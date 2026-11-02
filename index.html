@@ -9,8 +9,8 @@
 <meta property="og:site_name" content="My Recovery Journey" />
 <meta property="og:title" content="My Recovery Journey | Steven Gregory" />
 <meta property="og:description" content="My Recovery Journey by Steven Gregory — faith, hope, and practical recovery tools. One day at a time, one step toward a new life." />
-<meta property="og:url" content="https://stgnov05.github.io/My-Recovery-Journey/" />
-<meta property="og:image" content="https://stgnov05.github.io/My-Recovery-Journey/og-image.jpg" />
+<meta property="og:url" content="https://stgnov05.github.io/my-recovery-journey/" />
+<meta property="og:image" content="https://stgnov05.github.io/my-recovery-journey/og-image.jpg" />
 <meta property="og:image:type" content="image/jpeg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="My Recovery Journey | Steven Gregory" />
 <meta name="twitter:description" content="My Recovery Journey by Steven Gregory — faith, hope, and practical recovery tools. One day at a time, one step toward a new life." />
-<meta name="twitter:image" content="https://stgnov05.github.io/My-Recovery-Journey/og-image.jpg" />
+<meta name="twitter:image" content="https://stgnov05.github.io/my-recovery-journey/og-image.jpg" />
 <meta name="twitter:image:alt" content="Steven Gregory looking over a Pacific coastline at sunrise — My Recovery Journey" />
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?v=2" />
 <link rel="icon" type="image/svg+xml" href="favicon.svg?v=2" />
@@ -320,7 +320,24 @@
   }
   @media (prefers-color-scheme: dark){ .btn.ghost{ color:var(--ink); } }
 
-  /* ---------- Welcome ---------- */
+  
+/* ---------- Day counter & Journey Updates ---------- */
+.day-band{ margin:24px auto 0; max-width:640px; text-align:center;
+  background:linear-gradient(160deg, var(--steel) 0%, var(--navy) 90%);
+  color:#fff; border-radius:var(--radius); padding:22px 24px; box-shadow:var(--shadow); }
+.day-band .day-label{ font-size:.85rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); }
+.day-band .day-num{ font-family:"Lora", Georgia, serif; font-size:2.3rem; font-weight:700; line-height:1.15; margin-top:6px; color:#fff; }
+.day-band .day-sub{ margin:8px auto 0; max-width:46ch; color:#e6eff5; }
+.update-list{ display:grid; gap:16px; max-width:760px; margin:22px auto 0; text-align:left; }
+.update-item{ background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px 22px; }
+.update-meta{ display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:8px; }
+.update-date{ font-weight:700; color:var(--steel); }
+.update-day{ background:var(--gold); color:var(--navy-deep); border-radius:999px; padding:2px 11px; font-weight:700; font-size:.85rem; }
+.update-item h3{ font-family:"Lora", Georgia, serif; font-weight:700; color:var(--ink); margin:0 0 6px; font-size:1.22rem; }
+.update-item p{ margin:0; }
+.updates-more{ text-align:center; margin-top:20px; }
+
+/* ---------- Welcome ---------- */
   .welcome{ padding-top:26px; text-align:center; }
   .welcome h2{
     font-family:"Lora", Georgia, serif; font-weight:700; color:var(--ink);
@@ -616,6 +633,7 @@
     <li><a href="#/grounding" data-page-link="grounding">Grounding</a></li>
     <li><a href="#/next-step" data-page-link="next-step">Next Right Step</a></li>
     <li><a href="#/story" data-page-link="story">My Story</a></li>
+    <li><a href="#/updates" data-page-link="updates">Journey Updates</a></li>
     <li><a href="#/faith" data-page-link="faith">Faith</a></li>
     <li><a href="#/resources" data-page-link="resources">Resources</a></li>
   </ul>
@@ -639,6 +657,7 @@
     <a href="#/grounding" data-page-link="grounding">When a Moment Feels Difficult <span aria-hidden="true">&#8250;</span></a>
     <a href="#/next-step" data-page-link="next-step">My Next Right Step <span aria-hidden="true">&#8250;</span></a>
     <a href="#/story" data-page-link="story">My Story <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/updates" data-page-link="updates">Journey Updates <span aria-hidden="true">&#8250;</span></a>
     <a href="#/faith" data-page-link="faith">Faith for the Journey <span aria-hidden="true">&#8250;</span></a>
     <a href="#/resources" data-page-link="resources">Recovery Resources <span aria-hidden="true">&#8250;</span></a>
   </nav>
@@ -684,6 +703,11 @@
       <div class="welcome-actions">
         <a class="btn" href="#/story">Read My Story</a>
         <a class="btn ghost" href="#/tools">Open Recovery Tools</a>
+      </div>
+      <div class="day-band" role="note" aria-label="Steven's recovery day count">
+        <div class="day-label">Steven&#8217;s Journey &#183; One Day at a Time</div>
+        <div class="day-num">Day <span class="js-day-count">&#8212;</span></div>
+        <p class="day-sub">Counting from August 20, 2026 &#8212; and today is the only day that has to be won.</p>
       </div>
     </section>
 
@@ -764,6 +788,25 @@
           <p>Your past does not have to determine your future.</p>
         </article>
       </div>
+    </section>
+    <section id="journey-updates">
+      <div class="section-head">
+        <h2>Journey Updates</h2>
+        <p>Dated notes from the road &#8212; proof this journey is lived one day at a time, and still being written.</p>
+      </div>
+      <div class="update-list">
+        <article class="update-item">
+          <div class="update-meta"><span class="update-date">November 2, 2026</span><span class="update-day">Day 74</span></div>
+          <h3>Let go of yesterday and embrace today</h3>
+          <p>A daily prayer for letting go of the past &#8212; releasing yesterday&#8217;s mistakes and choosing to walk in freedom today.</p>
+        </article>
+        <article class="update-item">
+          <div class="update-meta"><span class="update-date">October 31, 2026</span><span class="update-day">Day 72</span></div>
+          <h3>Day 72 of my recovery journey</h3>
+          <p>Sobriety is a step by step, day by day journey. Please visit my website and say hello!</p>
+        </article>
+      </div>
+      <p class="updates-more"><a class="btn ghost" href="#/updates">All Journey Updates</a></p>
     </section>
   </div>
 
@@ -1058,6 +1101,11 @@
           </div>
         </div>
       </article>
+      <div class="day-band" role="note" aria-label="Steven's recovery day count">
+        <div class="day-label">This Journey Today</div>
+        <div class="day-num">Day <span class="js-day-count">&#8212;</span></div>
+        <p class="day-sub">Counting from August 20, 2026 &#8212; one day at a time.</p>
+      </div>
       <div class="quote-band">
         <h3>God Isn&#8217;t Finished Writing My Story</h3>
         <p>Faith, hope, and the courage to keep moving forward. Whatever yesterday held, today is another chance to choose recovery and connection.</p>
@@ -1067,6 +1115,45 @@
         <span class="label">Keep exploring:</span>
         <a href="#/tools">Recovery Tools</a>
         <a href="#/faith">Faith for the Journey</a>
+        <a href="#/resources">Recovery Resources</a>
+      </nav>
+    </section>
+  </div>
+
+  <!-- ============ PAGE: JOURNEY UPDATES ============ -->
+  <div class="page-view" data-page="updates">
+    <section id="updates">
+      <div class="page-head">
+        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <h2>Journey Updates</h2>
+        <p class="lede">Short, dated notes from my recovery &#8212; newest first. This page grows as the journey does.</p>
+      </div>
+      <div class="update-list">
+        <article class="update-item">
+          <div class="update-meta"><span class="update-date">November 2, 2026</span><span class="update-day">Day 74</span></div>
+          <h3>Let go of yesterday and embrace today</h3>
+          <p>A daily prayer for letting go of the past &#8212; releasing yesterday&#8217;s mistakes and choosing to walk in freedom today.</p>
+        </article>
+        <article class="update-item">
+          <div class="update-meta"><span class="update-date">October 31, 2026</span><span class="update-day">Day 72</span></div>
+          <h3>Day 72 of my recovery journey</h3>
+          <p>Sobriety is a step by step, day by day journey. Please visit my website and say hello!</p>
+        </article>
+        <article class="update-item">
+          <div class="update-meta"><span class="update-date">October 30, 2026</span><span class="update-day">Day 71</span></div>
+          <h3>71 days sober</h3>
+          <p>&#8220;71 Days Sober&#8230;&#8221;</p>
+        </article>
+        <article class="update-item">
+          <div class="update-meta"><span class="update-date">October 29, 2026</span><span class="update-day">Day 70</span></div>
+          <h3>My Recovery Journey website launches</h3>
+          <p>&#8220;I created a website for my journey through recovery. Check it out.&#8221;</p>
+        </article>
+      </div>
+      <nav class="page-foot-nav" aria-label="Keep exploring">
+        <span class="label">Keep exploring:</span>
+        <a href="#/story">My Story</a>
+        <a href="#/reflection">Daily Reflection</a>
         <a href="#/resources">Recovery Resources</a>
       </nav>
     </section>
@@ -1153,6 +1240,7 @@
     <a href="#/grounding" data-page-link="grounding">Grounding</a>
     <a href="#/next-step" data-page-link="next-step">Next Right Step</a>
     <a href="#/story" data-page-link="story">My Story</a>
+    <a href="#/updates" data-page-link="updates">Journey Updates</a>
     <a href="#/faith" data-page-link="faith">Faith</a>
     <a href="#/resources" data-page-link="resources">Resources</a>
   </nav>
@@ -1206,6 +1294,7 @@
     'grounding': { title:'Grounding Exercise | My Recovery Journey' },
     'next-step': { title:'My Next Right Step | My Recovery Journey' },
     'story':     { title:'My Story | My Recovery Journey' },
+    'updates':   { title:'Journey Updates | My Recovery Journey' },
     'faith':     { title:'Faith for the Journey | My Recovery Journey' },
     'resources': { title:'Recovery Resources | My Recovery Journey' }
   };
@@ -1249,6 +1338,17 @@
   }
   window.addEventListener('hashchange', route);
 
+  /* ---------- Steven's day counter (Day 1 starts August 20, 2026; count = days since) ---------- */
+  var dayStart = new Date(2026, 7, 20);
+  function refreshDayCount(){
+    var now = new Date();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var days = Math.round((today - dayStart) / 86400000);
+    if (days < 0) days = 0;
+    Array.prototype.slice.call(document.querySelectorAll('.js-day-count')).forEach(function(el){ el.textContent = days; });
+  }
+  refreshDayCount();
+
   /* ---------- Search ---------- */
   var searchPanel = document.getElementById('searchPanel');
   var searchInput = document.getElementById('searchInput');
@@ -1262,6 +1362,7 @@
     { title:'When a Moment Feels Difficult', note:'The 5-4-3-2-1 grounding exercise', page:'grounding', keys:'grounding difficult moment craving anxious 54321 senses calm' },
     { title:'My Next Right Step', note:'Pick one small action for today', page:'next-step', keys:'next right step checklist today action meeting prayer rest' },
     { title:'My Story', note:'Steven\u2019s story of faith, hope, and new beginnings', page:'story', keys:'story steven journey founder about testimony community stories' },
+    { title:'Journey Updates', note:'Dated notes from the road, newest first', page:'updates', keys:'updates journal news day count latest posts dated progress blog' },
     { title:'Faith for the Journey', note:'Scripture and restoration — Joel 2:25', page:'faith', keys:'faith god scripture bible joel christian devotion restoration' },
     { title:'Recovery Resources', note:'SAMHSA helpline and 988 crisis support', page:'resources', keys:'resources help samhsa 988 crisis helpline meeting treatment support phone reviews faq' }
   ];
