@@ -321,6 +321,15 @@
   @media (prefers-color-scheme: dark){ .btn.ghost{ color:var(--ink); } }
 
   
+
+/* ---------- Start Here / FAQ cards ---------- */
+.page-cards{ display:grid; gap:16px; max-width:760px; margin:22px auto 0; text-align:left; }
+.page-cards .card{ padding:22px 24px; }
+.page-cards h3{ font-family:"Lora", Georgia, serif; font-weight:700; color:var(--ink); margin:0 0 6px; font-size:1.22rem; }
+.page-cards p{ margin:0 0 10px; }
+.page-cards p:last-child{ margin-bottom:0; }
+.step-badge{ display:inline-block; background:var(--gold); color:var(--navy-deep); border-radius:999px; padding:2px 11px; font-weight:700; font-size:.85rem; margin-bottom:8px; }
+
 /* ---------- Day counter & Journey Updates ---------- */
 .day-band{ margin:24px auto 0; max-width:640px; text-align:center;
   background:linear-gradient(160deg, var(--steel) 0%, var(--navy) 90%);
@@ -626,6 +635,7 @@
 <nav class="primary-nav" aria-label="Pages">
   <ul>
     <li><a href="#/home" data-page-link="home">Home</a></li>
+    <li><a href="#/start-here" data-page-link="start-here">Start Here</a></li>
     <li><a href="#/tools" data-page-link="tools">Recovery Tools</a></li>
     <li><a href="#/gratitude" data-page-link="gratitude">Gratitude Journal</a></li>
     <li><a href="#/milestones" data-page-link="milestones">Milestones</a></li>
@@ -636,6 +646,8 @@
     <li><a href="#/updates" data-page-link="updates">Journey Updates</a></li>
     <li><a href="#/faith" data-page-link="faith">Faith</a></li>
     <li><a href="#/resources" data-page-link="resources">Resources</a></li>
+    <li><a href="#/paths" data-page-link="paths">Recovery Paths</a></li>
+    <li><a href="#/faq" data-page-link="faq">FAQ</a></li>
   </ul>
 </nav>
 
@@ -650,6 +662,7 @@
   </div>
   <nav>
     <a href="#/home" data-page-link="home">Home <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/start-here" data-page-link="start-here">Start Here <span aria-hidden="true">&#8250;</span></a>
     <a href="#/tools" data-page-link="tools">Recovery Tools <span aria-hidden="true">&#8250;</span></a>
     <a href="#/gratitude" data-page-link="gratitude">Gratitude Journal <span aria-hidden="true">&#8250;</span></a>
     <a href="#/milestones" data-page-link="milestones">My Milestones <span aria-hidden="true">&#8250;</span></a>
@@ -660,6 +673,8 @@
     <a href="#/updates" data-page-link="updates">Journey Updates <span aria-hidden="true">&#8250;</span></a>
     <a href="#/faith" data-page-link="faith">Faith for the Journey <span aria-hidden="true">&#8250;</span></a>
     <a href="#/resources" data-page-link="resources">Recovery Resources <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/paths" data-page-link="paths">Recovery Paths <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/faq" data-page-link="faq">FAQ <span aria-hidden="true">&#8250;</span></a>
   </nav>
   <p class="drawer-note">Every link above opens its own page. One day at a time. One step toward a new life.</p>
 </aside>
@@ -749,7 +764,7 @@
           <span class="glyph" aria-hidden="true"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c0-4.5-.5-8-4.5-10C7 8 9.5 8 11 9.5 11.5 6 13.5 3.5 17 3c.3 3.5-1 7-4.5 8.5C14.5 13 14 16.5 14 20"/></svg></span>
           <h3>New to Recovery?</h3>
           <p>Find practical first steps, meeting information, and encouragement without judgment.</p>
-          <a class="btn" href="#/tools">Get started</a>
+          <a class="btn" href="#/start-here">Get started</a>
         </article>
         <article class="card mini-card">
           <span class="glyph" aria-hidden="true"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8c2.5 0 2.5 2.5 5 2.5S9.5 8 12 8s2.5 2.5 5 2.5S19.5 8 22 8"/><path d="M2 14c2.5 0 2.5 2.5 5 2.5S9.5 14 12 14s2.5 2.5 5 2.5 2.5-2.5 5-2.5" transform="translate(0 2)"/></svg></span>
@@ -761,7 +776,7 @@
           <span class="glyph" aria-hidden="true"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg></span>
           <h3>Questions &amp; Stories</h3>
           <p>Read recovery FAQs and discover a space for community voices.</p>
-          <a class="btn" href="#/resources">Browse FAQs</a>
+          <a class="btn" href="#/faq">Browse FAQs</a>
         </article>
       </div>
     </section>
@@ -1184,6 +1199,188 @@
     </section>
   </div>
 
+  <!-- ============ PAGE: START HERE ============ -->
+  <div class="page-view" data-page="start-here">
+    <section id="start-here">
+      <div class="page-head">
+        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <h2>Start Here</h2>
+        <p class="lede">New to recovery &#8212; or starting again after a setback? You do not have to figure everything out today. Begin with one next step.</p>
+      </div>
+      <div class="page-cards">
+        <article class="card">
+          <h3>If you need help right now</h3>
+          <p>In the U.S., call or text <b>988</b> any time for crisis support, or call SAMHSA&#8217;s National Helpline at <b>1-800-662-HELP (4357)</b> for free, confidential treatment referrals, 24/7. In immediate danger, call <b>911</b>.</p>
+          <p><a class="btn" href="#/grounding">Try the grounding exercise</a></p>
+        </article>
+        <article class="card">
+          <span class="step-badge">Step 1</span>
+          <h3>Just take the next 24 hours</h3>
+          <p>Recovery is not built in a day, and it does not have to be carried all at once. Eat something, drink water, rest if you can, and aim only at getting through today. One day at a time is not a slogan here &#8212; it is the whole plan for today.</p>
+        </article>
+        <article class="card">
+          <span class="step-badge">Step 2</span>
+          <h3>Find a meeting or a community</h3>
+          <p>Connection is where recovery gets less lonely. At most open meetings you can simply sit and listen &#8212; you do not have to speak, join, or explain yourself. There are several different kinds of programs, and one of them will fit you better than the others.</p>
+          <p><a class="btn ghost" href="#/paths">Explore Recovery Paths</a></p>
+        </article>
+        <article class="card">
+          <span class="step-badge">Step 3</span>
+          <h3>Tell one person</h3>
+          <p>A sponsor, a trusted friend, a counselor, a pastor, someone at a meeting &#8212; one honest conversation can change the shape of a day. Asking for help is not weakness. For most of us, it was the first strong thing we did.</p>
+        </article>
+        <article class="card">
+          <span class="step-badge">Step 4</span>
+          <h3>Get professional support if you need it</h3>
+          <p>If alcohol or drugs have a real hold, willpower alone may not be the right tool &#8212; treatment, counseling, and medical support exist for exactly that reason. SAMHSA can point you to options near you, in English and Spanish.</p>
+          <p><a class="btn ghost" href="https://findtreatment.gov/" target="_blank" rel="noopener">Find treatment at FindTreatment.gov</a></p>
+        </article>
+        <article class="card">
+          <span class="step-badge">Step 5</span>
+          <h3>Use one tool today &#8212; then come back tomorrow</h3>
+          <p>Read today&#8217;s reflection, write one line of gratitude, or pick a single item from the Next Right Step checklist. Small steps, repeated daily, are how a new life actually gets built.</p>
+          <p><a class="btn ghost" href="#/reflection">Today&#8217;s reflection</a> <a class="btn ghost" href="#/next-step">My Next Right Step</a></p>
+        </article>
+      </div>
+      <p class="emergency"><b>A note:</b> My Recovery Journey is one man&#8217;s personal story and encouragement, not a treatment provider, medical advice, or an emergency service.</p>
+      <nav class="page-foot-nav" aria-label="Keep exploring">
+        <span class="label">Keep exploring:</span>
+        <a href="#/paths">Recovery Paths</a>
+        <a href="#/faq">FAQ</a>
+        <a href="#/story">My Story</a>
+      </nav>
+    </section>
+  </div>
+
+  <!-- ============ PAGE: RECOVERY PATHS ============ -->
+  <div class="page-view" data-page="paths">
+    <section id="paths">
+      <div class="page-head">
+        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <h2>Recovery Paths</h2>
+        <p class="lede">There is more than one road into recovery. People heal through different programs, and many combine more than one. Read through them honestly and start with the one you will actually walk.</p>
+      </div>
+      <div class="resource-grid">
+        <article class="card resource">
+          <div class="card-head">
+            <span class="tile" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+            <div><h3>Alcoholics Anonymous (AA)</h3></div>
+          </div>
+          <p>A worldwide fellowship built on the Twelve Steps and shared experience, focused on recovery from alcoholism. Meetings are free, widely available in person and online, and newcomers are welcome to just listen.</p>
+          <a class="btn" href="https://www.aa.org/" target="_blank" rel="noopener">Visit AA</a>
+        </article>
+        <article class="card resource">
+          <div class="card-head">
+            <span class="tile" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+            <div><h3>Narcotics Anonymous (NA)</h3></div>
+          </div>
+          <p>A Twelve Step fellowship for people recovering from drug addiction, with the same peer-support spirit as AA. If substances beyond alcohol are part of your story, NA may feel like the closer fit.</p>
+          <a class="btn" href="https://na.org/" target="_blank" rel="noopener">Visit NA</a>
+        </article>
+        <article class="card resource">
+          <div class="card-head">
+            <span class="tile" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span>
+            <div><h3>SMART Recovery</h3></div>
+          </div>
+          <p>A science-based approach that teaches practical tools for changing addictive behavior &#8212; building motivation, coping with urges, and managing thoughts and emotions. No spiritual component, and meetings run in person and online.</p>
+          <a class="btn" href="https://www.smartrecovery.org/" target="_blank" rel="noopener">Visit SMART Recovery</a>
+        </article>
+        <article class="card resource">
+          <div class="card-head">
+            <span class="tile" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M7 7h10"/></svg></span>
+            <div><h3>Celebrate Recovery</h3></div>
+          </div>
+          <p>A Christ-centered recovery community based in churches, working through biblical principles alongside step study. It addresses hurts, habits, and hang-ups of many kinds, not only substance use.</p>
+          <a class="btn" href="https://www.celebraterecovery.com/" target="_blank" rel="noopener">Visit Celebrate Recovery</a>
+        </article>
+        <article class="card resource">
+          <div class="card-head">
+            <span class="tile" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
+            <div><h3>Al-Anon Family Groups</h3></div>
+          </div>
+          <p>Support for the family and friends of people who drink &#8212; because addiction affects the whole household, and loved ones need recovery of their own. If you are here supporting someone else, this one is for you.</p>
+          <a class="btn" href="https://al-anon.org/" target="_blank" rel="noopener">Visit Al-Anon</a>
+        </article>
+        <article class="card resource">
+          <div class="card-head">
+            <span class="tile" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="M4.9 4.9l5 5"/><path d="M14.1 14.1l5 5"/><path d="M19.1 4.9l-5 5"/><path d="M9.9 14.1l-5 5"/></svg></span>
+            <div><h3>Professional Treatment &amp; Counseling</h3></div>
+          </div>
+          <p>Detox, inpatient and outpatient treatment, counseling, and medication support are real, respectable parts of many recoveries &#8212; including mine. SAMHSA&#8217;s FindTreatment.gov lists confidential, facility-based options by location.</p>
+          <a class="btn" href="https://findtreatment.gov/" target="_blank" rel="noopener">Find treatment</a>
+        </article>
+      </div>
+      <div class="page-cards">
+        <article class="card">
+          <h3>Different paths, shared hope</h3>
+          <p>No program on this page is the only way, and My Recovery Journey does not speak for any of them. What matters is not which door you walk through &#8212; it is that you walk through one, and keep coming back. If faith is part of your road, you are welcome on the Faith page too, whatever you believe.</p>
+          <p><a class="btn ghost" href="#/faith">Faith for the Journey</a> <a class="btn ghost" href="#/resources">Recovery Resources</a></p>
+        </article>
+      </div>
+      <nav class="page-foot-nav" aria-label="Keep exploring">
+        <span class="label">Keep exploring:</span>
+        <a href="#/start-here">Start Here</a>
+        <a href="#/faq">FAQ</a>
+        <a href="#/resources">Recovery Resources</a>
+      </nav>
+    </section>
+  </div>
+
+  <!-- ============ PAGE: FAQ ============ -->
+  <div class="page-view" data-page="faq">
+    <section id="faq">
+      <div class="page-head">
+        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <h2>Questions &amp; Answers</h2>
+        <p class="lede">Straightforward answers about this site, about recovery, and about what to do next.</p>
+      </div>
+      <div class="page-cards">
+        <article class="card">
+          <h3>Is My Recovery Journey a treatment center?</h3>
+          <p>No. This is Steven&#8217;s personal website &#8212; one man sharing his story, his faith, and tools that help him, plus links to organizations that do provide professional help. It is not medical advice, therapy, or an emergency service. If you need treatment, start with SAMHSA at 1-800-662-HELP (4357) or FindTreatment.gov.</p>
+        </article>
+        <article class="card">
+          <h3>Who is Steven?</h3>
+          <p>Steven Gregory &#8212; from Gallatin, Tennessee, a Tennessee Tech graduate, and a man who struggled with alcohol for 34 years. He began this recovery on August 20, 2026, and the day counter on the home page counts from that date. His full story is on the My Story page.</p>
+        </article>
+        <article class="card">
+          <h3>Do I have to be a Christian to be here?</h3>
+          <p>No. Faith in God is a real part of Steven&#8217;s recovery, and he writes about it honestly on the Faith page &#8212; but every page, tool, and resource here is for anyone seeking freedom from addiction or supporting someone who is, whatever you believe.</p>
+        </article>
+        <article class="card">
+          <h3>Do I have to choose just one recovery path?</h3>
+          <p>No. Many people combine peer support, counseling, treatment, faith, and practical lifestyle changes. The Recovery Paths page describes the main options &#8212; AA, NA, SMART Recovery, Celebrate Recovery, Al-Anon for families, and professional treatment &#8212; so you can find the mix that fits your life and values.</p>
+        </article>
+        <article class="card">
+          <h3>Can I go to a meeting and just listen?</h3>
+          <p>In most cases, yes. Many meetings are &#8220;open,&#8221; meaning newcomers and visitors are welcome, and nobody is required to speak. Check the meeting&#8217;s listing for its format, arrive a few minutes early, and let people know you are new if you feel comfortable &#8212; most rooms remember being the new person.</p>
+        </article>
+        <article class="card">
+          <h3>What if I have a setback or relapse?</h3>
+          <p>A setback does not erase what you have learned, and it does not end your story &#8212; but it is a signal to act quickly, not to hide. Reach out the same day to your sponsor, a trusted person, or a professional; get back to a meeting; and if you are in crisis in the U.S., call or text 988. Shame keeps people sick. Honesty is how recovery restarts.</p>
+        </article>
+        <article class="card">
+          <h3>Is the Gratitude Journal private?</h3>
+          <p>Yes. The journal, the milestones date, and the checklist on this site work without an account, and nothing you type or tap is sent to this website or any server &#8212; entries live only in the open tab on your own device and clear when you close it. Use the download button on the journal page if you want to keep a copy.</p>
+        </article>
+        <article class="card">
+          <h3>How can I say hello or reach Steven?</h3>
+          <p>Through the My Recovery Journey Facebook page, where Steven posts his daily updates and reads messages there. This site deliberately carries no personal email address, to keep one clear, public place for contact.</p>
+        </article>
+        <article class="card">
+          <h3>What should I do if I am in crisis right now?</h3>
+          <p>If you might act on thoughts of harming yourself, or you are in immediate danger, call 911. In the U.S. you can call or text 988 any time, day or night, for free and confidential crisis support. Then tell one person near you what is happening. You do not have to carry a hard moment alone.</p>
+        </article>
+      </div>
+      <nav class="page-foot-nav" aria-label="Keep exploring">
+        <span class="label">Keep exploring:</span>
+        <a href="#/start-here">Start Here</a>
+        <a href="#/paths">Recovery Paths</a>
+        <a href="#/resources">Recovery Resources</a>
+      </nav>
+    </section>
+  </div>
+
   <!-- ============ PAGE: RESOURCES ============ -->
   <div class="page-view" data-page="resources">
     <section id="resources">
@@ -1243,6 +1440,9 @@
     <a href="#/updates" data-page-link="updates">Journey Updates</a>
     <a href="#/faith" data-page-link="faith">Faith</a>
     <a href="#/resources" data-page-link="resources">Resources</a>
+    <a href="#/start-here" data-page-link="start-here">Start Here</a>
+    <a href="#/paths" data-page-link="paths">Recovery Paths</a>
+    <a href="#/faq" data-page-link="faq">FAQ</a>
   </nav>
   <p class="f-small">&#169; 2026 Steven Gregory &#183; My Recovery Journey &#183; One day at a time.</p>
 </footer>
@@ -1296,7 +1496,10 @@
     'story':     { title:'My Story | My Recovery Journey' },
     'updates':   { title:'Journey Updates | My Recovery Journey' },
     'faith':     { title:'Faith for the Journey | My Recovery Journey' },
-    'resources': { title:'Recovery Resources | My Recovery Journey' }
+    'resources': { title:'Recovery Resources | My Recovery Journey' },
+    'start-here':{ title:'Start Here | My Recovery Journey' },
+    'paths':     { title:'Recovery Paths | My Recovery Journey' },
+    'faq':       { title:'FAQ | My Recovery Journey' }
   };
   var ALIASES = { 'welcome':'home', 'index':'home', 'start':'home' };
   var views = Array.prototype.slice.call(document.querySelectorAll('.page-view'));
@@ -1364,7 +1567,10 @@
     { title:'My Story', note:'Steven\u2019s story of faith, hope, and new beginnings', page:'story', keys:'story steven journey founder about testimony community stories' },
     { title:'Journey Updates', note:'Dated notes from the road, newest first', page:'updates', keys:'updates journal news day count latest posts dated progress blog' },
     { title:'Faith for the Journey', note:'Scripture and restoration — Joel 2:25', page:'faith', keys:'faith god scripture bible joel christian devotion restoration' },
-    { title:'Recovery Resources', note:'SAMHSA helpline and 988 crisis support', page:'resources', keys:'resources help samhsa 988 crisis helpline meeting treatment support phone reviews faq' }
+    { title:'Recovery Resources', note:'SAMHSA helpline and 988 crisis support', page:'resources', keys:'resources help samhsa 988 crisis helpline meeting treatment support phone reviews' },
+    { title:'Start Here', note:'First steps for someone new to recovery', page:'start-here', keys:'start here new beginner first steps beginning help how do i start' },
+    { title:'Recovery Paths', note:'AA, NA, SMART Recovery, Celebrate Recovery, Al-Anon, treatment', page:'paths', keys:'paths programs aa na smart recovery celebrate recovery al-anon meetings fellowship twelve steps options' },
+    { title:'FAQ', note:'Questions about this site and about recovery', page:'faq', keys:'faq questions answers contact private journal relapse setback christian' }
   ];
   function renderResults(list){
     searchResults.innerHTML = '';
