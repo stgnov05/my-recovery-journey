@@ -30,6 +30,7 @@
 <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152x152.png?v=2" />
 <meta name="theme-color" content="#0e2739" />
 <title>My Recovery Journey | Steven Gregory</title>
+<link rel="canonical" href="https://stgnov05.github.io/my-recovery-journey/" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -329,6 +330,22 @@
 .page-cards p{ margin:0 0 10px; }
 .page-cards p:last-child{ margin-bottom:0; }
 .step-badge{ display:inline-block; background:var(--gold); color:var(--navy-deep); border-radius:999px; padding:2px 11px; font-weight:700; font-size:.85rem; margin-bottom:8px; }
+
+
+/* ---------- Need Help Now, social, books, directory ---------- */
+.primary-nav a.nav-help{ background:var(--gold); border-color:var(--gold); color:var(--navy-deep); font-weight:800; }
+.primary-nav a.nav-help:hover{ background:var(--navy); border-color:var(--navy); color:#fff; }
+.drawer a.nav-help{ color:var(--gold); font-weight:800; }
+.social-row{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:14px auto 4px; }
+.social-row a{ display:inline-block; padding:8px 16px; border:1.5px solid rgba(255,255,255,.45); border-radius:999px; color:#fff; text-decoration:none; font-weight:600; font-size:.94rem; }
+.social-row a:hover{ background:rgba(255,255,255,.14); }
+.chip-row{ display:flex; flex-wrap:wrap; gap:9px; justify-content:center; margin:20px auto 6px; }
+.chip{ font:inherit; font-weight:700; cursor:pointer; padding:8px 18px; border-radius:999px; border:1.5px solid var(--field-line); background:var(--card); color:var(--ink); }
+.chip[aria-pressed="true"]{ background:var(--navy); border-color:var(--navy); color:#fff; }
+.book-search{ max-width:520px; margin:16px auto 0; }
+.book-search input{ width:100%; font:inherit; color:var(--ink); background:var(--field); border:1.5px solid var(--field-line); border-radius:13px; padding:12px 15px; }
+.book-card[hidden]{ display:none; }
+.dir-group{ font-family:"Lora", Georgia, serif; color:var(--ink); max-width:760px; margin:26px auto 0; text-align:left; }
 
 /* ---------- Day counter & Journey Updates ---------- */
 .day-band{ margin:24px auto 0; max-width:640px; text-align:center;
@@ -637,17 +654,13 @@
     <li><a href="#/home" data-page-link="home">Home</a></li>
     <li><a href="#/start-here" data-page-link="start-here">Start Here</a></li>
     <li><a href="#/tools" data-page-link="tools">Recovery Tools</a></li>
-    <li><a href="#/gratitude" data-page-link="gratitude">Gratitude Journal</a></li>
-    <li><a href="#/milestones" data-page-link="milestones">Milestones</a></li>
     <li><a href="#/reflection" data-page-link="reflection">Daily Reflection</a></li>
-    <li><a href="#/grounding" data-page-link="grounding">Grounding</a></li>
-    <li><a href="#/next-step" data-page-link="next-step">Next Right Step</a></li>
     <li><a href="#/story" data-page-link="story">My Story</a></li>
     <li><a href="#/updates" data-page-link="updates">Journey Updates</a></li>
     <li><a href="#/faith" data-page-link="faith">Faith</a></li>
     <li><a href="#/resources" data-page-link="resources">Resources</a></li>
-    <li><a href="#/paths" data-page-link="paths">Recovery Paths</a></li>
-    <li><a href="#/faq" data-page-link="faq">FAQ</a></li>
+    <li><a href="#/directory" data-page-link="directory">All Pages</a></li>
+    <li><a class="nav-help" href="#/resources">Need Help Now</a></li>
   </ul>
 </nav>
 
@@ -661,6 +674,7 @@
     </button>
   </div>
   <nav>
+    <a class="nav-help" href="#/resources">Need Help Now <span aria-hidden="true">&#8250;</span></a>
     <a href="#/home" data-page-link="home">Home <span aria-hidden="true">&#8250;</span></a>
     <a href="#/start-here" data-page-link="start-here">Start Here <span aria-hidden="true">&#8250;</span></a>
     <a href="#/tools" data-page-link="tools">Recovery Tools <span aria-hidden="true">&#8250;</span></a>
@@ -675,6 +689,13 @@
     <a href="#/resources" data-page-link="resources">Recovery Resources <span aria-hidden="true">&#8250;</span></a>
     <a href="#/paths" data-page-link="paths">Recovery Paths <span aria-hidden="true">&#8250;</span></a>
     <a href="#/faq" data-page-link="faq">FAQ <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/articles" data-page-link="articles">Articles &amp; Inspiration <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/books" data-page-link="books">Books &amp; Literature <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/progress" data-page-link="progress">My Progress <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/sober-living" data-page-link="sober-living">Sober Living <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/support" data-page-link="support">Support This Site <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/directory" data-page-link="directory">Site Directory <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/privacy" data-page-link="privacy">Privacy <span aria-hidden="true">&#8250;</span></a>
   </nav>
   <p class="drawer-note">Every link above opens its own page. One day at a time. One step toward a new life.</p>
 </aside>
@@ -875,7 +896,7 @@
       </article>
 
       <div class="tools-foot">
-        <p><b>Privacy:</b> These tools work without an account. Nothing you type or tap here is sent to My Recovery Journey or any server &#8212; the journal, milestone date, and checklist live only in this tab, on your device, and clear when you close it. Use the download button on the journal page to keep a copy of your entries.</p>
+        <p><b>Privacy:</b> These tools work without an account. Nothing you type or tap here is sent to My Recovery Journey or any server &#8212; the journal, milestone date, and checklist are saved only in this browser, on your device, so they are here when you come back &#8212; nothing is sent to My Recovery Journey or any server. Anyone who uses this device can see them, and clearing browser data erases them. Use the download button on the journal page to keep a copy of your entries.</p>
         <p><b>A reminder:</b> A setback does not erase what you&#8217;ve learned. If you&#8217;re struggling, consider reaching out to your sponsor, a trusted person, or a qualified professional.</p>
       </div>
     </section>
@@ -901,7 +922,7 @@
       <label for="gratitudeInput">Today I&#8217;m grateful for&#8230;</label>
       <textarea id="gratitudeInput" placeholder="Write something you&#8217;re grateful for..."></textarea>
       <div class="form-actions">
-        <span class="save-note">Entries show in this tab only &#8212; download a copy to keep them.</span>
+        <span class="save-note">Entries save in this browser on your device &#8212; download a copy to keep them safe or move them.</span>
         <span class="spacer"></span>
         <button class="btn" id="saveEntry" type="button">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
@@ -1112,6 +1133,10 @@
             <p>If you&#8217;re one of those people, I want you to know that your story isn&#8217;t finished either.</p>
             <p>Recovery isn&#8217;t about having a perfect past. It&#8217;s about making a different choice today and finding the courage to keep moving forward.</p>
             <p class="strong-line">One day at a time. One step toward a new life.</p>
+                        <h3>What the work looks like right now</h3>
+            <p>I&#8217;m not writing this from a place of having it all figured out. I&#8217;m writing it from the middle of the work: choosing recovery one day at a time, rebuilding trust, strengthening my faith in God, and learning who I can become without alcohol.</p>
+            <p>Recovery, for me, is not a single dramatic moment. It&#8217;s a series of daily decisions: showing up to meetings, reaching out when isolation starts to sound appealing, practicing gratitude even when it feels forced, and asking God for strength on the days when my own runs out.</p>
+            <p>I&#8217;m learning to face the damage without drowning in it. I&#8217;m working to rebuild trust with people I hurt. And I&#8217;m discovering that structure, rest, and honest conversation are not optional extras &#8212; they are part of how I stay free.</p>
             <p class="signature">&#8212; Steven Gregory</p>
           </div>
         </div>
@@ -1161,8 +1186,15 @@
         </article>
         <article class="update-item">
           <div class="update-meta"><span class="update-date">October 29, 2026</span><span class="update-day">Day 70</span></div>
-          <h3>My Recovery Journey website launches</h3>
-          <p>&#8220;I created a website for my journey through recovery. Check it out.&#8221;</p>
+          <h3>A New Beginning: Choosing Recovery and Trusting God</h3>
+          <p>For 34 years, alcohol was a part of my life. Over those years, addiction took more from me than I ever imagined it could. I lost opportunities, stability, relationships, and pieces of the future I once dreamed of having.</p>
+          <p>There have been moments when I&#8217;ve looked at my life and wondered how I could possibly begin again. I&#8217;ve felt angry about the years I&#8217;ve lost, lonely, uncertain, and afraid of what comes next.</p>
+          <p>But somewhere in the middle of all that pain, I made a decision: I don&#8217;t want addiction to write the rest of my story.</p>
+          <p>Choosing recovery doesn&#8217;t mean everything suddenly becomes easy. I still have things to rebuild, mistakes to learn from, and challenges ahead of me. But I&#8217;m beginning to understand that I don&#8217;t have to fix my entire life overnight. I only have to take the next right step.</p>
+          <p>Through this journey, I&#8217;m holding on to my faith in God. I&#8217;ve prayed when I felt hopeful, and I&#8217;ve prayed when I felt angry and discouraged. I&#8217;ve asked for peace, strength, direction, and a reason to look forward to tomorrow.</p>
+          <p>One passage that speaks to my heart is Joel 2:25, where God speaks of restoring the years that have been lost. I cannot go back and reclaim the past. But I can begin building something different today.</p>
+          <p>That&#8217;s why I created My Recovery Journey &#8212; to share what I&#8217;m learning, to be honest about the struggles, and to remind someone else that they don&#8217;t have to face recovery alone.</p>
+          <p>My past is real. My recovery is real. And my future is still unwritten. One day at a time. One step toward a new life.</p>
         </article>
       </div>
       <nav class="page-foot-nav" aria-label="Keep exploring">
@@ -1268,6 +1300,7 @@
           </div>
           <p>A worldwide fellowship built on the Twelve Steps and shared experience, focused on recovery from alcoholism. Meetings are free, widely available in person and online, and newcomers are welcome to just listen.</p>
           <a class="btn" href="https://www.aa.org/" target="_blank" rel="noopener">Visit AA</a>
+          <a class="btn ghost" href="https://www.aa.org/find-aa" target="_blank" rel="noopener">Find a meeting</a>
         </article>
         <article class="card resource">
           <div class="card-head">
@@ -1276,6 +1309,7 @@
           </div>
           <p>A Twelve Step fellowship for people recovering from drug addiction, with the same peer-support spirit as AA. If substances beyond alcohol are part of your story, NA may feel like the closer fit.</p>
           <a class="btn" href="https://na.org/" target="_blank" rel="noopener">Visit NA</a>
+          <a class="btn ghost" href="https://na.org/meetingsearch/" target="_blank" rel="noopener">Find a meeting</a>
         </article>
         <article class="card resource">
           <div class="card-head">
@@ -1361,7 +1395,7 @@
         </article>
         <article class="card">
           <h3>Is the Gratitude Journal private?</h3>
-          <p>Yes. The journal, the milestones date, and the checklist on this site work without an account, and nothing you type or tap is sent to this website or any server &#8212; entries live only in the open tab on your own device and clear when you close it. Use the download button on the journal page if you want to keep a copy.</p>
+          <p>Yes. The journal, the milestones date, and the checklist on this site work without an account, and nothing you type or tap is sent to this website or any server &#8212; entries are saved only in this browser on your own device, so they are still here when you return &#8212; nothing is sent anywhere. Anyone who uses your device can see them, and clearing browser data erases them, so use the download button on the journal page to keep a copy.</p>
         </article>
         <article class="card">
           <h3>How can I say hello or reach Steven?</h3>
@@ -1376,6 +1410,376 @@
         <span class="label">Keep exploring:</span>
         <a href="#/start-here">Start Here</a>
         <a href="#/paths">Recovery Paths</a>
+        <a href="#/resources">Recovery Resources</a>
+      </nav>
+    </section>
+  </div>
+
+  <!-- ============ PAGE: ARTICLES ============ -->
+  <div class="page-view" data-page="articles">
+    <section id="articles">
+      <div class="page-head">
+        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <h2>Articles &amp; Inspiration</h2>
+        <p class="lede">Thoughtful, practical encouragement for the first day, the difficult days, and the years of growth ahead. These articles offer peer encouragement and general information, not individualized medical advice. If you need urgent support in the U.S., call or text 988.</p>
+      </div>
+      <div class="update-list">
+        <article class="update-item">
+          <div class="update-meta"><span class="update-day">Early recovery</span></div>
+          <h3>The First Days: Focus on What You Can Do Today</h3>
+          <p>Early recovery can feel overwhelming. You do not have to solve every problem at once. Begin with safety, support, and the next manageable step.</p>
+          <p>Make a simple plan: eat, rest, attend a meeting or speak with someone supportive, and avoid situations that increase risk. If you may experience alcohol or benzodiazepine withdrawal, seek medical guidance &#8212; withdrawal can be dangerous.</p>
+          <p>Progress often begins with ordinary, repeatable decisions rather than dramatic breakthroughs.</p>
+        </article>
+        <article class="update-item">
+          <div class="update-meta"><span class="update-day">Connection</span></div>
+          <h3>When Recovery Feels Lonely</h3>
+          <p>Connection takes practice, especially when old relationships or routines have changed. You can begin without telling everyone your whole story.</p>
+          <p>Try a peer-support meeting, a recovery-friendly activity, or a brief check-in with someone you trust. Look for people who respect boundaries and encourage your growth.</p>
+          <p>Belonging is built one honest conversation at a time.</p>
+        </article>
+        <article class="update-item">
+          <div class="update-meta"><span class="update-day">Daily life</span></div>
+          <h3>Building a Routine You Can Actually Keep</h3>
+          <p>A useful routine should support your life, not become another reason to criticize yourself. Start with a regular wake-up time, meals, movement, and one recovery-supportive action.</p>
+          <p>Leave room for rest, work, appointments, and unexpected challenges. When a day goes off course, restart with the next small choice rather than abandoning the plan entirely.</p>
+        </article>
+        <article class="update-item">
+          <div class="update-meta"><span class="update-day">Daily life</span></div>
+          <h3>What &#8220;One Day at a Time&#8221; Actually Looks Like for Me</h3>
+          <p>The phrase is familiar. Living it is different. For me, one day at a time often means getting out of bed even when motivation is low; choosing not to isolate when shame starts talking; making the meeting, or the phone call, or the honest conversation; eating something decent and drinking water; asking God for help without needing to sound polished; and going to bed without having solved everything.</p>
+          <p>None of these actions feel dramatic. Together they are how a life changes direction. If today only has room for one of these, that is still enough. Start there.</p>
+        </article>
+        <article class="update-item">
+          <div class="update-meta"><span class="update-day">Purpose</span></div>
+          <h3>Rebuilding After Lost Time</h3>
+          <p>Regret can make the future feel distant. It helps to separate what cannot be changed from what can be practiced today.</p>
+          <p>Choose one realistic goal in an area that matters to you: relationships, housing, work, learning, service, or health. Break it into a step you can take this week.</p>
+          <p>Your next chapter does not need to resemble your previous one.</p>
+        </article>
+        <article class="update-item">
+          <div class="update-meta"><span class="update-day">Faith &amp; reflection</span></div>
+          <h3>Hope Without Pretending Everything Is Easy</h3>
+          <p>Faith can offer comfort and meaning while leaving room for grief, frustration, and unanswered questions. You do not have to deny difficult feelings to practice hope.</p>
+          <p>For a faith-based reflection, read Joel 2:25 in the NLT and consider what rebuilding might look like in your life today. People of every belief are welcome here.</p>
+        </article>
+        <article class="update-item">
+          <div class="update-meta"><span class="update-day">Long-term recovery</span></div>
+          <h3>Staying Connected as Life Improves</h3>
+          <p>When life becomes more stable, recovery support can still matter. Relationships, stress management, meaningful activity, and attention to warning signs help sustain progress.</p>
+          <p>Review your support plan periodically and make adjustments when work, housing, relationships, or stress levels change. Asking for help is useful at every stage.</p>
+        </article>
+      </div>
+      <nav class="page-foot-nav" aria-label="Keep exploring">
+        <span class="label">Keep exploring:</span>
+        <a href="#/books">Books &amp; Literature</a>
+        <a href="#/reflection">Daily Reflection</a>
+        <a href="#/updates">Journey Updates</a>
+      </nav>
+    </section>
+  </div>
+
+  <!-- ============ PAGE: BOOKS ============ -->
+  <div class="page-view" data-page="books">
+    <section id="books">
+      <div class="page-head">
+        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <h2>Books &amp; Literature</h2>
+        <p class="lede">Books, daily readings, and step-study guides for finding hope and building a life in recovery. Every recommendation links to its publisher or recovery organization &#8212; and you never have to buy a book to begin; several of these can be read free at the links below.</p>
+      </div>
+      <div class="book-search">
+        <input type="search" id="bookSearch" placeholder="Search books and topics&#8230;" aria-label="Search books" />
+      </div>
+      <div class="chip-row" role="group" aria-label="Filter books by category">
+        <button type="button" class="chip" data-filter="All" aria-pressed="true">All books</button>
+        <button type="button" class="chip" data-filter="AA" aria-pressed="false">AA</button>
+        <button type="button" class="chip" data-filter="NA" aria-pressed="false">NA</button>
+        <button type="button" class="chip" data-filter="Other" aria-pressed="false">Other approaches</button>
+        <button type="button" class="chip" data-filter="Family" aria-pressed="false">Family &amp; friends</button>
+      </div>
+      <div class="update-list">
+        <article class="update-item book-card" data-category="AA" data-title="Alcoholics Anonymous (The Big Book)">
+          <div class="update-meta"><span class="update-day">AA</span></div>
+          <h3>Alcoholics Anonymous (The Big Book)</h3>
+          <p>The foundational text of Alcoholics Anonymous, including the Twelve Steps and personal recovery stories. The usual starting point for AA.</p>
+          <p><a class="btn ghost" href="https://www.aa.org/the-big-book" target="_blank" rel="noopener">Find a copy</a></p>
+        </article>
+        <article class="update-item book-card" data-category="AA" data-title="Twelve Steps and Twelve Traditions">
+          <div class="update-meta"><span class="update-day">AA</span></div>
+          <h3>Twelve Steps and Twelve Traditions</h3>
+          <p>AA&#8217;s closer look at each of the Twelve Steps and Twelve Traditions &#8212; the book to reach for when you are ready to work the steps in depth.</p>
+          <p><a class="btn ghost" href="https://www.aa.org/twelve-steps-twelve-traditions" target="_blank" rel="noopener">Find a copy</a></p>
+        </article>
+        <article class="update-item book-card" data-category="AA" data-title="Living Sober">
+          <div class="update-meta"><span class="update-day">AA</span></div>
+          <h3>Living Sober</h3>
+          <p>Everyday, practical suggestions for living without alcohol &#8212; short chapters aimed at the questions people actually face in early sobriety.</p>
+          <p><a class="btn ghost" href="https://www.aa.org/living-sober-book" target="_blank" rel="noopener">Find a copy</a></p>
+        </article>
+        <article class="update-item book-card" data-category="AA" data-title="Daily Reflections">
+          <div class="update-meta"><span class="update-day">AA</span></div>
+          <h3>Daily Reflections</h3>
+          <p>Brief reflections written by AA members, one for each day of the year &#8212; a gentle way to start a daily reading habit.</p>
+          <p><a class="btn ghost" href="https://www.aa.org/daily-reflections" target="_blank" rel="noopener">Read today&#8217;s reflection</a></p>
+        </article>
+        <article class="update-item book-card" data-category="NA" data-title="Narcotics Anonymous (Basic Text)">
+          <div class="update-meta"><span class="update-day">NA</span></div>
+          <h3>Narcotics Anonymous (Basic Text)</h3>
+          <p>The central text of Narcotics Anonymous and its message of recovery from addiction, including members&#8217; personal stories.</p>
+          <p><a class="btn ghost" href="https://na.org/literature/" target="_blank" rel="noopener">Find a copy</a></p>
+        </article>
+        <article class="update-item book-card" data-category="NA" data-title="It Works: How and Why">
+          <div class="update-meta"><span class="update-day">NA</span></div>
+          <h3>It Works: How and Why</h3>
+          <p>NA&#8217;s exploration of its Twelve Steps and Twelve Traditions &#8212; the &#8220;how and why&#8221; behind the Basic Text.</p>
+          <p><a class="btn ghost" href="https://na.org/literature/" target="_blank" rel="noopener">Find a copy</a></p>
+        </article>
+        <article class="update-item book-card" data-category="NA" data-title="Just for Today">
+          <div class="update-meta"><span class="update-day">NA</span></div>
+          <h3>Just for Today</h3>
+          <p>Daily meditations and encouragement for people in recovery, one short reading for each day.</p>
+          <p><a class="btn ghost" href="https://na.org/literature/" target="_blank" rel="noopener">Find a copy</a></p>
+        </article>
+        <article class="update-item book-card" data-category="NA" data-title="NA Step Working Guides">
+          <div class="update-meta"><span class="update-day">NA</span></div>
+          <h3>NA Step Working Guides</h3>
+          <p>Questions to help you explore and work through the Twelve Steps, often used together with a sponsor.</p>
+          <p><a class="btn ghost" href="https://na.org/literature/" target="_blank" rel="noopener">Find a copy</a></p>
+        </article>
+        <article class="update-item book-card" data-category="Other" data-title="SMART Recovery Handbook">
+          <div class="update-meta"><span class="update-day">Other</span></div>
+          <h3>SMART Recovery Handbook</h3>
+          <p>Exercises and practical strategies from SMART Recovery&#8217;s 4-Point Program for self-management and change &#8212; a science-based, non-spiritual approach.</p>
+          <p><a class="btn ghost" href="https://smartrecovery.org/" target="_blank" rel="noopener">Find a copy</a></p>
+        </article>
+        <article class="update-item book-card" data-category="Family" data-title="SMART Family &amp; Friends Handbook">
+          <div class="update-meta"><span class="update-day">Family</span></div>
+          <h3>SMART Family &amp; Friends Handbook</h3>
+          <p>Tools for family members and friends supporting someone in recovery &#8212; because loved ones need support and skills of their own.</p>
+          <p><a class="btn ghost" href="https://smartrecovery.org/family" target="_blank" rel="noopener">Find a copy</a></p>
+        </article>
+        <p class="search-empty" id="bookEmpty" hidden>No books match that yet &#8212; try a different word or category.</p>
+      </div>
+      <nav class="page-foot-nav" aria-label="Keep exploring">
+        <span class="label">Keep exploring:</span>
+        <a href="#/articles">Articles</a>
+        <a href="#/paths">Recovery Paths</a>
+        <a href="#/reflection">Daily Reflection</a>
+      </nav>
+    </section>
+  </div>
+
+  <!-- ============ PAGE: MY PROGRESS ============ -->
+  <div class="page-view" data-page="progress">
+    <section id="progress">
+      <div class="page-head">
+        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <h2>My Progress</h2>
+        <p class="lede">Progress is more than a number. Recovery also means asking for help, showing up, building healthier routines, and trying again when life gets difficult.</p>
+      </div>
+      <div class="day-band" role="note" aria-label="Steven's recovery day count">
+        <div class="day-label">Days in This Recovery</div>
+        <div class="day-num">Day <span class="js-day-count">&#8212;</span></div>
+        <p class="day-sub">Counting from August 20, 2026 &#8212; one day at a time.</p>
+      </div>
+      <div class="page-cards">
+        <article class="card">
+          <h3>&#127793; Recovery</h3>
+          <p>Practicing honesty, accountability, and one-day-at-a-time living &#8212; and treating setbacks as signals to reach out, not reasons to quit.</p>
+        </article>
+        <article class="card">
+          <h3>&#129309; Community</h3>
+          <p>Building meaningful connections and a healthy support network of people who understand the journey and encourage the growth.</p>
+        </article>
+        <article class="card">
+          <h3>&#129517; Stability</h3>
+          <p>Working toward financial independence, stable housing &#8212; including sober living in Washington or Oregon after treatment &#8212; and a purposeful future.</p>
+        </article>
+        <article class="card">
+          <h3>&#128591; Faith and Hope</h3>
+          <p>Making room for prayer, reflection, gratitude, and personal growth, and trusting that God isn&#8217;t finished writing this story.</p>
+        </article>
+        <article class="card">
+          <h3>Reflections and updates</h3>
+          <p>As this journey continues, dated notes and lessons learned are shared on the Journey Updates page &#8212; the honest record of how this progress actually happens, one day at a time.</p>
+          <p><a class="btn ghost" href="#/updates">Read Journey Updates</a></p>
+        </article>
+      </div>
+      <nav class="page-foot-nav" aria-label="Keep exploring">
+        <span class="label">Keep exploring:</span>
+        <a href="#/story">My Story</a>
+        <a href="#/updates">Journey Updates</a>
+        <a href="#/milestones">Milestones</a>
+      </nav>
+    </section>
+  </div>
+
+  <!-- ============ PAGE: SUPPORT ============ -->
+  <div class="page-view" data-page="support">
+    <section id="support">
+      <div class="page-head">
+        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <h2>Support My Recovery Journey</h2>
+        <p class="lede">Help me continue rebuilding my life in recovery, and growing this website into a welcoming resource for others. Every act of kindness matters.</p>
+      </div>
+      <div class="page-cards">
+        <article class="card">
+          <h3>Why I&#8217;m asking</h3>
+          <p>I created My Recovery Journey to share my experiences with addiction, faith, and the hope of beginning again. As I work toward stability, I&#8217;m building this website so others can find encouragement and trustworthy recovery resources. If my story or this site has been meaningful to you, and you&#8217;re in a position to help, I would be deeply grateful. There is absolutely no obligation to give.</p>
+        </article>
+        <article class="card">
+          <h3>GiveSendGo</h3>
+          <p>Read about my personal recovery fundraiser, &#8220;A Second Chance,&#8221; and choose whether to contribute.</p>
+          <p><a class="btn" href="https://www.givesendgo.com/a-second-chance-please-help-me-with-my-r" target="_blank" rel="noopener">Visit GiveSendGo</a></p>
+        </article>
+        <article class="card">
+          <h3>Venmo</h3>
+          <p>Support with Venmo: <b>@stgnov05</b></p>
+          <p><a class="btn" href="https://venmo.com/u/stgnov05" target="_blank" rel="noopener">Support with Venmo</a></p>
+        </article>
+        <article class="card">
+          <h3>Cash App</h3>
+          <p>Support with Cash App: <b>$cardboardheros</b></p>
+          <p><a class="btn" href="https://cash.app/$cardboardheros" target="_blank" rel="noopener">Support with Cash App</a></p>
+        </article>
+        <article class="card">
+          <h3>What support helps with</h3>
+          <p>Contributions may help with transportation, basic living needs, recovery-related materials, rebuilding stability, sober-living costs, and website improvements and outreach.</p>
+        </article>
+        <article class="card">
+          <h3>Important information &#8212; please read</h3>
+          <p>These are personal contributions to Steven. My Recovery Journey is a personal website, not a registered nonprofit or tax-exempt charity, so contributions are not tax-deductible charitable donations. Funds go to Steven personally and may be used for living and recovery needs as well as website purposes. Giving does not purchase any product or service.</p>
+          <p>Not in a position to give? Sharing this website and encouraging someone in recovery mean a great deal, too &#8212; please use the share links at the bottom of any page.</p>
+        </article>
+      </div>
+      <nav class="page-foot-nav" aria-label="Keep exploring">
+        <span class="label">Keep exploring:</span>
+        <a href="#/story">My Story</a>
+        <a href="#/progress">My Progress</a>
+        <a href="#/privacy">Privacy</a>
+      </nav>
+    </section>
+  </div>
+
+  <!-- ============ PAGE: SOBER LIVING ============ -->
+  <div class="page-view" data-page="sober-living">
+    <section id="sober-living">
+      <div class="page-head">
+        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <h2>Sober Living</h2>
+        <p class="lede">Finding a supportive place to rebuild. A stable environment and a supportive community can make a real difference when transitioning out of treatment &#8212; this is the step I&#8217;m preparing for myself, toward sober living in Washington or Oregon.</p>
+      </div>
+      <div class="page-cards">
+        <article class="card">
+          <h3>Oxford House</h3>
+          <p>Peer-run, democratically operated sober living homes across the country. Ask individual houses about vacancies, house expenses, interviews, and expectations.</p>
+          <p><a class="btn" href="https://www.oxfordhouse.org/" target="_blank" rel="noopener">Visit Oxford House</a></p>
+        </article>
+        <article class="card">
+          <h3>Look for real standards</h3>
+          <p>The National Alliance for Recovery Residences (NARR) promotes quality recovery housing. Wherever you look, favor clear rules, transparent fees, resident rights, a safe environment, and realistic access to work and meetings.</p>
+          <p><a class="btn ghost" href="https://narronline.org/" target="_blank" rel="noopener">Explore NARR</a></p>
+        </article>
+        <article class="card">
+          <h3>Budget before moving</h3>
+          <p>Ask about move-in fees, weekly or monthly rent, deposits, transportation, food, employment requirements, and any refund policies &#8212; before you travel or pay anything.</p>
+        </article>
+        <article class="card">
+          <h3>Questions to ask any residence</h3>
+          <p>What happens after a relapse? Are meetings required? Are there curfews, visitor policies, or medication rules? How are chores and house decisions handled? Get the answers in writing.</p>
+        </article>
+        <article class="card">
+          <h3>Please verify</h3>
+          <p>Vacancies and prices change quickly. Confirm all details directly with each residence before paying or traveling, and be cautious of anyone who pressures you to send money before you&#8217;ve seen the home and the terms.</p>
+        </article>
+      </div>
+      <nav class="page-foot-nav" aria-label="Keep exploring">
+        <span class="label">Keep exploring:</span>
+        <a href="#/start-here">Start Here</a>
+        <a href="#/resources">Recovery Resources</a>
+        <a href="#/progress">My Progress</a>
+      </nav>
+    </section>
+  </div>
+
+  <!-- ============ PAGE: DIRECTORY ============ -->
+  <div class="page-view" data-page="directory">
+    <section id="directory">
+      <div class="page-head">
+        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <h2>Site Directory</h2>
+        <p class="lede">Every page on My Recovery Journey, in one place &#8212; a simple guide to what&#8217;s here and where to find it.</p>
+      </div>
+      <div class="page-cards">
+        <article class="card">
+          <h3>Begin</h3>
+          <p><a href="#/start-here"><b>Start Here</b></a> &#8212; a welcoming first step if you&#8217;re new to recovery or starting again</p>
+          <p><a href="#/story"><b>My Story</b></a> &#8212; Steven&#8217;s story of faith, hope, and new beginnings</p>
+          <p><a href="#/updates"><b>Journey Updates</b></a> &#8212; dated notes from the road, newest first</p>
+          <p><a href="#/progress"><b>My Progress</b></a> &#8212; what Steven is working toward, and the live day counter</p>
+        </article>
+        <article class="card">
+          <h3>Daily tools</h3>
+          <p><a href="#/tools"><b>Recovery Tools</b></a> &#8212; every practical tool, each on its own page</p>
+          <p><a href="#/gratitude"><b>Gratitude Journal</b></a> &#8212; write what you&#8217;re grateful for today &#8212; saved privately on your device</p>
+          <p><a href="#/milestones"><b>Milestones</b></a> &#8212; count your days, weeks, and months, and earn badges</p>
+          <p><a href="#/reflection"><b>Daily Reflection</b></a> &#8212; a short reflection and one question for today</p>
+          <p><a href="#/grounding"><b>Grounding</b></a> &#8212; the 5-4-3-2-1 exercise for a difficult moment</p>
+          <p><a href="#/next-step"><b>Next Right Step</b></a> &#8212; pick one small action for today</p>
+        </article>
+        <article class="card">
+          <h3>Learn</h3>
+          <p><a href="#/articles"><b>Articles &amp; Inspiration</b></a> &#8212; practical encouragement for every stage of recovery</p>
+          <p><a href="#/books"><b>Books &amp; Literature</b></a> &#8212; recommended recovery reading, searchable by topic</p>
+          <p><a href="#/paths"><b>Recovery Paths</b></a> &#8212; AA, NA, SMART Recovery, Celebrate Recovery, Al-Anon, and treatment</p>
+          <p><a href="#/faq"><b>FAQ</b></a> &#8212; straightforward answers about this site and about recovery</p>
+          <p><a href="#/faith"><b>Faith for the Journey</b></a> &#8212; Scripture, grace, and restoration</p>
+        </article>
+        <article class="card">
+          <h3>Support</h3>
+          <p><a href="#/resources"><b>Recovery Resources</b></a> &#8212; SAMHSA, 988, and people to talk to &#8212; plus the Need Help Now links</p>
+          <p><a href="#/sober-living"><b>Sober Living</b></a> &#8212; questions to ask before choosing a recovery home</p>
+          <p><a href="#/support"><b>Support This Site</b></a> &#8212; ways to help Steven rebuild and keep this resource growing</p>
+          <p><a href="#/privacy"><b>Privacy</b></a> &#8212; what this site does and doesn&#8217;t do with your information</p>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ PAGE: PRIVACY ============ -->
+  <div class="page-view" data-page="privacy">
+    <section id="privacy">
+      <div class="page-head">
+        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <h2>Privacy</h2>
+        <p class="lede">Your privacy matters. How My Recovery Journey handles visitor information, its tools, and external links &#8212; in plain language. Last updated: November 2026.</p>
+      </div>
+      <div class="page-cards">
+        <article class="card">
+          <h3>No accounts, no tracking</h3>
+          <p>Browsing this site never requires an account, and the site itself runs no analytics, advertising, or tracking cookies. My Recovery Journey is a personal website maintained by Steven Gregory.</p>
+        </article>
+        <article class="card">
+          <h3>The recovery tools store data on your device only</h3>
+          <p>The gratitude journal, milestones date, and next-step checklist save their information in your browser&#8217;s local storage, on your device. Nothing you enter is sent to this website or its owner. Two cautions: anyone with access to your device or browser profile may be able to view what&#8217;s saved, and clearing your browser data will erase it &#8212; the journal&#8217;s download button exists so you can keep your own copy. Don&#8217;t enter anything you wouldn&#8217;t want stored on that device.</p>
+        </article>
+        <article class="card">
+          <h3>Contact and donations happen on other services</h3>
+          <p>If you message through Facebook, Instagram, or Threads, or give through GiveSendGo, Venmo, or Cash App, the information you share is handled by that service under its own privacy policy &#8212; not by this website.</p>
+        </article>
+        <article class="card">
+          <h3>Hosting and external links</h3>
+          <p>This website is hosted on GitHub Pages. GitHub and other infrastructure providers may process technical information such as IP addresses and request logs under their own policies. Links to other organizations (AA, NA, SAMHSA, and the rest) take you to their sites, with their own policies.</p>
+        </article>
+        <article class="card">
+          <h3>Community stories</h3>
+          <p>No one&#8217;s personal story will ever be published here without their informed permission, and testimonials are never invented. That principle will not change as the site grows.</p>
+        </article>
+      </div>
+      <nav class="page-foot-nav" aria-label="Keep exploring">
+        <span class="label">Keep exploring:</span>
+        <a href="#/faq">FAQ</a>
+        <a href="#/support">Support This Site</a>
         <a href="#/resources">Recovery Resources</a>
       </nav>
     </section>
@@ -1412,6 +1816,18 @@
           <p>In the U.S., call or text 988 any time for crisis support &#8212; free, confidential, and available 24/7. You don&#8217;t have to carry a hard moment alone.</p>
           <a class="btn" href="#/grounding">Try the grounding exercise</a>
         </article>
+        <article class="card resource">
+          <div class="card-head">
+            <span class="tile" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            <div>
+              <h3>Find a Meeting</h3>
+              <div class="phone">In person or online</div>
+            </div>
+          </div>
+          <p>Search official meeting lists for Alcoholics Anonymous and Narcotics Anonymous &#8212; by location, or online from anywhere.</p>
+          <a class="btn" href="https://www.aa.org/find-aa" target="_blank" rel="noopener">Find AA meetings</a>
+          <a class="btn ghost" href="https://na.org/meetingsearch/" target="_blank" rel="noopener">Find NA meetings</a>
+        </article>
       </div>
       <p class="emergency"><b>In immediate danger? Call 911.</b> In the U.S., call or text 988 for crisis support. My Recovery Journey provides personal encouragement and general resources, not medical advice or emergency services.</p>
       <nav class="page-foot-nav" aria-label="Keep exploring">
@@ -1443,7 +1859,21 @@
     <a href="#/start-here" data-page-link="start-here">Start Here</a>
     <a href="#/paths" data-page-link="paths">Recovery Paths</a>
     <a href="#/faq" data-page-link="faq">FAQ</a>
+    <a href="#/articles" data-page-link="articles">Articles</a>
+    <a href="#/books" data-page-link="books">Books</a>
+    <a href="#/progress" data-page-link="progress">My Progress</a>
+    <a href="#/sober-living" data-page-link="sober-living">Sober Living</a>
+    <a href="#/support" data-page-link="support">Support</a>
+    <a href="#/directory" data-page-link="directory">Directory</a>
+    <a href="#/privacy" data-page-link="privacy">Privacy</a>
   </nav>
+  <div class="social-row" aria-label="Follow and share My Recovery Journey">
+    <a href="https://www.facebook.com/share/1HewtDaZeQ/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://www.instagram.com/cardboardheroes05/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.threads.net/@stgnov75" target="_blank" rel="noopener">Threads</a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstgnov05.github.io%2Fmy-recovery-journey%2F" target="_blank" rel="noopener">Share on Facebook</a>
+    <a href="https://api.whatsapp.com/send?text=My%20Recovery%20Journey%20%E2%80%94%20hope%2C%20healing%2C%20and%20recovery%20resources%3A%20https%3A%2F%2Fstgnov05.github.io%2Fmy-recovery-journey%2F" target="_blank" rel="noopener">Share on WhatsApp</a>
+  </div>
   <p class="f-small">&#169; 2026 Steven Gregory &#183; My Recovery Journey &#183; One day at a time.</p>
 </footer>
 
@@ -1499,7 +1929,14 @@
     'resources': { title:'Recovery Resources | My Recovery Journey' },
     'start-here':{ title:'Start Here | My Recovery Journey' },
     'paths':     { title:'Recovery Paths | My Recovery Journey' },
-    'faq':       { title:'FAQ | My Recovery Journey' }
+    'faq':       { title:'FAQ | My Recovery Journey' },
+    'articles':  { title:'Articles & Inspiration | My Recovery Journey' },
+    'books':     { title:'Books & Literature | My Recovery Journey' },
+    'progress':  { title:'My Progress | My Recovery Journey' },
+    'support':   { title:'Support | My Recovery Journey' },
+    'sober-living': { title:'Sober Living | My Recovery Journey' },
+    'directory': { title:'Site Directory | My Recovery Journey' },
+    'privacy':   { title:'Privacy | My Recovery Journey' }
   };
   var ALIASES = { 'welcome':'home', 'index':'home', 'start':'home' };
   var views = Array.prototype.slice.call(document.querySelectorAll('.page-view'));
@@ -1570,7 +2007,14 @@
     { title:'Recovery Resources', note:'SAMHSA helpline and 988 crisis support', page:'resources', keys:'resources help samhsa 988 crisis helpline meeting treatment support phone reviews' },
     { title:'Start Here', note:'First steps for someone new to recovery', page:'start-here', keys:'start here new beginner first steps beginning help how do i start' },
     { title:'Recovery Paths', note:'AA, NA, SMART Recovery, Celebrate Recovery, Al-Anon, treatment', page:'paths', keys:'paths programs aa na smart recovery celebrate recovery al-anon meetings fellowship twelve steps options' },
-    { title:'FAQ', note:'Questions about this site and about recovery', page:'faq', keys:'faq questions answers contact private journal relapse setback christian' }
+    { title:'FAQ', note:'Questions about this site and about recovery', page:'faq', keys:'faq questions answers contact private journal relapse setback christian' },
+    { title:'Articles & Inspiration', note:'Encouragement for every stage of recovery', page:'articles', keys:'articles inspiration reading early recovery lonely routine rebuilding hope staying connected' },
+    { title:'Books & Literature', note:'Recommended recovery reading, searchable', page:'books', keys:'books literature reading big book basic text daily reflections literature library step guides family' },
+    { title:'My Progress', note:'What Steven is working toward, plus the day counter', page:'progress', keys:'progress goals working toward stability community faith day counter' },
+    { title:'Support This Site', note:'GiveSendGo, Venmo, and Cash App', page:'support', keys:'support donate give givesendgo venmo cash app contribute help steven' },
+    { title:'Sober Living', note:'Choosing a recovery home, questions to ask', page:'sober-living', keys:'sober living housing recovery residence oxford house narr moving after treatment home' },
+    { title:'Site Directory', note:'Every page on the site, in one place', page:'directory', keys:'directory all pages index sitemap guide explore everything' },
+    { title:'Privacy', note:'What this site does with your information', page:'privacy', keys:'privacy data stored local storage tracking cookies policy' }
   ];
   function renderResults(list){
     searchResults.innerHTML = '';
@@ -1662,11 +2106,18 @@
   });
   document.getElementById('bookmarkClose').addEventListener('click', closeBookmark);
 
-  /* ---------- Gratitude journal (this tab only) ---------- */
+  /* ---------- Gratitude journal (saved on this device) ---------- */
   var gInput = document.getElementById('gratitudeInput');
   var entriesEl = document.getElementById('entries');
   var entriesActions = document.getElementById('entriesActions');
   var entries = [];
+  function persistEntries(){
+    try { localStorage.setItem('mrj-gratitude', JSON.stringify(entries.map(function(e){ return { text:e.text, when:e.when.toISOString() }; }))); } catch (err) {}
+  }
+  try {
+    var savedEntries = JSON.parse(localStorage.getItem('mrj-gratitude') || '[]');
+    if (Array.isArray(savedEntries)) entries = savedEntries.filter(function(e){ return e && e.text; }).map(function(e){ return { text:e.text, when:new Date(e.when) }; });
+  } catch (err) { entries = []; }
   function fmtWhen(d){
     return d.toLocaleDateString(undefined, { month:'short', day:'numeric' }) + ', ' +
            d.toLocaleTimeString(undefined, { hour:'numeric', minute:'2-digit' });
@@ -1679,7 +2130,7 @@
       var text = document.createElement('span'); text.className = 'text'; text.textContent = entry.text;
       var rm = document.createElement('button'); rm.className = 'remove'; rm.type = 'button'; rm.textContent = 'Remove';
       rm.setAttribute('aria-label', 'Remove this gratitude entry');
-      rm.addEventListener('click', function(){ entries.splice(i,1); renderEntries(); });
+      rm.addEventListener('click', function(){ entries.splice(i,1); persistEntries(); renderEntries(); });
       row.appendChild(when); row.appendChild(text); row.appendChild(rm);
       entriesEl.appendChild(row);
     });
@@ -1689,6 +2140,7 @@
     var text = gInput.value.trim();
     if (!text) { gInput.focus(); return; }
     entries.unshift({ text:text, when:new Date() });
+    persistEntries();
     gInput.value = '';
     renderEntries();
   });
@@ -1696,6 +2148,7 @@
     gInput.value = '';
     gInput.focus();
   });
+  renderEntries();
   document.getElementById('downloadEntries').addEventListener('click', function(){
     if (!entries.length) return;
     var lines = ['My Recovery Journey — Gratitude Journal', ''];
@@ -1759,7 +2212,14 @@
       ? 'Day one. The most important milestone of all — welcome.'
       : 'Every one of those days was a choice. Keep going, one day at a time.';
   }
-  startDate.addEventListener('change', updateMilestones);
+  try {
+    var savedStart = localStorage.getItem('mrj-start-date');
+    if (savedStart) { startDate.value = savedStart; updateMilestones(); }
+  } catch (err) {}
+  startDate.addEventListener('change', function(){
+    try { localStorage.setItem('mrj-start-date', startDate.value); } catch (err) {}
+    updateMilestones();
+  });
 
   /* ---------- Daily reflection ---------- */
   var reflections = [
@@ -1809,17 +2269,59 @@
     else if (done === 1) progress.textContent = '1 step chosen for today. That\u2019s how recovery is built.';
     else progress.textContent = done + ' of ' + items.length + ' steps chosen for today — well done.';
   }
+  function todayKey(){ var d = new Date(); return d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate(); }
+  function persistSteps(){
+    var chosen = [];
+    items.forEach(function(item, idx){ if (item.getAttribute('aria-pressed') === 'true') chosen.push(idx); });
+    try { localStorage.setItem('mrj-nextstep', JSON.stringify({ day: todayKey(), chosen: chosen })); } catch (err) {}
+  }
+  try {
+    var savedSteps = JSON.parse(localStorage.getItem('mrj-nextstep') || 'null');
+    if (savedSteps && savedSteps.day === todayKey() && Array.isArray(savedSteps.chosen)) {
+      savedSteps.chosen.forEach(function(idx){ if (items[idx]) items[idx].setAttribute('aria-pressed', 'true'); });
+      updateProgress();
+    }
+  } catch (err) {}
   items.forEach(function(item){
     item.addEventListener('click', function(){
       var on = item.getAttribute('aria-pressed') === 'true';
       item.setAttribute('aria-pressed', on ? 'false' : 'true');
+      persistSteps();
       updateProgress();
     });
   });
   document.getElementById('checkReset').addEventListener('click', function(){
     items.forEach(function(i){ i.setAttribute('aria-pressed', 'false'); });
+    persistSteps();
     updateProgress();
   });
+
+  /* ---------- Books filter & search ---------- */
+  var bookCards = Array.prototype.slice.call(document.querySelectorAll('.book-card'));
+  var bookChips = Array.prototype.slice.call(document.querySelectorAll('.chip[data-filter]'));
+  var bookSearch = document.getElementById('bookSearch');
+  var bookEmpty = document.getElementById('bookEmpty');
+  var activeBookFilter = 'All';
+  function applyBookFilter(){
+    var q = bookSearch ? bookSearch.value.trim().toLowerCase() : '';
+    var visible = 0;
+    bookCards.forEach(function(card){
+      var catOk = activeBookFilter === 'All' || card.getAttribute('data-category') === activeBookFilter;
+      var qOk = !q || card.textContent.toLowerCase().indexOf(q) >= 0;
+      var show = catOk && qOk;
+      card.hidden = !show;
+      if (show) visible++;
+    });
+    if (bookEmpty) bookEmpty.hidden = visible !== 0;
+  }
+  bookChips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      activeBookFilter = chip.getAttribute('data-filter');
+      bookChips.forEach(function(c){ c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'); });
+      applyBookFilter();
+    });
+  });
+  if (bookSearch) bookSearch.addEventListener('input', applyBookFilter);
 
   /* ---------- Open the page named in the address ---------- */
   route();
