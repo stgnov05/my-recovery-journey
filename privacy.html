@@ -1797,7 +1797,7 @@
 <h2>Daily Reflections</h2>
 <p class="lede">One short reflection for each day of the journey &#8212; every one on its own page, so it can be found, shared, and read again on a hard day. Newest first.</p>
 </div>
-<div class="update-list">
+<div class="update-list" id="reflectionsList">
 <article class="update-item">
 <div class="update-meta"><span class="update-date">November 2, 2026</span><span class="update-day">Day 74</span></div>
 <h3><a href="reflections/day-74-new-mercies-every-morning.html">New Mercies Every Morning</a></h3>
@@ -2019,6 +2019,31 @@
     Array.prototype.slice.call(document.querySelectorAll('.js-day-count')).forEach(function(el){ el.textContent = days; });
   }
   refreshDayCount();
+
+  /* ---------- Daily Reflections archive: refresh the list from reflections/index.json ---------- */
+  (function(){
+    var list = document.getElementById('reflectionsList');
+    if (!list || !window.fetch) return;
+    fetch('reflections/index.json', { cache: 'no-cache' }).then(function(r){ return r.ok ? r.json() : null; }).then(function(data){
+      if (!data || !data.length) return;
+      list.innerHTML = '';
+      data.forEach(function(e){
+        var art = document.createElement('article'); art.className = 'update-item';
+        var meta = document.createElement('div'); meta.className = 'update-meta';
+        var d = document.createElement('span'); d.className = 'update-date'; d.textContent = e.date;
+        var dy = document.createElement('span'); dy.className = 'update-day'; dy.textContent = 'Day ' + e.day;
+        meta.appendChild(d); meta.appendChild(dy); art.appendChild(meta);
+        var h = document.createElement('h3');
+        var a = document.createElement('a'); a.href = e.url; a.textContent = e.title;
+        h.appendChild(a); art.appendChild(h);
+        var p = document.createElement('p'); p.textContent = e.excerpt; art.appendChild(p);
+        var p2 = document.createElement('p');
+        var a2 = document.createElement('a'); a2.href = e.url; a2.textContent = 'Read this reflection';
+        p2.appendChild(a2); art.appendChild(p2);
+        list.appendChild(art);
+      });
+    }).catch(function(){});
+  })();
 
   /* ---------- Search ---------- */
   var searchPanel = document.getElementById('searchPanel');
