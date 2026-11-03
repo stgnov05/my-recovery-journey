@@ -497,6 +497,10 @@
   /* ---------- Next right step ---------- */
   .next-step{ background:var(--card-cream); }
   .checklist{ margin-top:18px; display:grid; gap:6px; }
+  .ask-list{ list-style:none; margin:14px 0 4px; padding:0; display:grid; gap:9px; }
+  .ask-list li{ font-size:1.02rem; color:var(--ink); }
+  .ask-list label{ display:flex; gap:11px; align-items:flex-start; cursor:pointer; }
+  .ask-list input{ margin-top:4px; width:18px; height:18px; accent-color:var(--steel); flex:none; }
   .check-item{
     display:flex; align-items:center; gap:14px; width:100%;
     background:none; border:none; text-align:left;
@@ -1646,7 +1650,7 @@
         </article>
         <article class="card">
           <h3>What support helps with</h3>
-          <p>Contributions may help with transportation, basic living needs, recovery-related materials, rebuilding stability, sober-living costs, and website improvements and outreach.</p>
+          <p>Contributions may help with transportation, basic living needs, recovery-related materials, rebuilding stability, <a href="#/sober-living">sober-living costs</a>, and website improvements and outreach.</p>
         </article>
         <article class="card">
           <h3>Important information &#8212; please read</h3>
@@ -1670,6 +1674,7 @@
         <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
         <h2>Sober Living</h2>
         <p class="lede">Finding a supportive place to rebuild. A stable environment and a supportive community can make a real difference when transitioning out of treatment &#8212; this is the step I&#8217;m preparing for myself, toward sober living in Washington or Oregon.</p>
+        <p class="note">My Recovery Journey is not a housing provider and does not place people &#8212; this page is how I&#8217;m learning to evaluate options for myself.</p>
       </div>
       <div class="page-cards">
         <article class="card">
@@ -1683,12 +1688,22 @@
           <p><a class="btn ghost" href="https://narronline.org/" target="_blank" rel="noopener">Explore NARR</a></p>
         </article>
         <article class="card">
-          <h3>Budget before moving</h3>
-          <p>Ask about move-in fees, weekly or monthly rent, deposits, transportation, food, employment requirements, and any refund policies &#8212; before you travel or pay anything.</p>
-        </article>
-        <article class="card">
           <h3>Questions to ask any residence</h3>
-          <p>What happens after a relapse? Are meetings required? Are there curfews, visitor policies, or medication rules? How are chores and house decisions handled? Get the answers in writing.</p>
+          <p>Take this list to the phone call. Check each one off as you get an answer &#8212; and get the answers in writing before you travel or pay anything.</p>
+          <ul class="ask-list">
+            <li><label><input type="checkbox" /> Move-in fee &#8212; how much, and when is it due?</label></li>
+            <li><label><input type="checkbox" /> Rent &#8212; weekly or monthly, and how much?</label></li>
+            <li><label><input type="checkbox" /> Deposit &#8212; how much, and is it refundable?</label></li>
+            <li><label><input type="checkbox" /> Other costs &#8212; transportation, food, or anything extra?</label></li>
+            <li><label><input type="checkbox" /> Employment &#8212; is a job required, and by when?</label></li>
+            <li><label><input type="checkbox" /> Curfew &#8212; is there one, and what time?</label></li>
+            <li><label><input type="checkbox" /> Visitors &#8212; who can visit, and when?</label></li>
+            <li><label><input type="checkbox" /> Medication policy &#8212; are prescribed medications allowed?</label></li>
+            <li><label><input type="checkbox" /> Relapse policy &#8212; what happens after a relapse?</label></li>
+            <li><label><input type="checkbox" /> Meetings &#8212; are they required, and how often?</label></li>
+            <li><label><input type="checkbox" /> Chores and house decisions &#8212; how are they handled?</label></li>
+          </ul>
+          <p class="note">Tip: print this page or screenshot this list before you call, so nothing gets missed.</p>
         </article>
         <article class="card">
           <h3>Please verify</h3>
