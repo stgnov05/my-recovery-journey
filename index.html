@@ -199,15 +199,21 @@
   .page-foot-nav a{ font-weight:600; text-decoration:none; }
   .page-foot-nav a:hover{ text-decoration:underline; }
 
+  /* ---------- Guided grounding ---------- */
+  .grounding-guide{ margin-top:14px; padding:18px; border:1.5px solid var(--line); border-radius:14px; }
+  .guide-progress{ font-weight:700; letter-spacing:.08em; text-transform:uppercase; font-size:.8rem; color:var(--steel); margin:0 0 8px; }
+  .guide-prompt{ font-size:1.35rem; font-weight:700; color:var(--ink); margin:0 0 6px; line-height:1.35; }
+  .guide-sub{ margin:0 0 14px; }
+
   /* ---------- Drawer & search ---------- */
   .scrim{
-    position:fixed; inset:0; z-index:40;
+    position:fixed; inset:0; z-index:190;
     background:rgba(8,24,38,.55);
     opacity:0; pointer-events:none; transition:opacity .25s ease;
   }
   .scrim.open{ opacity:1; pointer-events:auto; }
   .drawer{
-    position:fixed; top:0; left:0; bottom:0; z-index:50;
+    position:fixed; top:0; left:0; bottom:0; z-index:200; height:100dvh; max-height:100dvh; overscroll-behavior:contain;
     width:min(320px, 86vw);
     background:var(--card); color:var(--body);
     box-shadow:12px 0 40px rgba(10,28,44,.3);
@@ -230,7 +236,7 @@
   .drawer nav a[aria-current="page"]{ color:var(--steel); }
   .drawer-note{ margin-top:18px; font-size:.92rem; color:var(--muted); }
   .search-panel{
-    position:fixed; top:0; left:0; right:0; z-index:50;
+    position:fixed; top:0; left:0; right:0; z-index:200;
     background:var(--card);
     box-shadow:0 18px 44px rgba(10,28,44,.28);
     transform:translateY(-110%); transition:transform .3s ease;
@@ -827,43 +833,6 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   </ul>
 </nav>
 
-<div class="scrim" id="scrim"></div>
-
-<aside class="drawer" id="drawer" aria-label="Site menu" hidden>
-  <div class="drawer-head">
-    <span class="drawer-title">Menu</span>
-    <button class="icon-btn" id="drawerClose" aria-label="Close menu">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
-    </button>
-  </div>
-  <nav>
-    <a class="nav-help" href="#/resources">Need Help Now <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/home" data-page-link="home">Home <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/start-here" data-page-link="start-here">Start Here <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/tools" data-page-link="tools">Recovery Tools <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/gratitude" data-page-link="gratitude">Gratitude Journal <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/milestones" data-page-link="milestones">My Milestones <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/reflection" data-page-link="reflection">Daily Reflection <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/reflections" data-page-link="reflections">Daily Reflections <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/grounding" data-page-link="grounding">When a Moment Feels Difficult <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/next-step" data-page-link="next-step">My Next Right Step <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/story" data-page-link="story">My Story <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/updates" data-page-link="updates">Journey Updates <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/faith" data-page-link="faith">Faith for the Journey <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/resources" data-page-link="resources">Recovery Resources <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/paths" data-page-link="paths">Recovery Paths <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/faq" data-page-link="faq">FAQ <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/articles" data-page-link="articles">Articles &amp; Inspiration <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/books" data-page-link="books">Books &amp; Literature <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/progress" data-page-link="progress">My Progress <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/sober-living" data-page-link="sober-living">Sober Living <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/support" data-page-link="support">Support This Site <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/directory" data-page-link="directory">Site Directory <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/privacy" data-page-link="privacy">Privacy <span aria-hidden="true">&#8250;</span></a>
-  </nav>
-  <button class="theme-toggle" id="themeBtn" type="button" aria-pressed="false">Switch to dark mode</button>
-  <p class="drawer-note">Every link above opens its own page. One day at a time. One step toward a new life.</p>
-</aside>
 
 <div class="search-panel" id="searchPanel" role="search" hidden>
   <div class="search-wrap">
@@ -1129,6 +1098,17 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
           <figcaption class="sr-only">A moment of stillness. One step at a time.</figcaption>
         </figure>
       </div>
+      <p><button class="btn" id="guideStart" type="button">Guide me through it, step by step</button></p>
+      <div class="grounding-guide" id="groundingGuide" hidden>
+        <p class="guide-progress" id="guideProgress" aria-live="polite"></p>
+        <p class="guide-prompt" id="guidePrompt"></p>
+        <p class="guide-sub" id="guideSub"></p>
+        <div class="card-actions">
+          <button class="btn ghost" id="guideBack" type="button">Back</button>
+          <button class="btn" id="guideNext" type="button">Next</button>
+          <button class="btn ghost" id="guideDone" type="button">End exercise</button>
+        </div>
+      </div>
       <p class="after">Then consider one small, safe next step: drink water, take a short walk, contact a supportive person, or attend a meeting.</p>
       <a class="btn" href="#/resources">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -1315,6 +1295,16 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
           <h3>If you need help right now</h3>
           <p>In the U.S., call or text <b>988</b> any time for crisis support, or call SAMHSA&#8217;s National Helpline at <b>1-800-662-HELP (4357)</b> for free, confidential treatment referrals, 24/7. In immediate danger, call <b>911</b>.</p>
           <p><a class="btn" href="#/grounding">Try the grounding exercise</a></p>
+        </article>
+        <article class="card">
+          <h3>Find help near you right now</h3>
+          <p>You do not have to figure this out from a homepage. Here is how to find real help, close to home, in the next few minutes:</p>
+          <p><b>Find a meeting near you</b> &#8212; at most open meetings you can simply sit and listen. You do not have to speak, join, or explain yourself. Both sites also list online meetings you can join from anywhere, today.</p>
+          <p><a class="btn ghost" href="https://www.aa.org/find-aa" target="_blank" rel="noopener">Find an AA meeting</a> <a class="btn ghost" href="https://www.na.org/meetingsearch/" target="_blank" rel="noopener">Find an NA meeting</a></p>
+          <p><b>Find treatment near you</b> &#8212; free, confidential, 24/7, in English and Spanish: SAMHSA&#8217;s National Helpline, <a href="tel:18006624357"><b>1-800-662-HELP (4357)</b></a>, or search by ZIP code at FindTreatment.gov.</p>
+          <p><a class="btn ghost" href="https://findtreatment.gov" target="_blank" rel="noopener">Search FindTreatment.gov</a></p>
+          <p><b>In crisis right now?</b> Call or text <a href="tel:988"><b>988</b></a> any time in the U.S. In immediate danger, call <b>911</b>. Then tell one person near you what is happening &#8212; you do not have to carry a hard moment alone.</p>
+          <p class="note">My Recovery Journey is one man&#8217;s personal story and encouragement &#8212; not a treatment provider, medical advice, or an emergency service. The organizations above can help you today, where you live.</p>
         </article>
         <article class="card">
           <span class="step-badge">Step 1</span>
@@ -1988,6 +1978,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
     <a href="https://www.threads.net/@stgnovo5" target="_blank" rel="noopener">Threads</a>
     <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstgnov05.github.io%2Fmy-recovery-journey%2F" target="_blank" rel="noopener">Share on Facebook</a>
     <a href="https://api.whatsapp.com/send?text=My%20Recovery%20Journey%20%E2%80%94%20hope%2C%20healing%2C%20and%20recovery%20resources%3A%20https%3A%2F%2Fstgnov05.github.io%2Fmy-recovery-journey%2F" target="_blank" rel="noopener">Share on WhatsApp</a>
+    <a href="https://twitter.com/intent/tweet?text=My%20Recovery%20Journey%20%E2%80%94%20faith%2C%20hope%2C%20and%20one%20day%20at%20a%20time%3A%20https%3A%2F%2Fstgnov05.github.io%2Fmy-recovery-journey%2F" target="_blank" rel="noopener" id="shareX">Share on X</a>
   </div>
   <p class="f-small">&#169; 2026 Steven Gregory &#183; My Recovery Journey &#183; One day at a time.</p>
 </footer>
@@ -2007,6 +1998,8 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   function openDrawer(){
     if (drawerHideTimer) { clearTimeout(drawerHideTimer); drawerHideTimer = null; }
     drawer.hidden = false;
+    drawer.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
     requestAnimationFrame(function(){ requestAnimationFrame(function(){ drawer.classList.add('open'); }); });
     scrim.classList.add('open');
   }
@@ -2014,6 +2007,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
     if (drawer.hidden) return;
     drawer.classList.remove('open');
     scrim.classList.remove('open');
+    document.body.style.overflow = '';
     if (drawerHideTimer) clearTimeout(drawerHideTimer);
     drawerHideTimer = setTimeout(function(){ drawer.hidden = true; drawerHideTimer = null; }, 320);
   }
@@ -2407,8 +2401,59 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   }
   rBtn.addEventListener('click', function(){
     if (!rShown) { showReflectionOnce(); }
-    else { rIndex = (rIndex + 1) % reflections.length; showReflection(); }
+    else { var n = rIndex; if (reflections.length > 1) { while (n === rIndex) { n = Math.floor(Math.random() * reflections.length); } } rIndex = n; showReflection(); }
   });
+
+  /* ---------- Guided grounding ---------- */
+  (function(){
+    var startBtn = document.getElementById('guideStart');
+    var panel = document.getElementById('groundingGuide');
+    if (!startBtn || !panel) return;
+    var progress = document.getElementById('guideProgress');
+    var promptEl = document.getElementById('guidePrompt');
+    var subEl = document.getElementById('guideSub');
+    var backBtn = document.getElementById('guideBack');
+    var nextBtn = document.getElementById('guideNext');
+    var doneBtn = document.getElementById('guideDone');
+    var steps = [
+      { p:'First, one slow breath.', s:'Breathe in slowly... and let it out. There is no hurry here. When you are ready, press Next.' },
+      { p:'Name 5 things you can see.', s:'Look around slowly. Name them out loud or in your mind \u2014 a color, a shadow, something still, something moving.' },
+      { p:'Notice 4 things you can feel.', s:'The chair beneath you, fabric on your skin, air on your face, your feet on the floor. One at a time.' },
+      { p:'Listen for 3 things you can hear.', s:'Near or far \u2014 a hum, a voice, the wind, your own breathing. Let each sound just be there.' },
+      { p:'Notice 2 things you can smell.', s:'Coffee, rain, soap, fresh air. If nothing comes, notice the clean absence of smell.' },
+      { p:'Notice 1 thing you can taste.', s:'A sip of water helps. Or simply the taste of this moment, exactly as it is.' },
+      { p:'You are here. This moment is enough.', s:'The wave does not get the final say. Consider one small, safe next step: drink water, take a short walk, contact a supportive person, or attend a meeting. One day at a time.' }
+    ];
+    var idx = 0;
+    function render(){
+      progress.textContent = idx === 0 ? 'Begin' : (idx === steps.length - 1 ? 'Finish' : 'Step ' + idx + ' of 5');
+      promptEl.textContent = steps[idx].p;
+      subEl.textContent = steps[idx].s;
+      backBtn.style.visibility = idx === 0 ? 'hidden' : 'visible';
+      nextBtn.textContent = idx === steps.length - 1 ? 'Done' : 'Next';
+    }
+    startBtn.addEventListener('click', function(){ idx = 0; panel.hidden = false; startBtn.hidden = true; render(); panel.scrollIntoView({ behavior:'smooth', block:'center' }); });
+    nextBtn.addEventListener('click', function(){ if (idx < steps.length - 1) { idx++; render(); } else { panel.hidden = true; startBtn.hidden = false; startBtn.textContent = 'Guide me through it again'; } });
+    backBtn.addEventListener('click', function(){ if (idx > 0) { idx--; render(); } });
+    doneBtn.addEventListener('click', function(){ panel.hidden = true; startBtn.hidden = false; });
+  })();
+
+  /* ---------- Share text carries the day count; help button always lands at the top of Resources ---------- */
+  (function(){
+    var start = new Date(2026, 7, 20);
+    var now = new Date();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var days = Math.round((today - start) / 86400000);
+    if (days < 0) days = 0;
+    var msg = 'Day ' + days + ' of my recovery journey \u2014 faith, hope, and one day at a time. My Recovery Journey: ';
+    var url = 'https://stgnov05.github.io/my-recovery-journey/';
+    var wa = document.querySelector('a[href^="https://api.whatsapp.com/send"]');
+    if (wa) wa.href = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(msg + url);
+    var x = document.getElementById('shareX');
+    if (x) x.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(msg) + '&url=' + encodeURIComponent(url);
+    var fab = document.querySelector('.help-fab');
+    if (fab) fab.addEventListener('click', function(){ setTimeout(function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); }, 80); });
+  })();
 
   /* ---------- Next right step checklist ---------- */
   var items = Array.prototype.slice.call(document.querySelectorAll('.check-item'));
@@ -2502,5 +2547,41 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   route();
 })();
 </script>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Site menu" hidden>
+  <div class="drawer-head">
+    <span class="drawer-title">Menu</span>
+    <button class="icon-btn" id="drawerClose" aria-label="Close menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    </button>
+  </div>
+  <nav>
+    <a class="nav-help" href="#/resources">Need Help Now <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/home" data-page-link="home">Home <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/start-here" data-page-link="start-here">Start Here <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/tools" data-page-link="tools">Recovery Tools <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/gratitude" data-page-link="gratitude">Gratitude Journal <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/milestones" data-page-link="milestones">My Milestones <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/reflection" data-page-link="reflection">Daily Reflection <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/reflections" data-page-link="reflections">Daily Reflections <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/grounding" data-page-link="grounding">When a Moment Feels Difficult <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/next-step" data-page-link="next-step">My Next Right Step <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/story" data-page-link="story">My Story <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/updates" data-page-link="updates">Journey Updates <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/faith" data-page-link="faith">Faith for the Journey <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/resources" data-page-link="resources">Recovery Resources <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/paths" data-page-link="paths">Recovery Paths <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/faq" data-page-link="faq">FAQ <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/articles" data-page-link="articles">Articles &amp; Inspiration <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/books" data-page-link="books">Books &amp; Literature <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/progress" data-page-link="progress">My Progress <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/sober-living" data-page-link="sober-living">Sober Living <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/support" data-page-link="support">Support This Site <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/directory" data-page-link="directory">Site Directory <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/privacy" data-page-link="privacy">Privacy <span aria-hidden="true">&#8250;</span></a>
+  </nav>
+  <button class="theme-toggle" id="themeBtn" type="button" aria-pressed="false">Switch to dark mode</button>
+  <p class="drawer-note">Every link above opens its own page. One day at a time. One step toward a new life.</p>
+</aside>
 </body>
 </html>
