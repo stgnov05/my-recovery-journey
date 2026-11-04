@@ -336,7 +336,6 @@
 .page-cards p:last-child{ margin-bottom:0; }
 .step-badge{ display:inline-block; background:var(--gold); color:var(--navy-deep); border-radius:999px; padding:2px 11px; font-weight:700; font-size:.85rem; margin-bottom:8px; }
 
-
 /* ---------- Need Help Now, social, books, directory ---------- */
 .primary-nav a.nav-help{ background:var(--gold); border-color:var(--gold); color:var(--navy-deep); font-weight:800; }
 .primary-nav a.nav-help:hover{ background:var(--navy); border-color:var(--navy); color:#fff; }
@@ -789,7 +788,6 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
 <body>
 <a class="help-fab" href="#/resources" aria-label="Need help now: find crisis and recovery support">Need help now</a>
 
-
 <header class="site-header">
   <img class="banner" src="photo-542cdea4.webp" alt="" width="1600" height="686" />
   <div class="shade"></div>
@@ -830,7 +828,6 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
     <li><a class="nav-help" href="#/resources">Need Help Now</a></li>
   </ul>
 </nav>
-
 
 <div class="search-panel" id="searchPanel" role="search" hidden>
   <div class="search-wrap">
@@ -1982,6 +1979,43 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
 </footer>
 
 <script>if(!location.hash){history.replaceState(null,"","#/resources");}</script>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Site menu" hidden>
+  <div class="drawer-head">
+    <span class="drawer-title">Menu</span>
+    <button class="icon-btn" id="drawerClose" aria-label="Close menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    </button>
+  </div>
+  <nav>
+    <a class="nav-help" href="#/resources">Need Help Now <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/home" data-page-link="home">Home <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/start-here" data-page-link="start-here">Start Here <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/tools" data-page-link="tools">Recovery Tools <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/gratitude" data-page-link="gratitude">Gratitude Journal <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/milestones" data-page-link="milestones">My Milestones <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/reflection" data-page-link="reflection">Daily Reflection <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/reflections" data-page-link="reflections">Reflections Archive <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/grounding" data-page-link="grounding">When a Moment Feels Difficult <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/next-step" data-page-link="next-step">My Next Right Step <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/story" data-page-link="story">My Story <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/updates" data-page-link="updates">Journey Updates <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/faith" data-page-link="faith">Faith for the Journey <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/resources" data-page-link="resources">Recovery Resources <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/paths" data-page-link="paths">Recovery Paths <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/faq" data-page-link="faq">FAQ <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/articles" data-page-link="articles">Articles &amp; Inspiration <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/books" data-page-link="books">Books &amp; Literature <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/progress" data-page-link="progress">My Progress <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/sober-living" data-page-link="sober-living">Sober Living <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/support" data-page-link="support">Support This Site <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/directory" data-page-link="directory">Site Directory <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/privacy" data-page-link="privacy">Privacy <span aria-hidden="true">&#8250;</span></a>
+  </nav>
+  <button class="theme-toggle" id="themeBtn" type="button" aria-pressed="false">Switch to dark mode</button>
+  <p class="drawer-note">Every link above opens its own page. One day at a time. One step toward a new life.</p>
+</aside>
+
 <script>
 (function(){
   "use strict";
@@ -2546,41 +2580,6 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   route();
 })();
 </script>
-<div class="scrim" id="scrim"></div>
-<aside class="drawer" id="drawer" aria-label="Site menu" hidden>
-  <div class="drawer-head">
-    <span class="drawer-title">Menu</span>
-    <button class="icon-btn" id="drawerClose" aria-label="Close menu">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
-    </button>
-  </div>
-  <nav>
-    <a class="nav-help" href="#/resources">Need Help Now <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/home" data-page-link="home">Home <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/start-here" data-page-link="start-here">Start Here <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/tools" data-page-link="tools">Recovery Tools <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/gratitude" data-page-link="gratitude">Gratitude Journal <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/milestones" data-page-link="milestones">My Milestones <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/reflection" data-page-link="reflection">Daily Reflection <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/reflections" data-page-link="reflections">Reflections Archive <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/grounding" data-page-link="grounding">When a Moment Feels Difficult <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/next-step" data-page-link="next-step">My Next Right Step <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/story" data-page-link="story">My Story <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/updates" data-page-link="updates">Journey Updates <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/faith" data-page-link="faith">Faith for the Journey <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/resources" data-page-link="resources">Recovery Resources <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/paths" data-page-link="paths">Recovery Paths <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/faq" data-page-link="faq">FAQ <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/articles" data-page-link="articles">Articles &amp; Inspiration <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/books" data-page-link="books">Books &amp; Literature <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/progress" data-page-link="progress">My Progress <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/sober-living" data-page-link="sober-living">Sober Living <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/support" data-page-link="support">Support This Site <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/directory" data-page-link="directory">Site Directory <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/privacy" data-page-link="privacy">Privacy <span aria-hidden="true">&#8250;</span></a>
-  </nav>
-  <button class="theme-toggle" id="themeBtn" type="button" aria-pressed="false">Switch to dark mode</button>
-  <p class="drawer-note">Every link above opens its own page. One day at a time. One step toward a new life.</p>
-</aside>
+
 </body>
 </html>
