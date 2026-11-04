@@ -625,8 +625,55 @@
   footer .f-small{ margin-top:20px; font-size:.92rem; color:#9db9cc; }
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://stgnov05.github.io/my-recovery-journey/#site", "url": "https://stgnov05.github.io/my-recovery-journey/", "name": "My Recovery Journey", "description": "Faith, hope, and practical recovery tools. One day at a time, one step toward a new life.", "inLanguage": "en-US", "publisher": {"@id": "https://stgnov05.github.io/my-recovery-journey/#steven"}}, {"@type": "Person", "@id": "https://stgnov05.github.io/my-recovery-journey/#steven", "name": "Steven Gregory", "url": "https://stgnov05.github.io/my-recovery-journey/", "sameAs": ["https://www.facebook.com/stgnov05", "https://www.instagram.com/cardboardheroes05/", "https://www.threads.net/@stgnovo5"]}]}</script>
+<style id="enhance-2026-11">
+/* Visual polish pass */
+h1,h2,h3{ text-wrap:balance; }
+p,li,blockquote{ text-wrap:pretty; }
+/* Phones: one swipeable row of pills instead of five stacked rows */
+@media (max-width:700px){
+  .primary-nav{ padding:0; position:relative; }
+  .primary-nav ul{
+    flex-wrap:nowrap; justify-content:flex-start; overflow-x:auto;
+    padding:4px 16px 10px; gap:8px; scroll-snap-type:x proximity; scroll-padding-inline:16px;
+    -webkit-overflow-scrolling:touch; scrollbar-width:none;
+    -webkit-mask-image:linear-gradient(90deg,#000 0,#000 90%,transparent 100%);
+            mask-image:linear-gradient(90deg,#000 0,#000 90%,transparent 100%);
+  }
+  .primary-nav ul::-webkit-scrollbar{ display:none; }
+  .primary-nav li{ flex:none; scroll-snap-align:start; }
+  .primary-nav a{ white-space:nowrap; }
+  .primary-nav li:first-child{ margin-left:16px; }
+  .primary-nav li:last-child{ margin-right:28px; }
+}
+/* Cards and buttons feel alive */
+.card{ transition:transform .25s ease, box-shadow .25s ease; }
+@media (hover:hover){
+  .card:hover{ transform:translateY(-3px); box-shadow:0 16px 38px rgba(18,42,63,.18), 0 3px 8px rgba(18,42,63,.09); }
+}
+.primary-nav a{ transition:transform .15s ease, border-color .15s ease, color .15s ease; }
+.primary-nav a:hover{ transform:translateY(-1px); }
+a:focus-visible,button:focus-visible{ outline:3px solid var(--gold); outline-offset:3px; border-radius:10px; }
+/* Gentle reveal as cards scroll into view (browsers that support it) */
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    .card{ animation:rj-rise linear both; animation-timeline:view(); animation-range:entry 0% entry 35%; }
+    @keyframes rj-rise{ from{ opacity:0; transform:translateY(22px); } to{ opacity:1; transform:none; } }
+  }
+}
+/* Always-available help button */
+.help-fab{
+  position:fixed; right:14px; bottom:calc(14px + env(safe-area-inset-bottom)); z-index:60;
+  display:inline-flex; align-items:center; gap:8px; padding:12px 18px; border-radius:999px;
+  background:var(--gold); color:var(--navy-deep); font-weight:800; font-size:.95rem;
+  text-decoration:none; box-shadow:0 8px 22px rgba(0,0,0,.28);
+}
+.help-fab:hover{ background:var(--navy); color:#fff; }
+@media print{ .help-fab{ display:none; } }
+</style>
 </head>
 <body>
+<a class="help-fab" href="#/resources" aria-label="Need help now: find crisis and recovery support">Need help now</a>
+
 
 <header class="site-header">
   <img class="banner" src="photo-542cdea4.webp" alt="" width="1600" height="686" />
