@@ -1,0 +1,73 @@
+/* My Recovery Journey - 10/10 Design System */
+:root {
+  --deep: #0f2a3c;
+  --mist: #e6ecea;
+  --sand: #c7a47a;
+  --paper: #fdfcfa;
+  --ink: #1a2a33;
+  --crisis: #b23a2b;
+  --success: #2d6a4f;
+  --radius: 16px;
+  --shadow: 0 8px 32px rgba(15,42,60,0.08);
+}
+* { box-sizing: border-box; }
+body {
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--ink);
+  background: var(--paper);
+  max-width: 100%;
+  margin: 0;
+}
+h1,h2,h3 { font-family: Merriweather, Georgia, serif; line-height: 1.2; letter-spacing: -0.02em; }
+h1 { font-size: clamp(32px, 6vw, 56px); }
+h2 { font-size: clamp(28px, 4vw, 36px); margin-top: 3rem; }
+p { max-width: 65ch; }
+a:focus, button:focus { outline: 3px solid var(--sand); outline-offset: 2px; border-radius: 4px; }
+
+/* Sticky header */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(12px); background: rgba(253,252,250,0.9);
+  border-bottom: 1px solid var(--mist);
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 24px;
+}
+.day-counter {
+  background: var(--deep); color: white; padding: 6px 14px; border-radius: 999px;
+  font-weight: 700; font-size: 14px; letter-spacing: 0.05em;
+}
+
+/* Tool card - 10/10 */
+.tool-card {
+  background: white; border: 1px solid var(--mist); border-radius: var(--radius);
+  padding: 24px; box-shadow: var(--shadow);
+  transition: transform 0.2s ease;
+}
+.tool-card:hover { transform: translateY(-2px); }
+.privacy-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--mist); color: var(--deep); font-size: 12px; font-weight: 600;
+  padding: 4px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em;
+}
+
+/* Crisis banner */
+.crisis-bar {
+  background: var(--deep); color: white; text-align: center;
+  padding: 10px; font-size: 14px;
+}
+.crisis-bar a { color: var(--sand); font-weight: 700; }
+
+/* Bottom nav mobile */
+.mobile-nav {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: white; border-top: 1px solid var(--mist);
+  display: flex; justify-content: space-around; padding: 10px 0 20px;
+  z-index: 100;
+}
+@media(min-width: 768px){ .mobile-nav{display:none} }
+
+/* Article */
+.article-meta { font-size: 14px; color: #6b7c88; display:flex; gap:12px; }
+.prose { max-width: 65ch; margin: 0 auto; }
