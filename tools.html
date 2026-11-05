@@ -231,6 +231,16 @@
     color:var(--ink); text-decoration:none; font-weight:600;
     border-bottom:1px solid var(--line);
   }
+  .drawer nav button.more-toggle{
+    display:flex; justify-content:space-between; align-items:center;
+    width:100%; padding:13px 6px; background:none; border:none; cursor:pointer;
+    color:var(--ink); font:inherit; font-weight:600; text-align:left;
+    border-bottom:1px solid var(--line);
+  }
+  .more-toggle .more-chev{ display:inline-block; transition:transform .25s ease; }
+  .more-toggle[aria-expanded="true"] .more-chev{ transform:rotate(90deg); }
+  .page-hero-img{ display:block; width:100%; aspect-ratio:16/7; object-fit:cover; border-radius:18px; margin:4px 0 20px; }
+
   .drawer nav a:hover{ color:var(--steel); }
   .drawer nav a[aria-current="page"]{ color:var(--steel); }
   .drawer-note{ margin-top:18px; font-size:.92rem; color:var(--muted); }
@@ -979,6 +989,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   <!-- ============ PAGE: RECOVERY TOOLS ============ -->
   <div class="page-view" data-page="tools">
     <section id="tools">
+      <img class="page-hero-img" src="pnw-cascade.webp" alt="A clear stream cascading over moss-covered rocks in a lush green forest" width="1600" height="700" loading="lazy" decoding="async" />
       <div class="tools-head">
         <div class="tools-title">
           <span class="tile" aria-hidden="true">
@@ -1144,6 +1155,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   <!-- ============ PAGE: MY STORY ============ -->
   <div class="page-view" data-page="story">
     <section id="story">
+      <img class="page-hero-img" src="pnw-waterfall.webp" alt="A tall, slender waterfall falling through a deep green forest" width="1600" height="700" loading="lazy" decoding="async" />
       <div class="page-head">
         <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
         <h2>My Journey</h2>
@@ -1198,6 +1210,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   <!-- ============ PAGE: JOURNEY UPDATES ============ -->
   <div class="page-view" data-page="updates">
     <section id="updates">
+      <img class="page-hero-img" src="pnw-trail.webp" alt="A quiet trail winding through a foggy evergreen forest" width="1600" height="700" loading="lazy" decoding="async" />
       <div class="page-head">
         <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
         <h2>Journey Updates</h2>
@@ -1273,6 +1286,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   <!-- ============ PAGE: FAITH ============ -->
   <div class="page-view" data-page="faith">
     <section id="faith">
+      <img class="page-hero-img" src="pnw-sunbeams.webp" alt="Sunbeams breaking through morning mist along a forest trail" width="1600" height="700" loading="lazy" decoding="async" />
       <div class="page-head">
         <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
         <h2>Faith for the Journey</h2>
@@ -1298,6 +1312,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   <!-- ============ PAGE: START HERE ============ -->
   <div class="page-view" data-page="start-here">
     <section id="start-here">
+      <img class="page-hero-img" src="pnw-boardwalk.webp" alt="A wooden boardwalk winding through a mossy old-growth forest in the Pacific Northwest" width="1600" height="700" loading="lazy" decoding="async" />
       <div class="page-head">
         <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
         <h2>Start Here</h2>
@@ -1743,6 +1758,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   <!-- ============ PAGE: SOBER LIVING ============ -->
   <div class="page-view" data-page="sober-living">
     <section id="sober-living">
+      <img class="page-hero-img" src="pnw-road.webp" alt="A wet highway running between tall evergreen trees toward misty mountains" width="1600" height="700" loading="lazy" decoding="async" />
       <div class="page-head">
         <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
         <h2>Sober Living</h2>
@@ -1980,28 +1996,15 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   <svg width="52" height="29" viewBox="0 0 72 40" fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><polyline points="4,36 22,12 32,24 44,6 56,22 68,36"/></svg>
   <div class="f-name">My Recovery Journey</div>
   <p class="f-tag">FAITH &#8226; RECOVERY &#8226; GROWTH &#8226; NEW BEGINNINGS</p>
-  <nav>
+    <nav>
     <a href="#/home" data-page-link="home">Home</a>
-    <a href="#/tools" data-page-link="tools">Recovery Tools</a>
-    <a href="#/gratitude" data-page-link="gratitude">Gratitude Journal</a>
-    <a href="#/milestones" data-page-link="milestones">Milestones</a>
-    <a href="#/reflection" data-page-link="reflection">Daily Reflection</a>
-    <a href="#/grounding" data-page-link="grounding">Grounding</a>
-    <a href="#/next-step" data-page-link="next-step">Next Right Step</a>
+    <a href="#/start-here" data-page-link="start-here">Start Here</a>
     <a href="#/story" data-page-link="story">My Story</a>
     <a href="#/updates" data-page-link="updates">Journey Updates</a>
-    <a href="#/faith" data-page-link="faith">Faith</a>
+    <a href="#/reflection" data-page-link="reflection">Daily Reflection</a>
+    <a href="#/tools" data-page-link="tools">Recovery Tools</a>
     <a href="#/resources" data-page-link="resources">Resources</a>
-    <a href="#/start-here" data-page-link="start-here">Start Here</a>
-    <a href="#/paths" data-page-link="paths">Recovery Paths</a>
-    <a href="#/faq" data-page-link="faq">FAQ</a>
-    <a href="#/articles" data-page-link="articles">Articles</a>
-    <a href="#/books" data-page-link="books">Books</a>
-    <a href="#/progress" data-page-link="progress">My Progress</a>
-    <a href="#/sober-living" data-page-link="sober-living">Sober Living</a>
     <a href="#/support" data-page-link="support">Support</a>
-    <a href="#/directory" data-page-link="directory">Directory</a>
-    <a href="#/privacy" data-page-link="privacy">Privacy</a>
   </nav>
   <div class="social-row" aria-label="Follow and share My Recovery Journey">
     <a href="https://www.facebook.com/share/1HewtDaZeQ/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a>
@@ -2011,7 +2014,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
     <a href="https://api.whatsapp.com/send?text=My%20Recovery%20Journey%20%E2%80%94%20hope%2C%20healing%2C%20and%20recovery%20resources%3A%20https%3A%2F%2Fstgnov05.github.io%2Fmy-recovery-journey%2F" target="_blank" rel="noopener">Share on WhatsApp</a>
     <a href="https://twitter.com/intent/tweet?text=My%20Recovery%20Journey%20%E2%80%94%20faith%2C%20hope%2C%20and%20one%20day%20at%20a%20time%3A%20https%3A%2F%2Fstgnov05.github.io%2Fmy-recovery-journey%2F" target="_blank" rel="noopener" id="shareX">Share on X</a>
   </div>
-  <p class="f-small">&#169; 2026 Steven Gregory &#183; My Recovery Journey &#183; One day at a time.</p>
+  <p class="f-small">&#169; 2026 Steven Gregory &#183; My Recovery Journey &#183; One day at a time &#183; <a href="#/privacy" data-page-link="privacy">Privacy</a></p>
 </footer>
 
 <script>if(!location.hash){history.replaceState(null,"","#/tools");}</script>
@@ -2023,30 +2026,33 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
     </button>
   </div>
-  <nav>
+    <nav>
     <a class="nav-help" href="#/resources">Need Help Now <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/home" data-page-link="home">Home <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/start-here" data-page-link="start-here">Start Here <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/tools" data-page-link="tools">Recovery Tools <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/gratitude" data-page-link="gratitude">Gratitude Journal <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/milestones" data-page-link="milestones">My Milestones <span aria-hidden="true">&#8250;</span></a>
     <a href="#/reflection" data-page-link="reflection">Daily Reflection <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/reflections" data-page-link="reflections">Reflections Archive <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/grounding" data-page-link="grounding">When a Moment Feels Difficult <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/next-step" data-page-link="next-step">My Next Right Step <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/story" data-page-link="story">My Story <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/updates" data-page-link="updates">Journey Updates <span aria-hidden="true">&#8250;</span></a>
     <a href="#/faith" data-page-link="faith">Faith for the Journey <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/gratitude" data-page-link="gratitude">Gratitude Journal <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/home" data-page-link="home">Home <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/updates" data-page-link="updates">Journey Updates <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/milestones" data-page-link="milestones">My Milestones <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/story" data-page-link="story">My Story <span aria-hidden="true">&#8250;</span></a>
     <a href="#/resources" data-page-link="resources">Recovery Resources <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/paths" data-page-link="paths">Recovery Paths <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/faq" data-page-link="faq">FAQ <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/tools" data-page-link="tools">Recovery Tools <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/start-here" data-page-link="start-here">Start Here <span aria-hidden="true">&#8250;</span></a>
+    <button class="more-toggle" id="moreToggle" type="button" aria-expanded="false" aria-controls="drawerMore">More <span class="more-chev" aria-hidden="true">&#8250;</span></button>
+    <div class="drawer-more" id="drawerMore" hidden>
     <a href="#/articles" data-page-link="articles">Articles &amp; Inspiration <span aria-hidden="true">&#8250;</span></a>
     <a href="#/books" data-page-link="books">Books &amp; Literature <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/faq" data-page-link="faq">FAQ <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/next-step" data-page-link="next-step">My Next Right Step <span aria-hidden="true">&#8250;</span></a>
     <a href="#/progress" data-page-link="progress">My Progress <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/privacy" data-page-link="privacy">Privacy <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/paths" data-page-link="paths">Recovery Paths <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/reflections" data-page-link="reflections">Reflections Archive <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/directory" data-page-link="directory">Site Directory <span aria-hidden="true">&#8250;</span></a>
     <a href="#/sober-living" data-page-link="sober-living">Sober Living <span aria-hidden="true">&#8250;</span></a>
     <a href="#/support" data-page-link="support">Support This Site <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/directory" data-page-link="directory">Site Directory <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/privacy" data-page-link="privacy">Privacy <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/grounding" data-page-link="grounding">When a Moment Feels Difficult <span aria-hidden="true">&#8250;</span></a>
+    </div>
   </nav>
   <button class="theme-toggle" id="themeBtn" type="button" aria-pressed="false">Switch to dark mode</button>
   <p class="drawer-note">Every link above opens its own page. One day at a time. One step toward a new life.</p>
@@ -2615,6 +2621,24 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
 
   route();
 })();
+
+  /* ---------- Drawer "More" section ---------- */
+  (function(){
+    var btn = document.getElementById('moreToggle');
+    var group = document.getElementById('drawerMore');
+    if (!btn || !group) return;
+    function setOpen(open){
+      group.hidden = !open;
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    btn.addEventListener('click', function(){ setOpen(group.hidden); });
+    function syncToRoute(){
+      var name = (location.hash || '').replace(/^#\//, '').split('?')[0];
+      if (name && group.querySelector('[data-page-link="' + name + '"]')) setOpen(true);
+    }
+    window.addEventListener('hashchange', syncToRoute);
+    syncToRoute();
+  })();
 </script>
 
 </body>
