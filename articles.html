@@ -803,7 +803,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   footer{ margin-top:36px; }
   @media (max-width:640px){
     .welcome-actions .btn{ flex:1 1 150px; justify-content:center; }
-    .social-row a{ flex:1 1 120px; text-align:center; }
+    .social-row a{ flex:1 1 30%; text-align:center; }
     p:has(> .btn:only-child){ text-align:center; }
   }
 
@@ -2186,6 +2186,15 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
     activatePage('home');
   }
   window.addEventListener('hashchange', route);
+  /* Tapping a link for the page you are already on fires no hashchange
+     (the hash does not change), so the tap used to do nothing at all --
+     the menu did not even close. Re-run the route for same-hash taps so
+     the tap still jumps to its section and closes the menu. */
+  document.addEventListener('click', function(e){
+    var a = (e.target && e.target.closest) ? e.target.closest('a[href^="#"]') : null;
+    if (!a) return;
+    if (a.getAttribute('href') === location.hash) setTimeout(route, 0);
+  });
 
   /* ---------- Steven's day counter (count = full days since August 20, 2026; Aug 20 = Day 0, matching Journey Updates labels. The number in the HTML is a no-JavaScript fallback and is updated live by this script.) ---------- */
   var dayStart = new Date(2026, 7, 20);
