@@ -806,6 +806,9 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
     .social-row a{ flex:1 1 120px; text-align:center; }
     p:has(> .btn:only-child){ text-align:center; }
   }
+
+  /* ---------- Nov 5: paragraph spacing in entries ---------- */
+  .update-item p + p{ margin-top:.9em; }
 </style>
 </head>
 <body>
@@ -1170,7 +1173,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
     <section id="story">
       <img class="page-hero-img" src="pnw-waterfall.webp" alt="A tall, slender waterfall falling through a deep green forest" width="1600" height="700" loading="lazy" decoding="async" />
       <div class="page-head">
-        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <a class="back-link" href="#/home">Home</a>
         <h2>My Journey</h2>
       </div>
       <article class="card">
@@ -1225,7 +1228,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
     <section id="updates">
       <img class="page-hero-img" src="pnw-trail.webp" alt="A quiet trail winding through a foggy evergreen forest" width="1600" height="700" loading="lazy" decoding="async" />
       <div class="page-head">
-        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <a class="back-link" href="#/home">Home</a>
         <h2>Journey Updates</h2>
         <p class="lede">Short, dated notes from my recovery &#8212; newest first. This page grows as the journey does.</p>
       </div>
@@ -1301,7 +1304,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
     <section id="faith">
       <img class="page-hero-img" src="pnw-sunbeams.webp" alt="Sunbeams breaking through morning mist along a forest trail" width="1600" height="700" loading="lazy" decoding="async" />
       <div class="page-head">
-        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <a class="back-link" href="#/home">Home</a>
         <h2>Faith for the Journey</h2>
         <p class="lede">Faith &#183; Grace &#183; Restoration</p>
       </div>
@@ -1327,7 +1330,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
     <section id="start-here">
       <img class="page-hero-img" src="pnw-boardwalk.webp" alt="A wooden boardwalk winding through a mossy old-growth forest in the Pacific Northwest" width="1600" height="700" loading="lazy" decoding="async" />
       <div class="page-head">
-        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <a class="back-link" href="#/home">Home</a>
         <h2>Start Here</h2>
         <p class="lede">New to recovery &#8212; or starting again after a setback? You do not have to figure everything out today. Begin with one next step.</p>
       </div>
@@ -1390,7 +1393,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   <div class="page-view" data-page="paths">
     <section id="paths">
       <div class="page-head">
-        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <a class="back-link" href="#/home">Home</a>
         <h2>Recovery Paths</h2>
         <p class="lede">There is more than one road into recovery. People heal through different programs, and many combine more than one. Read through them honestly and start with the one you will actually walk.</p>
       </div>
@@ -1466,7 +1469,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   <div class="page-view" data-page="faq">
     <section id="faq">
       <div class="page-head">
-        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <a class="back-link" href="#/home">Home</a>
         <h2>Questions &amp; Answers</h2>
         <p class="lede">Straightforward answers about this site, about recovery, and about what to do next.</p>
       </div>
@@ -1521,7 +1524,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   <div class="page-view" data-page="articles">
     <section id="articles">
       <div class="page-head">
-        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <a class="back-link" href="#/home">Home</a>
         <h2>Articles &amp; Inspiration</h2>
         <p class="lede">Thoughtful, practical encouragement for the first day, the difficult days, and the years of growth ahead. These articles offer peer encouragement and general information, not individualized medical advice. If you need urgent support in the U.S., call or text 988.</p>
       </div>
@@ -1585,7 +1588,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   <div class="page-view" data-page="books">
     <section id="books">
       <div class="page-head">
-        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <a class="back-link" href="#/home">Home</a>
         <h2>Books &amp; Literature</h2>
         <p class="lede">Books, daily readings, and step-study guides for finding hope and building a life in recovery. Every recommendation links to its publisher or recovery organization &#8212; and you never have to buy a book to begin; several of these can be read free at the links below.</p>
       </div>
@@ -1675,7 +1678,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   <div class="page-view" data-page="progress">
     <section id="progress">
       <div class="page-head">
-        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <a class="back-link" href="#/home">Home</a>
         <h2>My Progress</h2>
         <p class="lede">Progress is more than a number. Recovery also means asking for help, showing up, building healthier routines, and trying again when life gets difficult.</p>
       </div>
@@ -1720,7 +1723,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   <div class="page-view" data-page="support">
     <section id="support">
       <div class="page-head">
-        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <a class="back-link" href="#/home">Home</a>
         <h2>Support My Recovery Journey</h2>
         <p class="lede">Help me continue rebuilding my life in recovery, and growing this website into a welcoming resource for others. Every act of kindness matters.</p>
       </div>
@@ -1773,7 +1776,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
     <section id="sober-living">
       <img class="page-hero-img" src="pnw-road.webp" alt="A wet highway running between tall evergreen trees toward misty mountains" width="1600" height="700" loading="lazy" decoding="async" />
       <div class="page-head">
-        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <a class="back-link" href="#/home">Home</a>
         <h2>Sober Living</h2>
         <p class="lede">Finding a supportive place to rebuild. A stable environment and a supportive community can make a real difference when transitioning out of treatment &#8212; this is the step I&#8217;m preparing for myself, toward sober living in Washington or Oregon.</p>
         <p class="note">My Recovery Journey is not a housing provider and does not place people &#8212; this page is how I&#8217;m learning to evaluate options for myself.</p>
@@ -1826,7 +1829,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   <div class="page-view" data-page="directory">
     <section id="directory">
       <div class="page-head">
-        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <a class="back-link" href="#/home">Home</a>
         <h2>Site Directory</h2>
         <p class="lede">Every page on My Recovery Journey, in one place &#8212; a simple guide to what&#8217;s here and where to find it.</p>
       </div>
@@ -1871,7 +1874,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   <div class="page-view" data-page="privacy">
     <section id="privacy">
       <div class="page-head">
-        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <a class="back-link" href="#/home">Home</a>
         <h2>Privacy</h2>
         <p class="lede">Your privacy matters. How My Recovery Journey handles visitor information, its tools, and external links &#8212; in plain language. Last updated: November 2026.</p>
       </div>
@@ -1911,7 +1914,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
 <div class="page-view" data-page="reflections">
 <section id="reflections">
 <div class="page-head">
-<a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+<a class="back-link" href="#/home">Home</a>
 <h2>Daily Reflections</h2>
 <p class="lede">One short reflection for each day of the journey &#8212; every one on its own page, so it can be found, shared, and read again on a hard day. Newest first.</p>
 </div>
@@ -1954,7 +1957,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   <div class="page-view" data-page="resources">
     <section id="resources">
       <div class="page-head">
-        <a class="back-link" href="#/home"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Home</a>
+        <a class="back-link" href="#/home">Home</a>
         <h2>Recovery Resources</h2>
         <p class="lede">If you need support today, these independent organizations can help you find meetings, treatment information, and people to talk to. You do not have to figure everything out alone.</p>
       </div>
