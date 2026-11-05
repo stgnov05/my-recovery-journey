@@ -793,6 +793,19 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   .form-actions{ justify-content:stretch; }
   .form-actions .btn{ flex:1; justify-content:center; }
 }
+
+  /* ---------- Nov 5 polish: Home button, portrait button rows, tighter spacing ---------- */
+  .back-link{ padding:9px 18px; border:1.5px solid var(--field-line); border-radius:999px; background:var(--bg-soft); color:var(--ink); }
+  .back-link:hover{ text-decoration:none; border-color:var(--steel); }
+  .section-head{ padding-top:30px; }
+  .page-hero-img{ margin-bottom:14px; }
+  .header-inner{ padding-bottom:34px; }
+  footer{ margin-top:36px; }
+  @media (max-width:640px){
+    .welcome-actions .btn{ flex:1 1 150px; justify-content:center; }
+    .social-row a{ flex:1 1 120px; text-align:center; }
+    p:has(> .btn:only-child){ text-align:center; }
+  }
 </style>
 </head>
 <body>
@@ -2632,6 +2645,15 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     }
     btn.addEventListener('click', function(){ setOpen(group.hidden); });
+    var drawer = document.getElementById('drawer');
+    if (drawer) {
+      var wasOpen = drawer.classList.contains('open');
+      new MutationObserver(function(){
+        var isOpen = drawer.classList.contains('open');
+        if (wasOpen && !isOpen) setOpen(false);
+        wasOpen = isOpen;
+      }).observe(drawer, { attributes: true, attributeFilter: ['class'] });
+    }
     function syncToRoute(){
       var name = (location.hash || '').replace(/^#\//, '').split('?')[0];
       if (name && group.querySelector('[data-page-link="' + name + '"]')) setOpen(true);
