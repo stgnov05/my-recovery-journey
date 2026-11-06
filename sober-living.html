@@ -812,6 +812,11 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
 
   /* ---------- Nov 5: paragraph spacing in entries ---------- */
   .update-item p + p{ margin-top:.9em; }
+
+  /* ---------- Current page in the menu (Nov 6) ---------- */
+  /* Bright, bold, with a left bar, so the current page reads as
+     "you are here" instead of disabled. Need Help Now keeps its gold. */
+  .drawer nav a[aria-current="page"]:not(.nav-help){ color:#8ec9ff; font-weight:700; box-shadow:inset 4px 0 0 #8ec9ff; }
 </style>
 </head>
 <body>
@@ -2070,17 +2075,17 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   </div>
     <nav>
     <a class="nav-help" href="#/resources">Need Help Now <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/home" data-page-link="home">Home <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/start-here" data-page-link="start-here">Start Here <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/story" data-page-link="story">My Story <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/updates" data-page-link="updates">Journey Updates <span aria-hidden="true">&#8250;</span></a>
     <a href="#/reflection" data-page-link="reflection">Daily Reflection <span aria-hidden="true">&#8250;</span></a>
     <a href="#/faith" data-page-link="faith">Faith for the Journey <span aria-hidden="true">&#8250;</span></a>
     <a href="#/gratitude" data-page-link="gratitude">Gratitude Journal <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/home" data-page-link="home">Home <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/updates" data-page-link="updates">Journey Updates <span aria-hidden="true">&#8250;</span></a>
     <a href="#/milestones" data-page-link="milestones">My Milestones <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/story" data-page-link="story">My Story <span aria-hidden="true">&#8250;</span></a>
     <a href="#/resources" data-page-link="resources">Recovery Resources <span aria-hidden="true">&#8250;</span></a>
     <a href="#/tools" data-page-link="tools">Recovery Tools <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/start-here" data-page-link="start-here">Start Here <span aria-hidden="true">&#8250;</span></a>
-    <button class="more-toggle" id="moreToggle" type="button" aria-expanded="false" aria-controls="drawerMore">More <span class="more-chev" aria-hidden="true">&#8250;</span></button>
+    <button class="more-toggle" id="moreToggle" type="button" aria-expanded="false" aria-controls="drawerMore">More Pages <span class="more-chev" aria-hidden="true">&#8250;</span></button>
     <div class="drawer-more" id="drawerMore" hidden>
     <a href="#/articles" data-page-link="articles">Articles &amp; Inspiration <span aria-hidden="true">&#8250;</span></a>
     <a href="#/books" data-page-link="books">Books &amp; Literature <span aria-hidden="true">&#8250;</span></a>
