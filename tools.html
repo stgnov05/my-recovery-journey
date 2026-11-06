@@ -841,6 +841,16 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
     /* Hope section intro gets breathing room */
     #hope .section-head p{ padding-left:14px; padding-right:14px; }
   }
+
+/* Resources-page buttons wrapped to match the other cards;
+   meeting-card subtitle; tidy Keep exploring row on phones;
+   phone-number links never split across lines */
+.card-sub{ font-size:1.02rem; font-weight:600; color:var(--muted); margin-top:3px; }
+a[href^="tel:"]{ white-space:nowrap; }
+@media (max-width:640px){
+  .page-foot-nav .label{ flex:1 1 100%; }
+  .page-foot-nav a{ flex:1 1 0; text-align:center; }
+}
 </style>
 </head>
 <body>
@@ -2026,7 +2036,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
             </div>
           </div>
           <p>A free, confidential, 24/7 treatment referral and information service (in English and Spanish) for individuals and families facing mental and/or substance use disorders.</p>
-          <a class="btn" href="https://www.samhsa.gov/find-help/national-helpline" target="_blank" rel="noopener">Find support at SAMHSA</a>
+          <p><a class="btn" href="https://www.samhsa.gov/find-help/national-helpline" target="_blank" rel="noopener">Find support at SAMHSA</a></p>
         </article>
         <article class="card resource">
           <div class="card-head">
@@ -2037,19 +2047,19 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
             </div>
           </div>
           <p>In the U.S., call or text 988 any time for crisis support &#8212; free, confidential, and available 24/7. You don&#8217;t have to carry a hard moment alone.</p>
-          <a class="btn" href="#/grounding">Try the grounding exercise</a>
+          <p><a class="btn" href="#/grounding">Try the grounding exercise</a></p>
         </article>
         <article class="card resource">
           <div class="card-head">
             <span class="tile" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
             <div>
               <h3>Find a Meeting</h3>
-              <div class="phone">In person or online</div>
+              <div class="card-sub">In person or online</div>
             </div>
           </div>
           <p>Search official meeting lists for Alcoholics Anonymous and Narcotics Anonymous &#8212; by location, or online from anywhere.</p>
-          <a class="btn" href="https://www.aa.org/find-aa" target="_blank" rel="noopener">Find AA meetings</a>
-          <a class="btn ghost" href="https://na.org/meetingsearch/" target="_blank" rel="noopener">Find NA meetings</a>
+          <p><a class="btn" href="https://www.aa.org/find-aa" target="_blank" rel="noopener">Find AA meetings</a>
+          <a class="btn ghost" href="https://na.org/meetingsearch/" target="_blank" rel="noopener">Find NA meetings</a></p>
         </article>
       </div>
       <p class="emergency"><b>In immediate danger? Call 911.</b> In the U.S., call or text 988 for crisis support. My Recovery Journey provides personal encouragement and general resources, not medical advice or emergency services.</p>
