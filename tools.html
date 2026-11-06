@@ -817,6 +817,30 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   /* Bright, bold, with a left bar, so the current page reads as
      "you are here" instead of disabled. Need Help Now keeps its gold. */
   .drawer nav a[aria-current="page"]:not(.nav-help){ color:#8ec9ff; font-weight:700; box-shadow:inset 4px 0 0 #8ec9ff; }
+
+  /* ---------- Nov 6 polish: cards, help button, footer, text buttons ---------- */
+  /* Homepage value cards match the site's left-aligned card style */
+  .value{ text-align:left; }
+  .value .glyph{ width:52px; height:52px; border-radius:14px; margin:0 0 14px; }
+  /* Footer tagline wraps as two clean halves, never a dangling bullet */
+  .f-tag .keep{ white-space:nowrap; }
+  /* Entry text: gentler right edge */
+  .update-item p{ hyphens:auto; }
+  /* Follow / Share labels over the footer button rows */
+  .social-row .row-label{ flex:1 1 100%; text-align:center; font-size:.75rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.6); margin-top:6px; }
+  @media (max-width:860px){
+    /* Help button a little smaller; the footer clears it at the page bottom */
+    .help-fab{ padding:10px 15px; font-size:.9rem; right:10px; bottom:calc(10px + env(safe-area-inset-bottom)); }
+    footer{ padding-bottom:104px; }
+  }
+  @media (max-width:640px){
+    /* Footer nav: two even columns instead of a stranded last link */
+    footer nav{ display:grid; grid-template-columns:1fr 1fr; justify-items:center; row-gap:14px; }
+    /* In-text buttons stack full-width so groups line up evenly */
+    p:has(>a.btn){ display:flex; flex-direction:column; align-items:stretch; gap:10px; }
+    /* Hope section intro gets breathing room */
+    #hope .section-head p{ padding-left:14px; padding-right:14px; }
+  }
 </style>
 </head>
 <body>
@@ -2042,7 +2066,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
 <footer>
   <svg width="52" height="29" viewBox="0 0 72 40" fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><polyline points="4,36 22,12 32,24 44,6 56,22 68,36"/></svg>
   <div class="f-name">My Recovery Journey</div>
-  <p class="f-tag">FAITH &#8226; RECOVERY &#8226; GROWTH &#8226; NEW BEGINNINGS</p>
+  <p class="f-tag"><span class="keep">FAITH &#8226; RECOVERY</span> <span class="keep">GROWTH &#8226; NEW BEGINNINGS</span></p>
     <nav>
     <a href="#/home" data-page-link="home">Home</a>
     <a href="#/start-here" data-page-link="start-here">Start Here</a>
@@ -2054,12 +2078,14 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
     <a href="#/support" data-page-link="support">Support</a>
   </nav>
   <div class="social-row" aria-label="Follow and share My Recovery Journey">
+    <span class="row-label">Follow</span>
     <a href="https://www.facebook.com/share/1HewtDaZeQ/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a>
     <a href="https://www.instagram.com/cardboardheroes05/" target="_blank" rel="noopener">Instagram</a>
     <a href="https://www.threads.net/@stgnovo5" target="_blank" rel="noopener">Threads</a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstgnov05.github.io%2Fmy-recovery-journey%2F" target="_blank" rel="noopener">Share on Facebook</a>
-    <a href="https://api.whatsapp.com/send?text=My%20Recovery%20Journey%20%E2%80%94%20hope%2C%20healing%2C%20and%20recovery%20resources%3A%20https%3A%2F%2Fstgnov05.github.io%2Fmy-recovery-journey%2F" target="_blank" rel="noopener">Share on WhatsApp</a>
-    <a href="https://twitter.com/intent/tweet?text=My%20Recovery%20Journey%20%E2%80%94%20faith%2C%20hope%2C%20and%20one%20day%20at%20a%20time%3A%20https%3A%2F%2Fstgnov05.github.io%2Fmy-recovery-journey%2F" target="_blank" rel="noopener" id="shareX">Share on X</a>
+    <span class="row-label">Share</span>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstgnov05.github.io%2Fmy-recovery-journey%2F" target="_blank" rel="noopener" aria-label="Share on Facebook">Facebook</a>
+    <a href="https://api.whatsapp.com/send?text=My%20Recovery%20Journey%20%E2%80%94%20hope%2C%20healing%2C%20and%20recovery%20resources%3A%20https%3A%2F%2Fstgnov05.github.io%2Fmy-recovery-journey%2F" target="_blank" rel="noopener" aria-label="Share on WhatsApp">WhatsApp</a>
+    <a href="https://twitter.com/intent/tweet?text=My%20Recovery%20Journey%20%E2%80%94%20faith%2C%20hope%2C%20and%20one%20day%20at%20a%20time%3A%20https%3A%2F%2Fstgnov05.github.io%2Fmy-recovery-journey%2F" target="_blank" rel="noopener" id="shareX" aria-label="Share on X">X</a>
   </div>
   <p class="f-small">&#169; 2026 Steven Gregory &#183; My Recovery Journey &#183; One day at a time &#183; <a href="#/privacy" data-page-link="privacy">Privacy</a></p>
 </footer>
