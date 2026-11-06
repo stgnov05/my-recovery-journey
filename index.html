@@ -376,6 +376,9 @@
 .update-day{ background:var(--gold); color:var(--navy-deep); border-radius:999px; padding:2px 11px; font-weight:700; font-size:.85rem; }
 .update-item h3{ font-family:"Lora", Georgia, serif; font-weight:700; color:var(--ink); margin:0 0 6px; font-size:1.22rem; }
 .update-item p{ margin:0; }
+.update-photos{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:.95em 0; }
+.update-photos img{ display:block; width:100%; height:auto; border-radius:12px; }
+@media (max-width:700px){ .update-photos{ grid-template-columns:1fr; } }
 .updates-more{ text-align:center; margin-top:20px; }
 
 /* ---------- Welcome ---------- */
@@ -1239,6 +1242,12 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
           <div class="update-meta"><span class="update-date">November 5, 2026</span><span class="update-day">Day 77</span></div>
           <h3>This Is What My Addiction Looks Like</h3>
           <p>This is what my addiction looks like.</p>
+          <div class="update-photos">
+            <img src="addiction-looks-photo-1.webp" alt="Steven after a drinking binge, before he got sober, with bruising under both eyes and a broken nose from falling face first" width="1080" height="811" loading="lazy" decoding="async" />
+            <img src="addiction-looks-photo-2.webp" alt="Close-up of Steven's bruised face and cut nose after the fall" width="1080" height="1440" loading="lazy" decoding="async" />
+            <img src="addiction-looks-photo-3.webp" alt="Steven with his eyes closed, bruising under both eyes, wearing a red shirt" width="1080" height="1440" loading="lazy" decoding="async" />
+            <img src="addiction-looks-photo-4.webp" alt="Steven in a white shirt, the bruising fading as he heals" width="1080" height="1440" loading="lazy" decoding="async" />
+          </div>
           <p>These photos aren&#8217;t from today &#8212; they&#8217;re from before I got sober. This is me after a drinking binge. I got up out of bed, took a couple of steps, and passed out falling face first onto the hardwood floor in the hotel I had locked myself away in, breaking my nose. It wasn&#8217;t pretty.</p>
           <p>My addiction is ugly, conniving, deceitful, cunning and most of all patient. It will stand in the dark, waiting for an opportunity, a crack in the foundation, a weakness to arise to attack.</p>
           <p>My addiction wants me to forget. Forget all of the bad times; forget the loneliness, of isolation, the depression, fear, anxiety, shame, regret, and resentment. The stints in jail, multiple rehabs, losing everything I owned multiple times. My career, my everything. Homelessness.</p>
