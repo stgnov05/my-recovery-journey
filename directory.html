@@ -2108,9 +2108,9 @@ a[href^="tel:"]{ white-space:nowrap; }
     <a href="https://www.instagram.com/cardboardheroes05/" target="_blank" rel="noopener">Instagram</a>
     <a href="https://www.threads.net/@stgnovo5" target="_blank" rel="noopener">Threads</a>
     <span class="row-label">Share</span>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstgnov05.github.io%2Fmy-recovery-journey%2F" target="_blank" rel="noopener" aria-label="Share on Facebook">Facebook</a>
-    <a href="https://api.whatsapp.com/send?text=My%20Recovery%20Journey%20%E2%80%94%20hope%2C%20healing%2C%20and%20recovery%20resources%3A%20https%3A%2F%2Fstgnov05.github.io%2Fmy-recovery-journey%2F" target="_blank" rel="noopener" aria-label="Share on WhatsApp">WhatsApp</a>
-    <a href="https://twitter.com/intent/tweet?text=My%20Recovery%20Journey%20%E2%80%94%20faith%2C%20hope%2C%20and%20one%20day%20at%20a%20time%3A%20https%3A%2F%2Fstgnov05.github.io%2Fmy-recovery-journey%2F" target="_blank" rel="noopener" id="shareX" aria-label="Share on X">X</a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstgnov05.github.io%2Fmy-recovery-journey%2Fdirectory.html" target="_blank" rel="noopener" aria-label="Share on Facebook">Facebook</a>
+    <a href="https://api.whatsapp.com/send?text=My%20Recovery%20Journey%20%E2%80%94%20hope%2C%20healing%2C%20and%20recovery%20resources%3A%20https%3A%2F%2Fstgnov05.github.io%2Fmy-recovery-journey%2Fdirectory.html" target="_blank" rel="noopener" aria-label="Share on WhatsApp">WhatsApp</a>
+    <a href="https://twitter.com/intent/tweet?text=My%20Recovery%20Journey%20%E2%80%94%20faith%2C%20hope%2C%20and%20one%20day%20at%20a%20time%3A%20https%3A%2F%2Fstgnov05.github.io%2Fmy-recovery-journey%2Fdirectory.html" target="_blank" rel="noopener" id="shareX" aria-label="Share on X">X</a>
   </div>
   <p class="f-small">&#169; 2026 Steven Gregory &#183; My Recovery Journey &#183; One day at a time &#183; <a href="#/privacy" data-page-link="privacy">Privacy</a></p>
 </footer>
@@ -2638,7 +2638,7 @@ a[href^="tel:"]{ white-space:nowrap; }
     doneBtn.addEventListener('click', function(){ panel.hidden = true; startBtn.hidden = false; });
   })();
 
-  /* ---------- Share text carries the day count; help button always lands at the top of Resources ---------- */
+  /* ---------- Share links point at the page the reader is on; share text carries the day count; help button always lands at the top of Resources ---------- */
   (function(){
     var start = new Date(2026, 7, 20);
     var now = new Date();
@@ -2646,11 +2646,31 @@ a[href^="tel:"]{ white-space:nowrap; }
     var days = Math.round((today - start) / 86400000);
     if (days < 0) days = 0;
     var msg = 'Day ' + days + ' of my recovery journey \u2014 faith, hope, and one day at a time. My Recovery Journey: ';
-    var url = 'https://stgnov05.github.io/my-recovery-journey/';
-    var wa = document.querySelector('a[href^="https://api.whatsapp.com/send"]');
-    if (wa) wa.href = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(msg + url);
-    var x = document.getElementById('shareX');
-    if (x) x.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(msg) + '&url=' + encodeURIComponent(url);
+    /* Share the page the reader is on: the standalone file for the current
+       view (for example #/updates shares updates.html), so a shared link
+       lands on that page instead of always on the home page. */
+    var PAGE_FILES = { 'home': '', 'start-here': 'start-here.html', 'story': 'story.html', 'updates': 'updates.html', 'reflection': 'reflection.html', 'faith': 'faith.html', 'gratitude': 'gratitude.html', 'milestones': 'milestones.html', 'resources': 'resources.html', 'tools': 'tools.html', 'articles': 'articles.html', 'books': 'books.html', 'paths': 'paths.html', 'faq': 'faq.html', 'progress': 'progress.html', 'support': 'support.html', 'sober-living': 'sober-living.html', 'directory': 'directory.html', 'privacy': 'privacy.html', 'reflections': 'reflections.html', 'grounding': 'grounding.html', 'next-step': 'next-step.html' };
+    function shareUrl(){
+      var canon = document.querySelector('link[rel="canonical"]');
+      var canonHref = canon ? canon.getAttribute('href') : null;
+      var base = 'https://stgnov05.github.io/my-recovery-journey/';
+      if (canonHref) base = canonHref.replace(/[^\/]*$/, '');
+      var raw = (location.hash || '').replace(/^#\/?/, '').split('?')[0];
+      if (raw === 'welcome' || raw === 'index' || raw === 'start') raw = 'home';
+      if (raw && Object.prototype.hasOwnProperty.call(PAGE_FILES, raw)) return base + PAGE_FILES[raw];
+      return canonHref || base;
+    }
+    function refreshShare(){
+      var url = shareUrl();
+      var fb = document.querySelector('a[href^="https://www.facebook.com/sharer/"]');
+      if (fb) fb.href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
+      var wa = document.querySelector('a[href^="https://api.whatsapp.com/send"]');
+      if (wa) wa.href = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(msg + url);
+      var x = document.getElementById('shareX');
+      if (x) x.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(msg) + '&url=' + encodeURIComponent(url);
+    }
+    refreshShare();
+    window.addEventListener('hashchange', refreshShare);
     var fab = document.querySelector('.help-fab');
     if (fab) fab.addEventListener('click', function(){ setTimeout(function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); }, 80); });
   })();
