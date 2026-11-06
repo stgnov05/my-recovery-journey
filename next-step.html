@@ -940,7 +940,7 @@ a[href^="tel:"]{ white-space:nowrap; }
       </div>
       <div class="day-band" role="note" aria-label="Steven's recovery day count">
         <div class="day-label">Steven&#8217;s Journey &#183; One Day at a Time</div>
-        <div class="day-num">Day <span class="js-day-count">77</span></div>
+        <div class="day-num">Day <span class="js-day-count">78</span></div>
         <p class="day-sub">Counting from August 20, 2026 &#8212; and today is the only day that has to be won.</p>
       </div>
     </section>
@@ -1248,7 +1248,7 @@ a[href^="tel:"]{ white-space:nowrap; }
       </article>
       <div class="day-band" role="note" aria-label="Steven's recovery day count">
         <div class="day-label">This Journey Today</div>
-        <div class="day-num">Day <span class="js-day-count">77</span></div>
+        <div class="day-num">Day <span class="js-day-count">78</span></div>
         <p class="day-sub">Counting from August 20, 2026 &#8212; one day at a time.</p>
       </div>
       <div class="quote-band">
@@ -1758,7 +1758,7 @@ a[href^="tel:"]{ white-space:nowrap; }
       </div>
       <div class="day-band" role="note" aria-label="Steven's recovery day count">
         <div class="day-label">Days in This Recovery</div>
-        <div class="day-num">Day <span class="js-day-count">77</span></div>
+        <div class="day-num">Day <span class="js-day-count">78</span></div>
         <p class="day-sub">Counting from August 20, 2026 &#8212; one day at a time.</p>
       </div>
       <div class="page-cards">
@@ -2156,6 +2156,24 @@ a[href^="tel:"]{ white-space:nowrap; }
   <p class="drawer-note">Every link above opens its own page. One day at a time. One step toward a new life.</p>
 </aside>
 
+<script>
+/* ---------- Day counter (standalone) ----------
+   Runs on its own, before the main page script, so Steven's current day
+   shows correctly even if another script on the page fails. Count = full
+   days since August 20, 2026 (Aug 20 = Day 0), matching Journey Updates.
+   The number in the HTML is only a no-JavaScript fallback. */
+(function(){
+  try {
+    var start = new Date(2026, 7, 20);
+    var now = new Date();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var days = Math.round((today - start) / 86400000);
+    if (days < 0) days = 0;
+    var els = document.querySelectorAll('.js-day-count');
+    for (var i = 0; i < els.length; i++) els[i].textContent = days;
+  } catch (e) {}
+})();
+</script>
 <script>
 (function(){
   "use strict";
