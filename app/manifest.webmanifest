@@ -1,0 +1,17 @@
+{
+  "name": "My Recovery Journey",
+  "short_name": "My Recovery Journey",
+  "description": "One Day at a Time. One Step Toward a New Life. Day counter, daily reflection, gratitude journal, grounding, and My Next Right Step.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#0c2f2c",
+  "background_color": "#0c2f2c",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icon-1024.png", "sizes": "1024x1024", "type": "image/png", "purpose": "any" }
+  ]
+}
