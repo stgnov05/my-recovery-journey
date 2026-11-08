@@ -76,7 +76,7 @@ section.card h3{font-size:1.05rem;margin:18px 0 6px}
 .btn:disabled{opacity:.45;cursor:default}
 .btn-gold{background:var(--gold-bright);color:#14232f}
 .btn-quiet{background:transparent;color:var(--dim);border:0;padding:10px 8px;text-decoration:underline}
-input[type="date"],input[type="text"],textarea{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:12px;font:inherit}
+input[type="date"],input[type="text"],input[type="number"],textarea{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:12px;font:inherit}
 label.lbl{display:block;font-weight:600;font-size:.94rem;margin-bottom:6px}
 .form-row{display:flex;gap:10px;align-items:end;flex-wrap:wrap}
 .form-row .grow{flex:1;min-width:180px}
@@ -137,6 +137,12 @@ details.settings summary{cursor:pointer;font-weight:600;color:var(--dim);font-si
 footer.note{margin-top:22px;text-align:center;color:var(--dim);font-size:.92rem;padding:0 8px}
 @media (max-width:420px){ .day-big{font-size:3.4rem} .hero img.hero-img{height:225px} .hero-copy{padding:14px 16px} .install-banner{padding:12px} .install-banner img{width:48px;height:48px} .form-row{flex-direction:column;align-items:stretch} .form-row .btn{width:100%} }
 section.card.install-highlight{outline:3px solid var(--gold-bright);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 2px}
+.chip{border:1.5px solid var(--border);background:var(--surface);color:var(--text);border-radius:999px;padding:7px 13px;font-weight:600;font-size:.95rem}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
+.bars{display:flex;gap:5px;align-items:flex-end;height:52px;margin:10px 0 4px}
+.bars span{flex:1;background:var(--gold-bright);border-radius:4px 4px 0 0}
 @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
 </style>
 </head>
@@ -189,6 +195,21 @@ section.card.install-highlight{outline:3px solid var(--gold-bright);outline-offs
       </div>
       <div id="setupDone" hidden>
         <p style="margin:0">Counting from <strong id="startDateLabel"></strong> — that's <strong id="personalDayLabel"></strong> today.</p>
+        <p id="moneyLine" style="margin:12px 0 0" hidden></p>
+        <details class="settings" style="margin-top:12px">
+          <summary>Money saved &#8212; what a drinking day used to cost</summary>
+          <form id="spendForm" style="margin-top:12px">
+            <div class="form-row">
+              <div class="grow">
+                <label class="lbl" for="spendInput">About what I spent per day ($)</label>
+                <input type="number" id="spendInput" min="0" max="10000" step="1" inputmode="numeric" placeholder="e.g. 20">
+              </div>
+              <button class="btn" type="submit">Save</button>
+              <button class="btn-quiet" type="button" id="clearSpend">Clear</button>
+            </div>
+          </form>
+          <p class="muted" style="margin:10px 0 0;font-size:.94rem">A rough number is fine &#8212; it just turns your days into dollars you kept. It stays on this device.</p>
+        </details>
         <details class="settings" style="margin-top:12px">
           <summary>Change my start date</summary>
           <form id="startForm2" style="margin-top:12px">
@@ -212,6 +233,46 @@ section.card.install-highlight{outline:3px solid var(--gold-bright);outline-offs
       <blockquote class="verse"><p id="reflVerse"></p><cite id="reflRef"></cite></blockquote>
       <p id="reflBody"></p>
       <p><strong>Prayer:</strong> <span id="reflPrayer"></span></p>
+    </section>
+
+    <section class="card" id="checkinCard">
+      <h2>Daily check-in</h2>
+      <p class="muted" style="margin:0">Thirty seconds, honestly. How are you right now? Check-ins stay on this device, same as your journal.</p>
+      <p style="margin:14px 0 0"><strong>I feel:</strong></p>
+      <div class="chips" id="moodChips" role="group" aria-label="How you feel">
+        <button type="button" class="chip" data-mood="Struggling" aria-pressed="false">Struggling</button>
+        <button type="button" class="chip" data-mood="Low" aria-pressed="false">Low</button>
+        <button type="button" class="chip" data-mood="Okay" aria-pressed="true">Okay</button>
+        <button type="button" class="chip" data-mood="Good" aria-pressed="false">Good</button>
+        <button type="button" class="chip" data-mood="Strong" aria-pressed="false">Strong</button>
+      </div>
+      <p style="margin:14px 0 0"><strong>Craving strength: <span id="cravingVal">0</span> / 10</strong></p>
+      <input type="range" id="cravingRange" min="0" max="10" step="1" value="0" aria-label="Craving strength, 0 to 10">
+      <p style="margin:10px 0 0"><strong>What&#8217;s around you?</strong> <span class="muted">(optional)</span></p>
+      <div class="chips" id="ctxChips" role="group" aria-label="What is around you">
+        <button type="button" class="chip" data-val="Just checking in" aria-pressed="false">Just checking in</button>
+        <button type="button" class="chip" data-val="Alone" aria-pressed="false">Alone</button>
+        <button type="button" class="chip" data-val="With people" aria-pressed="false">With people</button>
+        <button type="button" class="chip" data-val="A stressful moment" aria-pressed="false">A stressful moment</button>
+        <button type="button" class="chip" data-val="Hungry or tired" aria-pressed="false">Hungry or tired</button>
+        <button type="button" class="chip" data-val="Around temptation" aria-pressed="false">Around temptation</button>
+      </div>
+      <p style="margin:10px 0 0"><strong>What helps?</strong> <span class="muted">(optional)</span></p>
+      <div class="chips" id="helpChips" role="group" aria-label="What helps">
+        <button type="button" class="chip" data-val="Prayer" aria-pressed="false">Prayer</button>
+        <button type="button" class="chip" data-val="Calling someone" aria-pressed="false">Calling someone</button>
+        <button type="button" class="chip" data-val="A meeting" aria-pressed="false">A meeting</button>
+        <button type="button" class="chip" data-val="A walk" aria-pressed="false">A walk</button>
+        <button type="button" class="chip" data-val="Grounding or breathing" aria-pressed="false">Grounding or breathing</button>
+        <button type="button" class="chip" data-val="Music" aria-pressed="false">Music</button>
+        <button type="button" class="chip" data-val="Nothing yet" aria-pressed="false">Nothing yet</button>
+      </div>
+      <p style="margin:16px 0 0"><button class="btn" type="button" id="checkinSave">Save check-in</button> <span id="checkinThanks" class="muted" hidden>Saved. One day at a time.</span></p>
+      <div id="cravingNudge" hidden style="margin:14px 0 0;background:var(--gold-soft);border:1px solid var(--gold);border-radius:10px;padding:12px 14px">
+        <p style="margin:0"><strong>That&#8217;s a strong craving &#8212; and cravings pass.</strong> You don&#8217;t have to ride it out alone.</p>
+        <p style="margin:10px 0 0"><button class="btn btn-gold" type="button" data-goto="help">I&#8217;m struggling right now</button></p>
+      </div>
+      <div id="checkinHistory"></div>
     </section>
 
     <section class="card" id="milesCard" hidden>
@@ -318,6 +379,7 @@ section.card.install-highlight{outline:3px solid var(--gold-bright);outline-offs
       <p>I built My Recovery Journey, and now this app, for the person who feels alone in recovery tonight. You are not alone. These are the same tools I use every day: count the days, read the reflection, write the gratitude, take the next right step.</p>
       <p class="font-display" style="font-style:italic;font-size:1.15rem">“One Day at a Time. One Step Toward a New Life.”</p>
       <p style="margin:14px 0 0"><a class="btn" href="https://stgnov05.github.io/my-recovery-journey/#/home" target="_blank" rel="noopener">Visit My Recovery Journey</a></p>
+      <p style="margin:10px 0 0"><button type="button" class="btn btn-gold" data-goto="support">Support this work</button></p>
     </section>
 
     <section class="card">
@@ -331,6 +393,26 @@ section.card.install-highlight{outline:3px solid var(--gold-bright);outline-offs
       <p>The Daily Reflection cycles through thirty reflections — a different one each day. Here is the full set:</p>
       <ul class="ref-list" id="refList"></ul>
     </section>
+  </div>
+
+  <!-- ============ SUPPORT ============ -->
+  <div class="view" id="view-support">
+    <section class="card">
+      <h2>Support My Recovery Journey</h2>
+      <p>The website and this app are two doors into the same journey. Both are free for anyone in recovery &#8212; the daily posts and reflections on the website, and the counter, journal, and tools here in the app. Steven builds and maintains both himself, one day at a time.</p>
+      <p>If My Recovery Journey has helped you and you&#8217;d like to help keep it going, you can support Steven here:</p>
+      <p style="margin:14px 0 0"><a class="btn" href="https://venmo.com/stgnov05" target="_blank" rel="noopener">Venmo &#8212; @stgnov05</a></p>
+      <p style="margin:10px 0 0"><a class="btn" href="https://cash.app/$cardboardheros" target="_blank" rel="noopener">Cash App &#8212; $cardboardheros</a></p>
+      <p class="muted" style="margin:14px 0 0">Give only if you can. Everything here stays free either way &#8212; and if you&#8217;re the one who needs help tonight, the help at the top of the Today screen is yours, no strings attached.</p>
+    </section>
+
+    <section class="card">
+      <h2>One journey, two doors</h2>
+      <p style="margin:0">The website carries Steven&#8217;s story, the daily Journey Updates, and the Reflections Archive. This app carries the tools he uses every day. They belong together &#8212; and your support maintains both.</p>
+      <p style="margin:14px 0 0"><a class="btn" href="https://stgnov05.github.io/my-recovery-journey/#/home" target="_blank" rel="noopener">Visit the My Recovery Journey website</a></p>
+    </section>
+
+    <p style="margin:14px 0 0"><button class="btn-quiet" type="button" data-goto="today">&#8592; Back to Today</button></p>
   </div>
 
   <!-- ============ INSTALL ============ -->
@@ -373,7 +455,7 @@ section.card.install-highlight{outline:3px solid var(--gold-bright);outline-offs
   </div>
 
   <footer class="note">
-    <p>My Recovery Journey · Founded by Steven Gregory · <a href="https://stgnov05.github.io/my-recovery-journey/#/home" target="_blank" rel="noopener">My Recovery Journey website</a></p>
+    <p>My Recovery Journey · Founded by Steven Gregory · <a href="https://stgnov05.github.io/my-recovery-journey/#/home" target="_blank" rel="noopener">My Recovery Journey website</a> &#183; <button type="button" class="small-link" data-goto="support" style="padding:0">Support</button></p>
   </footer>
 </div>
 
@@ -515,6 +597,7 @@ function applyPersonal(){
   }else{
     document.getElementById("heroDay").textContent="Day "+founderDay;
   }
+  renderMoney();
 }
 document.getElementById("startForm").addEventListener("submit",function(e){e.preventDefault();var v=document.getElementById("startDate").value;if(v){personalStart=v;applyPersonal();}});
 document.getElementById("startForm2").addEventListener("submit",function(e){e.preventDefault();var v=document.getElementById("startDate2").value;if(v){personalStart=v;applyPersonal();}});
@@ -766,6 +849,103 @@ function tryInstall(){
 if(installNowBtn)installNowBtn.addEventListener("click",tryInstall);
 var bannerInstallBtn=document.getElementById("bannerInstallBtn");
 if(bannerInstallBtn)bannerInstallBtn.addEventListener("click",tryInstall);
+/* Check-ins & money saved (saved on this device) */
+var checkins=store.get("mrj.checkins",[]);
+var selMood="Okay", selCtx="", selHelped="";
+function wireChips(id,attr,allowClear,initial,set){
+  var box=document.getElementById(id); if(!box)return;
+  box.querySelectorAll(".chip").forEach(function(ch){
+    ch.addEventListener("click",function(){
+      var was=ch.getAttribute("aria-pressed")==="true";
+      box.querySelectorAll(".chip").forEach(function(c){c.setAttribute("aria-pressed","false");});
+      if(was&&allowClear){set("");}
+      else{ch.setAttribute("aria-pressed","true");set(ch.getAttribute(attr));}
+    });
+  });
+}
+wireChips("moodChips","data-mood",false,"Okay",function(v){selMood=v;});
+wireChips("ctxChips","data-val",true,"",function(v){selCtx=v;});
+wireChips("helpChips","data-val",true,"",function(v){selHelped=v;});
+var cravingRange=document.getElementById("cravingRange"), cravingVal=document.getElementById("cravingVal");
+if(cravingRange)cravingRange.addEventListener("input",function(){cravingVal.textContent=cravingRange.value;});
+function fmtWhen(t){
+  var d=new Date(t), ct=chicagoToday();
+  var dayMs=86400000;
+  var diff=Math.round((Date.UTC(ct.y,ct.m-1,ct.d)-Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()))/dayMs);
+  var time=d.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"});
+  if(diff===0)return "Today, "+time;
+  if(diff===1)return "Yesterday, "+time;
+  return d.toLocaleDateString("en-US",{month:"short",day:"numeric"})+", "+time;
+}
+function renderCheckins(){
+  store.set("mrj.checkins",checkins);
+  var wrap=document.getElementById("checkinHistory"); if(!wrap)return;
+  wrap.innerHTML="";
+  if(!checkins.length){
+    var p=document.createElement("p"); p.className="muted"; p.style.margin="14px 0 0";
+    p.textContent="No check-ins yet. Your first one takes thirty seconds.";
+    wrap.appendChild(p); return;
+  }
+  var n=Math.min(checkins.length,7), sum=0, i;
+  for(i=0;i<n;i++)sum+=checkins[i].craving;
+  var counts={}, topCtx="", topN=0;
+  checkins.forEach(function(c){ if(c.ctx){ counts[c.ctx]=(counts[c.ctx]||0)+1; if(counts[c.ctx]>topN){topN=counts[c.ctx]; topCtx=c.ctx;} } });
+  var head=document.createElement("h3"); head.textContent="Your recent check-ins"; wrap.appendChild(head);
+  var note=document.createElement("p"); note.className="muted"; note.style.margin="0";
+  note.textContent="Average craving across your last "+n+" check-in"+(n>1?"s":"")+": "+(Math.round((sum/n)*10)/10)+" / 10."+(topCtx?(" Most often around you: "+topCtx.toLowerCase()+"."):"");
+  wrap.appendChild(note);
+  if(checkins.length>=2){
+    var bars=document.createElement("div"); bars.className="bars"; bars.setAttribute("aria-hidden","true");
+    checkins.slice(0,7).reverse().forEach(function(c){ var b=document.createElement("span"); b.style.height=Math.max(8,c.craving*10)+"%"; bars.appendChild(b); });
+    wrap.appendChild(bars);
+    var cap=document.createElement("p"); cap.className="muted"; cap.style.margin="0"; cap.style.fontSize=".85rem";
+    cap.textContent="Craving strength, oldest to newest (last 7)."; wrap.appendChild(cap);
+  }
+  checkins.slice(0,5).forEach(function(c){
+    var d=document.createElement("div"); d.className="entry";
+    var when=document.createElement("div"); when.className="when"; when.textContent=fmtWhen(c.t); d.appendChild(when);
+    var line=document.createElement("p"); line.style.margin="4px 0 0";
+    var txt="Feeling "+c.mood.toLowerCase()+" \u00b7 Craving "+c.craving+" / 10";
+    if(c.ctx)txt+=" \u00b7 Around you: "+c.ctx.toLowerCase();
+    if(c.helped)txt+=" \u00b7 What helped: "+c.helped.toLowerCase();
+    line.textContent=txt; d.appendChild(line); wrap.appendChild(d);
+  });
+}
+var checkinSave=document.getElementById("checkinSave");
+if(checkinSave)checkinSave.addEventListener("click",function(){
+  var entry={t:Date.now(),mood:selMood,craving:Number(cravingRange.value),ctx:selCtx,helped:selHelped};
+  checkins.unshift(entry); if(checkins.length>90)checkins=checkins.slice(0,90);
+  renderCheckins();
+  var th=document.getElementById("checkinThanks"); if(th){th.hidden=false; setTimeout(function(){th.hidden=true;},4000);}
+  var nu=document.getElementById("cravingNudge"); if(nu)nu.hidden=entry.craving<7;
+});
+renderCheckins();
+
+var dailySpend=store.get("mrj.spend",null);
+function renderMoney(){
+  var line=document.getElementById("moneyLine"); if(!line)return;
+  var d=personalStart?dayNumberFor(personalStart):-1;
+  if(dailySpend&&d>=0){
+    line.hidden=false;
+    line.innerHTML="Money not spent on alcohol so far: <strong>$"+Math.round(dailySpend*d).toLocaleString("en-US")+"</strong> <span class=\"muted\">(about $"+dailySpend+" a day \u00d7 "+d+" days)</span>";
+  }else{
+    line.hidden=true;
+  }
+  var inp=document.getElementById("spendInput"); if(inp&&dailySpend)inp.value=dailySpend;
+}
+var spendForm=document.getElementById("spendForm");
+if(spendForm)spendForm.addEventListener("submit",function(e){
+  e.preventDefault();
+  var v=parseFloat(document.getElementById("spendInput").value);
+  if(v>0){ dailySpend=Math.round(v); store.set("mrj.spend",dailySpend); }
+  renderMoney();
+});
+var clearSpend=document.getElementById("clearSpend");
+if(clearSpend)clearSpend.addEventListener("click",function(){
+  dailySpend=null; store.set("mrj.spend",null);
+  document.getElementById("spendInput").value=""; renderMoney();
+});
+
 updateInstallStatus();
 applyPersonal();
 </script>
