@@ -144,6 +144,46 @@ input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
 .bars{display:flex;gap:5px;align-items:flex-end;height:52px;margin:10px 0 4px}
 .bars span{flex:1;background:var(--gold-bright);border-radius:4px 4px 0 0}
 @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+
+/* My Collection: virtual AA coins + NA key tags (CSS/SVG shapes only, no images) */
+.coll-toggle{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 4px}
+.shelf{display:flex;flex-wrap:wrap;gap:16px 12px;margin:14px 0 6px}
+.token-wrap{width:96px;text-align:center}
+.token-wrap .tlabel{font-size:.8rem;font-weight:700;margin-top:7px;line-height:1.2}
+.token-wrap .tstate{font-size:.75rem;color:var(--dim);line-height:1.25}
+.token{border:0;padding:0;cursor:pointer;display:block;margin:0 auto;position:relative;font-family:inherit}
+.coin{width:92px;height:92px;border-radius:50%;color:#fff;box-shadow:inset 0 0 0 5px rgba(0,0,0,.18),inset 6px 8px 14px rgba(255,255,255,.35),0 3px 8px rgba(0,0,0,.25)}
+.coin .c-top,.coin .c-bot{display:block;font-size:.5rem;font-weight:700;letter-spacing:.08em}
+.coin .c-mid{display:block;font-size:1.02rem;font-weight:800;line-height:1.1;margin:7px 2px}
+.tag{width:66px;height:106px;color:#fff;background:transparent;padding-top:22px}
+.tag svg.tshape,.flip-face svg.tshape{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.tag span{position:relative;z-index:1}
+.token.glowtag{filter:drop-shadow(0 0 9px rgba(165,230,150,.95))}
+.tag .c-top{display:block;font-size:.48rem;font-weight:700;letter-spacing:.06em}
+.tag .c-mid{display:block;font-size:.82rem;font-weight:800;line-height:1.12;margin:8px 3px}
+.tag .c-bot{display:block;font-size:.48rem;font-weight:700;letter-spacing:.06em}
+.token.ahead{filter:grayscale(.85);opacity:.38;box-shadow:none}
+.token.nextup{animation:collPulse 2s ease-in-out infinite}
+@keyframes collPulse{0%,100%{outline:3px solid rgba(195,210,223,0)}50%{outline:3px solid var(--gold)}}
+.token.glowtag{box-shadow:0 0 18px 5px rgba(190,242,180,.95),inset 0 0 0 3px rgba(0,0,0,.12);color:#17351c}
+.flipbox{width:190px;height:190px;margin:14px auto;perspective:800px;cursor:pointer}
+.flipbox.tagbox{width:132px;height:214px}
+.flip-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.flipbox.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:14px}
+.flip-face.back{transform:rotateY(180deg);font-size:.86rem;line-height:1.4}
+.coinface{border-radius:50%}
+.tagface{border-radius:22px}
+.flip-face span{position:relative;z-index:1}
+#milestoneOverlay{position:fixed;inset:0;background:rgba(6,18,29,.82);z-index:60;display:flex;align-items:center;justify-content:center;padding:18px}
+#milestoneOverlay[hidden]{display:none}
+.mile-card{background:var(--surface);color:var(--text);border-radius:18px;max-width:430px;width:100%;max-height:92vh;overflow:auto;padding:24px;text-align:center}
+.share-panel{margin-top:16px;border-top:1px solid var(--border);padding-top:14px}
+.share-panel canvas{max-width:100%;height:auto;border-radius:12px;border:1px solid var(--border)}
+.share-opts{display:flex;gap:16px;flex-wrap:wrap;margin:10px 0}
+.share-opts label{font-weight:600;font-size:.95rem}
+@media (prefers-reduced-motion: reduce){ .token.nextup{animation:none;outline:3px solid var(--gold)} .flip-inner{transition:none} }
+
 </style>
 </head>
 <body>
@@ -291,6 +331,70 @@ input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
       <div id="todaySteps"></div>
       <p style="margin:12px 0 0"><button class="btn" type="button" data-goto="steps">Open My Next Right Step</button></p>
     </section>
+  </div>
+
+
+  <!-- ============ COLLECTION ============ -->
+  <div class="view" id="view-collection">
+    <section class="card">
+      <h2>My Collection</h2>
+      <p class="muted" style="margin:0">The tokens you would be handed at a meeting — earned by time, one day at a time. They unlock on their own from your day counter.</p>
+      <div id="collNoStart" hidden>
+        <p style="margin:14px 0 0">Set your start date on the Today tab first, and your collection starts with the most important token of all — the one for wanting to stop.</p>
+        <p style="margin:12px 0 0"><button type="button" class="btn" data-goto="today">Go to my day counter</button></p>
+      </div>
+      <div id="collMain" hidden>
+        <div class="coll-toggle" role="group" aria-label="Which collection to show">
+          <button type="button" class="chip" id="collModeAA" aria-pressed="false">AA Coins</button>
+          <button type="button" class="chip" id="collModeNA" aria-pressed="false">NA Key Tags</button>
+          <button type="button" class="chip" id="collModeBoth" aria-pressed="true">Both</button>
+        </div>
+        <p style="margin:12px 0 0"><button type="button" class="btn btn-gold" id="shareCollectionBtn">Share my collection</button></p>
+        <div id="aaShelfWrap">
+          <h3>AA Coins — sober time</h3>
+          <div class="shelf" id="aaShelf"></div>
+        </div>
+        <div id="naShelfWrap">
+          <h3>NA Key Tags — clean time</h3>
+          <div class="shelf" id="naShelf"></div>
+        </div>
+        <div id="tokenDetail" hidden></div>
+        <div id="sharePanel" class="share-panel" hidden>
+          <h3 style="margin-top:0">Share — preview</h3>
+          <p class="muted" style="margin:0 0 10px">This preview is the exact image that will be shared. Nothing is posted by the app — you choose where it goes.</p>
+          <canvas id="shareCanvas" width="1080" height="1080" role="img" aria-label="Share card preview"></canvas>
+          <div class="share-opts">
+            <label><input type="checkbox" id="shareShowName"> Show my name</label>
+            <label><input type="checkbox" id="shareShowDay" checked> Show my day count</label>
+          </div>
+          <div class="form-row">
+            <div class="grow">
+              <label class="lbl" for="shareNameInput">Name to show (only if the box above is on)</label>
+              <input type="text" id="shareNameInput" placeholder="e.g. Steven" autocomplete="off">
+            </div>
+          </div>
+          <p style="margin:12px 0 0;display:flex;gap:10px;flex-wrap:wrap">
+            <button type="button" class="btn" id="shareNowBtn">Share image</button>
+            <button type="button" class="btn btn-gold" id="shareSaveBtn">Save image</button>
+            <button type="button" class="btn-quiet" id="shareCopyBtn">Copy caption</button>
+          </p>
+          <p class="muted" id="shareMsg" style="margin:10px 0 0" hidden></p>
+        </div>
+      </div>
+      <p class="muted" style="margin:18px 0 0;font-size:.86rem">These virtual tokens honor the traditions of AA and NA. They are not issued by, affiliated with, or endorsed by Alcoholics Anonymous or Narcotics Anonymous, and they don't replace the real coin or key tag handed to you at a meeting — that one, from people's hands, means something a phone can't. Colors follow the most common standards; your home group may vary.</p>
+    </section>
+  </div>
+
+  <div id="milestoneOverlay" hidden role="dialog" aria-modal="true" aria-labelledby="milestoneHead">
+    <div class="mile-card">
+      <h2 class="font-display" id="milestoneHead" style="margin:0 0 6px;font-size:1.6rem">A new token is yours</h2>
+      <p style="margin:0">One day at a time got you here.</p>
+      <div id="milestoneList"></div>
+      <p style="margin:16px 0 0;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button type="button" class="btn" id="milestoneAdd">Add to My Collection</button>
+        <button type="button" class="btn btn-gold" id="milestoneShare">Share</button>
+      </p>
+    </div>
   </div>
 
   <!-- ============ HELP ============ -->
@@ -462,6 +566,7 @@ input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
 <nav class="bottom" aria-label="App sections">
   <div class="inner">
     <button type="button" data-goto="today" aria-current="page"><span class="ic" aria-hidden="true">☀</span>Today</button>
+    <button type="button" data-goto="collection"><span class="ic" aria-hidden="true">◉</span>Collection</button>
     <button type="button" data-goto="journal"><span class="ic" aria-hidden="true">✎</span>Journal</button>
     <button type="button" data-goto="steps"><span class="ic" aria-hidden="true">→</span>Next Step</button>
     <button type="button" data-goto="founder"><span class="ic" aria-hidden="true">♰</span>Founder</button>
@@ -945,6 +1050,389 @@ if(clearSpend)clearSpend.addEventListener("click",function(){
   dailySpend=null; store.set("mrj.spend",null);
   document.getElementById("spendInput").value=""; renderMoney();
 });
+
+
+/* My Collection: virtual AA coins + NA key tags.
+   Unlocks come from the SAME personal start date and day counter as
+   the rest of the app (store key "mrj.start", dayNumberFor) — there is
+   no second counter. Everything stays on this device. No AA logo or
+   triangle, no NA logo or symbol: colors and words only. */
+var AA_COINS=[
+ {key:"desire",days:0,name:"Desire Coin",colorName:"White",bg:"#f2f1ec",fg:"#17394f",front:"DESIRE"},
+ {key:"h24",days:1,name:"24 Hours Coin",colorName:"Silver",bg:"#c3ccd4",fg:"#17394f",front:"24 HOURS"},
+ {key:"d30",days:30,name:"30 Days Coin",colorName:"Red",bg:"#a52a2a",fg:"#ffffff",front:"30 DAYS"},
+ {key:"d60",days:60,name:"60 Days Coin",colorName:"Gold",bg:"#c99612",fg:"#ffffff",front:"60 DAYS"},
+ {key:"d90",days:90,name:"90 Days Coin",colorName:"Green",bg:"#2e7d4f",fg:"#ffffff",front:"90 DAYS"},
+ {key:"m4",days:120,name:"4 Months Coin",colorName:"Purple",bg:"#6a3d9a",fg:"#ffffff",front:"4 MONTHS"},
+ {key:"m5",days:150,name:"5 Months Coin",colorName:"Pink",bg:"#e58bb1",fg:"#41203a",front:"5 MONTHS"},
+ {key:"m6",days:180,name:"6 Months Coin",colorName:"Dark Blue",bg:"#27408b",fg:"#ffffff",front:"6 MONTHS"},
+ {key:"m7",days:210,name:"7 Months Coin",colorName:"Copper",bg:"#b0703a",fg:"#ffffff",front:"7 MONTHS"},
+ {key:"m8",days:240,name:"8 Months Coin",colorName:"Red",bg:"#a52a2a",fg:"#ffffff",front:"8 MONTHS"},
+ {key:"m9",days:270,name:"9 Months Coin",colorName:"Purple",bg:"#6a3d9a",fg:"#ffffff",front:"9 MONTHS"},
+ {key:"m10",days:300,name:"10 Months Coin",colorName:"Gold",bg:"#c99612",fg:"#ffffff",front:"10 MONTHS"},
+ {key:"m11",days:330,name:"11 Months Coin",colorName:"Green",bg:"#2e7d4f",fg:"#ffffff",front:"11 MONTHS"},
+ {key:"y1",days:365,name:"One Year Coin",colorName:"Bronze",bg:"#9a7433",fg:"#ffffff",front:"1 YEAR"},
+ {key:"y2",days:730,name:"Two Years Coin",colorName:"Bronze",bg:"#9a7433",fg:"#ffffff",front:"2 YEARS"},
+ {key:"y3",days:1095,name:"Three Years Coin",colorName:"Bronze",bg:"#9a7433",fg:"#ffffff",front:"3 YEARS"},
+ {key:"y4",days:1460,name:"Four Years Coin",colorName:"Bronze",bg:"#9a7433",fg:"#ffffff",front:"4 YEARS"},
+ {key:"y5",days:1825,name:"Five Years Coin",colorName:"Bronze",bg:"#9a7433",fg:"#ffffff",front:"5 YEARS"}
+];
+var NA_TAGS=[
+ {key:"welcome",days:0,name:"Welcome Key Tag",colorName:"White",bg:"#f2f1ec",fg:"#17394f",front:"WELCOME"},
+ {key:"d30",days:30,name:"30 Days Key Tag",colorName:"Orange",bg:"#e07b24",fg:"#ffffff",front:"30 DAYS"},
+ {key:"d60",days:60,name:"60 Days Key Tag",colorName:"Green",bg:"#2e7d4f",fg:"#ffffff",front:"60 DAYS"},
+ {key:"d90",days:90,name:"90 Days Key Tag",colorName:"Red",bg:"#a52a2a",fg:"#ffffff",front:"90 DAYS"},
+ {key:"m6",days:180,name:"6 Months Key Tag",colorName:"Blue",bg:"#2b5fb3",fg:"#ffffff",front:"6 MONTHS"},
+ {key:"m9",days:270,name:"9 Months Key Tag",colorName:"Yellow",bg:"#eec51f",fg:"#3a2f05",front:"9 MONTHS"},
+ {key:"y1",days:365,name:"One Year Key Tag",colorName:"Glow-in-the-dark",bg:"#d9f4c8",fg:"#17351c",front:"1 YEAR",glow:true},
+ {key:"m18",days:545,name:"18 Months Key Tag",colorName:"Gray",bg:"#8a939c",fg:"#ffffff",front:"18 MONTHS"},
+ {key:"multi",days:730,name:"Multiple Years Key Tag",colorName:"Black",bg:"#1d1d20",fg:"#ffffff",front:"MULTIPLE YEARS"}
+];
+var COIN_BACK="God, grant me the serenity to accept the things I cannot change, courage to change the things I can, and wisdom to know the difference.";
+var TAG_BACK="Just for today, I will live this day clean, and trust God with tomorrow.";
+var collMode=store.get("mrj.collMode","both");
+if(["aa","na","both"].indexOf(collMode)<0)collMode="both";
+var collSelected=null; /* {kind:"aa"|"na", key:...} */
+var shareState={kind:"collection",token:null};
+
+function collAddDaysISO(iso,days){
+  var p=parseISO(iso); if(!p)return iso;
+  var d=new Date(Date.UTC(p.y,p.m-1,p.d+days));
+  function pad(n){return (n<10?"0":"")+n;}
+  return d.getUTCFullYear()+"-"+pad(d.getUTCMonth()+1)+"-"+pad(d.getUTCDate());
+}
+function collDay(){ return personalStart?dayNumberFor(personalStart):-1; }
+function collSetMode(m){
+  collMode=m; store.set("mrj.collMode",m);
+  ["AA","NA","Both"].forEach(function(x){
+    var b=document.getElementById("collMode"+x); if(b)b.setAttribute("aria-pressed",String(m===x.toLowerCase()));
+  });
+  var aa=document.getElementById("aaShelfWrap"), na=document.getElementById("naShelfWrap");
+  if(aa)aa.hidden=(m==="na"); if(na)na.hidden=(m==="aa");
+  renderCollection();
+}
+function tagShapeSVG(t){
+  return '<svg class="tshape" viewBox="0 0 64 104" aria-hidden="true">'
+  +'<circle cx="32" cy="1" r="10" fill="none" stroke="#c3ccd4" stroke-width="3.5"/>'
+  +'<path d="M32 7 C42 7 49 19 53 33 C59 54 56 78 46 90 C38 100 26 100 18 90 C8 78 5 54 11 33 C15 19 22 7 32 7 Z" fill="'+t.bg+'" stroke="rgba(0,0,0,.28)" stroke-width="2"/>'
+  +'<path d="M32 13.5 C40 13.5 45.5 23 48.5 35 C53.5 53 51.5 73.5 43 84.5 C36.8 92 27.2 92 21 84.5 C12.5 73.5 10.5 53 15.5 35 C18.5 23 24 13.5 32 13.5 Z" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-dasharray="4 3"/>'
+  +'<circle cx="32" cy="19" r="4.6" fill="#d7e5ee" stroke="#8a939c" stroke-width="2"/>'
+  +'<circle cx="32" cy="61" r="18.5" fill="none" stroke="'+t.fg+'" stroke-opacity=".55" stroke-width="1.6"/>'
+  +'</svg>';
+}
+function collTokenEl(kind,t,day){
+  var wrap=document.createElement("div"); wrap.className="token-wrap";
+  var earned=day>=t.days;
+  var b=document.createElement("button"); b.type="button";
+  b.className="token "+(kind==="aa"?"coin":"tag")+(t.glow?" glowtag":"");
+  if(kind==="na"){ b.style.background="transparent"; b.style.color=t.fg; b.innerHTML=tagShapeSVG(t); }
+  else { b.style.background=t.bg; b.style.color=t.fg; }
+  b.setAttribute("data-token",kind+"-"+t.key);
+  if(!earned){
+    var next=true;
+    (kind==="aa"?AA_COINS:NA_TAGS).forEach(function(x){ if(x.days>day&&x.days<t.days)next=false; });
+    b.classList.add(next?"nextup":"ahead");
+  }
+  var top=document.createElement("span"); top.className="c-top"; top.textContent=(kind==="aa"?"ONE DAY AT A TIME":"JUST FOR TODAY");
+  var mid=document.createElement("span"); mid.className="c-mid"; mid.textContent=t.front;
+  var bot=document.createElement("span"); bot.className="c-bot"; bot.textContent=(kind==="aa"?"MY RECOVERY JOURNEY":"CLEAN TIME");
+  b.appendChild(top); b.appendChild(mid); b.appendChild(bot);
+  b.setAttribute("aria-label",t.name+(earned?", earned":", ahead"));
+  b.addEventListener("click",function(){showTokenDetail(kind,t.key);});
+  wrap.appendChild(b);
+  var lab=document.createElement("div"); lab.className="tlabel"; lab.textContent=t.colorName+" · "+t.front; wrap.appendChild(lab);
+  var st=document.createElement("div"); st.className="tstate";
+  if(earned){ st.textContent="Earned "+fmtLong(collAddDaysISO(personalStart,t.days)); }
+  else if(b.classList.contains("nextup")){ var n=t.days-day; st.textContent="Next up — in "+n+(n===1?" day":" days")+" — "+fmtLong(collAddDaysISO(personalStart,t.days)); }
+  else { st.textContent="Ahead of you — Day "+t.days; }
+  wrap.appendChild(st);
+  return wrap;
+}
+function renderCollection(){
+  var main=document.getElementById("collMain"), none=document.getElementById("collNoStart");
+  if(!main||!none)return;
+  var day=collDay();
+  none.hidden=!!personalStart; main.hidden=!personalStart;
+  if(!personalStart)return;
+  ["AA","NA","Both"].forEach(function(x){
+    var b=document.getElementById("collMode"+x); if(b)b.setAttribute("aria-pressed",String(collMode===x.toLowerCase()));
+  });
+  var aa=document.getElementById("aaShelfWrap"), na=document.getElementById("naShelfWrap");
+  if(aa)aa.hidden=(collMode==="na"); if(na)na.hidden=(collMode==="aa");
+  var as=document.getElementById("aaShelf"); as.innerHTML="";
+  AA_COINS.forEach(function(t){as.appendChild(collTokenEl("aa",t,day));});
+  var ns=document.getElementById("naShelf"); ns.innerHTML="";
+  NA_TAGS.forEach(function(t){ns.appendChild(collTokenEl("na",t,day));});
+  if(collSelected)showTokenDetail(collSelected.kind,collSelected.key,true);
+}
+function collFind(kind,key){
+  var list=(kind==="aa"?AA_COINS:NA_TAGS);
+  for(var i=0;i<list.length;i++)if(list[i].key===key)return list[i];
+  return null;
+}
+function showTokenDetail(kind,key,keep){
+  var t=collFind(kind,key); if(!t)return;
+  collSelected={kind:kind,key:key};
+  var day=collDay(), earned=day>=t.days;
+  var det=document.getElementById("tokenDetail"); det.hidden=false; det.innerHTML="";
+  var h=document.createElement("h3"); h.textContent=t.colorName+" "+(kind==="aa"?"Coin":"Key Tag")+" — "+t.front; det.appendChild(h);
+  var fb=document.createElement("div"); fb.className="flipbox"+(kind==="na"?" tagbox":"");
+  fb.setAttribute("role","button"); fb.setAttribute("tabindex","0");
+  fb.setAttribute("aria-label","Tap to flip the token over");
+  var inner=document.createElement("div"); inner.className="flip-inner";
+  function face(isBack){
+    var f=document.createElement("div");
+    f.className="flip-face "+(kind==="aa"?"coinface":"tagface")+(isBack?" back":"");
+    f.style.background=t.bg; f.style.color=t.fg;
+    f.style.boxShadow="inset 0 0 0 5px rgba(0,0,0,.18),inset 6px 8px 14px rgba(255,255,255,.3)";
+    if(t.glow&&!isBack)f.style.boxShadow="0 0 22px 6px rgba(190,242,180,.95)";
+    if(kind==="na"){ f.style.background="transparent"; f.innerHTML=tagShapeSVG(t); }
+    if(isBack){ var bs=document.createElement("span"); bs.textContent=(kind==="aa"?COIN_BACK:TAG_BACK); if(kind==="na"){bs.style.padding="0 16px";} f.appendChild(bs); }
+    else{
+      var s1=document.createElement("span"); s1.style.fontWeight="700"; s1.style.fontSize=".72rem"; s1.textContent=(kind==="aa"?"ONE DAY AT A TIME":"JUST FOR TODAY");
+      var s2=document.createElement("span"); s2.style.fontWeight="800"; s2.style.fontSize=(kind==="aa"?"1.7rem":"1.25rem"); s2.textContent=t.front;
+      var s3=document.createElement("span"); s3.style.fontWeight="700"; s3.style.fontSize=".72rem"; s3.textContent=(kind==="aa"?"MY RECOVERY JOURNEY":"CLEAN TIME");
+      f.appendChild(s1); f.appendChild(s2); f.appendChild(s3);
+    }
+    return f;
+  }
+  inner.appendChild(face(false)); inner.appendChild(face(true)); fb.appendChild(inner);
+  function flip(){fb.classList.toggle("flipped");}
+  fb.addEventListener("click",flip);
+  fb.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();flip();}});
+  det.appendChild(fb);
+  var hint=document.createElement("p"); hint.className="muted"; hint.style.textAlign="center"; hint.style.margin="0";
+  hint.textContent="Tap the "+(kind==="aa"?"coin":"tag")+" to flip it over."; det.appendChild(hint);
+  var stat=document.createElement("p"); stat.style.textAlign="center";
+  if(earned)stat.textContent="Earned "+fmtLong(collAddDaysISO(personalStart,t.days))+" — Day "+t.days+".";
+  else stat.textContent="Ahead of you again on the road — Day "+t.days+", "+fmtLong(collAddDaysISO(personalStart,t.days))+".";
+  det.appendChild(stat);
+  if(earned){
+    var p=document.createElement("p"); p.style.textAlign="center";
+    var sb=document.createElement("button"); sb.className="btn btn-gold"; sb.type="button";
+    sb.textContent=(kind==="aa"?"Share my coin":"Share my tag");
+    sb.addEventListener("click",function(){openShare("single",{kind:kind,token:t});});
+    p.appendChild(sb); det.appendChild(p);
+  }
+  if(!keep)det.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+/* Milestone-morning card: once per token, stacked oldest first. */
+function collSeenRec(){
+  var rec=store.get("mrj.collSeen",null);
+  if(!rec||rec.start!==personalStart)rec={start:personalStart,keys:[]};
+  return rec;
+}
+function checkMilestones(){
+  if(!personalStart)return;
+  var day=collDay(); if(day<0)return;
+  var rec=collSeenRec();
+  var fresh=[];
+  function scan(kind,list){ list.forEach(function(t){ var k=kind+"-"+t.key; if(day>=t.days&&rec.keys.indexOf(k)<0&&(collMode==="both"||collMode===kind))fresh.push({kind:kind,t:t,k:k}); }); }
+  scan("aa",AA_COINS); scan("na",NA_TAGS);
+  fresh.sort(function(a,b){return a.t.days-b.t.days;});
+  if(!fresh.length){store.set("mrj.collSeen",rec);return;}
+  var ov=document.getElementById("milestoneOverlay"), list=document.getElementById("milestoneList");
+  list.innerHTML="";
+  fresh.forEach(function(f){
+    var p=document.createElement("p"); p.style.margin="14px 0 0"; p.style.fontWeight="700"; p.style.fontSize="1.1rem";
+    p.textContent="Day "+f.t.days+" — You earned your "+f.t.colorName+" "+(f.kind==="aa"?"Coin":"Key Tag")+".";
+    list.appendChild(p);
+    var holder=document.createElement("div");
+    holder.appendChild(collTokenEl(f.kind,f.t,day));
+    holder.firstChild.style.margin="10px auto 0";
+    list.appendChild(holder);
+  });
+  ov.hidden=false;
+  document.getElementById("milestoneAdd").onclick=function(){
+    fresh.forEach(function(f){ if(rec.keys.indexOf(f.k)<0)rec.keys.push(f.k); });
+    store.set("mrj.collSeen",rec); ov.hidden=true; goTo("collection"); renderCollection();
+  };
+  document.getElementById("milestoneShare").onclick=function(){
+    var f=fresh[fresh.length-1];
+    fresh.forEach(function(x){ if(rec.keys.indexOf(x.k)<0)rec.keys.push(x.k); });
+    store.set("mrj.collSeen",rec); ov.hidden=true; goTo("collection"); renderCollection();
+    openShare("milestone",{kind:f.kind,token:f.t});
+  };
+}
+/* Sharing: on-device Canvas PNG cards (1080x1080), Web Share with
+   files where supported, Save-image fallback, Copy caption. The app
+   never posts anything itself. */
+function shareMsg(t){ var m=document.getElementById("shareMsg"); if(m){m.hidden=false;m.textContent=t;} }
+function shareOpts(){
+  return {
+    showName:document.getElementById("shareShowName").checked,
+    showDay:document.getElementById("shareShowDay").checked,
+    name:document.getElementById("shareNameInput").value.trim()
+  };
+}
+function drawTokenOn(ctx,kind,t,x,y,r){
+  ctx.save();
+  if(kind==="aa"){
+    if(t.glow){ctx.shadowColor="rgba(190,242,180,.95)";ctx.shadowBlur=40;}
+    ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fillStyle=t.bg; ctx.fill();
+    ctx.shadowBlur=0; ctx.lineWidth=10; ctx.strokeStyle="rgba(0,0,0,.18)"; ctx.stroke();
+    ctx.fillStyle=t.fg; ctx.textAlign="center";
+    ctx.font="700 26px sans-serif"; ctx.fillText("ONE DAY AT A TIME",x,y-r+52);
+    ctx.font="800 54px sans-serif";
+    var words=t.front.split(" ");
+    if(words.length>1&&t.front.length>9){ ctx.fillText(words[0],x,y-6); ctx.fillText(words.slice(1).join(" "),x,y+52); }
+    else ctx.fillText(t.front,x,y+22);
+    ctx.font="700 24px sans-serif"; ctx.fillText("MY RECOVERY JOURNEY",x,y+r-38);
+  }else{
+    var w=r*1.25,h=r*2.05;
+    if(t.glow){ctx.shadowColor="rgba(190,242,180,.95)";ctx.shadowBlur=40;}
+    function tearPath(cx,cy,ww,hh){
+      ctx.beginPath();
+      ctx.moveTo(cx,cy-hh/2);
+      ctx.bezierCurveTo(cx+ww*.32,cy-hh/2,cx+ww/2,cy-hh*.20,cx+ww/2,cy+hh*.06);
+      ctx.bezierCurveTo(cx+ww/2,cy+hh*.40,cx+ww*.27,cy+hh/2,cx,cy+hh/2);
+      ctx.bezierCurveTo(cx-ww*.27,cy+hh/2,cx-ww/2,cy+hh*.40,cx-ww/2,cy+hh*.06);
+      ctx.bezierCurveTo(cx-ww/2,cy-hh*.20,cx-ww*.32,cy-hh/2,cx,cy-hh/2);
+      ctx.closePath();
+    }
+    tearPath(x,y,w,h);
+    ctx.fillStyle=t.bg; ctx.fill(); ctx.shadowBlur=0;
+    ctx.lineWidth=7; ctx.strokeStyle="rgba(0,0,0,.25)"; ctx.stroke();
+    tearPath(x,y+4,w*.86,h*.88);
+    ctx.setLineDash([11,8]); ctx.lineWidth=4; ctx.strokeStyle="rgba(255,255,255,.6)"; ctx.stroke(); ctx.setLineDash([]);
+    ctx.beginPath(); ctx.arc(x,y-h/2-4,27,0,Math.PI*2); ctx.lineWidth=7; ctx.strokeStyle="#c3ccd4"; ctx.stroke();
+    ctx.beginPath(); ctx.arc(x,y-h/2+34,15,0,Math.PI*2); ctx.fillStyle="#d7e5ee"; ctx.fill();
+    ctx.lineWidth=5; ctx.strokeStyle="#8a939c"; ctx.stroke();
+    ctx.beginPath(); ctx.arc(x,y+18,64,0,Math.PI*2); ctx.lineWidth=4; ctx.strokeStyle=t.fg; ctx.globalAlpha=.55; ctx.stroke(); ctx.globalAlpha=1;
+    ctx.fillStyle=t.fg; ctx.textAlign="center";
+    ctx.font="700 24px sans-serif"; ctx.fillText("JUST FOR TODAY",x,y-h/2+92);
+    ctx.font="800 44px sans-serif";
+    var ws=t.front.split(" ");
+    if(t.front.length>9&&ws.length>1){ ctx.fillText(ws[0],x,y-10); ctx.fillText(ws.slice(1).join(" "),x,y+40); }
+    else ctx.fillText(t.front,x,y+16);
+    ctx.font="700 24px sans-serif"; ctx.fillText("CLEAN TIME",x,y+h/2-36);
+  }
+  ctx.restore();
+}
+function buildShareCanvas(){
+  var cv=document.getElementById("shareCanvas"); if(!cv)return null;
+  var ctx=cv.getContext("2d"); if(!ctx)return cv;
+  var day=collDay(), o=shareOpts();
+  var grad=ctx.createLinearGradient(0,0,1080,1080);
+  grad.addColorStop(0,"#0e2739"); grad.addColorStop(1,"#2e6484");
+  ctx.fillStyle=grad; ctx.fillRect(0,0,1080,1080);
+  ctx.strokeStyle="#c3d2df"; ctx.lineWidth=6; ctx.strokeRect(28,28,1024,1024);
+  ctx.fillStyle="#ffffff"; ctx.textAlign="center";
+  function footer(){
+    ctx.font="italic 34px Georgia,serif"; ctx.fillStyle="#eef4f8";
+    ctx.fillText("One Day at a Time. One Step Toward a New Life.",540,990);
+    if(o.showName&&o.name){ ctx.font="700 30px sans-serif"; ctx.fillText(o.name,540,930); }
+  }
+  if(shareState.kind==="collection"){
+    ctx.font="700 52px Georgia,serif"; ctx.fillText("My Recovery Journey",540,118);
+    ctx.font="600 36px sans-serif"; ctx.fillStyle="#d9e6f2";
+    var earned=[];
+    if(collMode!=="na")AA_COINS.forEach(function(t){if(day>=t.days)earned.push({kind:"aa",t:t});});
+    if(collMode!=="aa")NA_TAGS.forEach(function(t){if(day>=t.days)earned.push({kind:"na",t:t});});
+    var head=(o.showDay?("Day "+day+" — "):"")+earned.length+" token"+(earned.length===1?"":"s")+" earned";
+    ctx.fillText(head,540,172);
+    var cols=4, cell=230, x0=540-((Math.min(cols,Math.max(earned.length,1))-1)*cell)/2, y=330;
+    earned.slice(0,12).forEach(function(e,i){
+      var cx=x0+(i%cols)*cell, cy=y+Math.floor(i/cols)*250;
+      drawTokenOn(ctx,e.kind,e.t,cx,cy,86);
+    });
+    footer();
+  }else{
+    var t=shareState.token, kind=shareState.kind2;
+    if(shareState.kind==="milestone"){
+      ctx.font="800 44px sans-serif"; ctx.fillStyle="#c3d2df";
+      ctx.fillText("NEW TODAY",540,120);
+    }
+    ctx.font="700 50px Georgia,serif"; ctx.fillStyle="#ffffff";
+    ctx.fillText("My Recovery Journey",540,shareState.kind==="milestone"?180:130);
+    drawTokenOn(ctx,kind,t,540,520,kind==="aa"?215:185);
+    ctx.font="800 58px sans-serif";
+    ctx.fillText(t.front,540,838);
+    ctx.font="600 36px sans-serif"; ctx.fillStyle="#d9e6f2";
+    ctx.fillText(o.showDay?("Day "+day+" — My Recovery Journey"):("My Recovery Journey"),540,890);
+    footer();
+  }
+  return cv;
+}
+function openShare(kind,sel){
+  shareState={kind:kind,token:sel?sel.token:null,kind2:sel?sel.kind:null};
+  var p=document.getElementById("sharePanel"); p.hidden=false;
+  buildShareCanvas();
+  p.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+function shareCanvasBlob(cb){
+  var cv=buildShareCanvas(); if(!cv){cb(null);return;}
+  if(cv.toBlob){ try{ cv.toBlob(function(b){cb(b);},"image/png"); }catch(e){ cb(null); } return; }
+  try{
+    var url=cv.toDataURL("image/png");
+    var bin=atob(url.split(",")[1]), arr=new Uint8Array(bin.length);
+    for(var i=0;i<bin.length;i++)arr[i]=bin.charCodeAt(i);
+    cb(new Blob([arr],{type:"image/png"}));
+  }catch(e){ cb(null); }
+}
+function saveShareImage(){
+  shareCanvasBlob(function(blob){
+    if(!blob){shareMsg("This browser couldn't make the image — your collection is still saved on this device.");return;}
+    var a=document.createElement("a");
+    a.href=URL.createObjectURL(blob); a.download="my-recovery-journey-collection.png";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){URL.revokeObjectURL(a.href);},4000);
+    shareMsg("Saved — post it wherever you like.");
+  });
+}
+function shareNow(){
+  shareCanvasBlob(function(blob){
+    if(!blob){shareMsg("This browser couldn't make the image — try Save image instead.");return;}
+    var file=null;
+    try{ file=new File([blob],"my-recovery-journey.png",{type:"image/png"}); }catch(e){}
+    if(file&&navigator.canShare&&navigator.share&&navigator.canShare({files:[file]})){
+      navigator.share({files:[file],title:"My Recovery Journey"}).then(function(){shareMsg("Shared. One day at a time.");},function(){});
+    }else if(navigator.share){
+      navigator.share({title:"My Recovery Journey",text:shareCaptionText()}).then(function(){},function(){ saveShareImage(); });
+    }else{
+      saveShareImage();
+    }
+  });
+}
+function shareCaptionText(){
+  var day=collDay();
+  if(shareState.kind!=="collection"&&shareState.token){
+    var t=shareState.token;
+    return "Day "+t.days+". "+t.colorName+" "+(shareState.kind2==="aa"?"coin":"key tag")+" earned, one day at a time. #MyRecoveryJourney #Recovery #SoberLife #OneDayAtATime #Sobriety";
+  }
+  return "Day "+day+". My collection so far, earned one day at a time. #MyRecoveryJourney #Recovery #SoberLife #OneDayAtATime #Sobriety";
+}
+function copyShareCaption(){
+  var txt=shareCaptionText();
+  function done(){shareMsg("Caption copied — paste it with your image wherever you post it.");}
+  function fallback(){
+    var ta=document.createElement("textarea"); ta.value=txt;
+    ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    try{document.execCommand("copy"); done();}
+    catch(e){shareMsg("Copy didn't work in this browser — the caption is: "+txt);}
+    document.body.removeChild(ta);
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done,fallback); }
+  else fallback();
+}
+document.getElementById("collModeAA").addEventListener("click",function(){collSetMode("aa");});
+document.getElementById("collModeNA").addEventListener("click",function(){collSetMode("na");});
+document.getElementById("collModeBoth").addEventListener("click",function(){collSetMode("both");});
+document.getElementById("shareCollectionBtn").addEventListener("click",function(){openShare("collection",null);});
+document.getElementById("shareNowBtn").addEventListener("click",shareNow);
+document.getElementById("shareSaveBtn").addEventListener("click",saveShareImage);
+document.getElementById("shareCopyBtn").addEventListener("click",copyShareCaption);
+["shareShowName","shareShowDay"].forEach(function(id){
+  document.getElementById(id).addEventListener("change",function(){buildShareCanvas();});
+});
+document.getElementById("shareNameInput").addEventListener("input",function(){
+  store.set("mrj.collName",this.value); buildShareCanvas();
+});
+document.getElementById("shareNameInput").value=store.get("mrj.collName","");
+window.__mrjCollection={coins:AA_COINS,tags:NA_TAGS,render:renderCollection,checkMilestones:checkMilestones,buildShareCanvas:buildShareCanvas,shareState:function(){return shareState;},openShare:openShare};
+var _applyPersonalForColl=applyPersonal;
+applyPersonal=function(){ _applyPersonalForColl(); renderCollection(); checkMilestones(); };
 
 updateInstallStatus();
 applyPersonal();
