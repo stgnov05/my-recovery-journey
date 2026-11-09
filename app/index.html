@@ -76,6 +76,7 @@ section.card h3{font-size:1.05rem;margin:18px 0 6px}
 .btn:disabled{opacity:.45;cursor:default}
 .btn-gold{background:var(--gold-bright);color:#14232f}
 .btn-quiet{background:transparent;color:var(--dim);border:0;padding:10px 8px;text-decoration:underline}
+.btn-stack{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;text-align:center}
 input[type="date"],input[type="text"],input[type="number"],textarea{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:12px;font:inherit}
 label.lbl{display:block;font-weight:600;font-size:.94rem;margin-bottom:6px}
 .form-row{display:flex;gap:10px;align-items:end;flex-wrap:wrap}
@@ -238,7 +239,7 @@ input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
             <button class="btn" type="submit">Start counting</button>
           </div>
         </form>
-        <p style="margin:12px 0 0"><button type="button" class="btn btn-gold" id="useFounderDate">Use Steven's date — August 20, 2026</button></p>
+        <p style="margin:12px 0 0"><button type="button" class="btn btn-gold btn-stack" id="useFounderDate">Use Steven's date — August 20, 2026</button></p>
       </div>
       <div id="setupDone" hidden>
         <p style="margin:0">Counting from <strong id="startDateLabel"></strong> — that's <strong id="personalDayLabel"></strong> today.</p>
@@ -317,7 +318,7 @@ input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
       <p style="margin:16px 0 0"><button class="btn" type="button" id="checkinSave">Save check-in</button> <span id="checkinThanks" class="muted" hidden>Saved. One day at a time.</span></p>
       <div id="cravingNudge" hidden style="margin:14px 0 0;background:var(--gold-soft);border:1px solid var(--gold);border-radius:10px;padding:12px 14px">
         <p style="margin:0"><strong>That&#8217;s a strong craving &#8212; and cravings pass.</strong> You don&#8217;t have to ride it out alone.</p>
-        <p style="margin:10px 0 0"><button class="btn btn-gold" type="button" data-goto="help">I&#8217;m struggling right now</button></p>
+        <p style="margin:10px 0 0"><button class="btn btn-gold btn-stack" type="button" data-goto="help">I&#8217;m struggling right now</button></p>
       </div>
       <div id="checkinHistory"></div>
     </section>
@@ -336,7 +337,13 @@ input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
     <section class="card">
       <h2>My Next Right Step</h2>
       <div id="todaySteps"></div>
-      <p style="margin:12px 0 0"><button class="btn" type="button" data-goto="steps">Open My Next Right Step</button></p>
+      <p style="margin:12px 0 0"><button class="btn btn-stack" type="button" data-goto="steps">Open My Next Right Step</button></p>
+    </section>
+
+    <section class="card" id="supportCard">
+      <h2>Keeping this going</h2>
+      <p style="margin:0">This app is free, and always will be. If it helped you today, you can help keep it going.</p>
+      <p style="margin:12px 0 0"><button class="btn btn-stack" type="button" data-goto="support">Support this work</button> <button class="btn-quiet" type="button" id="supportCardDismiss">Dismiss</button></p>
     </section>
   </div>
 
@@ -348,7 +355,7 @@ input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
       <p class="muted" style="margin:0">The tokens you would be handed at a meeting — earned by time, one day at a time. They unlock on their own from your day counter.</p>
       <div id="collNoStart" hidden>
         <p style="margin:14px 0 0">Set your start date on the Today tab first, and your collection starts with the most important token of all — the one for wanting to stop.</p>
-        <p style="margin:12px 0 0"><button type="button" class="btn" data-goto="today">Go to my day counter</button></p>
+        <p style="margin:12px 0 0"><button type="button" class="btn btn-stack" data-goto="today">Go to my day counter</button></p>
       </div>
       <div id="collMain" hidden>
         <div class="coll-toggle" role="group" aria-label="Which collection to show">
@@ -356,7 +363,7 @@ input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
           <button type="button" class="chip" id="collModeNA" aria-pressed="false">NA Key Tags</button>
           <button type="button" class="chip" id="collModeBoth" aria-pressed="true">Both</button>
         </div>
-        <p style="margin:12px 0 0"><button type="button" class="btn btn-gold" id="shareCollectionBtn">Share my collection</button></p>
+        <p style="margin:12px 0 0"><button type="button" class="btn btn-gold btn-stack" id="shareCollectionBtn">Share my collection</button></p>
         <div id="aaShelfWrap">
           <h3>AA Coins — sober time</h3>
           <div class="shelf" id="aaShelf"></div>
@@ -416,14 +423,14 @@ input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
       <p>A hard moment is not a failure &#8212; and you don&#8217;t have to carry it by yourself. Reach out right now, in whichever way feels possible:</p>
       <p style="margin:16px 0 0"><a class="btn" href="tel:988">Call 988</a> <a class="btn" href="sms:988">Text 988</a></p>
       <p class="muted" style="margin:8px 0 0">The 988 Suicide and Crisis Lifeline &#8212; free, confidential, 24/7, anywhere in the U.S.</p>
-      <p style="margin:16px 0 0"><a class="btn" href="tel:18006624357">Call SAMHSA: 1-800-662-4357</a></p>
+      <p style="margin:16px 0 0"><a class="btn btn-stack" href="tel:18006624357">Call SAMHSA: 1-800-662-4357</a></p>
       <p class="muted" style="margin:8px 0 0">SAMHSA&#8217;s National Helpline &#8212; free, confidential treatment referrals and support, 24/7.</p>
       <div id="supportWrap"></div>
     </section>
 
     <section class="card">
       <h2>Grounding &amp; prayer</h2>
-      <p style="margin:0"><button class="btn" type="button" id="helpGroundBtn">Start the 5-4-3-2-1 grounding</button></p>
+      <p style="margin:0"><button class="btn btn-stack" type="button" id="helpGroundBtn">Start the 5-4-3-2-1 grounding</button></p>
       <p style="margin:16px 0 0"><strong>A prayer for this moment:</strong> Lord, I can&#8217;t carry this moment alone, and I don&#8217;t have to. You are my refuge and my strength, always ready to help. Slow my breathing, steady my heart, and walk me to the next right step. Amen.</p>
     </section>
 
@@ -494,18 +501,18 @@ input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
       <p>My Christian faith is the ground I stand on. I pray every day, and prayer is what keeps me holding on. When I say God restores, I mean it the way Joel 2:25 says it — He gives back what was lost.</p>
       <p>I built My Recovery Journey, and now this app, for the person who feels alone in recovery tonight. You are not alone. These are the same tools I use every day: count the days, read the reflection, write the gratitude, take the next right step.</p>
       <p class="font-display" style="font-style:italic;font-size:1.15rem">“One Day at a Time. One Step Toward a New Life.”</p>
-      <p style="margin:14px 0 0"><a class="btn" href="https://stgnov05.github.io/my-recovery-journey/#/home" target="_blank" rel="noopener">Visit My Recovery Journey</a></p>
-      <p style="margin:10px 0 0"><button type="button" class="btn btn-gold" data-goto="support">Support this work</button></p>
+      <p style="margin:14px 0 0"><a class="btn btn-stack" href="https://stgnov05.github.io/my-recovery-journey/#/home" target="_blank" rel="noopener">Visit My Recovery Journey</a></p>
+      <p style="margin:10px 0 0"><button type="button" class="btn btn-gold btn-stack" data-goto="support">Support this work</button></p>
     </section>
 
     <section class="card" id="fromWebsiteCard">
       <h2>From the Website</h2>
       <p>The app is the toolbox; the website is the story. Steven&#8217;s day-by-day posts, every past Daily Reflection, the recovery resource pages, and ways to support the journey all live on My Recovery Journey:</p>
-      <p style="margin:14px 0 0"><a class="btn" href="https://stgnov05.github.io/my-recovery-journey/#/updates" target="_blank" rel="noopener">Journey Updates</a></p>
-      <p style="margin:10px 0 0"><a class="btn" href="https://stgnov05.github.io/my-recovery-journey/#/reflections" target="_blank" rel="noopener">Reflections Archive</a></p>
-      <p style="margin:10px 0 0"><a class="btn" href="https://stgnov05.github.io/my-recovery-journey/#/resources" target="_blank" rel="noopener">Recovery Resources</a></p>
-      <p style="margin:10px 0 0"><a class="btn" href="https://stgnov05.github.io/my-recovery-journey/#/support" target="_blank" rel="noopener">Support the Journey</a></p>
-      <p style="margin:10px 0 0"><a class="btn" href="https://stgnov05.github.io/my-recovery-journey/#/home" target="_blank" rel="noopener">Website Home</a></p>
+      <p style="margin:14px 0 0"><a class="btn btn-stack" href="https://stgnov05.github.io/my-recovery-journey/#/updates" target="_blank" rel="noopener">Journey Updates</a></p>
+      <p style="margin:10px 0 0"><a class="btn btn-stack" href="https://stgnov05.github.io/my-recovery-journey/#/reflections" target="_blank" rel="noopener">Reflections Archive</a></p>
+      <p style="margin:10px 0 0"><a class="btn btn-stack" href="https://stgnov05.github.io/my-recovery-journey/#/resources" target="_blank" rel="noopener">Recovery Resources</a></p>
+      <p style="margin:10px 0 0"><a class="btn btn-stack" href="https://stgnov05.github.io/my-recovery-journey/#/support" target="_blank" rel="noopener">Support the Journey</a></p>
+      <p style="margin:10px 0 0"><a class="btn btn-stack" href="https://stgnov05.github.io/my-recovery-journey/#/home" target="_blank" rel="noopener">Website Home</a></p>
     </section>
 
     <section class="card">
@@ -527,16 +534,16 @@ input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
       <h2>Support My Recovery Journey</h2>
       <p>The website and this app are two doors into the same journey. Both are free for anyone in recovery &#8212; the daily posts and reflections on the website, and the counter, journal, and tools here in the app. Steven builds and maintains both himself, one day at a time.</p>
       <p>If My Recovery Journey has helped you and you&#8217;d like to help keep it going, you can support Steven here:</p>
-      <p style="margin:14px 0 0"><a class="btn" href="https://venmo.com/stgnov05" target="_blank" rel="noopener">Venmo &#8212; @stgnov05</a></p>
-      <p style="margin:10px 0 0"><a class="btn" href="https://cash.app/$cardboardheros" target="_blank" rel="noopener">Cash App &#8212; $cardboardheros</a></p>
-      <p style="margin:10px 0 0"><a class="btn" href="https://ko-fi.com/stgnov05" target="_blank" rel="noopener">Ko-fi &#8212; stgnov05 (tips &amp; Recovery Partner)</a></p>
+      <p style="margin:14px 0 0"><a class="btn btn-stack" href="https://venmo.com/stgnov05" target="_blank" rel="noopener">Venmo &#8212; @stgnov05</a></p>
+      <p style="margin:10px 0 0"><a class="btn btn-stack" href="https://cash.app/$cardboardheros" target="_blank" rel="noopener">Cash App &#8212; $cardboardheros</a></p>
+      <p style="margin:10px 0 0"><a class="btn btn-stack" href="https://ko-fi.com/stgnov05" target="_blank" rel="noopener">Ko-fi &#8212; stgnov05 (tips &amp; Recovery Partner)</a></p>
       <p class="muted" style="margin:14px 0 0">Give only if you can. Everything here stays free either way &#8212; and if you&#8217;re the one who needs help tonight, the help at the top of the Today screen is yours, no strings attached.</p>
     </section>
 
     <section class="card">
       <h2>One journey, two doors</h2>
       <p style="margin:0">The website carries Steven&#8217;s story, the daily Journey Updates, and the Reflections Archive. This app carries the tools he uses every day. They belong together &#8212; and your support maintains both.</p>
-      <p style="margin:14px 0 0"><a class="btn" href="https://stgnov05.github.io/my-recovery-journey/#/home" target="_blank" rel="noopener">Visit the My Recovery Journey website</a></p>
+      <p style="margin:14px 0 0"><a class="btn btn-stack" href="https://stgnov05.github.io/my-recovery-journey/#/home" target="_blank" rel="noopener">Visit the My Recovery Journey website</a></p>
     </section>
 
     <p style="margin:14px 0 0"><button class="btn-quiet" type="button" data-goto="today">&#8592; Back to Today</button></p>
@@ -593,6 +600,7 @@ input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
     <button type="button" data-goto="journal"><span class="ic" aria-hidden="true">✎</span>Journal</button>
     <button type="button" data-goto="steps"><span class="ic" aria-hidden="true">→</span>Next Step</button>
     <button type="button" data-goto="founder"><span class="ic" aria-hidden="true">♰</span>Founder</button>
+    <button type="button" data-goto="support"><span class="ic" aria-hidden="true">♥</span>Support</button>
     <button type="button" data-goto="install"><span class="ic" aria-hidden="true">⬇</span>Install</button>
   </div>
 </nav>
@@ -685,6 +693,13 @@ function goTo(name){
 }
 document.querySelectorAll("[data-goto]").forEach(function(b){b.addEventListener("click",function(){goTo(b.getAttribute("data-goto"));});});
 
+/* Support card on Today: gentle and dismissible; the dismissal is
+   remembered on this device only, so it never nags. */
+var supportCard=document.getElementById("supportCard");
+if(supportCard&&store.get("mrj.supportCardOff",false))supportCard.hidden=true;
+var supportCardDismiss=document.getElementById("supportCardDismiss");
+if(supportCardDismiss)supportCardDismiss.addEventListener("click",function(){store.set("mrj.supportCardOff",true);if(supportCard)supportCard.hidden=true;});
+
 /* Hero + reflection */
 var founderDay=dayNumberFor(FOUNDER_START);
 document.getElementById("todayLabel").textContent=todayLabel();
@@ -744,7 +759,7 @@ function renderGround(){
   var root=document.getElementById("groundRoot"); root.innerHTML="";
   if(gStage===null){
     var p=document.createElement("p"); p.textContent="When a craving or a wave of anxiety hits, this exercise brings you back to the room you're in — five senses, one at a time. It takes about a minute."; root.appendChild(p);
-    var b=document.createElement("button"); b.className="btn"; b.textContent="Begin grounding"; b.addEventListener("click",function(){gStage=0;renderGround();}); root.appendChild(b); return;
+    var b=document.createElement("button"); b.className="btn btn-stack"; b.textContent="Begin grounding"; b.addEventListener("click",function(){gStage=0;renderGround();}); root.appendChild(b); return;
   }
   if(gStage>=GROUND.length){
     var h=document.createElement("p"); h.className="font-display"; h.style.fontSize="1.3rem"; h.textContent="You're here. You're present."; root.appendChild(h);
@@ -836,7 +851,7 @@ function renderSupport(){
   w.appendChild(lead);
   if(support&&support.phone){
     var p=document.createElement("p"); p.style.margin="10px 0 0";
-    var a=document.createElement("a"); a.className="btn btn-gold";
+    var a=document.createElement("a"); a.className="btn btn-gold btn-stack";
     a.href="tel:"+String(support.phone).replace(/[^0-9+]/g,"");
     a.textContent="Call "+(support.name?support.name:"my person");
     p.appendChild(a); w.appendChild(p);
