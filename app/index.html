@@ -146,6 +146,20 @@ input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
 .bars span{flex:1;background:var(--gold-bright);border-radius:4px 4px 0 0}
 @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
 
+/* Learn: shelves of plain-language lessons. One lesson is open; the rest
+   are listed honestly as coming soon — visible rows, never dead-end links. */
+ul.topics{list-style:none;margin:4px 0 0;padding:0}
+ul.topics li{padding:10px 0;border-bottom:1px solid var(--border)}
+ul.topics li:last-child{border-bottom:0}
+.t-title{font-weight:700}
+.t-desc{display:block;color:var(--dim);font-size:.94rem;margin-top:2px;line-height:1.45}
+.topic-link{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;background:none;border:0;padding:0;text-align:left;color:var(--text);font:inherit;cursor:pointer}
+.topic-go{color:var(--accent);font-weight:700;white-space:nowrap}
+.soon-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.soon-tag{color:var(--dim);white-space:nowrap;font-size:.92rem;padding-top:2px}
+.lesson-body p{margin:0 0 12px}
+.lesson-body p:last-child{margin-bottom:0}
+
 /* My Collection v2: virtual AA coins + NA key tags — real inline SVG tokens
    (curved coin motto, embossed gradients, wide teardrop tags, fitted text).
    No images, no AA logo/triangle, no NA symbol: colors and words only. */
@@ -321,6 +335,12 @@ input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
         <p style="margin:10px 0 0"><button class="btn btn-gold btn-stack" type="button" data-goto="help">I&#8217;m struggling right now</button></p>
       </div>
       <div id="checkinHistory"></div>
+    </section>
+
+    <section class="card" id="learnCard">
+      <h2>Learn</h2>
+      <p style="margin:0">Short, plain-language lessons about how addiction works and how recovery works. Start with <strong>The Hijacked Brain</strong> &#8212; why addiction is not a character flaw, and why the brain heals.</p>
+      <p style="margin:12px 0 0"><button class="btn btn-stack" type="button" data-goto="learn">Browse the lessons</button></p>
     </section>
 
     <section class="card" id="milesCard" hidden>
@@ -586,6 +606,81 @@ input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
       <h3>Good to know</h3>
       <p>Installing this way is free and needs no App Store account and no password. It is the same app, with the same icon, ready each morning for your counter, reflection, and journal. The App Store version is a separate, later step — this home-screen app works today.</p>
     </section>
+  </div>
+
+  <!-- ============ LEARN ============ -->
+  <div class="view" id="view-learn">
+    <section class="card">
+      <h2>Learn</h2>
+      <p style="margin:0">Short lessons in plain language &#8212; how addiction works, how you work, and how recovery works. These are the ideas people in the rooms talk about, explained slowly. Read in any order, at your own pace.</p>
+      <p class="muted" style="margin:10px 0 0">No tests, no scores, nothing to keep up with. Just understanding &#8212; and understanding is its own kind of strength. New lessons are being added one at a time.</p>
+    </section>
+
+    <section class="card">
+      <h2>Understanding Addiction</h2>
+      <p class="muted" style="margin:0">The brain and the pattern &#8212; what is actually happening, and why it is not a character flaw.</p>
+      <ul class="topics">
+        <li><button type="button" class="topic-link" data-goto="lesson-hijacked"><span><span class="t-title">The Hijacked Brain</span><span class="t-desc">Substances retrain the brain&#8217;s reward system &#8212; and a hijacked brain can heal.</span></span><span class="topic-go">Read &#8594;</span></button></li>
+        <li><div class="soon-row"><span><span class="t-title">PAWS: Why Early Recovery Feels Bumpy</span><span class="t-desc">The mood, sleep, and focus bumps that can come and go for months &#8212; and why they don&#8217;t mean you&#8217;re doing recovery wrong.</span></span><span class="soon-tag">Coming soon</span></div></li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Understanding Yourself</h2>
+      <p class="muted" style="margin:0">The attitudes and traps that can run recovery from the back seat if they go unnamed.</p>
+      <ul class="topics">
+        <li><div class="soon-row"><span><span class="t-title">King Baby</span><span class="t-desc">The childish, self-centered pattern &#8212; &#8220;I want what I want, now&#8221; &#8212; that can quietly steer a recovery.</span></span><span class="soon-tag">Coming soon</span></div></li>
+        <li><div class="soon-row"><span><span class="t-title">One Day at a Time: The Only Promise</span><span class="t-desc">Why recovery is measured in days &#8212; and why that small unit of time is a feature, not a consolation prize.</span></span><span class="soon-tag">Coming soon</span></div></li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Working Recovery</h2>
+      <p class="muted" style="margin:0">Tools and practices for the daily work.</p>
+      <ul class="topics">
+        <li><div class="soon-row"><span><span class="t-title">HALT: Hungry, Angry, Lonely, Tired</span><span class="t-desc">Four ordinary states that quietly raise relapse risk &#8212; and the five-minute self-check that catches them.</span></span><span class="soon-tag">Coming soon</span></div></li>
+        <li><div class="soon-row"><span><span class="t-title">Triggers &amp; Cravings: Riding the Wave</span><span class="t-desc">Why cravings peak and pass like a wave, and what to do in the twenty minutes in between.</span></span><span class="soon-tag">Coming soon</span></div></li>
+        <li><div class="soon-row"><span><span class="t-title">The 12 Steps &#8212; A Gentle Overview</span><span class="t-desc">What the Steps are and are not, in plain language, for someone deciding whether a fellowship is for them.</span></span><span class="soon-tag">Coming soon</span></div></li>
+        <li><div class="soon-row"><span><span class="t-title">Finding a Sponsor (and Being Sponsorable)</span><span class="t-desc">What a sponsor actually does, how people find one, and what to do while you&#8217;re looking.</span></span><span class="soon-tag">Coming soon</span></div></li>
+        <li><div class="soon-row"><span><span class="t-title">Relapse Prevention: Your Personal Warning Signs</span><span class="t-desc">Relapse usually starts long before a drink or a drug &#8212; how to build your warning-sign list before you need it.</span></span><span class="soon-tag">Coming soon</span></div></li>
+        <li><div class="soon-row"><span><span class="t-title">Meetings: What Actually Happens in One</span><span class="t-desc">A first-timer&#8217;s walkthrough &#8212; open and closed meetings, sharing, the basket, anonymity &#8212; so the door feels less heavy.</span></span><span class="soon-tag">Coming soon</span></div></li>
+      </ul>
+    </section>
+
+    <p style="margin:14px 0 0"><button class="btn-quiet" type="button" data-goto="today">&#8592; Back to Today</button></p>
+  </div>
+
+  <!-- ============ LESSON: THE HIJACKED BRAIN ============ -->
+  <div class="view" id="view-lesson-hijacked">
+    <section class="card">
+      <h2>The Hijacked Brain</h2>
+      <p class="font-display" style="font-size:1.18rem;font-style:italic;line-height:1.4;margin:0 0 12px">It is not a character flaw. Your brain was hijacked &#8212; and a hijacked brain can heal.</p>
+      <div class="lesson-body" id="hijackedLesson">
+        <p>If you have ever promised yourself in the morning that you were done &#8212; meant it with everything in you &#8212; and then found yourself drinking or using by evening anyway, this lesson is for you. That broken promise was probably not a lie. And it was not proof that you are weak. Something real had happened inside your brain.</p>
+        <p>Deep in the middle of the brain sits a small survival system. Its job is to notice the things that keep you alive &#8212; food, water, rest, sleep, the people you love &#8212; and mark them: <em>that mattered; do it again.</em> It does the marking with a chemical messenger called dopamine. Think of dopamine less as a pleasure chemical and more as a highlighter pen. It tells the brain what to pay attention to, what to remember, and what to repeat.</p>
+        <p>Alcohol and other addictive drugs break into that system. They trigger a rush of dopamine far beyond anything nature provides &#8212; not a little more, but many times more. Faced with a signal that loud, the brain does exactly what it was built to do: it learns, fast and deep. It starts treating the substance the way it treats food and water &#8212; as something needed to survive. That is the hijacking. The drug stops looking like one choice among many and starts feeling like a necessity. And a craving is the sound of that alarm going off.</p>
+        <p>A brain flooded that often protects itself the only way it can: it turns the volume down. It makes less dopamine, and the receptors that receive it grow less sensitive. Two results follow, and both are familiar. You need more of the substance to feel what you used to feel &#8212; that is tolerance. And the everyday things that once registered &#8212; a good meal, a laugh, music, a clear morning &#8212; barely move the needle. Life feels flat and gray, and people mistake that flatness for their new personality. It is not a personality. It is a turned-down system.</p>
+        <p>Here is the cruel twist researchers keep finding: over time, the <em>liking</em> fades while the <em>wanting</em> grows. Long after the substance has stopped being enjoyable, the craving can still hit like a wave &#8212; set off by a place, a person, a time of day, a hard feeling. That is why someone can honestly hate everything addiction has cost them and still feel pulled toward it. The wanting is a learned alarm. It is not a verdict on your character.</p>
+        <p>At the same time, the front part of the brain &#8212; the prefrontal cortex, the part that weighs consequences, plans ahead, and says <em>wait</em> &#8212; grows quieter under addiction&#8217;s strain. So at the very moment the alarm is at its loudest, the brakes are at their softest. If you have ever felt like part of you was watching yourself do something you did not want to do, that is not an excuse. It is an honest description of a system out of balance.</p>
+        <p>Now the part that matters most: the brain heals. A brain is not fixed wiring. It is living tissue that reshapes itself around what you repeatedly do &#8212; scientists call that neuroplasticity. Stay stopped, and the dopamine system slowly recovers. Ordinary pleasures start to register again. The brakes grow stronger. Slowly is the honest word: think months, not days, and the line does not move straight. Sleep, food, movement, meetings, prayer, the honest work of recovery &#8212; these are not just good habits. They are the daily physical therapy of a brain learning how to live again.</p>
+        <p>So if your brain has felt like the enemy, hear this plainly: it was hijacked &#8212; and what has been hijacked can be taken back. One day, one right step, at a time.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Try this today</h2>
+      <p style="margin:0">Don&#8217;t just take this on faith &#8212; watch it happen. The next time a craving shows up today, don&#8217;t wrestle it head-on. Open the 5-4-3-2-1 grounding exercise, work through it slowly, and then notice the urge itself: it rises, it levels off, and it starts to fall &#8212; usually inside twenty minutes. That is the hijacked alarm running out of breath. Every craving you ride out is one more rep in retraining your brain.</p>
+      <p style="margin:12px 0 0"><button class="btn btn-stack" type="button" id="lessonGroundBtn">Start the 5-4-3-2-1 grounding</button></p>
+    </section>
+
+    <section class="card">
+      <h2>Read more</h2>
+      <p style="margin:0">This lesson is a plain-language summary of the brain science set out by the National Institute on Drug Abuse (NIDA), part of the U.S. National Institutes of Health. Their page walks through the same ground in more depth:</p>
+      <p style="margin:12px 0 0"><a class="btn btn-stack" href="https://nida.nih.gov/publications/drugs-brains-behavior-science-addiction/drugs-brain" target="_blank" rel="noopener">Drugs and the Brain &#8212; NIDA</a></p>
+      <p class="muted" style="margin:14px 0 0;font-size:.94rem">This lesson is educational &#8212; it is not medical advice, and it is no substitute for a doctor, a counselor, or a sponsor. If you are in a hard moment right now, <button type="button" class="small-link" data-goto="help" style="padding:0;font-size:.94rem">open the Help view</button> &#8212; 988, SAMHSA, grounding, and a prayer are right there.</p>
+    </section>
+
+    <p style="margin:14px 0 0"><button class="btn-quiet" type="button" data-goto="learn">&#8592; Back to Learn</button></p>
   </div>
 
   <footer class="note">
@@ -886,6 +981,12 @@ function renderSupport(){
 renderSupport();
 var helpGroundBtn=document.getElementById("helpGroundBtn");
 if(helpGroundBtn)helpGroundBtn.addEventListener("click",function(){
+  goTo("today");
+  setTimeout(function(){var c=document.getElementById("groundCard"); if(c)c.scrollIntoView({behavior:"smooth",block:"start"});},150);
+});
+
+var lessonGroundBtn=document.getElementById("lessonGroundBtn");
+if(lessonGroundBtn)lessonGroundBtn.addEventListener("click",function(){
   goTo("today");
   setTimeout(function(){var c=document.getElementById("groundCard"); if(c)c.scrollIntoView({behavior:"smooth",block:"start"});},150);
 });
