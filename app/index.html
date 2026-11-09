@@ -154,7 +154,8 @@ input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
 .token{border:0;padding:0;cursor:pointer;display:block;margin:0 auto;position:relative;font-family:inherit}
 .coin{width:92px;height:92px;border-radius:50%;color:#fff;box-shadow:inset 0 0 0 5px rgba(0,0,0,.18),inset 6px 8px 14px rgba(255,255,255,.35),0 3px 8px rgba(0,0,0,.25)}
 .coin .c-top,.coin .c-bot{display:block;font-size:.5rem;font-weight:700;letter-spacing:.08em}
-.coin .c-mid{display:block;font-size:1.02rem;font-weight:800;line-height:1.1;margin:7px 2px}
+.coin .c-mid{display:flex;align-items:center;justify-content:center;width:46px;height:46px;margin:3px auto;font-size:1.15rem;font-weight:800;line-height:1;border:2px solid rgba(0,0,0,.18);border-radius:50%;background:rgba(255,255,255,.14);box-shadow:inset 0 1px 3px rgba(255,255,255,.5),0 1px 2px rgba(0,0,0,.25)}
+.coin .c-top{font-size:.43rem}
 .tag{width:66px;height:106px;color:#fff;background:transparent;padding-top:22px}
 .tag svg.tshape,.flip-face svg.tshape{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .tag span{position:relative;z-index:1}
@@ -1058,24 +1059,24 @@ if(clearSpend)clearSpend.addEventListener("click",function(){
    no second counter. Everything stays on this device. No AA logo or
    triangle, no NA logo or symbol: colors and words only. */
 var AA_COINS=[
- {key:"desire",days:0,name:"Desire Coin",colorName:"White",bg:"#f2f1ec",fg:"#17394f",front:"DESIRE"},
- {key:"h24",days:1,name:"24 Hours Coin",colorName:"Silver",bg:"#c3ccd4",fg:"#17394f",front:"24 HOURS"},
- {key:"d30",days:30,name:"30 Days Coin",colorName:"Red",bg:"#a52a2a",fg:"#ffffff",front:"30 DAYS"},
- {key:"d60",days:60,name:"60 Days Coin",colorName:"Gold",bg:"#c99612",fg:"#ffffff",front:"60 DAYS"},
- {key:"d90",days:90,name:"90 Days Coin",colorName:"Green",bg:"#2e7d4f",fg:"#ffffff",front:"90 DAYS"},
- {key:"m4",days:120,name:"4 Months Coin",colorName:"Purple",bg:"#6a3d9a",fg:"#ffffff",front:"4 MONTHS"},
- {key:"m5",days:150,name:"5 Months Coin",colorName:"Pink",bg:"#e58bb1",fg:"#41203a",front:"5 MONTHS"},
- {key:"m6",days:180,name:"6 Months Coin",colorName:"Dark Blue",bg:"#27408b",fg:"#ffffff",front:"6 MONTHS"},
- {key:"m7",days:210,name:"7 Months Coin",colorName:"Copper",bg:"#b0703a",fg:"#ffffff",front:"7 MONTHS"},
- {key:"m8",days:240,name:"8 Months Coin",colorName:"Red",bg:"#a52a2a",fg:"#ffffff",front:"8 MONTHS"},
- {key:"m9",days:270,name:"9 Months Coin",colorName:"Purple",bg:"#6a3d9a",fg:"#ffffff",front:"9 MONTHS"},
- {key:"m10",days:300,name:"10 Months Coin",colorName:"Gold",bg:"#c99612",fg:"#ffffff",front:"10 MONTHS"},
- {key:"m11",days:330,name:"11 Months Coin",colorName:"Green",bg:"#2e7d4f",fg:"#ffffff",front:"11 MONTHS"},
- {key:"y1",days:365,name:"One Year Coin",colorName:"Bronze",bg:"#9a7433",fg:"#ffffff",front:"1 YEAR"},
- {key:"y2",days:730,name:"Two Years Coin",colorName:"Bronze",bg:"#9a7433",fg:"#ffffff",front:"2 YEARS"},
- {key:"y3",days:1095,name:"Three Years Coin",colorName:"Bronze",bg:"#9a7433",fg:"#ffffff",front:"3 YEARS"},
- {key:"y4",days:1460,name:"Four Years Coin",colorName:"Bronze",bg:"#9a7433",fg:"#ffffff",front:"4 YEARS"},
- {key:"y5",days:1825,name:"Five Years Coin",colorName:"Bronze",bg:"#9a7433",fg:"#ffffff",front:"5 YEARS"}
+ {key:"desire",days:0,name:"Desire Coin",colorName:"White",bg:"#f2f1ec",fg:"#17394f",front:"DESIRE",num:"DESIRE",unit:"MY RECOVERY JOURNEY",top:"ONE DAY AT A TIME"},
+ {key:"h24",days:1,name:"24 Hours Coin",colorName:"Silver",bg:"#aebfd2",fg:"#17394f",front:"24 HOURS",num:"24",unit:"HOURS"},
+ {key:"d30",days:30,name:"1 Month Coin",colorName:"Red",bg:"#c22f2f",fg:"#ffffff",front:"1 MONTH",num:"1",unit:"MONTH"},
+ {key:"d60",days:60,name:"2 Months Coin",colorName:"Gold",bg:"#d9a72e",fg:"#ffffff",front:"2 MONTHS",num:"2",unit:"MONTHS"},
+ {key:"d90",days:90,name:"3 Months Coin",colorName:"Green",bg:"#1e6b3c",fg:"#ffffff",front:"3 MONTHS",num:"3",unit:"MONTHS"},
+ {key:"m4",days:120,name:"4 Months Coin",colorName:"Gold",bg:"#d9a72e",fg:"#ffffff",front:"4 MONTHS",num:"4",unit:"MONTHS"},
+ {key:"m5",days:150,name:"5 Months Coin",colorName:"Red",bg:"#c22f2f",fg:"#ffffff",front:"5 MONTHS",num:"5",unit:"MONTHS"},
+ {key:"m6",days:180,name:"6 Months Coin",colorName:"Blue",bg:"#2470e0",fg:"#ffffff",front:"6 MONTHS",num:"6",unit:"MONTHS"},
+ {key:"m7",days:210,name:"7 Months Coin",colorName:"Purple",bg:"#7d3fd1",fg:"#ffffff",front:"7 MONTHS",num:"7",unit:"MONTHS"},
+ {key:"m8",days:240,name:"8 Months Coin",colorName:"Orange",bg:"#e8892a",fg:"#ffffff",front:"8 MONTHS",num:"8",unit:"MONTHS"},
+ {key:"m9",days:270,name:"9 Months Coin",colorName:"Purple",bg:"#7d3fd1",fg:"#ffffff",front:"9 MONTHS",num:"9",unit:"MONTHS"},
+ {key:"m10",days:300,name:"10 Months Coin",colorName:"Green",bg:"#1e6b3c",fg:"#ffffff",front:"10 MONTHS",num:"10",unit:"MONTHS"},
+ {key:"m11",days:330,name:"11 Months Coin",colorName:"Dark Red",bg:"#9c2222",fg:"#ffffff",front:"11 MONTHS",num:"11",unit:"MONTHS"},
+ {key:"y1",days:365,name:"One Year Coin",colorName:"Bronze",bg:"#9a7433",fg:"#ffffff",front:"1 YEAR",num:"1",unit:"YEAR"},
+ {key:"y2",days:730,name:"Two Years Coin",colorName:"Bronze",bg:"#9a7433",fg:"#ffffff",front:"2 YEARS",num:"2",unit:"YEARS"},
+ {key:"y3",days:1095,name:"Three Years Coin",colorName:"Bronze",bg:"#9a7433",fg:"#ffffff",front:"3 YEARS",num:"3",unit:"YEARS"},
+ {key:"y4",days:1460,name:"Four Years Coin",colorName:"Bronze",bg:"#9a7433",fg:"#ffffff",front:"4 YEARS",num:"4",unit:"YEARS"},
+ {key:"y5",days:1825,name:"Five Years Coin",colorName:"Bronze",bg:"#9a7433",fg:"#ffffff",front:"5 YEARS",num:"5",unit:"YEARS"}
 ];
 var NA_TAGS=[
  {key:"welcome",days:0,name:"Welcome Key Tag",colorName:"White",bg:"#f2f1ec",fg:"#17394f",front:"WELCOME"},
@@ -1133,9 +1134,9 @@ function collTokenEl(kind,t,day){
     (kind==="aa"?AA_COINS:NA_TAGS).forEach(function(x){ if(x.days>day&&x.days<t.days)next=false; });
     b.classList.add(next?"nextup":"ahead");
   }
-  var top=document.createElement("span"); top.className="c-top"; top.textContent=(kind==="aa"?"ONE DAY AT A TIME":"JUST FOR TODAY");
-  var mid=document.createElement("span"); mid.className="c-mid"; mid.textContent=t.front;
-  var bot=document.createElement("span"); bot.className="c-bot"; bot.textContent=(kind==="aa"?"MY RECOVERY JOURNEY":"CLEAN TIME");
+  var top=document.createElement("span"); top.className="c-top"; top.textContent=(kind==="aa"?(t.top||"TO THINE OWN SELF BE TRUE"):"JUST FOR TODAY");
+  var mid=document.createElement("span"); mid.className="c-mid"; mid.textContent=(kind==="aa"?(t.num||t.front):t.front);
+  var bot=document.createElement("span"); bot.className="c-bot"; bot.textContent=(kind==="aa"?(t.unit||"MY RECOVERY JOURNEY"):"CLEAN TIME");
   b.appendChild(top); b.appendChild(mid); b.appendChild(bot);
   b.setAttribute("aria-label",t.name+(earned?", earned":", ahead"));
   b.addEventListener("click",function(){showTokenDetail(kind,t.key);});
@@ -1189,9 +1190,9 @@ function showTokenDetail(kind,key,keep){
     if(kind==="na"){ f.style.background="transparent"; f.innerHTML=tagShapeSVG(t); }
     if(isBack){ var bs=document.createElement("span"); bs.textContent=(kind==="aa"?COIN_BACK:TAG_BACK); if(kind==="na"){bs.style.padding="0 16px";} f.appendChild(bs); }
     else{
-      var s1=document.createElement("span"); s1.style.fontWeight="700"; s1.style.fontSize=".72rem"; s1.textContent=(kind==="aa"?"ONE DAY AT A TIME":"JUST FOR TODAY");
-      var s2=document.createElement("span"); s2.style.fontWeight="800"; s2.style.fontSize=(kind==="aa"?"1.7rem":"1.25rem"); s2.textContent=t.front;
-      var s3=document.createElement("span"); s3.style.fontWeight="700"; s3.style.fontSize=".72rem"; s3.textContent=(kind==="aa"?"MY RECOVERY JOURNEY":"CLEAN TIME");
+      var s1=document.createElement("span"); s1.style.fontWeight="700"; s1.style.fontSize=".72rem"; s1.textContent=(kind==="aa"?(t.top||"TO THINE OWN SELF BE TRUE"):"JUST FOR TODAY");
+      var s2=document.createElement("span"); s2.style.fontWeight="800"; s2.style.fontSize=(kind==="aa"?"1.7rem":"1.25rem"); s2.textContent=(kind==="aa"?(t.num||t.front):t.front); if(kind==="aa"){s2.style.border="3px solid rgba(0,0,0,.18)";s2.style.borderRadius="50%";s2.style.width="86px";s2.style.height="86px";s2.style.display="flex";s2.style.alignItems="center";s2.style.justifyContent="center";s2.style.background="rgba(255,255,255,.14)";}
+      var s3=document.createElement("span"); s3.style.fontWeight="700"; s3.style.fontSize=".72rem"; s3.textContent=(kind==="aa"?(t.unit||"MY RECOVERY JOURNEY"):"CLEAN TIME");
       f.appendChild(s1); f.appendChild(s2); f.appendChild(s3);
     }
     return f;
@@ -1272,12 +1273,12 @@ function drawTokenOn(ctx,kind,t,x,y,r){
     ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fillStyle=t.bg; ctx.fill();
     ctx.shadowBlur=0; ctx.lineWidth=10; ctx.strokeStyle="rgba(0,0,0,.18)"; ctx.stroke();
     ctx.fillStyle=t.fg; ctx.textAlign="center";
-    ctx.font="700 26px sans-serif"; ctx.fillText("ONE DAY AT A TIME",x,y-r+52);
-    ctx.font="800 54px sans-serif";
-    var words=t.front.split(" ");
-    if(words.length>1&&t.front.length>9){ ctx.fillText(words[0],x,y-6); ctx.fillText(words.slice(1).join(" "),x,y+52); }
-    else ctx.fillText(t.front,x,y+22);
-    ctx.font="700 24px sans-serif"; ctx.fillText("MY RECOVERY JOURNEY",x,y+r-38);
+    ctx.font="700 25px sans-serif"; ctx.fillText(t.top||"TO THINE OWN SELF BE TRUE",x,y-r+52);
+    ctx.beginPath(); ctx.arc(x,y+6,r*.42,0,Math.PI*2); ctx.fillStyle="rgba(255,255,255,.14)"; ctx.fill();
+    ctx.lineWidth=5; ctx.strokeStyle="rgba(0,0,0,.18)"; ctx.stroke();
+    ctx.fillStyle=t.fg; ctx.font="800 62px sans-serif";
+    ctx.fillText(t.num||t.front,x,y+28);
+    ctx.font="700 27px sans-serif"; ctx.fillText(t.unit||"MY RECOVERY JOURNEY",x,y+r-36);
   }else{
     var w=r*1.25,h=r*2.05;
     if(t.glow){ctx.shadowColor="rgba(190,242,180,.95)";ctx.shadowBlur=40;}
