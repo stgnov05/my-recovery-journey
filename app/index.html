@@ -338,6 +338,12 @@ input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
       <div id="todaySteps"></div>
       <p style="margin:12px 0 0"><button class="btn" type="button" data-goto="steps">Open My Next Right Step</button></p>
     </section>
+
+    <section class="card" id="supportCard">
+      <h2>Keeping this going</h2>
+      <p style="margin:0">This app is free, and always will be. If it helped you today, you can help keep it going.</p>
+      <p style="margin:12px 0 0"><button class="btn" type="button" data-goto="support">Support this work</button> <button class="btn-quiet" type="button" id="supportCardDismiss">Dismiss</button></p>
+    </section>
   </div>
 
 
@@ -593,6 +599,7 @@ input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
     <button type="button" data-goto="journal"><span class="ic" aria-hidden="true">✎</span>Journal</button>
     <button type="button" data-goto="steps"><span class="ic" aria-hidden="true">→</span>Next Step</button>
     <button type="button" data-goto="founder"><span class="ic" aria-hidden="true">♰</span>Founder</button>
+    <button type="button" data-goto="support"><span class="ic" aria-hidden="true">♥</span>Support</button>
     <button type="button" data-goto="install"><span class="ic" aria-hidden="true">⬇</span>Install</button>
   </div>
 </nav>
@@ -684,6 +691,13 @@ function goTo(name){
   window.scrollTo({top:0,behavior:"smooth"});
 }
 document.querySelectorAll("[data-goto]").forEach(function(b){b.addEventListener("click",function(){goTo(b.getAttribute("data-goto"));});});
+
+/* Support card on Today: gentle and dismissible; the dismissal is
+   remembered on this device only, so it never nags. */
+var supportCard=document.getElementById("supportCard");
+if(supportCard&&store.get("mrj.supportCardOff",false))supportCard.hidden=true;
+var supportCardDismiss=document.getElementById("supportCardDismiss");
+if(supportCardDismiss)supportCardDismiss.addEventListener("click",function(){store.set("mrj.supportCardOff",true);if(supportCard)supportCard.hidden=true;});
 
 /* Hero + reflection */
 var founderDay=dayNumberFor(FOUNDER_START);
