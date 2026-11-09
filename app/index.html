@@ -145,40 +145,46 @@ input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
 .bars span{flex:1;background:var(--gold-bright);border-radius:4px 4px 0 0}
 @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
 
-/* My Collection: virtual AA coins + NA key tags (CSS/SVG shapes only, no images) */
+/* My Collection v2: virtual AA coins + NA key tags — real inline SVG tokens
+   (curved coin motto, embossed gradients, wide teardrop tags, fitted text).
+   No images, no AA logo/triangle, no NA symbol: colors and words only. */
 .coll-toggle{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 4px}
-.shelf{display:flex;flex-wrap:wrap;gap:16px 12px;margin:14px 0 6px}
-.token-wrap{width:96px;text-align:center}
-.token-wrap .tlabel{font-size:.8rem;font-weight:700;margin-top:7px;line-height:1.2}
-.token-wrap .tstate{font-size:.75rem;color:var(--dim);line-height:1.25}
-.token{border:0;padding:0;cursor:pointer;display:block;margin:0 auto;position:relative;font-family:inherit}
-.coin{width:92px;height:92px;border-radius:50%;color:#fff;box-shadow:inset 0 0 0 5px rgba(0,0,0,.18),inset 6px 8px 14px rgba(255,255,255,.35),0 3px 8px rgba(0,0,0,.25)}
-.coin .c-top,.coin .c-bot{display:block;font-size:.5rem;font-weight:700;letter-spacing:.08em}
-.coin .c-mid{display:flex;align-items:center;justify-content:center;width:46px;height:46px;margin:3px auto;font-size:1.15rem;font-weight:800;line-height:1;border:2px solid rgba(0,0,0,.18);border-radius:50%;background:rgba(255,255,255,.14);box-shadow:inset 0 1px 3px rgba(255,255,255,.5),0 1px 2px rgba(0,0,0,.25)}
-.coin .c-top{font-size:.43rem}
-.tag{width:66px;height:106px;color:#fff;background:transparent;padding-top:22px}
-.tag svg.tshape,.flip-face svg.tshape{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.tag span{position:relative;z-index:1}
-.token.glowtag{filter:drop-shadow(0 0 9px rgba(165,230,150,.95))}
-.tag .c-top{display:block;font-size:.48rem;font-weight:700;letter-spacing:.06em}
-.tag .c-mid{display:block;font-size:.82rem;font-weight:800;line-height:1.12;margin:8px 3px}
-.tag .c-bot{display:block;font-size:.48rem;font-weight:700;letter-spacing:.06em}
-.token.ahead{filter:grayscale(.85);opacity:.38;box-shadow:none}
+.shelf{display:flex;flex-wrap:wrap;gap:18px 14px;margin:14px 0 6px}
+.token-wrap{width:100px;text-align:center}
+.token-wrap .tcap{font-size:.78rem;font-weight:600;line-height:1.3;margin-top:7px;color:var(--text)}
+.token-wrap .tcap .td{color:var(--dim);font-weight:500}
+.token{border:0;padding:0;cursor:pointer;display:block;margin:0 auto;position:relative;font-family:inherit;background:transparent;line-height:0}
+.token svg{display:block;width:100%;height:100%}
+.token:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.coin{width:94px;height:94px;border-radius:50%}
+.tag{width:78px;height:104px;border-radius:34px 34px 40px 40px}
+.token.ahead{filter:grayscale(.85);opacity:.38}
 .token.nextup{animation:collPulse 2s ease-in-out infinite}
 @keyframes collPulse{0%,100%{outline:3px solid rgba(195,210,223,0)}50%{outline:3px solid var(--gold)}}
-.token.glowtag{box-shadow:0 0 18px 5px rgba(190,242,180,.95),inset 0 0 0 3px rgba(0,0,0,.12);color:#17351c}
-.flipbox{width:190px;height:190px;margin:14px auto;perspective:800px;cursor:pointer}
-.flipbox.tagbox{width:132px;height:214px}
+.token.glowtag svg{filter:drop-shadow(0 0 9px rgba(165,230,150,.95))}
+.flipbox{width:196px;height:196px;margin:14px auto;perspective:800px;cursor:pointer}
+.flipbox.tagbox{width:157px;height:210px}
 .flip-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
 .flipbox.flipped .flip-inner{transform:rotateY(180deg)}
-.flip-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:14px}
-.flip-face.back{transform:rotateY(180deg);font-size:.86rem;line-height:1.4}
-.coinface{border-radius:50%}
-.tagface{border-radius:22px}
-.flip-face span{position:relative;z-index:1}
+.flip-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0}
+.flip-face.back{transform:rotateY(180deg);font-size:.86rem;line-height:1.45}
+.flip-face svg{width:100%;height:100%;display:block}
+.flip-face .backtxt{position:relative;z-index:1;padding:0 24px;font-size:.8rem;line-height:1.4}
+.flip-face .backtxt-tag{position:relative;z-index:1;max-width:64%;padding:0;font-size:.75rem;line-height:1.5;transform:translateY(16px)}
 #milestoneOverlay{position:fixed;inset:0;background:rgba(6,18,29,.82);z-index:60;display:flex;align-items:center;justify-content:center;padding:18px}
 #milestoneOverlay[hidden]{display:none}
-.mile-card{background:var(--surface);color:var(--text);border-radius:18px;max-width:430px;width:100%;max-height:92vh;overflow:auto;padding:24px;text-align:center}
+.mile-card{background:var(--surface);color:var(--text);border-radius:18px;max-width:430px;width:100%;max-height:94vh;overflow:auto;padding:22px;text-align:center}
+.mile-latest{margin:12px auto 0;line-height:0}
+.mile-latest svg{display:block;width:100%;height:100%}
+.mile-coin{width:168px;height:168px}
+.mile-tag{width:118px;height:157px}
+.mile-line{font-weight:700;font-size:1.08rem;margin:12px 0 0}
+.mile-minirow{display:flex;gap:8px;justify-content:center;align-items:flex-end;flex-wrap:wrap;margin:14px 0 0}
+.mile-mini{line-height:0}
+.mile-mini svg{display:block;width:100%;height:100%}
+.mile-mini.mini-coin{width:46px;height:46px}
+.mile-mini.mini-tag{width:34px;height:45px}
+.mile-more{margin:8px 0 0}
 .share-panel{margin-top:16px;border-top:1px solid var(--border);padding-top:14px}
 .share-panel canvas{max-width:100%;height:auto;border-radius:12px;border:1px solid var(--border)}
 .share-opts{display:flex;gap:16px;flex-wrap:wrap;margin:10px 0}
@@ -390,7 +396,12 @@ input[type="range"]{width:100%;accent-color:var(--accent);margin:6px 0 2px}
     <div class="mile-card">
       <h2 class="font-display" id="milestoneHead" style="margin:0 0 6px;font-size:1.6rem">A new token is yours</h2>
       <p style="margin:0">One day at a time got you here.</p>
-      <div id="milestoneList"></div>
+      <div class="mile-latest mile-coin" id="milestoneLatest"></div>
+      <p class="mile-line" id="milestoneLine"></p>
+      <div id="milestoneMore" hidden>
+        <div class="mile-minirow" id="milestoneMinis"></div>
+        <p class="muted mile-more" id="milestoneMoreText"></p>
+      </div>
       <p style="margin:16px 0 0;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
         <button type="button" class="btn" id="milestoneAdd">Add to My Collection</button>
         <button type="button" class="btn btn-gold" id="milestoneShare">Share</button>
@@ -1113,41 +1124,139 @@ function collSetMode(m){
   if(aa)aa.hidden=(m==="na"); if(na)na.hidden=(m==="aa");
   renderCollection();
 }
-function tagShapeSVG(t){
-  return '<svg class="tshape" viewBox="0 0 64 104" aria-hidden="true">'
-  +'<circle cx="32" cy="1" r="10" fill="none" stroke="#c3ccd4" stroke-width="3.5"/>'
-  +'<path d="M32 7 C42 7 49 19 53 33 C59 54 56 78 46 90 C38 100 26 100 18 90 C8 78 5 54 11 33 C15 19 22 7 32 7 Z" fill="'+t.bg+'" stroke="rgba(0,0,0,.28)" stroke-width="2"/>'
-  +'<path d="M32 13.5 C40 13.5 45.5 23 48.5 35 C53.5 53 51.5 73.5 43 84.5 C36.8 92 27.2 92 21 84.5 C12.5 73.5 10.5 53 15.5 35 C18.5 23 24 13.5 32 13.5 Z" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-dasharray="4 3"/>'
-  +'<circle cx="32" cy="19" r="4.6" fill="#d7e5ee" stroke="#8a939c" stroke-width="2"/>'
-  +'<circle cx="32" cy="61" r="18.5" fill="none" stroke="'+t.fg+'" stroke-opacity=".55" stroke-width="1.6"/>'
-  +'</svg>';
+/* v2 token artwork: real inline SVG. Coins get layered radial gradients, a
+   beveled rim, the motto on a true circular textPath, and an embossed raised
+   center. Key tags get a true wide teardrop (150x200) with stitched border,
+   eyelet + split ring, and text sized to fit inside the shape. */
+var collUid=0;
+function collShade(hex,amt){
+  var n=parseInt(hex.slice(1),16);
+  var r=(n>>16)&255,g=(n>>8)&255,b=n&255;
+  function f(c){ return Math.max(0,Math.min(255,Math.round(amt>0?c+(255-c)*amt:c*(1+amt)))); }
+  function hh(c){ var s=f(c).toString(16); return s.length<2?"0"+s:s; }
+  return "#"+hh(r)+hh(g)+hh(b);
+}
+var COLL_MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function collFmtShort(iso){ var p=parseISO(iso); if(!p)return iso; return COLL_MON[p.m-1]+" "+p.d+", "+p.y; }
+function collFrontLabel(t){ var s=t.front.toLowerCase(); return s.charAt(0).toUpperCase()+s.slice(1); }
+function collEmbPasses(t,lo,hi,big){
+  if(t.fg==="#ffffff"){
+    return big?[[2.2,lo,.7],[-1.4,hi,.55],[0,collShade(t.bg,.68),1]]
+              :[[1.6,lo,.55],[-1,hi,.45],[0,collShade(t.bg,.68),1]];
+  }
+  return big?[[2.2,"#ffffff",.9],[-1.4,lo,.3],[0,t.fg,1]]
+            :[[1.6,"#ffffff",.85],[-1,lo,.3],[0,t.fg,1]];
+}
+function coinArtSVG(t){
+  var uid="cg"+(++collUid);
+  var light=collShade(t.bg,.38), dark=collShade(t.bg,-.28), rim=collShade(t.bg,-.40);
+  var hi=collShade(t.bg,.60), lo=collShade(t.bg,-.45);
+  var motto=t.top||"TO THINE OWN SELF BE TRUE", unit=t.unit||"MY RECOVERY JOURNEY", num=t.num||t.front;
+  var passes=collEmbPasses(t,lo,hi,false), bigPasses=collEmbPasses(t,lo,hi,true);
+  var s='<svg viewBox="0 0 200 200" aria-hidden="true" focusable="false">'
+  +'<defs>'
+  +'<radialGradient id="'+uid+'g" cx="38%" cy="30%" r="82%">'
+  +'<stop offset="0%" stop-color="'+light+'"/><stop offset="55%" stop-color="'+t.bg+'"/><stop offset="100%" stop-color="'+dark+'"/></radialGradient>'
+  +'<radialGradient id="'+uid+'c" cx="42%" cy="34%" r="78%">'
+  +'<stop offset="0%" stop-color="'+hi+'"/><stop offset="60%" stop-color="'+light+'"/><stop offset="100%" stop-color="'+t.bg+'"/></radialGradient>'
+  +'<clipPath id="'+uid+'k"><circle cx="100" cy="100" r="93.5"/></clipPath>'
+  +'<path id="'+uid+'T" d="M19,100 A81,81 0 0 1 181,100" fill="none"/>'
+  +'<path id="'+uid+'B" d="M28,100 A72,72 0 0 0 172,100" fill="none"/>'
+  +'</defs>'
+  +'<circle cx="100" cy="100" r="97" fill="'+rim+'"/>'
+  +'<circle cx="100" cy="100" r="93.5" fill="url(#'+uid+'g)"/>'
+  +'<g clip-path="url(#'+uid+'k)"><ellipse cx="70" cy="52" rx="52" ry="27" fill="#ffffff" opacity=".12" transform="rotate(-24 70 52)"/></g>'
+  +'<circle cx="100" cy="100" r="88.5" fill="none" stroke="'+hi+'" stroke-opacity=".5" stroke-width="1.6"/>'
+  +'<circle cx="100" cy="100" r="67" fill="none" stroke="'+lo+'" stroke-opacity=".32" stroke-width="1.3"/>';
+  passes.forEach(function(p){
+    s+='<text font-size="12" font-weight="700" letter-spacing="2" fill="'+p[1]+'" opacity="'+p[2]+'" transform="translate(0,'+p[0]+')"><textPath href="#'+uid+'T" xlink:href="#'+uid+'T" startOffset="50%" text-anchor="middle">'+motto+'</textPath></text>';
+  });
+  passes.forEach(function(p){
+    s+='<text font-size="10.5" font-weight="700" letter-spacing="1.6" fill="'+p[1]+'" opacity="'+p[2]+'" transform="translate(0,'+p[0]+')"><textPath href="#'+uid+'B" xlink:href="#'+uid+'B" startOffset="50%" text-anchor="middle">'+unit+'</textPath></text>';
+  });
+  s+='<circle cx="100" cy="100" r="41" fill="url(#'+uid+'c)" stroke="'+lo+'" stroke-width="2"/>'
+  +'<circle cx="100" cy="98.5" r="37.5" fill="none" stroke="'+hi+'" stroke-opacity=".45" stroke-width="1.2"/>';
+  var nfs=num.length<=1?47:(num.length===2?40:22);
+  bigPasses.forEach(function(p){
+    s+='<text x="100" y="'+(101+p[0])+'" text-anchor="middle" dominant-baseline="central" font-size="'+nfs+'" font-weight="800" letter-spacing="1" fill="'+p[1]+'" opacity="'+p[2]+'">'+num+'</text>';
+  });
+  s+='</svg>';
+  return s;
+}
+var TAG_BODY_D="M75 26 C97 30 112 55 120 86 C129 121 124 156 103 175 C90 186 60 186 47 175 C26 156 21 121 30 86 C38 55 53 30 75 26 Z";
+function tagBigSub(t){
+  if(t.front==="WELCOME")return {big:"WELCOME",sub:""};
+  var parts=t.front.split(" ");
+  return {big:parts[0],sub:parts.slice(1).join(" ")};
+}
+function tagArtSVG(t,bare){
+  var uid="tg"+(++collUid);
+  var light=collShade(t.bg,.35), dark=collShade(t.bg,-.25), rim=collShade(t.bg,-.35), lo=collShade(t.bg,-.45);
+  var stitch=(t.fg==="#ffffff")?"rgba(255,255,255,.65)":"rgba(23,57,79,.35)";
+  var shadowCol=(t.fg==="#ffffff")?lo:"rgba(255,255,255,.75)";
+  var s='<svg class="tshape" viewBox="0 0 150 200" aria-hidden="true" focusable="false">'
+  +'<defs>'
+  +'<linearGradient id="'+uid+'g" x1="0" y1="0" x2="1" y2="1">'
+  +'<stop offset="0%" stop-color="'+light+'"/><stop offset="45%" stop-color="'+t.bg+'"/><stop offset="100%" stop-color="'+dark+'"/></linearGradient>'
+  +'<linearGradient id="'+uid+'r" x1="0" y1="0" x2="0" y2="1">'
+  +'<stop offset="0%" stop-color="#e8eef3"/><stop offset="50%" stop-color="#9fb2c1"/><stop offset="100%" stop-color="#d7e5ee"/></linearGradient>'
+  +'</defs>'
+  +'<circle cx="75" cy="15" r="12.5" fill="none" stroke="url(#'+uid+'r)" stroke-width="5"/>'
+  +'<path d="'+TAG_BODY_D+'" fill="url(#'+uid+'g)" stroke="'+rim+'" stroke-width="2"/>'
+  +'<path d="'+TAG_BODY_D+'" fill="#ffffff" opacity=".06" transform="translate(75 106) scale(.96) translate(-75 -106)"/>'
+  +'<path d="'+TAG_BODY_D+'" fill="none" stroke="'+stitch+'" stroke-width="1.7" stroke-dasharray="5 4" transform="translate(75 106) scale(.9) translate(-75 -106)"/>'
+  +'<circle cx="75" cy="42" r="6.8" fill="url(#'+uid+'r)" stroke="#8a939c" stroke-width="1"/>'
+  +'<circle cx="75" cy="42" r="2.9" fill="#22384a"/>';
+  if(!bare){
+    var bs=tagBigSub(t);
+    function tx(txt,x,y,size,ls,tl){
+      var lenAttr=tl?' textLength="'+tl+'" lengthAdjust="spacingAndGlyphs"':'';
+      return '<text x="'+x+'" y="'+(y+1.2)+'" text-anchor="middle" font-size="'+size+'" font-weight="700" letter-spacing="'+ls+'" fill="'+shadowCol+'" opacity=".5"'+lenAttr+'>'+txt+'</text>'
+            +'<text x="'+x+'" y="'+y+'" text-anchor="middle" font-size="'+size+'" font-weight="700" letter-spacing="'+ls+'" fill="'+t.fg+'"'+lenAttr+'>'+txt+'</text>';
+    }
+    s+=tx("JUST FOR",75,76,12.5,1.2);
+    s+=tx("TODAY",75,92,12.5,1.2);
+    var bfs=bs.big.length<=2?40:(bs.big.length<=6?24:19);
+    var btl=bs.big.length>2?92:null;
+    (function(){
+      var lenAttr=btl?' textLength="'+btl+'" lengthAdjust="spacingAndGlyphs"':'';
+      s+='<text x="75" y="127.2" text-anchor="middle" font-size="'+bfs+'" font-weight="800" letter-spacing=".5" fill="'+shadowCol+'" opacity=".5"'+lenAttr+'>'+bs.big+'</text>'
+        +'<text x="75" y="126" text-anchor="middle" font-size="'+bfs+'" font-weight="800" letter-spacing=".5" fill="'+t.fg+'"'+lenAttr+'>'+bs.big+'</text>';
+    })();
+    if(bs.sub) s+=tx(bs.sub,75,146,15,2);
+    s+=tx("CLEAN TIME",75,bs.sub?162:156,9,.8,46);
+  }
+  s+='</svg>';
+  return s;
+}
+function collTokenArt(kind,t){
+  return kind==="aa"?coinArtSVG(t):tagArtSVG(t,false);
 }
 function collTokenEl(kind,t,day){
   var wrap=document.createElement("div"); wrap.className="token-wrap";
   var earned=day>=t.days;
-  var b=document.createElement("button"); b.type="button";
-  b.className="token "+(kind==="aa"?"coin":"tag")+(t.glow?" glowtag":"");
-  if(kind==="na"){ b.style.background="transparent"; b.style.color=t.fg; b.innerHTML=tagShapeSVG(t); }
-  else { b.style.background=t.bg; b.style.color=t.fg; }
-  b.setAttribute("data-token",kind+"-"+t.key);
+  var isNext=false;
   if(!earned){
-    var next=true;
-    (kind==="aa"?AA_COINS:NA_TAGS).forEach(function(x){ if(x.days>day&&x.days<t.days)next=false; });
-    b.classList.add(next?"nextup":"ahead");
+    isNext=true;
+    (kind==="aa"?AA_COINS:NA_TAGS).forEach(function(x){ if(x.days>day&&x.days<t.days)isNext=false; });
   }
-  var top=document.createElement("span"); top.className="c-top"; top.textContent=(kind==="aa"?(t.top||"TO THINE OWN SELF BE TRUE"):"JUST FOR TODAY");
-  var mid=document.createElement("span"); mid.className="c-mid"; mid.textContent=(kind==="aa"?(t.num||t.front):t.front);
-  var bot=document.createElement("span"); bot.className="c-bot"; bot.textContent=(kind==="aa"?(t.unit||"MY RECOVERY JOURNEY"):"CLEAN TIME");
-  b.appendChild(top); b.appendChild(mid); b.appendChild(bot);
+  var b=document.createElement("button"); b.type="button";
+  b.className="token "+(kind==="aa"?"coin":"tag")+(t.glow?" glowtag":"")+(!earned?(isNext?" nextup":" ahead"):"");
+  b.innerHTML=collTokenArt(kind,t);
+  b.setAttribute("data-token",kind+"-"+t.key);
+  b.setAttribute("data-state",earned?"earned":(isNext?"next":"ahead"));
   b.setAttribute("aria-label",t.name+(earned?", earned":", ahead"));
   b.addEventListener("click",function(){showTokenDetail(kind,t.key);});
   wrap.appendChild(b);
-  var lab=document.createElement("div"); lab.className="tlabel"; lab.textContent=t.colorName+" · "+t.front; wrap.appendChild(lab);
-  var st=document.createElement("div"); st.className="tstate";
-  if(earned){ st.textContent="Earned "+fmtLong(collAddDaysISO(personalStart,t.days)); }
-  else if(b.classList.contains("nextup")){ var n=t.days-day; st.textContent="Next up — in "+n+(n===1?" day":" days")+" — "+fmtLong(collAddDaysISO(personalStart,t.days)); }
-  else { st.textContent="Ahead of you — Day "+t.days; }
-  wrap.appendChild(st);
+  var cap=document.createElement("div"); cap.className="tcap";
+  var dateISO=collAddDaysISO(personalStart,t.days);
+  cap.appendChild(document.createTextNode(t.colorName+" · "+collFrontLabel(t)));
+  var tail=document.createElement("span"); tail.className="td";
+  if(earned){ tail.textContent=" — "+collFmtShort(dateISO); }
+  else if(isNext){ var n=t.days-day; tail.textContent=" — in "+n+(n===1?" day":" days")+" · "+collFmtShort(dateISO); }
+  else { tail.textContent=" — Day "+t.days; }
+  cap.appendChild(tail);
+  wrap.appendChild(cap);
   return wrap;
 }
 function renderCollection(){
@@ -1185,16 +1294,24 @@ function showTokenDetail(kind,key,keep){
   function face(isBack){
     var f=document.createElement("div");
     f.className="flip-face "+(kind==="aa"?"coinface":"tagface")+(isBack?" back":"");
-    f.style.background=t.bg; f.style.color=t.fg;
-    f.style.boxShadow="inset 0 0 0 5px rgba(0,0,0,.18),inset 6px 8px 14px rgba(255,255,255,.3)";
-    if(t.glow&&!isBack)f.style.boxShadow="0 0 22px 6px rgba(190,242,180,.95)";
-    if(kind==="na"){ f.style.background="transparent"; f.innerHTML=tagShapeSVG(t); }
-    if(isBack){ var bs=document.createElement("span"); bs.textContent=(kind==="aa"?COIN_BACK:TAG_BACK); if(kind==="na"){bs.style.padding="0 16px";} f.appendChild(bs); }
-    else{
-      var s1=document.createElement("span"); s1.style.fontWeight="700"; s1.style.fontSize=".72rem"; s1.textContent=(kind==="aa"?(t.top||"TO THINE OWN SELF BE TRUE"):"JUST FOR TODAY");
-      var s2=document.createElement("span"); s2.style.fontWeight="800"; s2.style.fontSize=(kind==="aa"?"1.7rem":"1.25rem"); s2.textContent=(kind==="aa"?(t.num||t.front):t.front); if(kind==="aa"){s2.style.border="3px solid rgba(0,0,0,.18)";s2.style.borderRadius="50%";s2.style.width="86px";s2.style.height="86px";s2.style.display="flex";s2.style.alignItems="center";s2.style.justifyContent="center";s2.style.background="rgba(255,255,255,.14)";}
-      var s3=document.createElement("span"); s3.style.fontWeight="700"; s3.style.fontSize=".72rem"; s3.textContent=(kind==="aa"?(t.unit||"MY RECOVERY JOURNEY"):"CLEAN TIME");
-      f.appendChild(s1); f.appendChild(s2); f.appendChild(s3);
+    if(!isBack){
+      f.innerHTML=collTokenArt(kind,t);
+      if(t.glow)f.style.filter="drop-shadow(0 0 14px rgba(165,230,150,.9))";
+    }else if(kind==="aa"){
+      var light=collShade(t.bg,.38), dark=collShade(t.bg,-.28);
+      f.style.background="radial-gradient(circle at 38% 30%,"+light+","+t.bg+" 55%,"+dark+")";
+      f.style.borderRadius="50%";
+      f.style.boxShadow="inset 0 0 0 5px rgba(0,0,0,.18),inset 6px 8px 14px rgba(255,255,255,.3)";
+      f.style.color=t.fg;
+      var bs=document.createElement("span"); bs.className="backtxt"; bs.textContent=COIN_BACK; f.appendChild(bs);
+    }else{
+      f.style.color=t.fg;
+      var art=document.createElement("div");
+      art.style.position="absolute"; art.style.inset="0";
+      art.innerHTML=tagArtSVG(t,true);
+      f.appendChild(art);
+      var ts=document.createElement("span"); ts.className="backtxt-tag"; ts.innerHTML="Just for today,<br>I will live this<br>day clean, and<br>trust God with<br>tomorrow."; f.appendChild(ts);
+      if(t.glow)f.style.filter="drop-shadow(0 0 14px rgba(165,230,150,.9))";
     }
     return f;
   }
@@ -1233,17 +1350,31 @@ function checkMilestones(){
   scan("aa",AA_COINS); scan("na",NA_TAGS);
   fresh.sort(function(a,b){return a.t.days-b.t.days;});
   if(!fresh.length){store.set("mrj.collSeen",rec);return;}
-  var ov=document.getElementById("milestoneOverlay"), list=document.getElementById("milestoneList");
-  list.innerHTML="";
-  fresh.forEach(function(f){
-    var p=document.createElement("p"); p.style.margin="14px 0 0"; p.style.fontWeight="700"; p.style.fontSize="1.1rem";
-    p.textContent="Day "+f.t.days+" — You earned your "+f.t.colorName+" "+(f.kind==="aa"?"Coin":"Key Tag")+".";
-    list.appendChild(p);
-    var holder=document.createElement("div");
-    holder.appendChild(collTokenEl(f.kind,f.t,day));
-    holder.firstChild.style.margin="10px auto 0";
-    list.appendChild(holder);
-  });
+  /* v2: ONE compact card. The latest token large, a single line, and any
+     other unseen tokens as a mini row — never an endless scroll. */
+  var latest=fresh[fresh.length-1];
+  var ov=document.getElementById("milestoneOverlay");
+  var art=document.getElementById("milestoneLatest");
+  art.className="mile-latest "+(latest.kind==="aa"?"mile-coin":"mile-tag");
+  art.innerHTML=collTokenArt(latest.kind,latest.t);
+  if(latest.t.glow)art.style.filter="drop-shadow(0 0 14px rgba(165,230,150,.9))"; else art.style.filter="";
+  document.getElementById("milestoneLine").textContent="Day "+latest.t.days+" — You earned your "+latest.t.colorName+" "+(latest.kind==="aa"?"Coin":"Key Tag")+".";
+  var more=document.getElementById("milestoneMore");
+  if(fresh.length>1){
+    more.hidden=false;
+    var minis=document.getElementById("milestoneMinis"); minis.innerHTML="";
+    fresh.slice(0,fresh.length-1).forEach(function(f){
+      var m=document.createElement("div");
+      m.className="mile-mini "+(f.kind==="aa"?"mini-coin":"mini-tag");
+      m.innerHTML=collTokenArt(f.kind,f.t);
+      if(f.t.glow)m.style.filter="drop-shadow(0 0 7px rgba(165,230,150,.9))";
+      m.title=f.t.colorName+" "+(f.kind==="aa"?"Coin":"Key Tag")+" — Day "+f.t.days;
+      minis.appendChild(m);
+    });
+    document.getElementById("milestoneMoreText").textContent="+"+(fresh.length-1)+" more added to your collection";
+  }else{
+    more.hidden=true;
+  }
   ov.hidden=false;
   document.getElementById("milestoneAdd").onclick=function(){
     fresh.forEach(function(f){ if(rec.keys.indexOf(f.k)<0)rec.keys.push(f.k); });
@@ -1267,22 +1398,81 @@ function shareOpts(){
     name:document.getElementById("shareNameInput").value.trim()
   };
 }
+function collArcText(ctx,text,cx,cy,radius,centerAngle,dir,ls){
+  var chars=text.split(""), widths=[], total=0, i;
+  for(i=0;i<chars.length;i++){ var w=ctx.measureText(chars[i]).width; widths.push(w); total+=w; }
+  total+=ls*(chars.length-1);
+  var span=total/radius, a=(dir>0)?(centerAngle-span/2):(centerAngle+span/2);
+  for(i=0;i<chars.length;i++){
+    var half=(widths[i]/2)/radius;
+    a+=(dir>0?half:-half);
+    var x=cx+radius*Math.cos(a), y=cy+radius*Math.sin(a);
+    ctx.save(); ctx.translate(x,y); ctx.rotate(dir>0?a+Math.PI/2:a-Math.PI/2);
+    ctx.fillText(chars[i],0,0);
+    ctx.restore();
+    a+=(dir>0?half+ls/radius:-(half+ls/radius));
+  }
+}
+function embArcText(ctx,text,cx,cy,radius,center,dir,ls,t,lo,hi){
+  var lightFg=(t.fg==="#ffffff");
+  var passes=lightFg?[[2,lo,.6],[-1.2,hi,.45],[0,collShade(t.bg,.68),1]]
+                    :[[2,"rgba(255,255,255,.9)",.9],[-1,lo,.3],[0,t.fg,1]];
+  passes.forEach(function(p){
+    ctx.save(); ctx.translate(0,p[0]); ctx.fillStyle=p[1]; ctx.globalAlpha=p[2];
+    collArcText(ctx,text,cx,cy,radius,center,dir,ls);
+    ctx.restore();
+  });
+  ctx.globalAlpha=1;
+}
+function embCenterText(ctx,text,x,y,t,lo,hi){
+  var lightFg=(t.fg==="#ffffff");
+  var passes=lightFg?[[2.2,lo,.7],[-1.4,hi,.5],[0,collShade(t.bg,.68),1]]
+                    :[[2.2,"rgba(255,255,255,.9)",.9],[-1.2,lo,.3],[0,t.fg,1]];
+  passes.forEach(function(p){
+    ctx.save(); ctx.fillStyle=p[1]; ctx.globalAlpha=p[2];
+    ctx.fillText(text,x,y+p[0]);
+    ctx.restore();
+  });
+  ctx.globalAlpha=1;
+}
+function fitFont(ctx,weight,size,text,maxW){
+  ctx.font=weight+" "+size+"px sans-serif";
+  var w=ctx.measureText(text).width;
+  if(w>maxW&&w>0){ size=Math.max(8,Math.floor(size*maxW/w)); ctx.font=weight+" "+size+"px sans-serif"; }
+  return size;
+}
+function embFlatText(ctx,text,x,y,t,lo){
+  ctx.save();
+  ctx.fillStyle=(t.fg==="#ffffff")?lo:"rgba(255,255,255,.8)";
+  ctx.globalAlpha=.5; ctx.fillText(text,x,y+1.5);
+  ctx.restore();
+  ctx.fillStyle=t.fg; ctx.fillText(text,x,y);
+}
 function drawTokenOn(ctx,kind,t,x,y,r){
   ctx.save();
+  var light=collShade(t.bg,.38), dark=collShade(t.bg,-.28), rim=collShade(t.bg,-.40), hi=collShade(t.bg,.60), lo=collShade(t.bg,-.45);
   if(kind==="aa"){
-    if(t.glow){ctx.shadowColor="rgba(190,242,180,.95)";ctx.shadowBlur=40;}
-    ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fillStyle=t.bg; ctx.fill();
-    ctx.shadowBlur=0; ctx.lineWidth=10; ctx.strokeStyle="rgba(0,0,0,.18)"; ctx.stroke();
-    ctx.fillStyle=t.fg; ctx.textAlign="center";
-    ctx.font="700 25px sans-serif"; ctx.fillText(t.top||"TO THINE OWN SELF BE TRUE",x,y-r+52);
-    ctx.beginPath(); ctx.arc(x,y+6,r*.42,0,Math.PI*2); ctx.fillStyle="rgba(255,255,255,.14)"; ctx.fill();
-    ctx.lineWidth=5; ctx.strokeStyle="rgba(0,0,0,.18)"; ctx.stroke();
-    ctx.fillStyle=t.fg; ctx.font="800 62px sans-serif";
-    ctx.fillText(t.num||t.front,x,y+28);
-    ctx.font="700 27px sans-serif"; ctx.fillText(t.unit||"MY RECOVERY JOURNEY",x,y+r-36);
+    ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fillStyle=rim; ctx.fill();
+    var g=ctx.createRadialGradient(x-r*.38,y-r*.42,r*.1,x,y,r);
+    g.addColorStop(0,light); g.addColorStop(.55,t.bg); g.addColorStop(1,dark);
+    ctx.beginPath(); ctx.arc(x,y,r*.955,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
+    ctx.beginPath(); ctx.arc(x,y,r*.90,0,Math.PI*2); ctx.lineWidth=Math.max(2,r*.016); ctx.strokeStyle=hi; ctx.globalAlpha=.5; ctx.stroke(); ctx.globalAlpha=1;
+    ctx.beginPath(); ctx.arc(x,y,r*.68,0,Math.PI*2); ctx.lineWidth=Math.max(1.5,r*.013); ctx.strokeStyle=lo; ctx.globalAlpha=.32; ctx.stroke(); ctx.globalAlpha=1;
+    var cg=ctx.createRadialGradient(x-r*.14,y-r*.16,r*.05,x,y,r*.43);
+    cg.addColorStop(0,hi); cg.addColorStop(.6,light); cg.addColorStop(1,t.bg);
+    ctx.beginPath(); ctx.arc(x,y,r*.43,0,Math.PI*2); ctx.fillStyle=cg; ctx.fill();
+    ctx.lineWidth=Math.max(2,r*.02); ctx.strokeStyle=lo; ctx.globalAlpha=.8; ctx.stroke(); ctx.globalAlpha=1;
+    ctx.textAlign="center";
+    ctx.font="700 "+(r*.098)+"px sans-serif";
+    embArcText(ctx,t.top||"TO THINE OWN SELF BE TRUE",x,y,r*.80,-Math.PI/2,1,r*.012,t,lo,hi);
+    ctx.font="700 "+(r*.09)+"px sans-serif";
+    embArcText(ctx,t.unit||"MY RECOVERY JOURNEY",x,y,r*.88,Math.PI/2,-1,r*.012,t,lo,hi);
+    var num=t.num||t.front;
+    var fsN=num.length<=1?r*.47:(num.length===2?r*.40:r*.23);
+    ctx.font="800 "+fsN+"px sans-serif";
+    embCenterText(ctx,num,x,y+fsN*.36,t,lo,hi);
   }else{
-    var w=r*1.25,h=r*2.05;
-    if(t.glow){ctx.shadowColor="rgba(190,242,180,.95)";ctx.shadowBlur=40;}
+    var w=r*1.28, h=r*2.05, top=y-h/2;
     function tearPath(cx,cy,ww,hh){
       ctx.beginPath();
       ctx.moveTo(cx,cy-hh/2);
@@ -1292,22 +1482,32 @@ function drawTokenOn(ctx,kind,t,x,y,r){
       ctx.bezierCurveTo(cx-ww/2,cy-hh*.20,cx-ww*.32,cy-hh/2,cx,cy-hh/2);
       ctx.closePath();
     }
+    if(t.glow){ctx.shadowColor="rgba(190,242,180,.95)";ctx.shadowBlur=40;}
     tearPath(x,y,w,h);
-    ctx.fillStyle=t.bg; ctx.fill(); ctx.shadowBlur=0;
-    ctx.lineWidth=7; ctx.strokeStyle="rgba(0,0,0,.25)"; ctx.stroke();
-    tearPath(x,y+4,w*.86,h*.88);
-    ctx.setLineDash([11,8]); ctx.lineWidth=4; ctx.strokeStyle="rgba(255,255,255,.6)"; ctx.stroke(); ctx.setLineDash([]);
-    ctx.beginPath(); ctx.arc(x,y-h/2-4,27,0,Math.PI*2); ctx.lineWidth=7; ctx.strokeStyle="#c3ccd4"; ctx.stroke();
-    ctx.beginPath(); ctx.arc(x,y-h/2+34,15,0,Math.PI*2); ctx.fillStyle="#d7e5ee"; ctx.fill();
-    ctx.lineWidth=5; ctx.strokeStyle="#8a939c"; ctx.stroke();
-    ctx.beginPath(); ctx.arc(x,y+18,64,0,Math.PI*2); ctx.lineWidth=4; ctx.strokeStyle=t.fg; ctx.globalAlpha=.55; ctx.stroke(); ctx.globalAlpha=1;
-    ctx.fillStyle=t.fg; ctx.textAlign="center";
-    ctx.font="700 24px sans-serif"; ctx.fillText("JUST FOR TODAY",x,y-h/2+92);
-    ctx.font="800 44px sans-serif";
-    var ws=t.front.split(" ");
-    if(t.front.length>9&&ws.length>1){ ctx.fillText(ws[0],x,y-10); ctx.fillText(ws.slice(1).join(" "),x,y+40); }
-    else ctx.fillText(t.front,x,y+16);
-    ctx.font="700 24px sans-serif"; ctx.fillText("CLEAN TIME",x,y+h/2-36);
+    var tg=ctx.createLinearGradient(x-w/2,top,x+w/2,y+h/2);
+    tg.addColorStop(0,light); tg.addColorStop(.45,t.bg); tg.addColorStop(1,dark);
+    ctx.fillStyle=tg; ctx.fill(); ctx.shadowBlur=0;
+    ctx.lineWidth=Math.max(3,r*.03); ctx.strokeStyle=rim; ctx.stroke();
+    tearPath(x,y+h*.02,w*.87,h*.89);
+    ctx.setLineDash([r*.07,r*.05]); ctx.lineWidth=Math.max(2,r*.02);
+    ctx.strokeStyle=(t.fg==="#ffffff")?"rgba(255,255,255,.65)":"rgba(23,57,79,.35)"; ctx.stroke(); ctx.setLineDash([]);
+    ctx.beginPath(); ctx.arc(x,top-2,w*.15,0,Math.PI*2); ctx.lineWidth=Math.max(3,r*.035); ctx.strokeStyle="#b9c9d6"; ctx.stroke();
+    ctx.beginPath(); ctx.arc(x,top+h*.085,w*.07,0,Math.PI*2); ctx.fillStyle="#d7e5ee"; ctx.fill();
+    ctx.lineWidth=3; ctx.strokeStyle="#8a939c"; ctx.stroke();
+    ctx.textAlign="center";
+    var fsJ=fitFont(ctx,"700",h*.062,"JUST FOR",w*.8);
+    embFlatText(ctx,"JUST FOR",x,top+h*.37,t,lo);
+    embFlatText(ctx,"TODAY",x,top+h*.37+fsJ*1.3,t,lo);
+    var bs=tagBigSub(t);
+    var fsB=(bs.big.length<=2)?h*.20:fitFont(ctx,"800",h*.11,bs.big,w*.86);
+    ctx.font="800 "+fsB+"px sans-serif";
+    embFlatText(ctx,bs.big,x,top+h*.63,t,lo);
+    if(bs.sub){
+      fitFont(ctx,"700",h*.075,bs.sub,w*.7);
+      embFlatText(ctx,bs.sub,x,top+h*.73,t,lo);
+    }
+    fitFont(ctx,"700",h*.048,"CLEAN TIME",w*.5);
+    embFlatText(ctx,"CLEAN TIME",x,top+h*(bs.sub?0.81:0.78),t,lo);
   }
   ctx.restore();
 }
