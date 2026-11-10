@@ -1049,6 +1049,50 @@ a[href^="tel:"]{ white-space:nowrap; }
       </div>
       <p class="updates-more"><a class="btn ghost" href="#/updates">All Journey Updates</a></p>
     </section>
+    <section id="this-weekend">
+      <div class="section-head">
+        <h2>This Weekend</h2>
+        <p>Recovery happens one day at a time &#8212; and weekends can be the hardest days of the week. Here&#8217;s the weather where I am right now, and where to find what&#8217;s happening around town.</p>
+      </div>
+      <div class="two-up">
+        <article class="card mini-card">
+          <h3>Weekend Weather</h3>
+          <div id="weekend-weather"><p><a href="https://forecast7.com/en/34d37n89d52/oxford/" target="_blank" rel="noopener">See the Oxford, Mississippi forecast</a></p></div>
+          <p>Live forecast from weatherwidget.io &#8212; it updates on its own, all week long.</p>
+        </article>
+        <article class="card mini-card">
+          <h3>What&#8217;s On Around Oxford</h3>
+          <p>Local calendars that stay current on their own &#8212; concerts, events on the Square, book signings, and ballgames:</p>
+          <p><a class="btn" href="https://visitoxfordms.com/events/" target="_blank" rel="noopener">Visit Oxford Events</a></p>
+          <p><a class="btn ghost" href="https://www.squarebooks.com/events" target="_blank" rel="noopener">Square Books Events</a></p>
+          <p><a class="btn ghost" href="https://olemisssports.com/sports/football/schedule" target="_blank" rel="noopener">Ole Miss Football Schedule</a></p>
+        </article>
+      </div>
+      <script>
+      /* THIS WEEKEND - LOCATION CONFIG: when Steven moves, change the three
+         values below to the new city and swap the event links in the card above. */
+      var WEEKEND_FORECAST_URL = "https://forecast7.com/en/34d37n89d52/oxford/";
+      var WEEKEND_LABEL_1 = "OXFORD";
+      var WEEKEND_LABEL_2 = "MISSISSIPPI";
+      (function () {
+        var host = document.getElementById("weekend-weather");
+        if (!host) return;
+        var a = document.createElement("a");
+        a.className = "weatherwidget-io";
+        a.href = WEEKEND_FORECAST_URL;
+        a.setAttribute("data-label_1", WEEKEND_LABEL_1);
+        a.setAttribute("data-label_2", WEEKEND_LABEL_2);
+        a.setAttribute("data-theme", "original");
+        a.textContent = WEEKEND_LABEL_1 + " WEATHER";
+        host.innerHTML = "";
+        host.appendChild(a);
+        var s = document.createElement("script");
+        s.src = "https://weatherwidget.io/js/widget.min.js";
+        s.async = true;
+        document.body.appendChild(s);
+      })();
+      </script>
+    </section>
   </div>
 
   <!-- ============ PAGE: RECOVERY TOOLS ============ -->
@@ -2020,6 +2064,7 @@ a[href^="tel:"]{ white-space:nowrap; }
           <h3>No accounts, no tracking cookies</h3>
           <p>Browsing this site never requires an account, and the site itself runs no advertising or tracking cookies. My Recovery Journey is a personal website maintained by Steven Gregory.</p>
           <p>Visitor counting: I use GoatCounter to count anonymous visits so I can see how many people this site reaches. It sets no cookies and does not identify or track individual visitors. The journals and tools on this site still keep everything you type on your own device.</p>
+          <p>Home-page widget: the &#8220;This Weekend&#8221; weather on the home page is an embedded widget from weatherwidget.io, a separate service. When it loads, weatherwidget.io may set its own cookies and receive technical information (such as your IP address) under its own privacy policy. The rest of this site is unchanged: no accounts, and the site itself still runs no advertising or tracking cookies.</p>
         </article>
         <article class="card">
           <h3>The recovery tools store data on your device only</h3>
