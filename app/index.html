@@ -90,6 +90,13 @@ blockquote.verse cite{display:block;margin-top:6px;font-style:normal;font-size:.
 ul.miles{list-style:none;margin:0;padding:0}
 ul.miles li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--border)}
 ul.miles li:last-child{border-bottom:0}
+
+ul.wk-days{list-style:none;margin:0;padding:0}
+ul.wk-days li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:9px 0;border-bottom:1px solid var(--border)}
+ul.wk-days li:last-child{border-bottom:0}
+ul.wk-meet{list-style:none;margin:0;padding:0}
+ul.wk-meet li{padding:7px 0;border-bottom:1px solid var(--border)}
+ul.wk-meet li:last-child{border-bottom:0}
 .mile-status{font-weight:700;color:var(--gold);white-space:nowrap;font-size:.95rem}
 .mile-todo{color:var(--dim);white-space:nowrap;font-size:.95rem}
 
@@ -345,6 +352,12 @@ ul.miles li[role="button"]:focus-visible{outline:3px solid var(--gold);outline-o
       <h2>Learn</h2>
       <p style="margin:0">Short, plain-language lessons about how addiction works and how recovery works. Start with <strong>The Hijacked Brain</strong> &#8212; why addiction is not a character flaw, and why the brain heals.</p>
       <p style="margin:12px 0 0"><button class="btn btn-stack" type="button" data-goto="learn">Browse the lessons</button></p>
+    </section>
+
+    <section class="card" id="weekendCard">
+      <h2>This Weekend</h2>
+      <p style="margin:0">Weather for Friday through Sunday, what&#8217;s on around town, and the weekend&#8217;s recovery meetings &#8212; gathered in one place, so the weekend has a shape before it starts.</p>
+      <p style="margin:12px 0 0"><button class="btn btn-stack" type="button" id="weekendOpenBtn" data-goto="weekend">Open This Weekend</button></p>
     </section>
 
     <section class="card" id="milesCard" hidden>
@@ -1037,6 +1050,47 @@ ul.miles li[role="button"]:focus-visible{outline:3px solid var(--gold);outline-o
     <p style="margin:14px 0 0"><button class="btn-quiet" type="button" data-goto="learn">&#8592; Back to Learn</button></p>
   </div>
 
+
+  <!-- ============ THIS WEEKEND ============ -->
+  <div class="view" id="view-weekend">
+    <section class="card">
+      <h2>Need help right now?</h2>
+      <p style="margin:0">If this moment feels bigger than a weekend, don&#8217;t wait &#8212; call or text <strong>988</strong> any time, day or night. The Help view gathers 988, SAMHSA, grounding, and a prayer in one place.</p>
+      <p style="margin:12px 0 0"><button class="btn btn-gold btn-stack" type="button" data-goto="help">Open the Help view</button></p>
+    </section>
+
+    <section class="card">
+      <h2>This Weekend in <span class="wkCity">&#8230;</span></h2>
+      <p class="muted" id="wkRange" style="margin:0"></p>
+      <p style="margin:10px 0 0">The weather, what&#8217;s on, and the weekend&#8217;s recovery meetings &#8212; so the weekend has a shape before it starts.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="wkCity">&#8230;</span> weather</h2>
+      <div id="wkWeather"><p class="muted" style="margin:0">The forecast loads when you open this page.</p></div>
+      <p class="muted" id="wkWeatherNote" style="margin:10px 0 0;font-size:.85rem">Forecast from Open-Meteo &#8212; it refreshes every time you open this page.</p>
+    </section>
+
+    <section class="card">
+      <h2>What&#8217;s on in <span class="wkCity">&#8230;</span></h2>
+      <p style="margin:0">Local event calendars don&#8217;t offer a free listing we can embed in the app yet, so these buttons open the live listings themselves &#8212; always current, straight from the source.</p>
+      <p style="margin:12px 0 0"><a class="btn btn-stack" id="wkEventsBtn" href="#" target="_blank" rel="noopener">Events calendar</a></p>
+      <p id="wkTeamIntro" style="margin:16px 0 0"></p>
+      <p style="margin:12px 0 0"><a class="btn btn-stack" id="wkTeamBtn" href="#" target="_blank" rel="noopener">Team schedules</a></p>
+    </section>
+
+    <section class="card">
+      <h2>Weekend meetings &amp; support</h2>
+      <p style="margin:0">The regular Friday-to-Sunday meetings in <span class="wkCity">&#8230;</span>, as listed in the public directories. Times can change, so a quick check of a directory before you go is worth it &#8212; Meetings &amp; Resources has the fellowships&#8217; own finders.</p>
+      <div id="wkMeetings"></div>
+      <p style="margin:12px 0 0"><button class="btn btn-stack" type="button" data-goto="meetings">Open Meetings &amp; Resources</button></p>
+      <p class="muted" style="margin:12px 0 0;font-size:.94rem">&#8220;Closed&#8221; meetings are for people who identify as alcoholic or in recovery; &#8220;Open&#8221; meetings welcome anyone.</p>
+    </section>
+
+    <p class="muted" style="margin:14px 2px 0;font-size:.85rem">About this page: the weather and the linked listings come from outside services that update themselves, and those services may use cookies. Your journal, check-ins, and day counter still stay on this device &#8212; they are never sent anywhere.</p>
+    <p style="margin:14px 0 0"><button class="btn-quiet" type="button" data-goto="today">&#8592; Back to Today</button></p>
+  </div>
+
   <footer class="note">
     <p>My Recovery Journey · Founded by Steven Gregory · <a href="https://stgnov05.github.io/my-recovery-journey/#/home" target="_blank" rel="noopener">My Recovery Journey website</a> &#183; <button type="button" class="small-link" data-goto="support" style="padding:0">Support</button></p>
   </footer>
@@ -1055,6 +1109,49 @@ ul.miles li[role="button"]:focus-visible{outline:3px solid var(--gold);outline-o
 </nav>
 
 <script>
+
+/* ================= THIS WEEKEND — LOCATION CONFIG =================
+   Everything location-specific in the "This Weekend" view comes from
+   this one block: the weather forecast (lat/lon/timezone), the events
+   and team links, and the recurring Fri/Sat/Sun meeting lists.
+   AFTER THE DEC 10, 2026 MOVE: change this block to Seattle, WA —
+   city labels, lat/lon + timezone, the two link targets, and the
+   meeting lists — and nothing else in the app needs to change. */
+var WEEKEND_CONFIG={
+  cityLabel:"Oxford, Mississippi",
+  cityShort:"Oxford",
+  lat:34.3665,
+  lon:-89.5192,
+  timezone:"America/Chicago",
+  eventsLabel:"Visit Oxford — Events Calendar",
+  eventsUrl:"https://visitoxfordms.com/events/",
+  teamIntro:"And the games — every Ole Miss schedule (football, basketball, and the rest), straight from Ole Miss Athletics:",
+  teamLabel:"Ole Miss — Official Schedules",
+  teamUrl:"https://olemisssports.com/",
+  meetings:[
+    {day:"Friday",items:[
+      {tag:"AA",time:"6:00 p.m.",name:"Oxford 142 Group",place:"Oxford Church of Christ · 409 N. Lamar Blvd",note:"Open"},
+      {tag:"NA",time:"7:00 p.m.",name:"Living In The Now",place:"The Fountain Church · 1308 N. Lamar Blvd"},
+      {tag:"NA",time:"7:00 p.m.",name:"Courage to Change",place:"The Orchard · 295 Hwy 7"}
+    ]},
+    {day:"Saturday",items:[
+      {tag:"AA",time:"10:00 a.m.",name:"College Hill 12 & 12",place:"College Hill Presbyterian Church · 359 Co. Rd. 102",note:"Closed · Discussion"},
+      {tag:"Support",time:"10:00–11:30 a.m.",name:"NAMI Family Support Group",place:"Oxford-Lafayette County Public Library · 401 Bramlett Blvd"},
+      {tag:"NA",time:"11:00 a.m.",name:"There Is A Solution",place:"The Orchard · 295 Hwy 7"},
+      {tag:"AA",time:"6:00 p.m.",name:"On the Broad Highway",place:"St. Peter's Episcopal Church · 113 S. 9th St",note:"Open · 11th Step"},
+      {tag:"NA",time:"7:00 p.m.",name:"Courage to Change",place:"The Orchard · 295 Hwy 7"},
+      {tag:"AA",time:"8:00 p.m.",name:"Saturday Night Live Group",place:"St. Peter's Episcopal Church · 113 S. 9th St",note:"Open"}
+    ]},
+    {day:"Sunday",items:[
+      {tag:"AA",time:"11:00 a.m.",name:"Sunday Serenity Group",place:"Pinelake Church · 5202 George G. “Pat” Patterson Pkwy",note:"Open · Discussion"},
+      {tag:"NA",time:"3:00 p.m.",name:"The Orchard meeting",place:"295 MS-7"},
+      {tag:"Support",time:"3:30–5:00 p.m.",name:"NAMI Connection Recovery Support Group",place:"Oxford-Lafayette County Public Library · 401 Bramlett Blvd"},
+      {tag:"NA",time:"4:00 p.m.",name:"Living In The Now",place:"The Fountain Church · 1308 N. Lamar Blvd"},
+      {tag:"AA",time:"7:00 p.m.",name:"Oxford Group #1",place:"St. Andrew's Methodist Church · 431 N. 16th St",note:"Closed · Discussion"},
+      {tag:"NA",time:"7:00 p.m.",name:"The Orchard meeting",place:"295 MS-7"}
+    ]}
+  ]
+};
 var REFLECTIONS=[
 {title:"One Day at a Time",verse:"So don't worry about tomorrow, for tomorrow will bring its own worries. Today's trouble is enough for today.",reference:"Matthew 6:34 (NLT)",body:"Recovery is not lived a year at a time, or even a week at a time. It is lived today — this morning, this hour, this one decision in front of you. You do not have to carry tomorrow's weight on today's shoulders. Just do the next right thing, today.",prayer:"Lord, keep my feet in today. Help me do the next right thing and leave tomorrow in Your hands."},
 {title:"Be Strong and Courageous",verse:"Be strong and courageous! Do not be afraid or discouraged. For the LORD your God is with you wherever you go.",reference:"Joshua 1:9 (NLT)",body:"Courage is not the absence of fear. It is taking the next step while your hands are still shaking. Whatever room you have to walk into today — a meeting, a hard conversation, a new beginning — you do not walk in alone.",prayer:"God, give me courage for the step in front of me, and remind me that I never take it alone."},
@@ -2302,6 +2399,104 @@ window.__mrjMilestone={teach:MILE_TEACH,open:openMilestoneDetail,openForToken:op
 window.__mrjCollection={coins:AA_COINS,tags:NA_TAGS,render:renderCollection,checkMilestones:checkMilestones,buildShareCanvas:buildShareCanvas,shareState:function(){return shareState;},openShare:openShare};
 var _applyPersonalForColl=applyPersonal;
 applyPersonal=function(){ _applyPersonalForColl(); renderCollection(); checkMilestones(); };
+
+
+/* ================= THIS WEEKEND =================
+   The forecast is fetched lazily — only the first time the Weekend
+   view is opened, never at app start — so Today stays fast. If the
+   fetch fails (offline, service down), the card falls back to a
+   National Weather Service link built from the same coordinates. */
+function wkWeekendDates(){
+  var now=new Date(); var dow=now.getDay();
+  var diff=(5-dow+7)%7;
+  if(dow===6)diff=-1;
+  if(dow===0)diff=-2;
+  var fri=new Date(now.getFullYear(),now.getMonth(),now.getDate()+diff);
+  var sat=new Date(fri.getFullYear(),fri.getMonth(),fri.getDate()+1);
+  var sun=new Date(fri.getFullYear(),fri.getMonth(),fri.getDate()+2);
+  return [fri,sat,sun];
+}
+function wkISO(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function wkDayLabel(d){ return d.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"}); }
+var WKMO={0:["Clear sky","☀️"],1:["Mainly clear","🌤️"],2:["Partly cloudy","⛅"],3:["Overcast","☁️"],45:["Fog","🌫️"],48:["Fog","🌫️"],51:["Light drizzle","🌦️"],53:["Drizzle","🌦️"],55:["Drizzle","🌦️"],56:["Freezing drizzle","🧊"],57:["Freezing drizzle","🧊"],61:["Light rain","🌧️"],63:["Rain","🌧️"],65:["Heavy rain","🌧️"],66:["Freezing rain","🧊"],67:["Freezing rain","🧊"],71:["Light snow","🌨️"],73:["Snow","🌨️"],75:["Heavy snow","🌨️"],77:["Snow grains","🌨️"],80:["Light showers","🌦️"],81:["Showers","🌦️"],82:["Heavy showers","🌦️"],85:["Snow showers","🌨️"],86:["Snow showers","🌨️"],95:["Thunderstorm","⛈️"],96:["Thunderstorm","⛈️"],99:["Thunderstorm","⛈️"]};
+function wkWeatherUrl(){
+  var c=WEEKEND_CONFIG;
+  return "https://api.open-meteo.com/v1/forecast?latitude="+c.lat+"&longitude="+c.lon+"&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&timezone="+encodeURIComponent(c.timezone)+"&forecast_days=10";
+}
+var weekendLoaded=false;
+function renderWeekendStatic(){
+  var c=WEEKEND_CONFIG;
+  document.querySelectorAll(".wkCity").forEach(function(el){ el.textContent=c.cityShort; });
+  var dates=wkWeekendDates();
+  var range=document.getElementById("wkRange");
+  if(range)range.textContent=wkDayLabel(dates[0])+" – "+wkDayLabel(dates[2])+" · "+c.cityLabel;
+  var eb=document.getElementById("wkEventsBtn"); if(eb){ eb.href=c.eventsUrl; eb.textContent=c.eventsLabel; }
+  var ti=document.getElementById("wkTeamIntro"); if(ti)ti.textContent=c.teamIntro;
+  var tb=document.getElementById("wkTeamBtn"); if(tb){ tb.href=c.teamUrl; tb.textContent=c.teamLabel; }
+  var host=document.getElementById("wkMeetings");
+  if(host&&!host.hasChildNodes()){
+    c.meetings.forEach(function(dayBlock,di){
+      var h=document.createElement("h3");
+      h.textContent=dayBlock.day+" · "+dates[di].toLocaleDateString("en-US",{month:"long",day:"numeric"});
+      host.appendChild(h);
+      var ul=document.createElement("ul"); ul.className="wk-meet";
+      dayBlock.items.forEach(function(it){
+        var li=document.createElement("li");
+        var top=document.createElement("div");
+        var strong=document.createElement("strong");
+        strong.textContent=it.tag+" · "+it.time+" — "+it.name;
+        top.appendChild(strong);
+        if(it.note){ var n=document.createElement("span"); n.className="muted"; n.textContent=" · "+it.note; top.appendChild(n); }
+        var place=document.createElement("div"); place.className="muted"; place.textContent=it.place;
+        li.appendChild(top); li.appendChild(place); ul.appendChild(li);
+      });
+      host.appendChild(ul);
+    });
+  }
+}
+function loadWeekend(){
+  renderWeekendStatic();
+  if(weekendLoaded)return;
+  weekendLoaded=true;
+  var box=document.getElementById("wkWeather"); if(!box)return;
+  box.innerHTML="<p class=\"muted\" style=\"margin:0\">Loading the forecast…</p>";
+  function fallback(){
+    weekendLoaded=false;
+    var nt=document.getElementById("wkWeatherNote"); if(nt)nt.hidden=true;
+    box.innerHTML="";
+    var p=document.createElement("p"); p.style.margin="0";
+    p.textContent="The forecast couldn’t load just now — you can see it straight from the National Weather Service:";
+    box.appendChild(p);
+    var p2=document.createElement("p"); p2.style.margin="12px 0 0";
+    var a=document.createElement("a"); a.className="btn btn-stack"; a.target="_blank"; a.rel="noopener";
+    a.href="https://forecast.weather.gov/MapClick.php?lat="+WEEKEND_CONFIG.lat+"&lon="+WEEKEND_CONFIG.lon;
+    a.textContent=WEEKEND_CONFIG.cityShort+" forecast — National Weather Service";
+    p2.appendChild(a); box.appendChild(p2);
+  }
+  if(!window.fetch){ fallback(); return; }
+  fetch(wkWeatherUrl()).then(function(r){ if(!r.ok)throw new Error("http"); return r.json(); }).then(function(j){
+    var d=j&&j.daily; if(!d||!d.time)throw new Error("shape");
+    var dates=wkWeekendDates();
+    var ul=document.createElement("ul"); ul.className="wk-days";
+    dates.forEach(function(dt){
+      var idx=d.time.indexOf(wkISO(dt)); if(idx<0)return;
+      var w=WKMO[d.weather_code[idx]]||["—","🌡️"];
+      var li=document.createElement("li");
+      var left=document.createElement("span");
+      var nm=document.createElement("strong");
+      nm.textContent=dt.toLocaleDateString("en-US",{weekday:"short"})+" "+w[1]+" "+w[0];
+      left.appendChild(nm);
+      var right=document.createElement("span"); right.style.whiteSpace="nowrap";
+      var rain=d.precipitation_probability_max?d.precipitation_probability_max[idx]:null;
+      right.textContent=Math.round(d.temperature_2m_max[idx])+"° / "+Math.round(d.temperature_2m_min[idx])+"°"+(rain==null?"":" · 💧"+rain+"%");
+      li.appendChild(left); li.appendChild(right); ul.appendChild(li);
+    });
+    if(!ul.hasChildNodes())throw new Error("empty");
+    box.innerHTML=""; box.appendChild(ul);
+  }).catch(function(){ fallback(); });
+}
+var weekendOpenBtn=document.getElementById("weekendOpenBtn");
+if(weekendOpenBtn)weekendOpenBtn.addEventListener("click",loadWeekend);
 
 updateInstallStatus();
 applyPersonal();
