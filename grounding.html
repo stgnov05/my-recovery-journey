@@ -2642,7 +2642,7 @@ a[href^="tel:"]{ white-space:nowrap; }
     var parts = v.split('-');
     var start = new Date(+parts[0], +parts[1]-1, +parts[2]);
     var now = new Date(); var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    var days = Math.floor((today - start) / 86400000);
+    var days = Math.round((Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) - Date.UTC(start.getFullYear(), start.getMonth(), start.getDate())) / 86400000);
     if (days < 0) {
       dEl.textContent = wEl.textContent = moEl.textContent = '\u2014';
       mNote.textContent = 'That date is in the future — pick the day your journey began.';
