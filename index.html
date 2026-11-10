@@ -1059,8 +1059,10 @@ a[href^="tel:"]{ white-space:nowrap; }
       <div class="two-up">
         <article class="card mini-card">
           <h3>Weekend Weather</h3>
-          <div id="weekend-weather"><p><a href="https://forecast7.com/en/34d37n89d52/oxford/" target="_blank" rel="noopener">See the Oxford, Mississippi forecast</a></p></div>
-          <p>Live forecast from weatherwidget.io &#8212; it updates on its own, all week long.</p>
+          <!-- THIS WEEKEND - LOCATION CONFIG: when Steven moves, change the city in the
+               iframe address below (and the forecast link under it) to the new city. -->
+          <iframe src="https://www.meteoblue.com/en/weather/widget/daily/oxford_united-states_4440076?geoloc=fixed&amp;days=4&amp;tempunit=FAHRENHEIT&amp;windunit=MILE_PER_HOUR&amp;precipunit=INCH&amp;coloured=coloured&amp;pictoicon=0&amp;pictoicon=1&amp;maxtemperature=0&amp;maxtemperature=1&amp;mintemperature=0&amp;mintemperature=1&amp;windspeed=0&amp;windspeed=1&amp;windgust=0&amp;winddirection=0&amp;winddirection=1&amp;uv=0&amp;humidity=0&amp;precipitation=0&amp;precipitation=1&amp;precipitationprobability=0&amp;precipitationprobability=1&amp;spot=0&amp;spot=1&amp;pressure=0&amp;layout=light" title="Oxford, Mississippi weather forecast (meteoblue)" style="width:100%;height:380px;border:0;overflow:hidden;display:block" loading="lazy"></iframe>
+          <p>Live forecast from meteoblue &#8212; it updates on its own, all week long. If it doesn&#8217;t load, <a href="https://www.meteoblue.com/en/weather/week/oxford_united-states_4440076" target="_blank" rel="noopener">see the full Oxford forecast here</a>.</p>
         </article>
         <article class="card mini-card">
           <h3>What&#8217;s On Around Oxford</h3>
@@ -1070,30 +1072,6 @@ a[href^="tel:"]{ white-space:nowrap; }
           <p><a class="btn ghost" href="https://olemisssports.com/sports/football/schedule" target="_blank" rel="noopener">Ole Miss Football Schedule</a></p>
         </article>
       </div>
-      <script>
-      /* THIS WEEKEND - LOCATION CONFIG: when Steven moves, change the three
-         values below to the new city and swap the event links in the card above. */
-      var WEEKEND_FORECAST_URL = "https://forecast7.com/en/34d37n89d52/oxford/";
-      var WEEKEND_LABEL_1 = "OXFORD";
-      var WEEKEND_LABEL_2 = "MISSISSIPPI";
-      (function () {
-        var host = document.getElementById("weekend-weather");
-        if (!host) return;
-        var a = document.createElement("a");
-        a.className = "weatherwidget-io";
-        a.href = WEEKEND_FORECAST_URL;
-        a.setAttribute("data-label_1", WEEKEND_LABEL_1);
-        a.setAttribute("data-label_2", WEEKEND_LABEL_2);
-        a.setAttribute("data-theme", "original");
-        a.textContent = WEEKEND_LABEL_1 + " WEATHER";
-        host.innerHTML = "";
-        host.appendChild(a);
-        var s = document.createElement("script");
-        s.src = "https://weatherwidget.io/js/widget.min.js";
-        s.async = true;
-        document.body.appendChild(s);
-      })();
-      </script>
     </section>
   </div>
 
@@ -2066,7 +2044,7 @@ a[href^="tel:"]{ white-space:nowrap; }
           <h3>No accounts, no tracking cookies</h3>
           <p>Browsing this site never requires an account, and the site itself runs no advertising or tracking cookies. My Recovery Journey is a personal website maintained by Steven Gregory.</p>
           <p>Visitor counting: I use GoatCounter to count anonymous visits so I can see how many people this site reaches. It sets no cookies and does not identify or track individual visitors. The journals and tools on this site still keep everything you type on your own device.</p>
-          <p>Home-page widget: the &#8220;This Weekend&#8221; weather on the home page is an embedded widget from weatherwidget.io, a separate service. When it loads, weatherwidget.io may set its own cookies and receive technical information (such as your IP address) under its own privacy policy. The rest of this site is unchanged: no accounts, and the site itself still runs no advertising or tracking cookies.</p>
+          <p>Home-page widget: the &#8220;This Weekend&#8221; weather on the home page is an embedded widget from meteoblue, a separate service. When it loads, meteoblue may set its own cookies and receive technical information (such as your IP address) under its own privacy policy. The rest of this site is unchanged: no accounts, and the site itself still runs no advertising or tracking cookies.</p>
         </article>
         <article class="card">
           <h3>The recovery tools store data on your device only</h3>
