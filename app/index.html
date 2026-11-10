@@ -206,6 +206,10 @@ ul.topics li:last-child{border-bottom:0}
 .share-opts label{font-weight:600;font-size:.95rem}
 @media (prefers-reduced-motion: reduce){ .token.nextup{animation:none;outline:3px solid var(--gold)} .flip-inner{transition:none} }
 
+/* Phase 7: milestone detail — milestones that teach (plan §4) */
+ul.miles li[role="button"]{cursor:pointer}
+ul.miles li[role="button"]:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.md-tokcap{text-align:center;font-weight:700;margin:12px 0 0}
 </style>
 </head>
 <body>
@@ -434,6 +438,14 @@ ul.topics li:last-child{border-bottom:0}
         <button type="button" class="btn btn-gold" id="milestoneShare">Share</button>
       </p>
     </div>
+  </div>
+
+  <!-- ============ MILESTONE DETAIL (Phase 7) ============ -->
+  <div class="view" id="view-milestone">
+    <section class="card">
+      <div id="mdBody"></div>
+      <p style="margin:16px 0 0"><button class="btn-quiet" type="button" id="mdBack">&#8592; Back</button></p>
+    </section>
   </div>
 
   <!-- ============ HELP ============ -->
@@ -848,6 +860,10 @@ function renderMiles(elId,nextId,day){
   var ul=document.getElementById(elId); ul.innerHTML="";
   MILESTONES.forEach(function(m){
     var li=document.createElement("li");
+    li.setAttribute("role","button"); li.setAttribute("tabindex","0"); li.style.cursor="pointer";
+    li.setAttribute("aria-label",m.label+" — open milestone");
+    li.addEventListener("click",function(){openMilestoneDetail(m.days, elId==="founderMiles"?"founder":"personal");});
+    li.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();openMilestoneDetail(m.days, elId==="founderMiles"?"founder":"personal");}});
     var a=document.createElement("span"); a.textContent=m.label; if(day>=m.days)a.style.fontWeight="600";
     var b=document.createElement("span"); var reached=day>=m.days;
     b.textContent=reached?"Reached ✓":"Day "+m.days; b.className=reached?"mile-status":"mile-todo";
@@ -1454,7 +1470,7 @@ function collTokenEl(kind,t,day){
   b.setAttribute("data-token",kind+"-"+t.key);
   b.setAttribute("data-state",earned?"earned":(isNext?"next":"ahead"));
   b.setAttribute("aria-label",t.name+(earned?", earned":", ahead"));
-  b.addEventListener("click",function(){showTokenDetail(kind,t.key);});
+  b.addEventListener("click",function(){showTokenDetail(kind,t.key);openMilestoneForToken(kind,t);});
   wrap.appendChild(b);
   var cap=document.createElement("div"); cap.className="tcap";
   var dateISO=collAddDaysISO(personalStart,t.days);
@@ -1840,6 +1856,177 @@ document.getElementById("shareNameInput").addEventListener("input",function(){
   store.set("mrj.collName",this.value); buildShareCanvas();
 });
 document.getElementById("shareNameInput").value=store.get("mrj.collName","");
+
+/* Milestones that teach (Phase 7, plan §4): tapping a milestone — in the
+   milestone lists or on a Collection token — opens ONE detail view with
+   four parts: the moment (label, day count, date or days remaining, and
+   the token art from the existing PR #37 SVG rendering), an optional
+   reflection prompt whose answer saves ONLY into the private on-device
+   journal through the journal's own storage and render path, a paired
+   Learn topic (a live link only where the lesson exists today; plain
+   "Lesson coming soon" text otherwise — never a dead link), and the
+   existing My Collection share flow. No points, streaks, leaderboards,
+   or shame language; day counting and the gentle restart are untouched. */
+var MILE_TEACH={
+ 1:{prompt:"What made today the day? Write the honest reason you began — a future hard day may need you to read it back.",topics:[["Meetings: What Actually Happens in One",null]]},
+ 7:{prompt:"Which hour of this first week felt the hardest — and what, exactly, got you through it?",topics:[["HALT: Hungry, Angry, Lonely, Tired",null]]},
+ 14:{prompt:"What is one small thing your body or mind already does more easily than it did two weeks ago?",topics:[["HALT: Hungry, Angry, Lonely, Tired",null]]},
+ 30:{prompt:"What has surprised you most about yourself this month?",topics:[["The Hijacked Brain","lesson-hijacked"]]},
+ 60:{prompt:"As the newness fades, which old attitude has tested the door this month — and how did you answer it?",topics:[["King Baby","lesson-king-baby"]]},
+ 90:{prompt:"Which people, places, or moments have proved to be your strongest triggers so far — and what is your plan for the next one?",topics:[["Triggers & Cravings: Riding the Wave",null]]},
+ 120:{prompt:"Where do cravings still catch you off guard — and what has actually worked when they came?",topics:[["Triggers & Cravings: Riding the Wave",null]]},
+ 180:{prompt:"What is still healing more slowly than you expected — and who is walking this road alongside you?",topics:[["PAWS: Why Early Recovery Feels Bumpy",null],["Finding a Sponsor (and Being Sponsorable)",null]]},
+ 270:{prompt:"Which passing symptom — fog, mood swings, broken sleep — still visits now and then, and how do you ride it out these days?",topics:[["PAWS: Why Early Recovery Feels Bumpy",null],["Finding a Sponsor (and Being Sponsorable)",null]]},
+ 365:{prompt:"What are your personal warning signs that trouble is brewing — and who would you call first?",topics:[["Relapse Prevention: Your Personal Warning Signs",null]]},
+ 548:{prompt:"A year and a half in: which quiet, ordinary habit now matters more to your recovery than any big moment?",topics:[["Relapse Prevention: Your Personal Warning Signs",null]]},
+ 730:{prompt:"What would you say to someone standing at Day One, right where you stood two years ago?",topics:[["Relapse Prevention: Your Personal Warning Signs",null]]},
+ 1095:{prompt:"Which warning sign do you watch most carefully these days — and what keeps your recovery from going stale?",topics:[["Relapse Prevention: Your Personal Warning Signs",null]]},
+ 1825:{prompt:"Five years, one day at a time: what has staying made possible that leaving would have taken away?",topics:[["Relapse Prevention: Your Personal Warning Signs",null]]}
+};
+var mdReturn="today";
+/* The token a person is carrying at a given day: the latest token unlocked
+   at or before it across both sets (AA coin preferred when both fellowships
+   mark the same day). Day 7 and Day 14 have no token of their own — in the
+   rooms you carry your 24 Hours coin through them, and the card says so. */
+function mdTokenFor(days){
+  var best=null;
+  function scan(kind,list){ list.forEach(function(t){ if(t.days<=days&&(!best||t.days>best.t.days||(t.days===best.t.days&&kind==="aa")))best={kind:kind,t:t}; }); }
+  scan("aa",AA_COINS); scan("na",NA_TAGS);
+  return best;
+}
+/* Tokens that are not milestones themselves (Desire/Welcome at Day 0, the
+   in-between month coins, the 545-day NA tag) borrow the prompt and pairing
+   of the nearest milestone; ties go to the earlier milestone. */
+function mdResolveMilestone(days){
+  var best=null;
+  MILESTONES.forEach(function(m){ var d=Math.abs(m.days-days); if(!best||d<best.d||(d===best.d&&m.days<best.m.days))best={m:m,d:d}; });
+  return best?best.m:null;
+}
+function mdFlipbox(kind,t){
+  var fb=document.createElement("div"); fb.className="flipbox"+(kind==="na"?" tagbox":"");
+  fb.setAttribute("role","button"); fb.setAttribute("tabindex","0");
+  fb.setAttribute("aria-label","Tap to flip the token over");
+  var inner=document.createElement("div"); inner.className="flip-inner";
+  function face(isBack){
+    var f=document.createElement("div");
+    f.className="flip-face "+(kind==="aa"?"coinface":"tagface")+(isBack?" back":"");
+    if(!isBack){
+      f.innerHTML=collTokenArt(kind,t);
+      if(t.glow)f.style.filter="drop-shadow(0 0 14px rgba(165,230,150,.9))";
+    }else if(kind==="aa"){
+      var light=collShade(t.bg,.38), dark=collShade(t.bg,-.28);
+      f.style.background="radial-gradient(circle at 38% 30%,"+light+","+t.bg+" 55%,"+dark+")";
+      f.style.borderRadius="50%";
+      f.style.boxShadow="inset 0 0 0 5px rgba(0,0,0,.18),inset 6px 8px 14px rgba(255,255,255,.3)";
+      f.style.color=t.fg;
+      var bs=document.createElement("span"); bs.className="backtxt"; bs.textContent=COIN_BACK; f.appendChild(bs);
+    }else{
+      f.style.color=t.fg;
+      var art=document.createElement("div");
+      art.style.position="absolute"; art.style.inset="0";
+      art.innerHTML=tagArtSVG(t,true);
+      f.appendChild(art);
+      var ts=document.createElement("span"); ts.className="backtxt-tag"; ts.innerHTML="Just for today,<br>I will live this<br>day clean, and<br>trust God with<br>tomorrow."; f.appendChild(ts);
+      if(t.glow)f.style.filter="drop-shadow(0 0 14px rgba(165,230,150,.9))";
+    }
+    return f;
+  }
+  inner.appendChild(face(false)); inner.appendChild(face(true)); fb.appendChild(inner);
+  function flip(){fb.classList.toggle("flipped");}
+  fb.addEventListener("click",flip);
+  fb.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();flip();}});
+  return fb;
+}
+function mdShow(cfg){
+  var founder=cfg.ctx==="founder";
+  var startISO=founder?FOUNDER_START:personalStart;
+  var day=founder?founderDay:collDay();
+  mdReturn=founder?"founder":(cfg.ctx==="collection"?"collection":"today");
+  var art=cfg.token||mdTokenFor(cfg.days);
+  var earned=day>=cfg.days;
+  var body=document.getElementById("mdBody"); body.innerHTML="";
+  var h=document.createElement("h2"); h.style.marginTop="0"; h.textContent=cfg.label; body.appendChild(h);
+  if(founder){ var fw=document.createElement("p"); fw.className="muted"; fw.style.margin="0 0 4px"; fw.textContent="From Steven's journey — founder milestones, counted from August 20, 2026."; body.appendChild(fw); }
+  var moment=document.createElement("p"); moment.style.margin="6px 0 0";
+  if(startISO){
+    var dateISO=collAddDaysISO(startISO,cfg.days);
+    if(earned)moment.innerHTML="Day "+cfg.days+" — reached <strong>"+fmtLong(dateISO)+"</strong>. One day at a time got you here.";
+    else{ var n=cfg.days-day; moment.innerHTML="Day "+cfg.days+" — <strong>"+n+" "+(n===1?"day":"days")+" to go</strong> · "+fmtLong(dateISO)+". It is ahead of you on the road."; }
+  }else{
+    moment.textContent="Day "+cfg.days+" of the journey.";
+  }
+  body.appendChild(moment);
+  if(art){
+    var cap=document.createElement("p"); cap.className="md-tokcap";
+    cap.textContent=art.t.colorName+" "+art.t.name;
+    body.appendChild(cap);
+    body.appendChild(mdFlipbox(art.kind,art.t));
+    var hint=document.createElement("p"); hint.className="muted"; hint.style.textAlign="center"; hint.style.margin="0";
+    hint.textContent="Tap the "+(art.kind==="aa"?"coin":"tag")+" to flip it over."; body.appendChild(hint);
+    var tline=document.createElement("p"); tline.style.textAlign="center"; tline.style.margin="8px 0 0";
+    if(cfg.token){
+      if(day>=art.t.days)tline.textContent="Earned "+fmtLong(collAddDaysISO(startISO,art.t.days))+" — Day "+art.t.days+".";
+      else tline.textContent="Ahead of you on the road — Day "+art.t.days+", "+fmtLong(collAddDaysISO(startISO,art.t.days))+".";
+    }else if(art.t.days===cfg.days){
+      tline.textContent=earned?("Earned "+fmtLong(collAddDaysISO(startISO,art.t.days))+"."):("Yours on Day "+art.t.days+" — "+fmtLong(collAddDaysISO(startISO,art.t.days))+".");
+    }else{
+      tline.textContent="The token you carry at this milestone — earned Day "+art.t.days+".";
+    }
+    if(startISO)body.appendChild(tline);
+  }
+  var teach=MILE_TEACH[cfg.mile.days];
+  if(teach){
+    var ph=document.createElement("h3"); ph.textContent="A question to sit with"; body.appendChild(ph);
+    var pp=document.createElement("p"); pp.style.margin="0"; pp.textContent=teach.prompt; body.appendChild(pp);
+    var lab=document.createElement("label"); lab.className="lbl"; lab.setAttribute("for","mdText"); lab.textContent="Your answer (optional)"; body.appendChild(lab);
+    var ta=document.createElement("textarea"); ta.id="mdText"; ta.rows="3"; ta.placeholder="Only if you want to. There is no wrong answer."; body.appendChild(ta);
+    var priv=document.createElement("p"); priv.className="muted"; priv.style.margin="8px 0 0"; priv.textContent="Private — stays in your journal on this device."; body.appendChild(priv);
+    var srow=document.createElement("p"); srow.style.margin="10px 0 0";
+    var sb=document.createElement("button"); sb.className="btn"; sb.type="button"; sb.id="mdSave"; sb.textContent="Save to my journal"; sb.disabled=true;
+    srow.appendChild(sb); body.appendChild(srow);
+    var smsg=document.createElement("p"); smsg.className="muted"; smsg.id="mdSaved"; smsg.style.margin="8px 0 0"; smsg.hidden=true; smsg.textContent="Saved to your journal — private, on this device only."; body.appendChild(smsg);
+    ta.addEventListener("input",function(){sb.disabled=!ta.value.trim();});
+    sb.addEventListener("click",function(){
+      var v=ta.value.trim(); if(!v)return;
+      var t=chicagoToday(); var when=new Date(t.y,t.m-1,t.d).toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric",year:"numeric"});
+      journal.unshift({id:++jid,body:"Milestone reflection — "+cfg.mile.label+" (Day "+cfg.mile.days+")\n"+teach.prompt+"\n\n"+v,when:when});
+      renderJournal();
+      ta.value=""; sb.disabled=true; smsg.hidden=false;
+    });
+    var lh=document.createElement("h3"); lh.textContent="Keep learning"; body.appendChild(lh);
+    teach.topics.forEach(function(tp){
+      if(tp[1]){
+        var lp=document.createElement("p"); lp.style.margin="0 0 10px";
+        var lb=document.createElement("button"); lb.className="btn btn-stack"; lb.type="button"; lb.textContent="Read: "+tp[0];
+        lb.addEventListener("click",function(){goTo(tp[1]);});
+        lp.appendChild(lb); body.appendChild(lp);
+      }else{
+        var cp=document.createElement("p"); cp.className="muted"; cp.style.margin="0 0 10px"; cp.textContent="Lesson coming soon: "+tp[0]; body.appendChild(cp);
+      }
+    });
+  }
+  if(!founder&&personalStart&&earned&&art){
+    var shr=document.createElement("p"); shr.style.margin="14px 0 0";
+    var shb=document.createElement("button"); shb.className="btn btn-gold btn-stack"; shb.type="button"; shb.id="mdShare"; shb.textContent="Share this milestone";
+    shb.addEventListener("click",function(){ goTo("collection"); openShare("single",{kind:art.kind,token:art.t}); });
+    shr.appendChild(shb); body.appendChild(shr);
+  }
+  goTo("milestone");
+}
+function openMilestoneDetail(days,ctx){
+  var m=null;
+  MILESTONES.forEach(function(x){ if(x.days===days)m=x; });
+  if(!m)return;
+  mdShow({label:m.label,days:m.days,mile:m,ctx:ctx||"personal",token:null});
+}
+function openMilestoneForToken(kind,t){
+  var m=mdResolveMilestone(t.days); if(!m)return;
+  mdShow({label:t.colorName+" "+(kind==="aa"?"Coin":"Key Tag")+" — "+t.front,days:t.days,mile:m,ctx:"collection",token:{kind:kind,t:t}});
+}
+var mdBackBtn=document.getElementById("mdBack");
+if(mdBackBtn)mdBackBtn.addEventListener("click",function(){goTo(mdReturn);});
+window.__mrjMilestone={teach:MILE_TEACH,open:openMilestoneDetail,openForToken:openMilestoneForToken,resolve:mdResolveMilestone,tokenFor:mdTokenFor};
+
 window.__mrjCollection={coins:AA_COINS,tags:NA_TAGS,render:renderCollection,checkMilestones:checkMilestones,buildShareCanvas:buildShareCanvas,shareState:function(){return shareState;},openShare:openShare};
 var _applyPersonalForColl=applyPersonal;
 applyPersonal=function(){ _applyPersonalForColl(); renderCollection(); checkMilestones(); };
