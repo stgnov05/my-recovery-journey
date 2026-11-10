@@ -1115,6 +1115,7 @@ a[href^="tel:"]{ white-space:nowrap; }
         </button>
       </div>
       <div class="entries" id="entries" aria-live="polite"></div>
+      <p id="gratitudeStorageNote" class="note" hidden>This browser isn&#8217;t letting the site save on this device, so your journal entries won&#8217;t be kept after you close this page.</p>
       <div class="entries-actions" id="entriesActions">
         <button class="btn ghost" id="downloadEntries" type="button">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -2562,11 +2563,20 @@ a[href^="tel:"]{ white-space:nowrap; }
   var entriesActions = document.getElementById('entriesActions');
   var entries = [];
   function persistEntries(){
-    try { localStorage.setItem('mrj-gratitude', JSON.stringify(entries.map(function(e){ return { text:e.text, when:e.when.toISOString() }; }))); } catch (err) {}
+    var note = document.getElementById('gratitudeStorageNote');
+    try {
+      var safe = [];
+      entries.forEach(function(e){
+        var w = (e.when instanceof Date) ? e.when : new Date(e.when);
+        if (!isNaN(w.getTime())) safe.push({ text:e.text, when:w.toISOString() });
+      });
+      localStorage.setItem('mrj-gratitude', JSON.stringify(safe));
+      if (note) note.hidden = true;
+    } catch (err) { if (note) note.hidden = false; }
   }
   try {
     var savedEntries = JSON.parse(localStorage.getItem('mrj-gratitude') || '[]');
-    if (Array.isArray(savedEntries)) entries = savedEntries.filter(function(e){ return e && e.text; }).map(function(e){ return { text:e.text, when:new Date(e.when) }; });
+    if (Array.isArray(savedEntries)) entries = savedEntries.filter(function(e){ return e && e.text && !isNaN(new Date(e.when).getTime()); }).map(function(e){ return { text:e.text, when:new Date(e.when) }; });
   } catch (err) { entries = []; }
   function fmtWhen(d){
     return d.toLocaleDateString(undefined, { month:'short', day:'numeric' }) + ', ' +
