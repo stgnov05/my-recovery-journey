@@ -1057,7 +1057,7 @@ a[href^="tel:"]{ white-space:nowrap; }
         <p>Recovery happens one day at a time &#8212; and weekends can be the hardest days of the week. Here&#8217;s where to find what&#8217;s happening around town.</p>
       </div>
       <article class="card mini-card">
-          <h3>What&#8217;s On Around Oxford</h3>
+          <h3>What&#8217;s Going On Around Oxford</h3>
           <p>Local calendars that stay current on their own &#8212; concerts, events on the Square, book signings, and ballgames:</p>
           <!-- THIS WEEKEND: update these event links when Steven moves (Seattle after Dec 10, 2026). -->
           <p><a class="btn" href="https://visitoxfordms.com/events/" target="_blank" rel="noopener">Visit Oxford Events</a></p>
@@ -1065,6 +1065,43 @@ a[href^="tel:"]{ white-space:nowrap; }
           <p><a class="btn" href="https://olemisssports.com/sports/football/schedule" target="_blank" rel="noopener">Ole Miss Football Schedule</a></p>
         </article>
       </section>
+    <script>
+    /* This Weekend: show each visitor events near their own city (falls back to Oxford). */
+    (function () {
+      var sec = document.getElementById('this-weekend');
+      if (!sec || !window.fetch) return;
+      var title = sec.querySelector('h3');
+      var btns = sec.querySelectorAll('a.btn');
+      if (!title || btns.length < 3) return;
+      var slug = function (s) { return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); };
+      var ctrl = window.AbortController ? new AbortController() : null;
+      var timer = null;
+      if (ctrl) { timer = setTimeout(function () { ctrl.abort(); }, 3500); }
+      fetch('https://ipwho.is/', ctrl ? { signal: ctrl.signal } : {})
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (timer) clearTimeout(timer);
+          if (!d || !d.success || !d.city) return;
+          var city = d.city, region = d.region || '', country = d.country || '';
+          var place = region ? city + ', ' + region : city;
+          var g = 'https://www.google.com/search?q=';
+          title.textContent = 'What\u2019s Going On Around ' + city;
+          var intro = sec.querySelector('article p');
+          if (intro && city !== 'Oxford') { intro.textContent = 'Local calendars and listings that stay current on their own \u2014 concerts, community events, sports, and more near you:'; }
+          if (country === 'United States' && region) {
+            btns[0].href = 'https://www.eventbrite.com/d/' + slug(country) + '--' + slug(region) + '--' + slug(city) + '/events/';
+          } else {
+            btns[0].href = g + encodeURIComponent('events in ' + place + ' this weekend');
+          }
+          btns[0].textContent = 'Events in ' + city + ' This Weekend';
+          btns[1].href = 'https://www.ticketmaster.com/search?q=' + encodeURIComponent(city + ' events');
+          btns[1].textContent = 'Concerts & Sports in ' + city;
+          btns[2].href = g + encodeURIComponent('things to do in ' + place + ' this weekend');
+          btns[2].textContent = 'Things To Do in ' + city;
+        })
+        .catch(function () { /* lookup failed: the Oxford version stays */ });
+    })();
+    </script>
   </div>
 
   <!-- ============ PAGE: RECOVERY TOOLS ============ -->
@@ -2062,6 +2099,7 @@ a[href^="tel:"]{ white-space:nowrap; }
           <h3>No accounts, no tracking cookies</h3>
           <p>Browsing this site never requires an account, and the site itself runs no advertising or tracking cookies. My Recovery Journey is a personal website maintained by Steven Gregory.</p>
           <p>Visitor counting: I use GoatCounter to count anonymous visits so I can see how many people this site reaches. It sets no cookies and does not identify or track individual visitors. The journals and tools on this site still keep everything you type on your own device.</p>
+          <p>Home-page local events: the &#8220;This Weekend&#8221; section on the home page uses a small service called ipwho.is to estimate your city from your internet connection, so it can show events near you instead of only near me. The lookup runs in your browser &#8212; your city is not sent to me and is not stored anywhere. If it doesn&#8217;t work, the section simply shows Oxford, Mississippi.</p>
         </article>
         <article class="card">
           <h3>The recovery tools store data on your device only</h3>
