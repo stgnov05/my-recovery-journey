@@ -261,6 +261,21 @@ nav.tabbar button[aria-current="page"]{background:#101216;color:var(--accent);fo
 section.card.article-card{padding:0;overflow:hidden}
 .article-art svg{display:block;width:100%;height:auto}
 .article-body{padding:20px}
+
+/* PR D — Fellowship view: title, hero card, My People blocks
+   (3-tab redesign plan §3 Tab 2). */
+.fellow-title{font-size:var(--title);font-weight:800;line-height:1.15;margin:4px 0 0}
+.fellow-sub{color:var(--dim);margin:8px 0 0}
+.hero-card{background:linear-gradient(160deg,#1d3a56 0%,#14273c 55%,#101c2c 100%)}
+.hero-medal{width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,#3f7fbf,#8ec9ff);display:flex;align-items:center;justify-content:center;color:#0b1c2c;margin:2px 0 16px}
+.hero-medal svg{width:42px;height:42px;display:block}
+.hero-row{display:flex;gap:12px;margin-top:18px;align-items:flex-start}
+.hero-row .hic{flex:none;width:26px;height:26px;color:var(--accent)}
+.hero-row .hic svg{width:26px;height:26px;display:block}
+.hero-row p{margin:2px 0 0}
+.person-block{padding-top:18px;border-top:1px solid var(--border);margin-top:18px}
+.person-h{font-size:var(--body);font-weight:700;margin:0}
+.person-name{font-size:var(--body);font-weight:700;margin:8px 0 0}
 </style>
 </head>
 <body>
@@ -722,6 +737,59 @@ section.card.article-card{padding:0;overflow:hidden}
     </section>
 
     <p style="margin:14px 0 0"><button class="btn-quiet" type="button" data-goto="today">&#8592; Back to Today</button></p>
+  </div>
+
+  <!-- ============ FELLOWSHIP ============ -->
+  <div class="view" id="view-fellowship">
+    <h2 class="fellow-title">Fellowship</h2>
+    <p class="fellow-sub">Your people &#8212; not your data.</p>
+
+    <section class="card hero-card" id="fellowHero">
+      <div class="hero-medal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9" r="2.8"/><path d="M15.6 14.2c2.3.3 4.1 1.9 4.7 4.8"/></svg></div>
+      <h2>Sharing Your Milestones</h2>
+      <div class="hero-row"><span class="hic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8.5 12.5l2.5 2.5 4.5-5.5"/></svg></span><div><strong>You Decide What to Share</strong><p class="muted">Share a milestone only when you choose to. Nothing is ever posted for you.</p></div></div>
+      <div class="hero-row"><span class="hic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="10.5" width="13" height="9.5" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/><circle cx="12" cy="15.2" r="1.3" fill="currentColor" stroke="none"/></svg></span><div><strong>Private by Design</strong><p class="muted">Your journal and check-ins never leave this phone.</p></div></div>
+      <div class="hero-row"><span class="hic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.2s-6.8-4.4-6.8-9.1A3.9 3.9 0 0 1 12 8.4a3.9 3.9 0 0 1 6.8 2.7c0 4.7-6.8 9.1-6.8 9.1z"/></svg></span><div><strong>People, Not Data</strong><p class="muted">This tab is about your people, not your numbers.</p></div></div>
+      <p style="margin:22px 0 0"><button type="button" class="btn btn-gold btn-stack" id="fellowShareBtn">Share a Milestone</button></p>
+      <p class="muted" style="margin:10px 0 0">Opens your collection &#8212; tap any coin or key tag to share that milestone, or share the whole collection. Nothing is shared until you tap Share there.</p>
+    </section>
+
+    <section class="card" id="peopleCard">
+      <h2>My People</h2>
+      <p class="muted" style="margin:0">The people in your corner, saved on this phone only. Nothing here is uploaded or shared.</p>
+      <div id="peopleSupport"></div>
+      <div id="peopleSponsor"></div>
+      <div id="peopleHome"></div>
+    </section>
+
+    <section class="card" id="fellowMeetings">
+      <h2>Meetings</h2>
+      <p style="margin:0">You don&#8217;t have to do this alone &#8212; and you don&#8217;t have to walk into a room to begin. The fellowships keep their own meeting times current, so this app keeps no list of its own &#8212; a stale list helps no one. Start here:</p>
+      <p style="margin:14px 0 0"><button class="btn btn-stack" type="button" data-goto="meetings">Open Meetings &amp; Resources</button></p>
+      <p style="margin:18px 0 0"><strong>Find one in person</strong></p>
+      <p class="muted" style="margin:6px 0 0"><strong>Meeting Guide</strong> &#8212; AA&#8217;s free official app: 150,000+ in-person and online meetings a week, kept current by local AA groups.</p>
+      <p style="margin:12px 0 0"><a class="btn btn-stack" href="https://aa.org/meeting-guide-app" target="_blank" rel="noopener">Meeting Guide app &#8212; AA</a></p>
+      <p class="muted" style="margin:16px 0 0"><strong>NA Meeting Search</strong> &#8212; NA World Services&#8217; official search for in-person and virtual NA meetings.</p>
+      <p style="margin:12px 0 0"><a class="btn btn-stack" href="https://www.na.org/meetingsearch/" target="_blank" rel="noopener">NA Meeting Search</a></p>
+      <p style="margin:18px 0 0"><strong>Meet online or by phone</strong></p>
+      <p class="muted" style="margin:6px 0 0"><strong>Online Intergroup of AA</strong> &#8212; AA meetings on video, by phone, and by chat, in many languages, from all over the world. At almost any hour, one is starting soon.</p>
+      <p style="margin:12px 0 0"><a class="btn btn-stack" href="https://aa-intergroup.org/" target="_blank" rel="noopener">Online Intergroup of AA</a></p>
+      <p class="muted" style="margin:16px 0 0"><strong>Virtual NA</strong> &#8212; NA meetings online and by phone, for anyone who can&#8217;t get to a face-to-face meeting yet.</p>
+      <p style="margin:12px 0 0"><a class="btn btn-stack" href="https://virtual-na.org/" target="_blank" rel="noopener">Virtual NA</a></p>
+      <p class="muted" style="margin:16px 0 0"><strong>In The Rooms</strong> &#8212; a free online recovery community hosting 130+ live video meetings a week &#8212; AA, NA, and others. Listening in with your camera off is completely normal.</p>
+      <p style="margin:12px 0 0"><a class="btn btn-stack" href="https://www.intherooms.com/" target="_blank" rel="noopener">In The Rooms</a></p>
+    </section>
+
+<section class="card" id="fellowSupportCard">
+      <h2>Support This Journey</h2>
+      <p>The website and this app are two doors into the same journey. Both are free for anyone in recovery &#8212; the daily posts and reflections on the website, and the counter, journal, and tools here in the app. Steven builds and maintains both himself, one day at a time.</p>
+      <p>If My Recovery Journey has helped you and you&#8217;d like to help keep it going, you can support Steven here:</p>
+      <p style="margin:14px 0 0"><a class="btn btn-stack" href="https://venmo.com/stgnov05" target="_blank" rel="noopener">Venmo &#8212; @stgnov05</a></p>
+      <p style="margin:10px 0 0"><a class="btn btn-stack" href="https://cash.app/$cardboardheros" target="_blank" rel="noopener">Cash App &#8212; $cardboardheros</a></p>
+      <p style="margin:10px 0 0"><a class="btn btn-stack" href="https://ko-fi.com/stgnov05" target="_blank" rel="noopener">Ko-fi &#8212; stgnov05</a></p>
+      <p class="muted" style="margin:14px 0 0">Give only if you can. Everything here stays free either way &#8212; and if you&#8217;re the one who needs help tonight, the help at the top of the Today screen is yours, no strings attached.</p>
+          <p style="margin:14px 0 0"><a class="btn btn-stack" href="https://stgnov05.github.io/my-recovery-journey/#/home" target="_blank" rel="noopener">Visit the My Recovery Journey website</a></p>
+    </section>
   </div>
 
   <!-- ============ INSTALL ============ -->
@@ -1229,7 +1297,7 @@ section.card.article-card{padding:0;overflow:hidden}
 <button type="button" class="help-fab" data-goto="help" aria-label="Get help now">♥ Help</button>
 <nav class="tabbar" aria-label="Main sections">
   <button type="button" data-tab="today" data-goto="today" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Today</button>
-  <button type="button" data-tab="fellowship" data-goto="support"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9" r="2.8"/><path d="M15.6 14.2c2.3.3 4.1 1.9 4.7 4.8"/></svg>Fellowship</button>
+  <button type="button" data-tab="fellowship" data-goto="fellowship"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9" r="2.8"/><path d="M15.6 14.2c2.3.3 4.1 1.9 4.7 4.8"/></svg>Fellowship</button>
   <button type="button" data-tab="browse" data-goto="browse"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>Browse</button>
 </nav>
 <nav class="bottom" aria-label="App sections">
@@ -1369,9 +1437,9 @@ function renderMiles(elId,nextId,day){
 }
 
 /* Tabs — old bottom nav + PR A floating 3-tab bar (Today / Fellowship / Browse).
-   Fellowship is a stand-in until PR D builds its real view (opens Support).
+   Fellowship is a real view since PR D (Support still lights the Fellowship tab).
    Browse is a real view since PR B (lessons, meetings, weekend count as Browse). */
-var TAB_FOR_VIEW={today:"today",support:"fellowship",learn:"browse",meetings:"browse",weekend:"browse",browse:"browse"};
+var TAB_FOR_VIEW={today:"today",support:"fellowship",fellowship:"fellowship",learn:"browse",meetings:"browse",weekend:"browse",browse:"browse"};
 function goTo(name){
   document.querySelectorAll(".view").forEach(function(v){v.classList.remove("active");});
   var el=document.getElementById("view-"+name); if(el)el.classList.add("active");
@@ -2857,6 +2925,141 @@ applyPersonal();
   var _rm=window.renderMoney; if(_rm)window.renderMoney=function(){_rm();renderPRC();};
   var _ap=window.applyPersonal; if(_ap)window.applyPersonal=function(){_ap();renderPRC();};
   renderPRC();
+})();
+</script>
+
+<script>
+/* PR D — Fellowship: My People + Share a Milestone.
+   The support person reads and writes the SAME on-device key Help has
+   always used (mrj.support), and Help's renderSupport() is re-run after
+   every change, so Help and Fellowship can never disagree. Sponsor and
+   home group are genuinely new fields with their own on-device keys
+   (mrj.sponsor, mrj.homegroup). Everything stays on this device;
+   Fellowship shares nothing on its own — sharing happens only when the
+   reader taps Share inside the existing collection share flow. */
+(function(){
+  "use strict";
+  function $(id){return document.getElementById(id);}
+  function digits(p){return String(p||"").replace(/[^0-9+]/g,"");}
+  function el(tag,cls,text){var e=document.createElement(tag); if(cls)e.className=cls; if(text!=null)e.textContent=text; return e;}
+
+  function personForm(cfg,current){
+    var form=document.createElement("form"); form.style.marginTop="12px";
+    var row=el("div","form-row");
+    var g1=el("div","grow");
+    var l1=el("label","lbl",cfg.nameLabel); l1.setAttribute("for",cfg.id+"Name");
+    var i1=document.createElement("input"); i1.type="text"; i1.id=cfg.id+"Name"; i1.placeholder=cfg.namePh;
+    if(current&&current.name)i1.value=current.name;
+    g1.appendChild(l1); g1.appendChild(i1); row.appendChild(g1);
+    var i2=null;
+    var g2=el("div","grow");
+    if(cfg.phone){
+      var l2=el("label","lbl","Their phone number"); l2.setAttribute("for",cfg.id+"Phone");
+      i2=document.createElement("input"); i2.type="tel"; i2.id=cfg.id+"Phone"; i2.placeholder="555-123-4567";
+      if(current&&current.phone)i2.value=current.phone;
+    }else{
+      var l2b=el("label","lbl","When & where"); l2b.setAttribute("for",cfg.id+"Detail");
+      i2=document.createElement("input"); i2.type="text"; i2.id=cfg.id+"Detail"; i2.placeholder="e.g. Tuesdays, 7:00 pm";
+      if(current&&current.detail)i2.value=current.detail;
+      l2=l2b;
+    }
+    g2.appendChild(l2); g2.appendChild(i2); row.appendChild(g2);
+    var save=el("button","btn","Save"); save.type="submit"; row.appendChild(save);
+    form.appendChild(row);
+    form.addEventListener("submit",function(e){
+      e.preventDefault();
+      var name=i1.value.trim(), second=i2.value.trim();
+      if(cfg.phone){ if(!second)return; cfg.save({name:name,phone:second}); }
+      else{ if(!name)return; cfg.save({name:name,detail:second}); }
+      renderPeople();
+    });
+    return form;
+  }
+
+  function renderBlock(mount,cfg){
+    if(!mount)return; mount.innerHTML="";
+    var wrap=el("div","person-block");
+    wrap.appendChild(el("h3","person-h",cfg.title));
+    var cur=cfg.load();
+    if(cur&&(cur.phone||cur.name)){
+      if(cur.name)wrap.appendChild(el("p","person-name",cur.name));
+      if(cur.detail)wrap.appendChild(el("p","muted",cur.detail));
+      if(cur.phone){
+        var pc=el("p"); pc.style.margin="12px 0 0";
+        var a=el("a","btn btn-stack","Call "+(cur.name||cfg.callFallback)); a.href="tel:"+digits(cur.phone);
+        pc.appendChild(a); wrap.appendChild(pc);
+        var pt=el("p"); pt.style.margin="10px 0 0";
+        var b=el("a","btn btn-gold btn-stack","Text "+(cur.name||cfg.callFallback)); b.href="sms:"+digits(cur.phone);
+        pt.appendChild(b); wrap.appendChild(pt);
+      }
+      var acts=el("p"); acts.style.margin="12px 0 0";
+      var edit=el("button","small-link","Edit"); edit.type="button";
+      edit.addEventListener("click",function(){
+        wrap.innerHTML="";
+        wrap.appendChild(el("h3","person-h",cfg.title));
+        wrap.appendChild(personForm(cfg,cur));
+        var cp=el("p"); cp.style.margin="10px 0 0";
+        var cancel=el("button","small-link","Cancel"); cancel.type="button";
+        cancel.addEventListener("click",function(){renderPeople();});
+        cp.appendChild(cancel); wrap.appendChild(cp);
+      });
+      acts.appendChild(edit);
+      var rm=el("button","small-link","Remove"); rm.type="button"; rm.style.marginLeft="18px";
+      rm.addEventListener("click",function(){cfg.save(null); renderPeople();});
+      acts.appendChild(rm);
+      wrap.appendChild(acts);
+    }else{
+      var et=el("p","muted",cfg.emptyText); et.style.margin="8px 0 0"; wrap.appendChild(et);
+      var ap=el("p"); ap.style.margin="12px 0 0";
+      var add=el("button","btn btn-stack","Add "+cfg.addLabel); add.type="button";
+      add.addEventListener("click",function(){
+        wrap.innerHTML="";
+        wrap.appendChild(el("h3","person-h",cfg.title));
+        wrap.appendChild(personForm(cfg,null));
+        var cp=el("p"); cp.style.margin="10px 0 0";
+        var cancel=el("button","small-link","Cancel"); cancel.type="button";
+        cancel.addEventListener("click",function(){renderPeople();});
+        cp.appendChild(cancel); wrap.appendChild(cp);
+      });
+      ap.appendChild(add); wrap.appendChild(ap);
+    }
+    mount.appendChild(wrap);
+  }
+
+  var CFG={
+    support:{mount:"peopleSupport",id:"fellowSupport",title:"Support person",nameLabel:"Their name",namePh:"e.g. My sponsor",phone:true,addLabel:"your support person",callFallback:"my person",
+      emptyText:"A sponsor, a friend, someone who knows. Save them here and they will be one tap away \u2014 here, and on the Help screen too.",
+      load:function(){return window.support||store.get("mrj.support",null);},
+      save:function(v){window.support=v; store.set("mrj.support",v); if(window.renderSupport)renderSupport();}},
+    sponsor:{mount:"peopleSponsor",id:"fellowSponsor",title:"Sponsor",nameLabel:"Their name",namePh:"e.g. My sponsor",phone:true,addLabel:"your sponsor",callFallback:"my sponsor",
+      emptyText:"The person walking you through the Steps, one at a time. Saved on this phone only.",
+      load:function(){return store.get("mrj.sponsor",null);},
+      save:function(v){store.set("mrj.sponsor",v);}},
+    home:{mount:"peopleHome",id:"fellowHome",title:"Home group",nameLabel:"Group name",namePh:"e.g. Oxford Group",phone:false,addLabel:"your home group",callFallback:"",
+      emptyText:"Your home group \u2014 the meeting that is yours, where people know your name.",
+      load:function(){return store.get("mrj.homegroup",null);},
+      save:function(v){store.set("mrj.homegroup",v);}}
+  };
+  function renderPeople(){
+    renderBlock($("peopleSupport"),CFG.support);
+    renderBlock($("peopleSponsor"),CFG.sponsor);
+    renderBlock($("peopleHome"),CFG.home);
+  }
+
+  var sb=$("fellowShareBtn");
+  if(sb)sb.addEventListener("click",function(){
+    goTo("collection");
+    if(typeof openShare==="function")openShare("collection",null);
+  });
+
+  /* Keep the two screens in step, whichever one the reader edits.
+     The wrap also clears Help's one-time form-binding flag when no person
+     is saved: without that, Help's renderer skips re-drawing its empty
+     form after a person is removed or changed, and Help would keep
+     showing the old person — the two screens disagreeing. */
+  if(window.renderSupport){var _rs=window.renderSupport; window.renderSupport=function(){var sw=$("supportWrap"); if(sw&&!window.support)delete sw.dataset.bound; _rs(); renderPeople();};}
+  if(window.goTo){var _gt=window.goTo; window.goTo=function(n){_gt(n); if(n==="fellowship")renderPeople();};}
+  renderPeople();
 })();
 </script>
 </body>
