@@ -227,6 +227,25 @@ nav.tabbar button{flex:1;min-width:0;background:none;border:0;color:#e8edf3;font
 nav.tabbar button svg{display:block;width:20px;height:20px;margin:0 auto 3px}
 nav.tabbar button[aria-current="page"]{background:#101216;color:var(--accent);font-weight:700}
 .help-fab{position:fixed;right:16px;bottom:calc(var(--nav-h) + 84px + env(safe-area-inset-bottom));z-index:31;background:var(--red);color:#fff;border:0;font-size:14px;font-weight:800;padding:10px 16px;border-radius:999px;box-shadow:0 8px 22px rgba(255,69,58,.35)}
+/* PR B — Browse: title, search pill, results, category grid */
+.browse-title{font-size:var(--title);font-weight:800;line-height:1.15;margin:4px 0 0}
+.browse-sub{color:var(--dim);margin:8px 0 0}
+.browse-search{display:flex;align-items:center;gap:10px;background:var(--surface2);border-radius:999px;padding:4px 18px;margin-top:18px}
+.browse-search svg{flex:none;color:var(--dim)}
+.browse-search input{flex:1;min-width:0;background:none;border:0;outline:none;color:var(--text);font:inherit;padding:11px 0}
+.browse-search input::placeholder{color:var(--dim)}
+.browse-results{margin-top:14px}
+.browse-result{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--surface);border:0;border-radius:18px;padding:14px 16px;margin-top:10px;color:var(--text);font:inherit}
+.browse-result .r-main{flex:1;min-width:0}
+.browse-result .r-title{display:block;font-weight:600;line-height:1.3}
+.browse-result .r-kind{display:block;color:var(--dim);font-size:var(--caption);margin-top:2px}
+.browse-result .r-go{flex:none;color:var(--accent);font-weight:700}
+.browse-none{background:var(--surface);border-radius:18px;padding:16px;margin-top:14px}
+.browse-h{font-size:var(--cardtitle);font-weight:700;margin:28px 0 0}
+.browse-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);margin-top:14px}
+.tile{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:12px;background:var(--surface);border:0;border-radius:24px;padding:16px;min-height:116px;width:100%;color:var(--text);font:inherit;text-align:left}
+.tile svg{display:block;width:30px;height:30px}
+.tile .tile-label{font-size:17px;font-weight:600;line-height:1.28;color:var(--text)}
 </style>
 </head>
 <body>
@@ -580,6 +599,50 @@ nav.tabbar button[aria-current="page"]{background:#101216;color:var(--accent);fo
       <h2>All 30 reflections</h2>
       <p>The Daily Reflection cycles through thirty reflections — a different one each day. Here is the full set:</p>
       <ul class="ref-list" id="refList"></ul>
+    </section>
+  </div>
+
+  <!-- ============ BROWSE (PR B) ============ -->
+  <div class="view" id="view-browse">
+    <h2 class="browse-title">Browse</h2>
+    <p class="browse-sub">Everything in the app, in one place. Tap a category, or search what&#8217;s on your mind.</p>
+    <div class="browse-search">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5L16.6 16.6"/></svg>
+      <input type="search" id="browseSearch" placeholder="Search lessons &amp; reflections" aria-label="Search lessons, reflections and resources" autocomplete="off">
+    </div>
+    <div class="browse-results" id="browseResults" hidden></div>
+    <p class="browse-none" id="browseNone" hidden></p>
+
+    <h3 class="browse-h">Recovery Categories</h3>
+    <div class="browse-grid">
+      <button type="button" class="tile" data-goto="today" data-scroll="checkinCard"><span style="color:#ff9f0a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4.5" width="14" height="16.5" rx="2"/><path d="M9 4.5V3h6v1.5"/><path d="M9 13.5l2.2 2.2 4.3-4.7"/></svg></span><span class="tile-label">Daily<br>Check-In</span></button>
+      <button type="button" class="tile" data-goto="learn"><span style="color:#64d2ff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6c-1.8-1.6-4-2-8-2v14c4 0 6.2.4 8 2 1.8-1.6 4-2 8-2V4c-4 0-6.2.4-8 2z"/><path d="M12 6v14"/></svg></span><span class="tile-label">Learn</span></button>
+      <button type="button" class="tile" data-goto="today" data-scroll="milesCard"><span style="color:#ffd60a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21.5v-17"/><path d="M5 5c4-2.2 7 2 12 .2V12c-5 1.8-8-2.4-12-.2"/></svg></span><span class="tile-label">Milestones</span></button>
+      <button type="button" class="tile" data-goto="collection"><span style="color:#bf5af2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/></svg></span><span class="tile-label">My<br>Collection</span></button>
+      <button type="button" class="tile" data-goto="journal"><span style="color:#30d158"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="3.5" width="13" height="17" rx="2"/><path d="M9.5 3.5v17"/><path d="M12.8 8.5h3.4M12.8 12h3.4"/></svg></span><span class="tile-label">Gratitude<br>Journal</span></button>
+      <button type="button" class="tile" data-goto="today" data-scroll="reflTitle"><span style="color:#ff6482"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M7.5 8.5h9"/></svg></span><span class="tile-label">Faith &amp;<br>Prayer</span></button>
+      <button type="button" class="tile" data-goto="today" data-scroll="groundCard"><span style="color:#5e5ce6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 15c3-6 6-6 10 0s7 6 10 0"/><path d="M2.5 20h19"/></svg></span><span class="tile-label">Tools for<br>Cravings</span></button>
+      <button type="button" class="tile" data-goto="meetings"><span style="color:#40c8b8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5h16v11h-8l-4.5 4v-4H4z"/></svg></span><span class="tile-label">Meetings</span></button>
+      <button type="button" class="tile" data-goto="founder" data-scroll="refList"><span style="color:#ffb340"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 18a7 7 0 0 1 14 0"/><path d="M2.5 18h19"/><path d="M12 6V3.5"/><path d="M5.6 8.6L4 7"/><path d="M18.4 8.6L20 7"/></svg></span><span class="tile-label">Daily<br>Reflections</span></button>
+      <button type="button" class="tile" data-goto="weekend"><span style="color:#e35d8f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M8 14.5h2.5"/><path d="M13.5 14.5H16"/></svg></span><span class="tile-label">This<br>Weekend</span></button>
+      <button type="button" class="tile" data-goto="founder"><span style="color:#8ec9ff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5h6a3.5 3.5 0 0 0 0-7h-3a3.5 3.5 0 0 1 0-7" stroke-dasharray="3.5 3"/></svg></span><span class="tile-label">Founder&#8217;s<br>Story</span></button>
+      <button type="button" class="tile" data-goto="help"><span style="color:#ff453a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 2.6v5.6c0 4.6-3 7.7-7 9.3-4-1.6-7-4.7-7-9.3V5.6z"/><path d="M12 8.5v6"/><path d="M9 11.5h6"/></svg></span><span class="tile-label">Help &amp;<br>Safety</span></button>
+    </div>
+
+    <section class="card">
+      <h2>From the Website</h2>
+      <p>The app is the toolbox; the website is the story. Steven&#8217;s day-by-day posts, every past Daily Reflection, the recovery resource pages, and ways to support the journey:</p>
+      <p style="margin:14px 0 0"><a class="btn btn-stack" href="https://stgnov05.github.io/my-recovery-journey/#/updates" target="_blank" rel="noopener">Journey Updates</a></p>
+      <p style="margin:10px 0 0"><a class="btn btn-stack" href="https://stgnov05.github.io/my-recovery-journey/#/reflections" target="_blank" rel="noopener">Reflections Archive</a></p>
+      <p style="margin:10px 0 0"><a class="btn btn-stack" href="https://stgnov05.github.io/my-recovery-journey/#/resources" target="_blank" rel="noopener">Recovery Resources</a></p>
+      <p style="margin:10px 0 0"><a class="btn btn-stack" href="https://stgnov05.github.io/my-recovery-journey/#/support" target="_blank" rel="noopener">Support the Journey</a></p>
+    </section>
+
+    <section class="card">
+      <h2>About this app</h2>
+      <p>Private by design: your day counter, check-ins, gratitude journal, and next steps are stored only on this device. Nothing you write here is uploaded or shared &#8212; sharing happens only when you tap Share on a milestone card.</p>
+      <p style="margin:14px 0 0"><button class="btn btn-stack" type="button" data-goto="install">Install this app</button></p>
+      <p class="muted" style="margin:12px 0 0">Made by Steven Gregory as part of My Recovery Journey &#8212; one day at a time.</p>
     </section>
   </div>
 
@@ -1110,7 +1173,7 @@ nav.tabbar button[aria-current="page"]{background:#101216;color:var(--accent);fo
 <nav class="tabbar" aria-label="Main sections">
   <button type="button" data-tab="today" data-goto="today" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Today</button>
   <button type="button" data-tab="fellowship" data-goto="support"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9" r="2.8"/><path d="M15.6 14.2c2.3.3 4.1 1.9 4.7 4.8"/></svg>Fellowship</button>
-  <button type="button" data-tab="browse" data-goto="learn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>Browse</button>
+  <button type="button" data-tab="browse" data-goto="browse"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>Browse</button>
 </nav>
 <nav class="bottom" aria-label="App sections">
   <div class="inner">
@@ -1249,9 +1312,9 @@ function renderMiles(elId,nextId,day){
 }
 
 /* Tabs — old bottom nav + PR A floating 3-tab bar (Today / Fellowship / Browse).
-   Fellowship and Browse are stand-ins until PR D / PR B build their real views:
-   Fellowship opens Support, Browse opens Learn (lessons, meetings, weekend count as Browse). */
-var TAB_FOR_VIEW={today:"today",support:"fellowship",learn:"browse",meetings:"browse",weekend:"browse"};
+   Fellowship is a stand-in until PR D builds its real view (opens Support).
+   Browse is a real view since PR B (lessons, meetings, weekend count as Browse). */
+var TAB_FOR_VIEW={today:"today",support:"fellowship",learn:"browse",meetings:"browse",weekend:"browse",browse:"browse"};
 function goTo(name){
   document.querySelectorAll(".view").forEach(function(v){v.classList.remove("active");});
   var el=document.getElementById("view-"+name); if(el)el.classList.add("active");
@@ -2523,6 +2586,104 @@ if(weekendOpenBtn)weekendOpenBtn.addEventListener("click",loadWeekend);
 
 updateInstallStatus();
 applyPersonal();
+</script>
+<script>
+/* PR B — Browse: scroll-to-card for tiles, and in-app search.
+   Search covers only content inside this file: the 12 categories, the 10
+   Learn lessons, the 30 Daily Reflections, and Meetings & Resources. */
+(function(){
+  "use strict";
+  /* Tiles (and search results) marked data-scroll land on a card inside
+     the target view instead of the top of the view. */
+  document.querySelectorAll("[data-scroll]").forEach(function(el){
+    el.addEventListener("click",function(){
+      var id=el.getAttribute("data-scroll");
+      setTimeout(function(){
+        var t=document.getElementById(id);
+        if(t)t.scrollIntoView({behavior:"smooth",block:"start"});
+      },420);
+    });
+  });
+  function openTarget(view,scroll){
+    goTo(view);
+    if(scroll)setTimeout(function(){
+      var t=document.getElementById(scroll);
+      if(t)t.scrollIntoView({behavior:"smooth",block:"start"});
+    },420);
+  }
+  /* ---- search index ---- */
+  var INDEX=[];
+  var KEYWORDS={
+    "today|checkinCard":"check in mood craving how i feel daily",
+    "learn|":"learn lessons understanding study",
+    "today|milesCard":"milestones days sober clean counter progress",
+    "collection|":"collection coins key tags aa na chips celebrate",
+    "journal|":"gratitude journal thankful thanks private",
+    "today|reflTitle":"faith prayer verse scripture god bible reflection",
+    "today|groundCard":"craving cravings urge urges tools grounding breathing 5-4-3-2-1 wave",
+    "meetings|":"meetings aa na alcoholics narcotics anonymous fellowship rooms zoom online find",
+    "founder|refList":"reflections daily reflection verses archive all",
+    "weekend|":"weekend plans events oxford",
+    "founder|":"founder steven story why journey",
+    "help|":"help safety crisis 988 samhsa struggling emergency prayer withdrawal"
+  };
+  document.querySelectorAll("#view-browse .tile").forEach(function(t){
+    var view=t.getAttribute("data-goto"), scroll=t.getAttribute("data-scroll")||"";
+    var label=t.querySelector(".tile-label").innerHTML.replace(/<br[^>]*>/gi," ").replace(/&amp;/g,"&").replace(/\s+/g," ").trim();
+    INDEX.push({title:label,kind:"Category",view:view,scroll:scroll||null,
+      text:(label+" "+(KEYWORDS[view+"|"+scroll]||"")).toLowerCase()});
+  });
+  document.querySelectorAll('#view-learn .topic-link').forEach(function(b){
+    var title=b.querySelector(".t-title").textContent.trim();
+    var desc=b.querySelector(".t-desc").textContent.trim();
+    INDEX.push({title:title,kind:"Lesson",view:b.getAttribute("data-goto"),scroll:null,
+      text:(title+" "+desc).toLowerCase()});
+  });
+  if(typeof REFLECTIONS!=="undefined"){
+    REFLECTIONS.forEach(function(r){
+      INDEX.push({title:r.title,kind:"Daily Reflection — "+String(r.reference).replace(" (NLT)",""),
+        view:"founder",scroll:"refList",
+        text:(r.title+" "+r.reference+" "+r.verse).toLowerCase()});
+    });
+  }
+  [["988 — call or text, any hour","Crisis help","help",null,"988 crisis suicide hotline help now emergency"],
+   ["SAMHSA — 1-800-662-4357","Treatment helpline","help",null,"samhsa treatment helpline withdrawal stop drinking doctor"],
+   ["Find a meeting (AA & NA directories)","Meetings & Resources","meetings",null,"aa na meeting finder directory in person near me"],
+   ["Online meetings & In The Rooms","Meetings & Resources","meetings",null,"online zoom meetings in the rooms virtual"],
+   ["Support My Recovery Journey","Support","support",null,"support donate venmo cash app ko-fi give help keep going"],
+   ["Install this app","About","install",null,"install home screen add icon iphone android safari chrome"]
+  ].forEach(function(r){
+    INDEX.push({title:r[0],kind:r[1],view:r[2],scroll:r[3],text:(r[0]+" "+r[4]).toLowerCase()});
+  });
+  var input=document.getElementById("browseSearch"),
+      box=document.getElementById("browseResults"),
+      none=document.getElementById("browseNone");
+  function render(){
+    var q=input.value.trim().toLowerCase();
+    box.innerHTML="";
+    if(q.length<2){box.hidden=true;none.hidden=true;return;}
+    var hits=INDEX.filter(function(e){return e.text.indexOf(q)>-1;}).slice(0,12);
+    if(!hits.length){
+      box.hidden=true;none.hidden=false;
+      none.textContent="Nothing in the app matches \u201C"+input.value.trim()+"\u201D. Try a word like craving, prayer, sponsor, meeting, or gratitude.";
+      return;
+    }
+    none.hidden=true;box.hidden=false;
+    hits.forEach(function(e){
+      var b=document.createElement("button");
+      b.type="button";b.className="browse-result";
+      var main=document.createElement("span");main.className="r-main";
+      var t=document.createElement("span");t.className="r-title";t.textContent=e.title;
+      var k=document.createElement("span");k.className="r-kind";k.textContent=e.kind;
+      main.appendChild(t);main.appendChild(k);
+      var go=document.createElement("span");go.className="r-go";go.textContent="Open \u2192";
+      b.appendChild(main);b.appendChild(go);
+      b.addEventListener("click",function(){openTarget(e.view,e.scroll);});
+      box.appendChild(b);
+    });
+  }
+  if(input){input.addEventListener("input",render);}
+})();
 </script>
 </body>
 </html>
