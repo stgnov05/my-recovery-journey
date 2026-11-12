@@ -246,6 +246,21 @@ nav.tabbar button[aria-current="page"]{background:#101216;color:var(--accent);fo
 .tile{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:12px;background:var(--surface);border:0;border-radius:24px;padding:16px;min-height:116px;width:100%;color:var(--text);font:inherit;text-align:left}
 .tile svg{display:block;width:30px;height:30px}
 .tile .tile-label{font-size:17px;font-weight:600;line-height:1.28;color:var(--text)}
+
+/* PR C — Today restructure: section headings, pinned summary, highlights,
+   article cards (3-tab redesign plan §3 Tab 1). */
+.today-h{font-size:26px;font-weight:800;letter-spacing:-.01em;margin:28px 0 0}
+.pin-summary{margin:0 0 16px;padding:0 0 16px;border-bottom:1px solid var(--border)}
+.pin-day{font-size:44px;line-height:1;font-weight:800;letter-spacing:-.02em;margin:0}
+.pin-progress{height:8px;border-radius:99px;background:var(--surface2);margin-top:12px;overflow:hidden}
+.pin-progress span{display:block;height:100%;width:0;background:var(--gold-bright);border-radius:99px}
+.pin-bars{height:40px}
+.hl-block{padding:16px 0;border-top:1px solid var(--border)}
+.hl-block:first-child{padding-top:0;border-top:0}
+.hl-block:last-child{padding-bottom:0}
+section.card.article-card{padding:0;overflow:hidden}
+.article-art svg{display:block;width:100%;height:auto}
+.article-body{padding:20px}
 </style>
 </head>
 <body>
@@ -276,12 +291,27 @@ nav.tabbar button[aria-current="page"]{background:#101216;color:var(--accent);fo
 
   <!-- ============ TODAY ============ -->
     <div class="view active" id="view-today">
-    <section class="card">
-      <p style="margin:0"><button type="button" class="btn btn-help" data-goto="help" style="width:100%;font-size:1.08rem;padding:15px 18px">I&#8217;m struggling right now</button></p>
-      <p class="muted" style="margin:10px 0 0">One tap to help: 988, SAMHSA, your person, grounding, and a prayer. You don&#8217;t have to carry a hard moment alone.</p>
+        <section class="card" id="helpStrip">
+      <div id="helpUrgent" hidden>
+        <p style="margin:0"><button type="button" class="btn btn-help" data-goto="help" style="width:100%;font-size:1.08rem;padding:15px 18px">I&#8217;m struggling right now</button></p>
+        <p class="muted" style="margin:10px 0 0">Your check-in today showed a strong craving. One tap to help: 988, SAMHSA, your person, grounding, and a prayer. You don&#8217;t have to carry a hard moment alone.</p>
+      </div>
+      <div id="helpQuiet">
+        <p style="margin:0;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"><strong>Need help now?</strong><button type="button" class="btn btn-help" data-goto="help" style="width:auto;min-height:44px;padding:10px 18px">Get help</button></p>
+        <p class="muted" style="margin:10px 0 0">One tap to 988, SAMHSA, your person, grounding, and a prayer &#8212; any time the day gets heavy.</p>
+      </div>
     </section>
-    <section class="card" id="setupCard">
+    <h2 class="today-h" id="pinnedH">Pinned</h2>
+<section class="card" id="setupCard">
       <h2>Your day counter</h2>
+      <div class="pin-summary">
+        <p class="pin-day" id="pinDayNum"></p>
+        <p class="muted" id="pinDayNote" style="margin:2px 0 0"></p>
+        <div class="pin-progress" aria-hidden="true"><span id="pinProgressFill"></span></div>
+        <p class="muted" id="pinProgressText" style="margin:8px 0 0"></p>
+        <div class="bars pin-bars" id="pinSpark" aria-hidden="true"></div>
+        <p class="muted" id="pinSparkText" style="margin:0"></p>
+      </div>
       <div id="setupForm">
         <p>Set the first day of <strong>your</strong> recovery. That day counts as <strong>Day 0</strong> — the way Steven counts on My Recovery Journey — and every day after it adds one.</p>
         <form id="startForm">
@@ -328,16 +358,14 @@ nav.tabbar button[aria-current="page"]{background:#101216;color:var(--accent);fo
         </details>
       </div>
     </section>
-
-    <section class="card" aria-labelledby="reflTitle">
-      <h2>Today's Reflection</h2>
-      <p class="font-display" id="reflTitle" style="font-size:1.35rem;font-weight:700;margin:0"></p>
-      <blockquote class="verse"><p id="reflVerse"></p><cite id="reflRef"></cite></blockquote>
-      <p id="reflBody"></p>
-      <p><strong>Prayer:</strong> <span id="reflPrayer"></span></p>
+    <section class="card" id="nextMileCard">
+      <h2>Next milestone</h2>
+      <p class="font-display" id="pinNextLabel" style="font-size:1.35rem;font-weight:700;margin:0"></p>
+      <p id="pinNextText" style="margin:8px 0 0"></p>
+      <div class="pin-progress" aria-hidden="true"><span id="pinNextFill"></span></div>
+      <p class="muted" style="margin:10px 0 0">Your full milestone list is further down this page.</p>
     </section>
-
-    <section class="card" id="checkinCard">
+<section class="card" id="checkinCard">
       <h2>Daily check-in</h2>
       <p class="muted" style="margin:0">Thirty seconds, honestly. How are you right now? Check-ins stay on this device, same as your journal.</p>
       <p style="margin:14px 0 0"><strong>I feel:</strong></p>
@@ -376,40 +404,69 @@ nav.tabbar button[aria-current="page"]{background:#101216;color:var(--accent);fo
       </div>
       <div id="checkinHistory"></div>
     </section>
-
-    <section class="card" id="learnCard">
-      <h2>Learn</h2>
-      <p style="margin:0">Short, plain-language lessons about how addiction works and how recovery works. Start with <strong>The Hijacked Brain</strong> &#8212; why addiction is not a character flaw, and why the brain heals.</p>
-      <p style="margin:12px 0 0"><button class="btn btn-stack" type="button" data-goto="learn">Browse the lessons</button></p>
-    </section>
-
-    <section class="card" id="weekendCard">
-      <h2>This Weekend</h2>
-      <p style="margin:0">Weather for Friday through Sunday, what&#8217;s on around town, and the weekend&#8217;s recovery meetings &#8212; gathered in one place, so the weekend has a shape before it starts.</p>
-      <p style="margin:12px 0 0"><button class="btn btn-stack" type="button" id="weekendOpenBtn" data-goto="weekend">Open This Weekend</button></p>
-    </section>
-
-    <section class="card" id="milesCard" hidden>
+<section class="card" id="milesCard" hidden>
       <h2>Milestones</h2>
       <ul class="miles" id="milesList"></ul>
       <p class="muted" id="nextMile" style="margin:12px 0 0"></p>
     </section>
-
-    <section class="card" id="groundCard">
+<section class="card" id="groundCard">
       <h2>5-4-3-2-1 Grounding</h2>
       <div id="groundRoot"></div>
     </section>
-
-    <section class="card">
+<section class="card">
       <h2>My Next Right Step</h2>
       <div id="todaySteps"></div>
       <p style="margin:12px 0 0"><button class="btn btn-stack" type="button" data-goto="steps">Open My Next Right Step</button></p>
     </section>
-
-    <section class="card" id="supportCard">
+    <h2 class="today-h" id="highlightsH">Highlights</h2>
+    <section class="card" id="highlightsCard">
+      <div class="hl-block">
+        <h3 style="margin-top:0">Craving trend</h3>
+        <p id="hlCravingText" style="margin:0"></p>
+        <div class="bars" id="hlCravingBars" aria-hidden="true"></div>
+        <p class="muted" id="hlCravingCap" style="margin:0;font-size:.85rem" hidden>Average craving per check-in day, oldest to newest.</p>
+      </div>
+      <div class="hl-block">
+        <h3 style="margin-top:0">Money saved</h3>
+        <p id="hlMoneyText" style="margin:0"></p>
+      </div>
+      <div class="hl-block">
+        <h3 style="margin-top:0">Gratitude streak</h3>
+        <p id="hlGratitudeText" style="margin:0"></p>
+        <p style="margin:12px 0 0"><button class="btn btn-stack" type="button" data-goto="journal">Open my gratitude journal</button></p>
+      </div>
+    </section>
+    <h2 class="today-h" id="articlesH">Articles</h2>
+<section class="card article-card" id="reflCard" aria-labelledby="reflTitle">
+      <div class="article-art" role="img" aria-label="Original Pacific Northwest artwork: dawn light over layered mountain ridges and pine forest"><svg viewBox="0 0 680 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><defs><linearGradient id="prcSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#79b5e8"/><stop offset=".62" stop-color="#cfe5f7"/><stop offset="1" stop-color="#f4e8d8"/></linearGradient></defs><rect width="680" height="300" fill="url(#prcSky)"/><circle cx="498" cy="90" r="30" fill="#f7f3e8" opacity=".95"/><path d="M0 152 L110 96 L212 142 L322 84 L432 140 L542 92 L680 144 L680 300 L0 300 Z" fill="#5b82a6" opacity=".85"/><path d="M0 198 L122 140 L252 192 L382 132 L522 190 L680 148 L680 300 L0 300 Z" fill="#2c4f6e"/><path d="M0 240 L142 198 L302 242 L472 202 L680 246 L680 300 L0 300 Z" fill="#12283a"/><g fill="#0b1c2c"><path d="M64 208 L82 246 L46 246 Z"/><rect x="61" y="244" width="6" height="10"/><path d="M112 220 L126 250 L98 250 Z"/><rect x="110" y="248" width="5" height="8"/><path d="M556 214 L574 252 L538 252 Z"/><rect x="553" y="250" width="6" height="10"/><path d="M606 226 L620 254 L592 254 Z"/><rect x="604" y="252" width="5" height="8"/></g></svg></div>
+      <div class="article-body">
+      <h2>Today's Reflection</h2>
+      <p class="font-display" id="reflTitle" style="font-size:1.35rem;font-weight:700;margin:0"></p>
+      <blockquote class="verse"><p id="reflVerse"></p><cite id="reflRef"></cite></blockquote>
+      <p id="reflBody"></p>
+      <p><strong>Prayer:</strong> <span id="reflPrayer"></span></p>
+    </div>
+    </section>
+<section class="card" id="learnCard">
+      <h2>Learn</h2>
+      <p style="margin:0">Short, plain-language lessons about how addiction works and how recovery works. Start with <strong>The Hijacked Brain</strong> &#8212; why addiction is not a character flaw, and why the brain heals.</p>
+      <p style="margin:12px 0 0"><button class="btn btn-stack" type="button" data-goto="learn">Browse the lessons</button></p>
+    </section>
+<section class="card" id="weekendCard">
+      <h2>This Weekend</h2>
+      <p style="margin:0">Weather for Friday through Sunday, what&#8217;s on around town, and the weekend&#8217;s recovery meetings &#8212; gathered in one place, so the weekend has a shape before it starts.</p>
+      <p style="margin:12px 0 0"><button class="btn btn-stack" type="button" id="weekendOpenBtn" data-goto="weekend">Open This Weekend</button></p>
+    </section>
+<section class="card" id="supportCard">
       <h2>Keeping this going</h2>
       <p style="margin:0">This app is free, and always will be. If it helped you today, you can help keep it going.</p>
       <p style="margin:12px 0 0"><button class="btn btn-stack" type="button" data-goto="support">Support this work</button> <button class="btn-quiet" type="button" id="supportCardDismiss">Dismiss</button></p>
+    </section>
+    <section class="card" id="founderTeaser">
+      <h2>The Founder&#8217;s Journey</h2>
+      <p style="margin:0">Steven Gregory started this journey on August 20, 2026, after 34 years of struggling with alcohol &#8212; rehabs, jail, and losing everything he owned more than once. He built My Recovery Journey for the person who feels alone in recovery tonight.<span id="founderTeaserDay"></span></p>
+      <p class="font-display" style="margin:12px 0 0;font-style:italic">&#8220;One Day at a Time. One Step Toward a New Life.&#8221;</p>
+      <p style="margin:12px 0 0"><button class="btn btn-stack" type="button" data-goto="founder">Read the Founder&#8217;s Journey</button></p>
     </section>
   </div>
 
@@ -2683,6 +2740,123 @@ applyPersonal();
     });
   }
   if(input){input.addEventListener("input",render);}
+})();
+</script>
+
+<script>
+/* PR C — Today: help-strip state, pinned summary, highlights.
+   Reads only the data the app already stores on this device
+   (mrj.checkins, mrj.journal, mrj.spend, mrj.start) — no new storage
+   keys, and nothing is sent anywhere. */
+(function(){
+  "use strict";
+  function $(id){return document.getElementById(id);}
+  function pad(n){return (n<10?"0":"")+n;}
+  function chicagoKey(t){
+    var parts=new Intl.DateTimeFormat("en-US",{timeZone:"America/Chicago",year:"numeric",month:"numeric",day:"numeric"}).formatToParts(new Date(t));
+    var o={}; parts.forEach(function(p){o[p.type]=Number(p.value);});
+    return o.year+"-"+pad(o.month)+"-"+pad(o.day);
+  }
+  function todayKey(){var t=chicagoToday();return t.y+"-"+pad(t.m)+"-"+pad(t.d);}
+  function keyMs(k){var p=k.split("-");return Date.UTC(+p[0],+p[1]-1,+p[2]);}
+  function r1(x){return Math.round(x*10)/10;}
+  /* Distinct check-in days (Chicago), oldest to newest, average craving. */
+  function recentCheckinDays(limit){
+    var sums={},counts={};
+    (window.checkins||[]).forEach(function(c){
+      var k=chicagoKey(c.t); sums[k]=(sums[k]||0)+Number(c.craving||0); counts[k]=(counts[k]||0)+1;
+    });
+    var ks=Object.keys(sums).sort().slice(-limit);
+    return ks.map(function(k){return {key:k,avg:sums[k]/counts[k]};});
+  }
+  function renderHelpStrip(){
+    var urgent=$("helpUrgent"), quiet=$("helpQuiet"); if(!urgent||!quiet)return;
+    var tk=todayKey(), hot=false;
+    (window.checkins||[]).forEach(function(c){ if(chicagoKey(c.t)===tk&&Number(c.craving)>=7)hot=true; });
+    urgent.hidden=!hot; quiet.hidden=hot;
+  }
+  function currentDay(){
+    if(window.personalStart)return {day:dayNumberFor(window.personalStart),personal:true};
+    return {day:window.founderDay,personal:false};
+  }
+  function renderPinned(){
+    var info=currentDay(), day=info.day;
+    var num=$("pinDayNum"); if(num)num.textContent=day>=0?("Day "+day):"Day 0 soon";
+    var note=$("pinDayNote");
+    if(note)note.textContent=info.personal?("Your journey \u2014 counting from "+fmtLong(window.personalStart)+"."):("Steven\u2019s journey \u2014 set your start date below to make this counter yours.");
+    var next=null, prev=0;
+    window.MILESTONES.forEach(function(m){ if(day>=m.days)prev=m.days; if(!next&&m.days>day)next=m; });
+    var pct=next&&day>=0?Math.max(0,Math.min(100,Math.round((day-prev)/(next.days-prev)*100))):100;
+    ["pinProgressFill","pinNextFill"].forEach(function(id){var f=$(id); if(f)f.style.width=pct+"%";});
+    var pt=$("pinProgressText");
+    if(pt)pt.textContent=next?("Progress to "+next.label+" \u2014 "+(next.days-day)+" "+((next.days-day)===1?"day":"days")+" to go."):"Every milestone on the list is behind you. Keep going \u2014 one day at a time.";
+    var nl=$("pinNextLabel"); if(nl)nl.textContent=next?next.label:"";
+    var nt=$("pinNextText");
+    if(nt)nt.textContent=next?((info.personal?"You reach ":"Steven reaches ")+next.label+" at Day "+next.days+" \u2014 "+(next.days-day)+" "+((next.days-day)===1?"day":"days")+" from today."):"";
+    var spark=$("pinSpark"), st=$("pinSparkText"), days=recentCheckinDays(7);
+    if(spark){
+      spark.innerHTML="";
+      days.forEach(function(d){var b=document.createElement("span"); b.style.height=Math.max(8,d.avg*10)+"%"; spark.appendChild(b);});
+      spark.style.display=days.length>=3?"flex":"none";
+    }
+    if(st)st.textContent=days.length>=3?("Check-in cravings across your last "+days.length+" check-in days, oldest to newest."):("Your recent check-in pattern will appear here once you have a few check-ins saved.");
+    var ft=$("founderTeaserDay"); if(ft)ft.textContent=" He is on Day "+window.founderDay+" today.";
+  }
+  var MONTHS={Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12};
+  function journalKey(en){
+    var m=/([A-Z][a-z]{2}) (\d{1,2}), (\d{4})/.exec(en.when||""); if(!m||!MONTHS[m[1]])return null;
+    return m[3]+"-"+pad(MONTHS[m[1]])+"-"+pad(+m[2]);
+  }
+  function renderHighlights(){
+    var ct=$("hlCravingText"), cb=$("hlCravingBars"), cc=$("hlCravingCap"), days=recentCheckinDays(7);
+    if(ct&&cb){
+      if(days.length>=7){
+        var avg=days.reduce(function(a,d){return a+d.avg;},0)/days.length;
+        var older=(days[0].avg+days[1].avg+days[2].avg)/3, newer=(days[4].avg+days[5].avg+days[6].avg)/3;
+        var move=newer<older-0.24?(", down from "+r1(older)+" at the start of that stretch"):newer>older+0.24?(", up from "+r1(older)+" at the start of that stretch"):(" \u2014 about the same as the "+r1(older)+" they started that stretch at");
+        ct.textContent="Your cravings averaged "+r1(avg)+" out of 10 across your last 7 check-in days"+move+".";
+        cb.innerHTML="";
+        days.forEach(function(d){var b=document.createElement("span"); b.style.height=Math.max(8,d.avg*10)+"%"; cb.appendChild(b);});
+        cb.style.display="flex"; if(cc)cc.hidden=false;
+      }else{
+        ct.textContent="This card needs about a week of check-ins before it can show an honest trend. You have "+days.length+" check-in "+(days.length===1?"day":"days")+" saved so far \u2014 keep checking in, and the pattern will appear here.";
+        cb.innerHTML=""; cb.style.display="none"; if(cc)cc.hidden=true;
+      }
+    }
+    var mt=$("hlMoneyText");
+    if(mt){
+      var d=window.personalStart?dayNumberFor(window.personalStart):-1;
+      if(window.dailySpend&&d>=0){
+        mt.innerHTML="Money not spent on alcohol so far: <strong>$"+Math.round(window.dailySpend*d).toLocaleString("en-US")+"</strong> <span class=\"muted\">(about $"+window.dailySpend+" a day \u00d7 "+d+" days)</span>";
+      }else{
+        mt.textContent="Set your start date above and add what a drinking day used to cost, and this card will turn your days into dollars you kept.";
+      }
+    }
+    var gt=$("hlGratitudeText");
+    if(gt){
+      var set={}, total=0, latest=null;
+      (window.journal||[]).forEach(function(en){var k=journalKey(en); if(k&&!set[k]){set[k]=true; total++; if(!latest||k>latest)latest=k;}});
+      if(!total){
+        gt.textContent="No gratitude entries yet. Your streak starts with the first one \u2014 today\u2019s can be as small as a cup of coffee, a phone call, or waking up sober.";
+      }else{
+        var cursor=keyMs(todayKey()); if(!set[todayKey()])cursor-=86400000;
+        var streak=0; while(set[new Date(cursor).toISOString().slice(0,10)]){streak++; cursor-=86400000;}
+        var dayWord=function(n){return n+" "+(n===1?"day":"days");};
+        if(streak>0){
+          gt.textContent="You\u2019ve written gratitude on "+dayWord(streak)+" in a row"+(set[todayKey()]?".":" through yesterday \u2014 add today\u2019s entry to keep it going.")+" "+dayWord(total)+" with entries in all.";
+        }else{
+          var lp=latest.split("-"), when=new Date(+lp[0],+lp[1]-1,+lp[2]).toLocaleDateString("en-US",{month:"short",day:"numeric"});
+          gt.textContent="Your last gratitude entry was "+when+". Writing one today starts a new streak \u2014 "+dayWord(total)+" with entries so far.";
+        }
+      }
+    }
+  }
+  function renderPRC(){ renderHelpStrip(); renderPinned(); renderHighlights(); }
+  var _rc=window.renderCheckins; if(_rc)window.renderCheckins=function(){_rc();renderPRC();};
+  var _rj=window.renderJournal; if(_rj)window.renderJournal=function(){_rj();renderPRC();};
+  var _rm=window.renderMoney; if(_rm)window.renderMoney=function(){_rm();renderPRC();};
+  var _ap=window.applyPersonal; if(_ap)window.applyPersonal=function(){_ap();renderPRC();};
+  renderPRC();
 })();
 </script>
 </body>
