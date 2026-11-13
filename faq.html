@@ -642,6 +642,12 @@
   footer .f-small{ margin-top:20px; font-size:.92rem; color:#9db9cc; }
 
   #this-weekend .btn{ display:flex; justify-content:center; width:100%; box-sizing:border-box; }
+  #this-weekend .wk-loc-label{ margin:20px 0 0; font-weight:700; }
+  #this-weekend .wk-manual{ display:flex; gap:10px; margin-top:10px; }
+  #this-weekend .wk-manual input{ flex:1; min-width:0; font:inherit; color:var(--ink); background:var(--field); border:1.5px solid var(--field-line); border-radius:13px; padding:13px 16px; }
+  #this-weekend .wk-manual .btn{ width:auto; flex:none; margin-top:0; }
+  #this-weekend .wk-status{ margin:10px 0 0; }
+  #this-weekend .wk-status:empty{ margin:0; }
 </style>
 <style id="enhance-2026-11">
 /* Visual polish pass */
@@ -1065,43 +1071,102 @@ a[href^="tel:"]{ white-space:nowrap; }
           <p><a class="btn" href="https://visitoxfordms.com/events/" target="_blank" rel="noopener">Visit Oxford Events</a></p>
           <p><a class="btn" href="https://www.squarebooks.com/events" target="_blank" rel="noopener">Square Books Events</a></p>
           <p><a class="btn" href="https://olemisssports.com/sports/football/schedule" target="_blank" rel="noopener">Ole Miss Football Schedule</a></p>
+          <p class="wk-loc-label">Seeing the wrong town? Set yours:</p>
+          <p><button type="button" class="btn ghost" id="wk-geo-btn">Use my location</button></p>
+          <div class="wk-manual">
+            <input type="text" id="wk-city-input" placeholder="Your city, state" aria-label="Your city" autocomplete="off" />
+            <button type="button" class="btn" id="wk-apply-btn">Set</button>
+          </div>
+          <p class="wk-status" id="wk-status" aria-live="polite"></p>
         </article>
       </section>
-    <script>
-    /* This Weekend: show each visitor events near their own city (falls back to Oxford). */
+<script>
+    /* This Weekend: show each visitor events near their own city.
+       Priority: a choice saved on this device (typed, or from "Use my location"),
+       then a rough estimate from the visitor's connection (ipwho.is).
+       The static Oxford links stay if nothing works. */
     (function () {
       var sec = document.getElementById('this-weekend');
-      if (!sec || !window.fetch) return;
+      if (!sec) return;
       var title = sec.querySelector('h3');
       var btns = sec.querySelectorAll('a.btn');
+      var intro = sec.querySelector('article p');
+      var status = document.getElementById('wk-status');
+      var geoBtn = document.getElementById('wk-geo-btn');
+      var input = document.getElementById('wk-city-input');
+      var applyBtn = document.getElementById('wk-apply-btn');
       if (!title || btns.length < 3) return;
+      var KEY = 'mrj.weekendCity';
       var slug = function (s) { return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); };
-      var ctrl = window.AbortController ? new AbortController() : null;
-      var timer = null;
-      if (ctrl) { timer = setTimeout(function () { ctrl.abort(); }, 3500); }
-      fetch('https://ipwho.is/', ctrl ? { signal: ctrl.signal } : {})
-        .then(function (r) { return r.json(); })
-        .then(function (d) {
-          if (timer) clearTimeout(timer);
-          if (!d || !d.success || !d.city) return;
-          var city = d.city, region = d.region || '', country = d.country || '';
-          var place = region ? city + ', ' + region : city;
-          var g = 'https://www.google.com/search?q=';
-          title.textContent = 'What\u2019s Going On Around ' + city;
-          var intro = sec.querySelector('article p');
-          if (intro && city !== 'Oxford') { intro.textContent = 'Local calendars and listings that stay current on their own \u2014 concerts, community events, sports, and more near you:'; }
-          if (country === 'United States' && region) {
-            btns[0].href = 'https://www.eventbrite.com/d/' + slug(country) + '--' + slug(region) + '--' + slug(city) + '/events/';
-          } else {
-            btns[0].href = g + encodeURIComponent('events in ' + place + ' this weekend');
-          }
-          btns[0].textContent = 'Events in ' + city + ' This Weekend';
-          btns[1].href = 'https://www.ticketmaster.com/search?q=' + encodeURIComponent(city + ' events');
-          btns[1].textContent = 'Concerts & Sports in ' + city;
-          btns[2].href = g + encodeURIComponent('things to do in ' + place + ' this weekend');
-          btns[2].textContent = 'Things To Do in ' + city;
-        })
-        .catch(function () { /* lookup failed: the Oxford version stays */ });
+      function say(msg) { if (status) status.textContent = msg; }
+      function applyPlace(p, saved) {
+        if (!p || !p.city) return;
+        var city = p.city, region = p.region || '', label = p.label || (region ? city + ', ' + region : city);
+        var isUS = (p.countryCode === 'US') || p.country === 'United States' || p.country === 'United States of America' || (!p.country && !p.countryCode);
+        var g = 'https://www.google.com/search?q=';
+        title.textContent = 'What\u2019s Going On Around ' + city;
+        if (city !== 'Oxford' && intro) { intro.textContent = 'Local calendars and listings that stay current on their own \u2014 concerts, community events, sports, and more near you:'; }
+        if (isUS && region && region.length > 2) {
+          btns[0].href = 'https://www.eventbrite.com/d/united-states--' + slug(region) + '--' + slug(city) + '/events/';
+        } else if (isUS && region && region.length === 2) {
+          btns[0].href = 'https://www.eventbrite.com/d/' + region.toLowerCase() + '--' + slug(city) + '/events/';
+        } else {
+          btns[0].href = g + encodeURIComponent('events in ' + label + ' this weekend');
+        }
+        btns[0].textContent = 'Events in ' + city + ' This Weekend';
+        btns[1].href = 'https://www.ticketmaster.com/search?q=' + encodeURIComponent(city + ' events');
+        btns[1].textContent = 'Concerts & Sports in ' + city;
+        btns[2].href = g + encodeURIComponent('things to do in ' + label + ' this weekend');
+        btns[2].textContent = 'Things To Do in ' + city;
+        if (saved) say('Showing what\u2019s on around ' + city + ' \u2014 saved on this device.');
+      }
+      function save(p) { try { localStorage.setItem(KEY, JSON.stringify(p)); } catch (e) {} }
+      function load() { try { var s = localStorage.getItem(KEY); return s ? JSON.parse(s) : null; } catch (e) { return null; } }
+      var savedPlace = load();
+      if (savedPlace && savedPlace.city) { applyPlace(savedPlace, true); }
+      else if (window.fetch) {
+        var ctrl = window.AbortController ? new AbortController() : null;
+        var timer = null;
+        if (ctrl) { timer = setTimeout(function () { ctrl.abort(); }, 3500); }
+        fetch('https://ipwho.is/', ctrl ? { signal: ctrl.signal } : {})
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            if (timer) clearTimeout(timer);
+            if (!d || !d.success || !d.city) return;
+            applyPlace({ city: d.city, region: d.region || '', country: d.country || '', countryCode: d.country_code || '' }, false);
+          })
+          .catch(function () { /* Oxford stays */ });
+      }
+      if (geoBtn && navigator.geolocation) {
+        geoBtn.addEventListener('click', function () {
+          say('Getting your location\u2026');
+          navigator.geolocation.getCurrentPosition(function (pos) {
+            var url = 'https://api-bdc.io/data/reverse-geocode-client?latitude=' + pos.coords.latitude + '&longitude=' + pos.coords.longitude + '&localityLanguage=en';
+            fetch(url).then(function (r) { return r.json(); }).then(function (d) {
+              var city = d && (d.city || d.locality);
+              if (!city) { say('That didn\u2019t work \u2014 try typing your city instead.'); return; }
+              var p = { city: city, region: d.principalSubdivision || '', country: d.countryName || '', countryCode: d.countryCode || '' };
+              save(p); applyPlace(p, true);
+            }).catch(function () { say('That didn\u2019t work \u2014 try typing your city instead.'); });
+          }, function () {
+            say('Location wasn\u2019t shared \u2014 you can type your city instead.');
+          }, { timeout: 10000 });
+        });
+      } else if (geoBtn) {
+        geoBtn.style.display = 'none';
+      }
+      function applyTyped() {
+        var raw = ((input && input.value) || '').replace(/\s+/g, ' ').trim();
+        if (!raw) { say('Type your city first \u2014 like \u201cNashville, TN\u201d.'); return; }
+        var parts = raw.split(',');
+        var city = parts[0].trim();
+        var region = parts.length > 1 ? parts[1].trim() : '';
+        if (!city) { say('Type your city first \u2014 like \u201cNashville, TN\u201d.'); return; }
+        var p = { city: city, region: region, label: raw, country: '', countryCode: '' };
+        save(p); applyPlace(p, true);
+      }
+      if (applyBtn) applyBtn.addEventListener('click', applyTyped);
+      if (input) input.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') { ev.preventDefault(); applyTyped(); } });
     })();
     </script>
   </div>
@@ -2113,7 +2178,7 @@ a[href^="tel:"]{ white-space:nowrap; }
           <h3>No accounts, no tracking cookies</h3>
           <p>Browsing this site never requires an account, and the site itself runs no advertising or tracking cookies. My Recovery Journey is a personal website maintained by Steven Gregory.</p>
           <p>Visitor counting: I use GoatCounter to count anonymous visits so I can see how many people this site reaches. It sets no cookies and does not identify or track individual visitors. The journals and tools on this site still keep everything you type on your own device.</p>
-          <p>Home-page local events: the &#8220;This Weekend&#8221; section on the home page uses a small service called ipwho.is to estimate your city from your internet connection, so it can show events near you instead of only near me. The lookup runs in your browser &#8212; your city is not sent to me and is not stored anywhere. If it doesn&#8217;t work, the section simply shows Oxford, Mississippi.</p>
+          <p>Home-page local events: the &#8220;This Weekend&#8221; section on the home page tries to show events near you instead of only near me. Until you set anything, it estimates your city from your internet connection with a small service called ipwho.is &#8212; that estimate runs in your browser, is not sent to me, and is not stored. If you tap &#8220;Use my location,&#8221; your browser asks your permission first, and your coordinates go to a map service (BigDataCloud) only to turn them into a city name. If you type your city instead, it is kept only on your own device, in your browser&#8217;s local storage, so the section remembers it next time. Either way, nothing about your location is sent to me or stored anywhere else.</p>
         </article>
         <article class="card">
           <h3>The recovery tools store data on your device only</h3>
