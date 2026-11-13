@@ -746,7 +746,7 @@ html[data-theme="dark"] .card{ border-color:rgba(60,100,132,.55); }
 .tile{ width:64px; height:64px; border-radius:18px; background:linear-gradient(155deg,#3c78a6 0%,#1a4a72 55%,#123a5c 100%); box-shadow:inset 0 1px 0 rgba(255,255,255,.32), 0 6px 14px rgba(20,62,98,.28); }
 .tile.gold{ color:#f2c15a; }
 .compass-tile{ width:64px; height:64px; border:2.5px solid #9fb3c4; background:radial-gradient(circle at 35% 30%,#fff,#dbe6ef 70%); color:#1e5a86; box-shadow:0 5px 12px rgba(20,62,98,.22), inset 0 -2px 4px rgba(20,62,98,.15); }
-.card h3{ font-size:clamp(1.35rem,3.4vw,1.75rem); letter-spacing:-.005em; }
+.card h3{ font-size:clamp(0.9rem,4.6vw,1.75rem); letter-spacing:-.005em; }
 .card .sub{ font-size:1.05rem; margin-top:4px; }
 
 /* Buttons */
@@ -806,7 +806,7 @@ html[data-theme="dark"] .next-step{ background:var(--card-cream); border-color:r
   .card-head{ gap:13px; }
   .tile,.compass-tile{ width:52px; height:52px; border-radius:15px; }
   .tile svg,.compass-tile svg{ width:28px; height:28px; }
-  .card h3{ font-size:1.3rem; }
+  .card h3{ font-size:clamp(0.9rem,4.6vw,1.75rem); }
   .card .sub{ font-size:1rem; }
   .form-actions{ flex-direction:column; align-items:stretch; }
   .form-actions .btn{ flex:none; justify-content:center; }
@@ -1169,7 +1169,6 @@ a[href^="tel:"]{ white-space:nowrap; }
               var city = d && (d.city || d.locality);
               if (!city) { say('That didn\u2019t work \u2014 try typing your city instead.'); return; }
               var p = { city: city, region: d.principalSubdivision || '', country: d.countryName || '', countryCode: d.countryCode || '' };
-              if (input) input.value = '';
               save(p); applyPlace(p, true);
             }).catch(function () { say('That didn\u2019t work \u2014 try typing your city instead.'); });
           }, function () {
@@ -3087,6 +3086,36 @@ a[href^="tel:"]{ white-space:nowrap; }
     }
     window.addEventListener('hashchange', syncToRoute);
     syncToRoute();
+  })();
+
+  /* ---------- Card headers: keep every header on one line ---------- */
+  (function(){
+    function linesOf(el){
+      var r = document.createRange();
+      r.selectNodeContents(el);
+      return r.getClientRects().length;
+    }
+    function fitOne(h){
+      if (!h.clientWidth) return;
+      h.style.fontSize = '';
+      var size = parseFloat(window.getComputedStyle(h).fontSize) || 20;
+      var guard = 0;
+      while (linesOf(h) > 1 && size > 11 && guard < 30) {
+        size = Math.round((size - 0.5) * 10) / 10;
+        h.style.fontSize = size + 'px';
+        guard++;
+      }
+    }
+    function fitAll(){
+      var hs = document.querySelectorAll('.card h3');
+      for (var i = 0; i < hs.length; i++) fitOne(hs[i]);
+    }
+    fitAll();
+    window.addEventListener('hashchange', function(){ setTimeout(fitAll, 60); });
+    if (document.fonts && document.fonts.load) { try { document.fonts.load('700 1em Lora').then(function(){ fitAll(); }); } catch (e) {} }
+    window.addEventListener('load', function(){ setTimeout(fitAll, 400); });
+    var rzT;
+    window.addEventListener('resize', function(){ clearTimeout(rzT); rzT = setTimeout(fitAll, 200); });
   })();
 </script>
 
