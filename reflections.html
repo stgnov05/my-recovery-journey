@@ -650,6 +650,9 @@
   #this-weekend .wk-status:empty{ margin:0; }
 
   #faith .faith-card a.btn{ display:flex; justify-content:center; width:100%; box-sizing:border-box; }
+
+  #notifyBell[aria-pressed="true"]{ color:var(--gold); }
+  #notifyBell[aria-pressed="true"] svg{ fill:currentColor; }
 </style>
 <style id="enhance-2026-11">
 /* Visual polish pass */
@@ -864,6 +867,19 @@ a[href^="tel:"]{ white-space:nowrap; }
   .page-foot-nav a{ flex:1 1 0; text-align:center; display:flex; align-items:center; justify-content:center; }
 }
 </style>
+
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "6aa9679c-012d-4ecc-971a-c1fd1cf623fe",
+      serviceWorkerPath: "OneSignalSDKWorker.js",
+      serviceWorkerParam: { scope: "/my-recovery-journey/" },
+      notifyButton: { enable: false }
+    });
+  });
+</script>
 </head>
 <body>
 <a class="help-fab" href="#/resources" aria-label="Need help now: find crisis and recovery support">Need help now</a>
@@ -882,6 +898,9 @@ a[href^="tel:"]{ white-space:nowrap; }
         </button>
         <button class="icon-btn" id="searchBtn" aria-label="Search this site">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+        </button>
+        <button class="icon-btn" id="notifyBell" aria-label="Get notified about new posts" aria-pressed="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M10.3 21a2 2 0 0 0 3.4 0"/></svg>
         </button>
       </div>
     </div>
@@ -2183,6 +2202,7 @@ a[href^="tel:"]{ white-space:nowrap; }
           <p>Browsing this site never requires an account, and the site itself runs no advertising or tracking cookies. My Recovery Journey is a personal website maintained by Steven Gregory.</p>
           <p>Visitor counting: I use GoatCounter to count anonymous visits so I can see how many people this site reaches. It sets no cookies and does not identify or track individual visitors. The journals and tools on this site still keep everything you type on your own device.</p>
           <p>Home-page local events: the &#8220;This Weekend&#8221; section on the home page tries to show events near you instead of only near me. Until you set anything, it estimates your city from your internet connection with a small service called ipwho.is &#8212; that estimate runs in your browser, is not sent to me, and is not stored. If you tap &#8220;Use my location,&#8221; your browser asks your permission first, and your coordinates go to a map service (BigDataCloud) only to turn them into a city name. If you type your city instead, it is kept only on your own device, in your browser&#8217;s local storage, so the section remembers it next time. Either way, nothing about your location is sent to me or stored anywhere else.</p>
+        <p> Notifications: the bell at the top of the site lets you choose to be notified when a new Journey Update or Daily Reflection is posted. That service is run by OneSignal. If you opt in, your browser creates a notification subscription for this site, and OneSignal holds the token needed to deliver messages to your browser &#8212; Steven does not receive your name, your email, or any list of who subscribed. You can turn notifications off any time with the same bell, or in your browser&#8217;s settings.</p>
         </article>
         <article class="card">
           <h3>The recovery tools store data on your device only</h3>
@@ -3070,5 +3090,36 @@ a[href^="tel:"]{ white-space:nowrap; }
 
 <script data-goatcounter="https://myrecoveryjourney.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
+
+<script>
+/* Notifications bell: strictly opt-in. The first tap asks the browser's permission
+   through OneSignal; tapping again while subscribed turns notifications off. */
+(function () {
+  var bell = document.getElementById('notifyBell');
+  if (!bell || !window.OneSignalDeferred) return;
+  function paint(OneSignal) {
+    try {
+      var on = !!(OneSignal.User && OneSignal.User.PushSubscription && OneSignal.User.PushSubscription.optedIn);
+      bell.setAttribute('aria-pressed', on ? 'true' : 'false');
+      bell.setAttribute('aria-label', on ? 'Notifications on \u2014 tap to turn off' : 'Get notified about new posts');
+    } catch (e) {}
+  }
+  OneSignalDeferred.push(async function (OneSignal) {
+    paint(OneSignal);
+    try { OneSignal.User.PushSubscription.addEventListener('change', function () { paint(OneSignal); }); } catch (e) {}
+  });
+  bell.addEventListener('click', function () {
+    OneSignalDeferred.push(async function (OneSignal) {
+      try {
+        var sub = OneSignal.User.PushSubscription;
+        if (sub && sub.optedIn) { await sub.optOut(); }
+        else if (!OneSignal.Notifications.permission) { await OneSignal.Notifications.requestPermission(); }
+        else if (sub) { await sub.optIn(); }
+      } catch (e) {}
+      paint(OneSignal);
+    });
+  });
+})();
+</script>
 </body>
 </html>
