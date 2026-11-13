@@ -35,13 +35,13 @@
   --accent-strong:#0a84ff;
   --gold:#c3d2df; --gold-bright:#8ec9ff; --gold-soft:#262a33;
   --red:#ff453a;
-  --radius:26px; --nav-h:68px;
+  --radius:26px;
   --pad:16px; --gap:12px; --section:20px;
   --title:34px; --cardtitle:22px; --body:17px; --caption:13px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font-family:"Source Sans 3",system-ui,-apple-system,Segoe UI,sans-serif;font-size:17px;line-height:1.55;padding-bottom:calc(var(--nav-h) + 92px + env(safe-area-inset-bottom))}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Source Sans 3",system-ui,-apple-system,Segoe UI,sans-serif;font-size:17px;line-height:1.55;padding-bottom:calc(92px + env(safe-area-inset-bottom))}
 .font-display{font-family:"Newsreader",Georgia,serif}
 a{color:var(--accent)}
 button{font:inherit;cursor:pointer}
@@ -121,12 +121,6 @@ ul.wk-meet li:last-child{border-bottom:0}
 /* Tabs / views */
 .view{display:none}
 .view.active{display:block}
-nav.bottom{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--border);padding-bottom:env(safe-area-inset-bottom);z-index:20}
-nav.bottom .inner{max-width:680px;margin:0 auto;display:flex}
-nav.bottom button{flex:1;background:none;border:0;padding:12px 2px 10px;color:var(--dim);font-size:.82rem;font-weight:700;line-height:1.15}
-nav.bottom button .ic{display:block;font-size:1.15rem;line-height:1;margin-bottom:3px;font-family:"Newsreader",Georgia,serif}
-nav.bottom button[aria-current="page"]{color:var(--accent)}
-nav.bottom button[aria-current="page"]{box-shadow:inset 0 3px 0 var(--accent)}
 
 /* Install instructions */
 .install-hero{display:flex;gap:16px;align-items:center}
@@ -221,12 +215,14 @@ ul.miles li[role="button"]:focus-visible{outline:3px solid var(--gold);outline-o
 /* PR A — floating 3-tab bar + persistent Help (3-tab redesign plan §2/§3).
    Icons are original SVGs drawn on one 24px grid, same stroke weight.
    Tab labels follow the approved mockup (11px, standard iOS tab size);
-   all content text stays at 13px or larger. Old bottom nav stays until PR E. */
-nav.tabbar{position:fixed;left:16px;right:16px;bottom:calc(var(--nav-h) + 10px + env(safe-area-inset-bottom));max-width:648px;margin:0 auto;background:rgba(38,40,46,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:999px;display:flex;padding:7px;z-index:30;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+   all content text stays at 13px or larger. PR E removed the old bottom
+   nav — this bar is the only bottom navigation; it floats 10px above the
+   screen edge and page content clears it via the body bottom padding. */
+nav.tabbar{position:fixed;left:16px;right:16px;bottom:calc(10px + env(safe-area-inset-bottom));max-width:648px;margin:0 auto;background:rgba(38,40,46,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:999px;display:flex;padding:7px;z-index:30;box-shadow:0 8px 24px rgba(0,0,0,.45)}
 nav.tabbar button{flex:1;min-width:0;background:none;border:0;color:#e8edf3;font-size:11px;font-weight:600;line-height:1.2;padding:5px 0 4px;border-radius:999px}
 nav.tabbar button svg{display:block;width:20px;height:20px;margin:0 auto 3px}
 nav.tabbar button[aria-current="page"]{background:#101216;color:var(--accent);font-weight:700}
-.help-fab{position:fixed;right:16px;bottom:calc(var(--nav-h) + 84px + env(safe-area-inset-bottom));z-index:31;background:var(--red);color:#fff;border:0;font-size:14px;font-weight:800;padding:10px 16px;border-radius:999px;box-shadow:0 8px 22px rgba(255,69,58,.35)}
+.help-fab{position:fixed;right:16px;bottom:calc(84px + env(safe-area-inset-bottom));z-index:31;background:var(--red);color:#fff;border:0;font-size:14px;font-weight:800;padding:10px 16px;border-radius:999px;box-shadow:0 8px 22px rgba(255,69,58,.35)}
 /* PR B — Browse: title, search pill, results, category grid */
 .browse-title{font-size:var(--title);font-weight:800;line-height:1.15;margin:4px 0 0}
 .browse-sub{color:var(--dim);margin:8px 0 0}
@@ -1300,17 +1296,6 @@ section.card.article-card{padding:0;overflow:hidden}
   <button type="button" data-tab="fellowship" data-goto="fellowship"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9" r="2.8"/><path d="M15.6 14.2c2.3.3 4.1 1.9 4.7 4.8"/></svg>Fellowship</button>
   <button type="button" data-tab="browse" data-goto="browse"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>Browse</button>
 </nav>
-<nav class="bottom" aria-label="App sections">
-  <div class="inner">
-    <button type="button" data-goto="today" aria-current="page"><span class="ic" aria-hidden="true">☀</span>Today</button>
-    <button type="button" data-goto="collection"><span class="ic" aria-hidden="true">◉</span>Collection</button>
-    <button type="button" data-goto="journal"><span class="ic" aria-hidden="true">✎</span>Journal</button>
-    <button type="button" data-goto="steps"><span class="ic" aria-hidden="true">→</span>Next Step</button>
-    <button type="button" data-goto="founder"><span class="ic" aria-hidden="true">♰</span>Founder</button>
-    <button type="button" data-goto="support"><span class="ic" aria-hidden="true">♥</span>Support</button>
-    <button type="button" data-goto="install"><span class="ic" aria-hidden="true">⬇</span>Install</button>
-  </div>
-</nav>
 
 <script>
 
@@ -1436,16 +1421,14 @@ function renderMiles(elId,nextId,day){
   else np.textContent="";
 }
 
-/* Tabs — old bottom nav + PR A floating 3-tab bar (Today / Fellowship / Browse).
+/* Tabs — the PR A floating 3-tab bar (Today / Fellowship / Browse) is the
+   only bottom navigation since PR E removed the old bottom nav.
    Fellowship is a real view since PR D (Support still lights the Fellowship tab).
    Browse is a real view since PR B (lessons, meetings, weekend count as Browse). */
 var TAB_FOR_VIEW={today:"today",support:"fellowship",fellowship:"fellowship",learn:"browse",meetings:"browse",weekend:"browse",browse:"browse"};
 function goTo(name){
   document.querySelectorAll(".view").forEach(function(v){v.classList.remove("active");});
   var el=document.getElementById("view-"+name); if(el)el.classList.add("active");
-  document.querySelectorAll("nav.bottom button").forEach(function(b){
-    if(b.getAttribute("data-goto")===name)b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current");
-  });
   var tab=TAB_FOR_VIEW[name]||(name.indexOf("lesson-")===0?"browse":null);
   document.querySelectorAll("nav.tabbar button").forEach(function(b){
     if(tab&&b.getAttribute("data-tab")===tab)b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current");
