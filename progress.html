@@ -1167,6 +1167,7 @@ a[href^="tel:"]{ white-space:nowrap; }
               var city = d && (d.city || d.locality);
               if (!city) { say('That didn\u2019t work \u2014 try typing your city instead.'); return; }
               var p = { city: city, region: d.principalSubdivision || '', country: d.countryName || '', countryCode: d.countryCode || '' };
+              if (input) input.value = '';
               save(p); applyPlace(p, true);
             }).catch(function () { say('That didn\u2019t work \u2014 try typing your city instead.'); });
           }, function () {
