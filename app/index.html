@@ -273,6 +273,19 @@ section.card.article-card{padding:0;overflow:hidden}
 .person-h{font-size:var(--body);font-weight:700;margin:0}
 .person-name{font-size:var(--body);font-weight:700;margin:8px 0 0}
 </style>
+
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "6aa9679c-012d-4ecc-971a-c1fd1cf623fe",
+      serviceWorkerPath: "OneSignalSDKWorker.js",
+      serviceWorkerParam: { scope: "/my-recovery-journey/" },
+      notifyButton: { enable: false }
+    });
+  });
+</script>
 </head>
 <body>
 
@@ -414,6 +427,13 @@ section.card.article-card{padding:0;overflow:hidden}
         <p style="margin:10px 0 0"><button class="btn btn-help btn-stack" type="button" data-goto="help">I&#8217;m struggling right now</button></p>
       </div>
       <div id="checkinHistory"></div>
+    </section>
+<section class="card" id="remindCard">
+      <h2>Daily reminders</h2>
+      <p class="muted" style="margin:0">A gentle nudge once a day, only if you want it. Turning one on asks your permission to send notifications &#8212; the same ask as the bell on the website. Your check-ins and journal entries themselves never leave this device; the notification service (OneSignal) only keeps these two on/off flags.</p>
+      <p style="margin:14px 0 0"><label><input type="checkbox" id="remindCheckin"> Morning check-in reminder</label></p>
+      <p style="margin:10px 0 0"><label><input type="checkbox" id="remindGratitude"> Evening gratitude reminder</label></p>
+      <p class="muted" id="remindStatus" aria-live="polite" style="margin:10px 0 0"></p>
     </section>
 <section class="card" id="milesCard" hidden>
       <h2>Milestones</h2>
@@ -3043,6 +3063,49 @@ applyPersonal();
   if(window.renderSupport){var _rs=window.renderSupport; window.renderSupport=function(){var sw=$("supportWrap"); if(sw&&!window.support)delete sw.dataset.bound; _rs(); renderPeople();};}
   if(window.goTo){var _gt=window.goTo; window.goTo=function(n){_gt(n); if(n==="fellowship")renderPeople();};}
   renderPeople();
+})();
+</script>
+
+<script>
+/* Daily reminders: opt-in toggles. Each toggle sets a yes/no tag on this device's
+   OneSignal subscription; the daily sends are scheduled in OneSignal itself. */
+(function () {
+  var c = document.getElementById('remindCheckin');
+  var g = document.getElementById('remindGratitude');
+  var status = document.getElementById('remindStatus');
+  if (!c || !g || !window.OneSignalDeferred) return;
+  function say(msg) { if (status) status.textContent = msg; }
+  function sync(OneSignal) {
+    try {
+      var tags = OneSignal.User.getTags ? OneSignal.User.getTags() : null;
+      if (tags && typeof tags === 'object') {
+        c.checked = tags.remind_checkin === '1';
+        g.checked = tags.remind_gratitude === '1';
+      }
+    } catch (e) {}
+  }
+  OneSignalDeferred.push(async function (OneSignal) { sync(OneSignal); });
+  async function apply(OneSignal, which) {
+    var box = which === 'checkin' ? c : g;
+    var key = which === 'checkin' ? 'remind_checkin' : 'remind_gratitude';
+    try {
+      if (box.checked) {
+        if (!OneSignal.Notifications.permission) { await OneSignal.Notifications.requestPermission(); }
+        if (!OneSignal.Notifications.permission) { box.checked = false; say('Notifications are off for this app in your settings, so the reminder can\u2019t be set.'); return; }
+        await OneSignal.User.addTag(key, '1');
+        say(which === 'checkin' ? 'Morning check-in reminder is on.' : 'Evening gratitude reminder is on.');
+      } else {
+        await OneSignal.User.removeTag(key);
+        say('Reminder off.');
+      }
+    } catch (e) { say('That didn\u2019t work just now \u2014 please try again.'); }
+  }
+  function wire(box, which) {
+    box.addEventListener('change', function () {
+      OneSignalDeferred.push(function (OneSignal) { return apply(OneSignal, which); });
+    });
+  }
+  wire(c, 'checkin'); wire(g, 'gratitude');
 })();
 </script>
 </body>
