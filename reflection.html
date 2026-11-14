@@ -897,6 +897,28 @@ a[href^="tel:"]{ white-space:nowrap; }
     });
   });
 </script>
+<script>
+/* Pre-route: show the requested page from the first paint. Without this, every
+   page view stays hidden until the main script runs, and the content's late
+   appearance shoves the page down - the site's main layout shift (CLS). */
+(function(){
+  var PAGES = {home:1,tools:1,gratitude:1,milestones:1,reflection:1,grounding:1,'next-step':1,story:1,updates:1,faith:1,resources:1,'start-here':1,paths:1,faq:1,articles:1,books:1,progress:1,support:1,'sober-living':1,directory:1,privacy:1,reflections:1};
+  var ALIASES = {welcome:'home',index:'home',start:'home'};
+  function name(){
+    var raw = (location.hash || '').replace(/^#\/?/, '').split('?')[0];
+    if (ALIASES[raw]) raw = ALIASES[raw];
+    return PAGES[raw] ? raw : '';
+  }
+  var st = document.createElement('style');
+  document.head.appendChild(st);
+  function apply(){
+    var n = name();
+    st.textContent = n ? '.page-view[data-page="' + n + '"]{ display:block; }' : '';
+  }
+  apply();
+  window.addEventListener('hashchange', apply);
+})();
+</script>
 </head>
 <body>
 <a class="help-fab" href="#/resources" aria-label="Need help now: find crisis and recovery support">Need help now</a>
