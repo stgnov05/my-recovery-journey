@@ -281,6 +281,7 @@ section.card.article-card{padding:0;overflow:hidden}
     await OneSignal.init({
       appId: "6aa9679c-012d-4ecc-971a-c1fd1cf623fe",
       path: "/my-recovery-journey/",
+      serviceWorkerOverrideForTypical: true,
       serviceWorkerPath: "OneSignalSDKWorker.js",
       serviceWorkerParam: { scope: "/my-recovery-journey/" },
       notifyButton: { enable: false }
