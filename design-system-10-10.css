@@ -71,3 +71,6 @@ a:focus, button:focus { outline: 3px solid var(--sand); outline-offset: 2px; bor
 /* Article */
 .article-meta { font-size: 14px; color: #6b7c88; display:flex; gap:12px; }
 .prose { max-width: 65ch; margin: 0 auto; }
+
+/* Footer paragraphs stay full-width so the footer's centered lines center on the page, not inside the 65ch reading cap */
+footer p{ max-width:none; }
