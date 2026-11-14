@@ -368,6 +368,9 @@
 .day-band .day-label{ font-size:.85rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); }
 .day-band .day-num{ font-family:"Lora", Georgia, serif; font-size:2.3rem; font-weight:700; line-height:1.15; margin-top:6px; color:#fff; }
 .day-band .day-sub{ margin:8px auto 0; max-width:46ch; color:#e6eff5; }
+  .d90-band{ margin:16px auto 0; max-width:640px; text-align:center; background:#fdf6e3; border:1.5px solid var(--gold); color:var(--navy-deep); border-radius:var(--radius); padding:16px 22px; box-shadow:var(--shadow); }
+  .d90-band .d90-title{ font-family:"Lora", Georgia, serif; font-size:1.28rem; font-weight:700; line-height:1.25; }
+  .d90-band .d90-sub{ margin:6px auto 0; max-width:52ch; }
 .update-list{ display:grid; gap:16px; max-width:760px; margin:22px auto 0; text-align:left; }
 .update-item{ background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px 22px; }
 .update-meta{ display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:8px; }
@@ -975,6 +978,10 @@ a[href^="tel:"]{ white-space:nowrap; }
         <div class="day-label">Steven&#8217;s Journey &#183; One Day at a Time</div>
         <div class="day-num">Day <span class="js-day-count">78</span></div>
         <p class="day-sub">Counting from August 20, 2026 &#8212; and today is the only day that has to be won.</p>
+      </div>
+      <div class="d90-band" id="d90Band" role="note" aria-label="Day 90 milestone" hidden>
+        <div class="d90-title" id="d90Title">Day 90 is coming</div>
+        <p class="d90-sub" id="d90Sub">Ninety days, built one day at a time.</p>
       </div>
     </section>
 
@@ -2487,6 +2494,29 @@ a[href^="tel:"]{ white-space:nowrap; }
     if (days < 0) days = 0;
     var els = document.querySelectorAll('.js-day-count');
     for (var i = 0; i < els.length; i++) els[i].textContent = days;
+  } catch (e) {}
+})();
+</script>
+<script>
+/* Day 90 milestone band: shows during the run-up (Days 84-89) and on Day 90 itself, then retires on its own. */
+(function(){
+  try {
+    var start = new Date(2026, 7, 20);
+    var now = new Date();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var days = Math.round((today - start) / 86400000);
+    var band = document.getElementById('d90Band');
+    if (!band) return;
+    if (days >= 84 && days < 90) {
+      var left = 90 - days;
+      document.getElementById('d90Title').textContent = 'Day 90 is coming \u2014 Tuesday, November 18';
+      document.getElementById('d90Sub').textContent = 'Ninety days, built one day at a time \u2014 ' + (left === 1 ? 'tomorrow is the day.' : left + ' days to go.');
+      band.hidden = false;
+    } else if (days === 90) {
+      document.getElementById('d90Title').textContent = 'Today is Day 90';
+      document.getElementById('d90Sub').textContent = 'Ninety days \u2014 every one of them one day at a time. Thank God, and thank you for walking this road with me.';
+      band.hidden = false;
+    }
   } catch (e) {}
 })();
 </script>
