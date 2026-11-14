@@ -371,7 +371,7 @@
 .day-band .day-sub{ margin:8px auto 0; max-width:46ch; color:#e6eff5; }
   .d90-band{ margin:16px auto 0; max-width:640px; text-align:center; background:#fdf6e3; border:1.5px solid var(--gold); color:var(--navy-deep); border-radius:var(--radius); padding:16px 22px; box-shadow:var(--shadow); }
   .d90-band .d90-title{ font-family:"Lora", Georgia, serif; font-size:clamp(0.8rem,4.6vw,1.28rem); font-weight:700; line-height:1.25; }
-  .d90-band .d90-sub{ margin:6px auto 0; max-width:52ch; }
+  .d90-band .d90-sub{ margin:6px auto 0; max-width:52ch; font-size:clamp(0.72rem,3.9vw,1.02rem); }
 .scripture-index .book-head{ font-family:Lora, Georgia, serif; font-size:1.08rem; color:var(--navy-deep); margin:20px 0 4px; }
 .scripture-index .verse-entry{ margin:0 0 12px; }
 .scripture-index .v-ref{ font-weight:700; color:var(--steel); }
@@ -2602,24 +2602,28 @@ a[href^="tel:"]{ white-space:nowrap; }
       band.hidden = false;
     }
     if (!band.hidden) {
-      var d90TitleEl = document.getElementById('d90Title');
-      var fitD90Title = function() {
-        if (band.hidden || !d90TitleEl || !d90TitleEl.clientWidth) return;
-        d90TitleEl.style.fontSize = '';
-        d90TitleEl.style.whiteSpace = 'nowrap';
-        var size = parseFloat(window.getComputedStyle(d90TitleEl).fontSize) || 20;
+      var fitD90Line = function(el) {
+        if (!el || !el.clientWidth) return;
+        el.style.fontSize = '';
+        el.style.whiteSpace = 'nowrap';
+        var size = parseFloat(window.getComputedStyle(el).fontSize) || 16;
         var guard = 0;
-        while (d90TitleEl.scrollWidth > d90TitleEl.clientWidth && size > 10 && guard < 48) {
+        while (el.scrollWidth > el.clientWidth && size > 10 && guard < 48) {
           size -= 0.5; guard++;
-          d90TitleEl.style.fontSize = size + 'px';
+          el.style.fontSize = size + 'px';
         }
-        d90TitleEl.style.whiteSpace = '';
+        el.style.whiteSpace = '';
       };
-      fitD90Title();
-      if (document.fonts && document.fonts.load) { document.fonts.load('700 1em Lora').then(fitD90Title).catch(function() {}); }
-      window.addEventListener('load', function() { fitD90Title(); setTimeout(fitD90Title, 400); });
-      window.addEventListener('hashchange', fitD90Title);
-      window.addEventListener('resize', fitD90Title);
+      var fitD90 = function() {
+        if (band.hidden) return;
+        fitD90Line(document.getElementById('d90Title'));
+        if (days < 90) fitD90Line(document.getElementById('d90Sub'));
+      };
+      fitD90();
+      if (document.fonts && document.fonts.load) { document.fonts.load('700 1em Lora').then(fitD90).catch(function() {}); }
+      window.addEventListener('load', function() { fitD90(); setTimeout(fitD90, 400); });
+      window.addEventListener('hashchange', fitD90);
+      window.addEventListener('resize', fitD90);
     }
   } catch (e) {}
 })();
