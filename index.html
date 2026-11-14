@@ -3420,7 +3420,10 @@ a[href^="tel:"]{ white-space:nowrap; }
     if (!v) return;
     for (var i = 0; i < btns.length; i++) btns[i].classList.remove('on');
     btn.classList.add('on');
-    result.innerHTML = '<p class="storm-verse">' + v.text + '</p><p class="storm-ref">\u2014 ' + v.ref + ' (NLT)</p>';
+    var t = v.text;
+    if (t.charAt(0) === '\u201C') t = t.slice(1);
+    if (t.charAt(t.length - 1) === '\u201D') t = t.slice(0, -1);
+    result.innerHTML = '<p class="storm-verse">\u201C' + t + '\u201D</p><p class="storm-ref">\u2014 ' + v.ref + ' (NLT)</p>';
   }
   for (var i = 0; i < btns.length; i++) {
     btns[i].addEventListener('click', function () { pick(this); });
