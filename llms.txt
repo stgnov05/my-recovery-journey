@@ -1,0 +1,67 @@
+# My Recovery Journey
+
+> A personal recovery website by Steven Gregory: one day at a time after 34 years with alcohol. Faith, hope, and practical tools for people in recovery and for the people who love them.
+
+Steven Gregory began this recovery on August 20, 2026, and built this site to help anyone who feels alone in theirs. It holds his story, a day-by-day journal of the journey, daily reflections with Scripture (quoted from the NLT), a gratitude journal, recovery milestones, and simple tools for hard moments, including a grounding page, a Scripture index, and Scripture for the Storm, a small verse finder for fear, loneliness, shame, anger, hopelessness, and grief. A free companion web app carries the same tools onto a phone home screen.
+
+There are no accounts on this site. The gratitude journal, check-ins, and other personal entries are stored only on the visitor's own device and are never sent anywhere. If you are in crisis, call or text 988 in the US (Suicide and Crisis Lifeline) or call SAMHSA at 1-800-662-4357.
+
+## Start here
+
+- [Home](https://stgnov05.github.io/my-recovery-journey/): Start page with the day counter, the newest updates, and local weekend events.
+- [Start Here](https://stgnov05.github.io/my-recovery-journey/start-here.html): A welcome and a suggested path for first-time visitors.
+- [My Story](https://stgnov05.github.io/my-recovery-journey/story.html): Steven's story, honestly told.
+- [Journey Updates](https://stgnov05.github.io/my-recovery-journey/updates.html): The day-by-day journal of this recovery, newest first.
+
+## Daily life in recovery
+
+- [Daily Reflection](https://stgnov05.github.io/my-recovery-journey/reflection.html): A rotating daily reflection with a verse and a thought to carry.
+- [Reflections Archive](https://stgnov05.github.io/my-recovery-journey/reflections.html): Every dated Daily Reflection, plus the Scripture Index and Scripture for the Storm.
+- [Faith for the Journey](https://stgnov05.github.io/my-recovery-journey/faith.html): Faith, prayer, and Scripture for the road.
+- [Gratitude Journal](https://stgnov05.github.io/my-recovery-journey/gratitude.html): A private journal that stays on your own device.
+- [My Milestones](https://stgnov05.github.io/my-recovery-journey/milestones.html): The milestones of this journey so far.
+- [My Progress](https://stgnov05.github.io/my-recovery-journey/progress.html): An honest look at progress over time.
+- [My Next Right Step](https://stgnov05.github.io/my-recovery-journey/next-step.html): One small next step when the whole road feels like too much.
+
+## Daily Reflections
+
+- [Day 86: Every Good Gift](https://stgnov05.github.io/my-recovery-journey/reflections/day-86-every-good-gift.html): James 1:17.
+- [Day 85: Hold On to Hope](https://stgnov05.github.io/my-recovery-journey/reflections/day-85-hold-on-to-hope.html): Hebrews 10:23.
+- [Day 84: Trust Him With the Path](https://stgnov05.github.io/my-recovery-journey/reflections/day-84-trust-him-with-the-path.html): Proverbs 3:5-6.
+- [Day 83: Overflowing with Hope](https://stgnov05.github.io/my-recovery-journey/reflections/day-83-overflowing-with-hope.html): Romans 15:13.
+- [Day 82: A New Life Has Begun](https://stgnov05.github.io/my-recovery-journey/reflections/day-82-a-new-life-has-begun.html): 2 Corinthians 5:17.
+- [Day 81: Be Still](https://stgnov05.github.io/my-recovery-journey/reflections/day-81-be-still.html): Psalm 46:10.
+- [Day 80: Be Strong and Courageous](https://stgnov05.github.io/my-recovery-journey/reflections/day-80-be-strong-and-courageous.html): Joshua 1:9.
+- [Day 79: Wait Patiently](https://stgnov05.github.io/my-recovery-journey/reflections/day-79-wait-patiently.html): Psalm 27:14.
+- [Day 78: Show Me Where to Walk](https://stgnov05.github.io/my-recovery-journey/reflections/day-78-show-me-where-to-walk.html): Psalm 143:8.
+- [Day 77: A Day the Lord Has Made](https://stgnov05.github.io/my-recovery-journey/reflections/day-77-a-day-the-lord-has-made.html): Psalm 118:24.
+- [Day 76: Don't Give Up Before the Harvest](https://stgnov05.github.io/my-recovery-journey/reflections/day-76-dont-give-up-before-the-harvest.html): Galatians 6:9.
+- [Day 75: Strength for Today](https://stgnov05.github.io/my-recovery-journey/reflections/day-75-strength-for-today.html): Isaiah 41:10.
+- [Day 74: New Mercies Every Morning](https://stgnov05.github.io/my-recovery-journey/reflections/day-74-new-mercies-every-morning.html): Lamentations 3:22-23.
+
+## Tools and help
+
+- [Recovery Tools](https://stgnov05.github.io/my-recovery-journey/tools.html): All the site's tools in one place.
+- [Daily Tracker (printable PDF)](https://stgnov05.github.io/my-recovery-journey/daily-tracker.pdf): A one-page printable sheet for tracking the day.
+- [Recovery Resources](https://stgnov05.github.io/my-recovery-journey/resources.html): Meetings, helplines, and further help, with 988 and SAMHSA at the top.
+- [When a Moment Feels Difficult](https://stgnov05.github.io/my-recovery-journey/grounding.html): Guided grounding for a hard moment, right now.
+- [Recovery Paths](https://stgnov05.github.io/my-recovery-journey/paths.html): The different paths people take in recovery, without judgment.
+- [Sober Living](https://stgnov05.github.io/my-recovery-journey/sober-living.html): About sober living and Oxford Houses.
+
+## Read and learn
+
+- [Articles and Inspiration](https://stgnov05.github.io/my-recovery-journey/articles.html): Longer reads and encouragement.
+- [Books and Literature](https://stgnov05.github.io/my-recovery-journey/books.html): Books and literature that help.
+- [FAQ](https://stgnov05.github.io/my-recovery-journey/faq.html): Honest answers to common questions.
+- [Site Directory](https://stgnov05.github.io/my-recovery-journey/directory.html): Every page on the site, listed.
+
+## The app
+
+- [My Recovery Journey App](https://stgnov05.github.io/my-recovery-journey/app/): The free companion web app: day counter, daily check-in, gratitude journal, milestones, Learn lessons, and help that is always one tap away. Add it to a phone home screen from the browser; everything personal stays on the device.
+
+## Optional
+
+- [Support This Site](https://stgnov05.github.io/my-recovery-journey/support.html): How to support the site, and what support helps with.
+- [Privacy](https://stgnov05.github.io/my-recovery-journey/privacy.html): What this site does and does not do with visitor information, in plain words.
+- [My Recovery Journey on Facebook](https://www.facebook.com/stgnov05): The Facebook Page for daily posts.
+- [My Recovery Journey Facebook Group](https://www.facebook.com/groups/1437390218108130/): The community group: faith, hope, healing, second chances.
