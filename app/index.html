@@ -3087,24 +3087,29 @@ applyPersonal();
     } catch (e) {}
   }
   OneSignalDeferred.push(async function (OneSignal) { sync(OneSignal); });
-  async function apply(OneSignal, which) {
+  async function apply(OneSignal, which, wantOn) {
     var box = which === 'checkin' ? c : g;
     var key = which === 'checkin' ? 'remind_checkin' : 'remind_gratitude';
     try {
-      if (box.checked) {
+      if (wantOn) {
         if (!OneSignal.Notifications.permission) { await OneSignal.Notifications.requestPermission(); }
         if (!OneSignal.Notifications.permission) { box.checked = false; say('Notifications are off for this app in your settings, so the reminder can\u2019t be set.'); return; }
+        try { await OneSignal.User.PushSubscription.optIn(); } catch (e) {}
+        if (!OneSignal.User.PushSubscription.optedIn) { box.checked = false; say('That didn\u2019t finish signing you up \u2014 please try tapping again.'); return; }
         await OneSignal.User.addTag(key, '1');
+        box.checked = true;
         say(which === 'checkin' ? 'Morning check-in reminder is on.' : 'Evening gratitude reminder is on.');
       } else {
         await OneSignal.User.removeTag(key);
+        box.checked = false;
         say('Reminder off.');
       }
     } catch (e) { say('That didn\u2019t work just now \u2014 please try again.'); }
   }
   function wire(box, which) {
     box.addEventListener('change', function () {
-      OneSignalDeferred.push(function (OneSignal) { return apply(OneSignal, which); });
+      var wantOn = box.checked;
+      OneSignalDeferred.push(function (OneSignal) { return apply(OneSignal, which, wantOn); });
     });
   }
   wire(c, 'checkin'); wire(g, 'gratitude');
