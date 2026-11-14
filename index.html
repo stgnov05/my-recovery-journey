@@ -1101,12 +1101,12 @@ a[href^="tel:"]{ white-space:nowrap; }
         <p>Recovery happens one day at a time &#8212; and weekends can be the hardest days of the week. Here&#8217;s where to find what&#8217;s happening around town.</p>
       </div>
       <article class="card mini-card">
-          <h3>What&#8217;s Going On Around Oxford</h3>
-          <p>Local calendars that stay current on their own &#8212; concerts, events on the Square, book signings, and ballgames:</p>
-          <!-- THIS WEEKEND: update these event links when Steven moves (Seattle after Dec 10, 2026). -->
-          <p><a class="btn" href="https://visitoxfordms.com/events/" target="_blank" rel="noopener">Visit Oxford Events</a></p>
-          <p><a class="btn" href="https://www.squarebooks.com/events" target="_blank" rel="noopener">Square Books Events</a></p>
-          <p><a class="btn" href="https://olemisssports.com/sports/football/schedule" target="_blank" rel="noopener">Ole Miss Football Schedule</a></p>
+          <h3>What&#8217;s Going On Around Seattle</h3>
+          <p>Local calendars that stay current on their own &#8212; concerts, events around the waterfront and Capitol Hill, book readings, and ballgames:</p>
+          <!-- THIS WEEKEND: Steven moved to Seattle on Dec 10, 2026 - these are the Seattle fallback links. Update them if he moves again. -->
+          <p><a class="btn" href="https://visitseattle.org/events/" target="_blank" rel="noopener">Visit Seattle Events</a></p>
+          <p><a class="btn" href="https://www.elliottbaybook.com/events" target="_blank" rel="noopener">Elliott Bay Book Events</a></p>
+          <p><a class="btn" href="https://www.seahawks.com/schedule/" target="_blank" rel="noopener">Seahawks Schedule</a></p>
           <p class="wk-loc-label">Seeing the wrong town? Set yours:</p>
           <p><button type="button" class="btn ghost" id="wk-geo-btn">Use my location</button></p>
           <div class="wk-manual">
@@ -1120,7 +1120,7 @@ a[href^="tel:"]{ white-space:nowrap; }
     /* This Weekend: show each visitor events near their own city.
        Priority: a choice saved on this device (typed, or from "Use my location"),
        then a rough estimate from the visitor's connection (ipwho.is).
-       The static Oxford links stay if nothing works. */
+       The static Seattle links stay if nothing works. */
     (function () {
       var sec = document.getElementById('this-weekend');
       if (!sec) return;
@@ -1141,7 +1141,7 @@ a[href^="tel:"]{ white-space:nowrap; }
         var isUS = (p.countryCode === 'US') || p.country === 'United States' || p.country === 'United States of America' || (!p.country && !p.countryCode);
         var g = 'https://www.google.com/search?q=';
         title.textContent = 'What\u2019s Going On Around ' + city;
-        if (city !== 'Oxford' && intro) { intro.textContent = 'Local calendars and listings that stay current on their own \u2014 concerts, community events, sports, and more near you:'; }
+        if (city !== 'Seattle' && intro) { intro.textContent = 'Local calendars and listings that stay current on their own \u2014 concerts, community events, sports, and more near you:'; }
         if (isUS && region && region.length > 2) {
           btns[0].href = 'https://www.eventbrite.com/d/united-states--' + slug(region) + '--' + slug(city) + '/events/';
         } else if (isUS && region && region.length === 2) {
@@ -1171,7 +1171,7 @@ a[href^="tel:"]{ white-space:nowrap; }
             if (!d || !d.success || !d.city) return;
             applyPlace({ city: d.city, region: d.region || '', country: d.country || '', countryCode: d.country_code || '' }, false);
           })
-          .catch(function () { /* Oxford stays */ });
+          .catch(function () { /* Seattle stays */ });
       }
       if (geoBtn && navigator.geolocation) {
         geoBtn.addEventListener('click', function () {
