@@ -382,6 +382,13 @@
 .storm-verse{ font-family:Lora, Georgia, serif; font-size:1.12rem; line-height:1.5; margin:10px 0 4px; }
 .storm-ref{ font-weight:700; color:var(--steel); margin:0; }
 .storm-prompt{ margin:10px 0 0; }
+.path-btns{ display:flex; flex-wrap:wrap; gap:10px; margin:14px 0 6px; }
+.path-btn{ font:inherit; font-weight:700; color:var(--steel); background:var(--field); border:1.5px solid var(--field-line); border-radius:999px; padding:10px 20px; cursor:pointer; }
+.path-btn.on{ background:var(--steel); border-color:var(--steel); color:#fff; }
+.path-result{ margin-top:10px; }
+.path-text{ margin:10px 0; }
+.path-links{ margin:6px 0 2px; }
+.path-links .btn{ margin:2px 6px 2px 0; }
 .update-list{ display:grid; gap:16px; max-width:760px; margin:22px auto 0; text-align:left; }
 .update-item{ background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px 22px; }
 .update-meta{ display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:8px; }
@@ -1729,6 +1736,25 @@ a[href^="tel:"]{ white-space:nowrap; }
         <p class="lede">New to recovery &#8212; or starting again after a setback? You do not have to figure everything out today. Begin with one next step.</p>
       </div>
       <div class="page-cards">
+        <article class="card paths-card" id="start-paths">
+          <div class="card-head">
+            <span class="tile" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V4"/><path d="M12 5h8l-2.5 2.5L20 10h-8"/><path d="M12 12H4l2.5 2.5L4 17h8"/></svg>
+            </span>
+            <div>
+              <h3>Where are you right now?</h3>
+              <p class="sub">Four honest starting points &#8212; pick the one that sounds like you today.</p>
+            </div>
+          </div>
+          <div class="path-btns">
+            <button type="button" class="path-btn" data-path="crisis">I&#8217;m struggling right now</button>
+            <button type="button" class="path-btn" data-path="new">I&#8217;m new to recovery</button>
+            <button type="button" class="path-btn" data-path="support">I&#8217;m supporting someone</button>
+            <button type="button" class="path-btn" data-path="read">I&#8217;m just here to read</button>
+          </div>
+          <div class="path-result" id="startPathResult" aria-live="polite"></div>
+        </article>
+        
         <article class="card">
           <h3>If you need help right now</h3>
           <p>In the U.S., call or text <b>988</b> any time for crisis support, or call SAMHSA&#8217;s National Helpline at <b>1-800-662-HELP (4357)</b> for free, confidential treatment referrals, 24/7. In immediate danger, call <b>911</b>.</p>
@@ -3398,6 +3424,63 @@ a[href^="tel:"]{ white-space:nowrap; }
   }
   for (var i = 0; i < btns.length; i++) {
     btns[i].addEventListener('click', function () { pick(this); });
+  }
+})();
+</script>
+<script>
+/* Start Here paths: four starting points, one tailored panel each. */
+(function () {
+  var card = document.getElementById('start-paths');
+  var result = document.getElementById('startPathResult');
+  if (!card || !result) return;
+  var paths = {
+    crisis: {
+      text: 'You do not have to carry this hour alone. Reaching out right now is not weakness \u2014 it is the strongest step there is.',
+      links: [
+        ['tel:988', 'Call or text 988', ''],
+        ['#/grounding', 'Grounding exercise', ' ghost'],
+        ['#/resources', 'Recovery Resources', ' ghost']
+      ]
+    },
+    'new': {
+      text: 'Welcome \u2014 you are in the right place. Recovery is built one small, honest day at a time, and today is the only day you have to win.',
+      links: [
+        ['#/reflection', 'Today\u2019s reflection', ''],
+        ['#/tools', 'Recovery Tools', ' ghost'],
+        ['#/next-step', 'My Next Right Step', ' ghost']
+      ]
+    },
+    support: {
+      text: 'Thank you for standing with someone you love. You cannot carry their recovery for them, but you do not have to stand there empty-handed either.',
+      links: [
+        ['#/paths', 'Recovery Paths', ''],
+        ['#/articles', 'Articles &amp; Inspiration', ' ghost'],
+        ['#/faq', 'Questions &amp; Answers', ' ghost']
+      ]
+    },
+    read: {
+      text: 'Make yourself at home. This is one man\u2019s honest story of rebuilding a life \u2014 faith, hope, and practical tools, one day at a time.',
+      links: [
+        ['#/story', 'Read My Story', ''],
+        ['#/updates', 'Journey Updates', ' ghost'],
+        ['#/reflections', 'Reflections Archive', ' ghost']
+      ]
+    }
+  };
+  var btns = card.querySelectorAll('.path-btn');
+  function pick(btn) {
+    var p = paths[btn.getAttribute('data-path')];
+    if (!p) return;
+    for (var i = 0; i < btns.length; i++) btns[i].classList.remove('on');
+    btn.classList.add('on');
+    var html = '<p class="path-text">' + p.text + '</p><p class="path-links">';
+    for (var j = 0; j < p.links.length; j++) {
+      html += '<a class="btn' + p.links[j][2] + '" href="' + p.links[j][0] + '">' + p.links[j][1] + '</a>';
+    }
+    result.innerHTML = html + '</p>';
+  }
+  for (var k = 0; k < btns.length; k++) {
+    btns[k].addEventListener('click', function () { pick(this); });
   }
 })();
 </script>
