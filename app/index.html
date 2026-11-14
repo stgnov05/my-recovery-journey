@@ -339,7 +339,7 @@ section.card.article-card{padding:0;overflow:hidden}
         <p class="muted" id="pinSparkText" style="margin:0"></p>
       </div>
       <div id="setupForm">
-        <p>Set the first day of <strong>your</strong> recovery. That day counts as <strong>Day 0</strong> — the way Steven counts on My Recovery Journey — and every day after it adds one.</p>
+        <p>Set the first day of <strong>your</strong> recovery. That day counts as <strong>Sober Day 0</strong> — the way Steven counts on My Recovery Journey — and every day after it adds one.</p>
         <form id="startForm">
           <div class="form-row">
             <div class="grow">
@@ -1395,7 +1395,7 @@ var REFLECTIONS=[
 {title:"Let Go of the Past",verse:"I focus on this one thing: Forgetting the past and looking forward to what lies ahead.",reference:"Philippians 3:13 (NLT)",body:"Paul had a past too — one with real harm in it. His freedom did not come from pretending it never happened, but from refusing to live facing backward. You cannot drive forward staring in the rearview mirror. Own the past, learn from it, and then face the road ahead.",prayer:"Lord, help me learn from my past without living in it. Turn my face toward what lies ahead."},
 {title:"The God Who Sees",verse:"Yes, you have been with me from birth; from my mother's womb you have cared for me.",reference:"Psalm 71:6 (NLT)",body:"Loneliness is one of addiction's cruelest lies — the feeling that no one sees you and no one would stay if they did. The truth is that God has seen you and cared for you your whole life, including the years you could not see Him. You have never once been unseen.",prayer:"God, thank You that You have seen me and cared for me all along. Help me feel it today."}
 ];
-var MILESTONES=[{days:1,label:"Day One"},{days:7,label:"One Week"},{days:14,label:"Two Weeks"},{days:30,label:"30 Days"},{days:60,label:"60 Days"},{days:90,label:"90 Days"},{days:120,label:"Four Months"},{days:180,label:"Six Months"},{days:270,label:"Nine Months"},{days:365,label:"One Year"},{days:548,label:"Eighteen Months"},{days:730,label:"Two Years"},{days:1095,label:"Three Years"},{days:1825,label:"Five Years"}];
+var MILESTONES=[{days:1,label:"Sober Day One"},{days:7,label:"One Week"},{days:14,label:"Two Weeks"},{days:30,label:"30 Days"},{days:60,label:"60 Days"},{days:90,label:"90 Days"},{days:120,label:"Four Months"},{days:180,label:"Six Months"},{days:270,label:"Nine Months"},{days:365,label:"One Year"},{days:548,label:"Eighteen Months"},{days:730,label:"Two Years"},{days:1095,label:"Three Years"},{days:1825,label:"Five Years"}];
 var FOUNDER_START="2026-08-20";
 
 /* On-device storage: everything stays on the reader's own phone or
@@ -1434,7 +1434,7 @@ function renderMiles(elId,nextId,day){
     li.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();openMilestoneDetail(m.days, elId==="founderMiles"?"founder":"personal");}});
     var a=document.createElement("span"); a.textContent=m.label; if(day>=m.days)a.style.fontWeight="600";
     var b=document.createElement("span"); var reached=day>=m.days;
-    b.textContent=reached?"Reached ✓":"Day "+m.days; b.className=reached?"mile-status":"mile-todo";
+    b.textContent=reached?"Reached ✓":"Sober Day "+m.days; b.className=reached?"mile-status":"mile-todo";
     li.appendChild(a); li.appendChild(b); ul.appendChild(li);
   });
   var next=MILESTONES.find(function(m){return m.days>day;});
@@ -1469,9 +1469,9 @@ if(supportCardDismiss)supportCardDismiss.addEventListener("click",function(){sto
 /* Hero + reflection */
 var founderDay=dayNumberFor(FOUNDER_START);
 document.getElementById("todayLabel").textContent=todayLabel();
-document.getElementById("heroDay").textContent="Day "+founderDay;
-document.getElementById("heroSub").textContent="Steven Gregory — Day "+founderDay+" since August 20, 2026. Your counter is below.";
-document.getElementById("founderDay").textContent="Day "+founderDay;
+document.getElementById("heroDay").textContent="Sober Day "+founderDay;
+document.getElementById("heroSub").textContent="Steven Gregory — Sober Day "+founderDay+" since August 20, 2026. Your counter is below.";
+document.getElementById("founderDay").textContent="Sober Day "+founderDay;
 var r=reflectionForToday();
 document.getElementById("reflTitle").textContent=r.title;
 document.getElementById("reflVerse").textContent="“"+r.verse+"”";
@@ -1497,14 +1497,14 @@ function applyPersonal(){
   document.getElementById("milesCard").hidden=!has;
   if(has){
     var d=dayNumberFor(personalStart);
-    document.getElementById("startDateLabel").textContent=fmtLong(personalStart)+" (Day 0)";
-    document.getElementById("personalDayLabel").textContent=d>=0?("Day "+d):("starting "+fmtLong(personalStart));
+    document.getElementById("startDateLabel").textContent=fmtLong(personalStart)+" (Sober Day 0)";
+    document.getElementById("personalDayLabel").textContent=d>=0?("Sober Day "+d):("starting "+fmtLong(personalStart));
     document.getElementById("startDate2").value=personalStart;
     if(d>=0)renderMiles("milesList","nextMile",d);
-    document.getElementById("heroDay").textContent=d>=0?("Day "+d):"Day 0 soon";
+    document.getElementById("heroDay").textContent=d>=0?("Sober Day "+d):"Sober Day 0 soon";
     document.getElementById("heroSub").textContent=d>=0?("Your recovery — Day "+d+" counting from "+fmtLong(personalStart)+". Steven is on Day "+founderDay+"."):"Your journey begins "+fmtLong(personalStart)+".";
   }else{
-    document.getElementById("heroDay").textContent="Day "+founderDay;
+    document.getElementById("heroDay").textContent="Sober Day "+founderDay;
   }
   renderMoney();
 }
@@ -2167,7 +2167,7 @@ function checkMilestones(){
   art.className="mile-latest "+(latest.kind==="aa"?"mile-coin":"mile-tag");
   art.innerHTML=collTokenArt(latest.kind,latest.t);
   if(latest.t.glow)art.style.filter="drop-shadow(0 0 14px rgba(165,230,150,.9))"; else art.style.filter="";
-  document.getElementById("milestoneLine").textContent="Day "+latest.t.days+" — You earned your "+latest.t.colorName+" "+(latest.kind==="aa"?"Coin":"Key Tag")+".";
+  document.getElementById("milestoneLine").textContent="Sober Day "+latest.t.days+" — You earned your "+latest.t.colorName+" "+(latest.kind==="aa"?"Coin":"Key Tag")+".";
   var more=document.getElementById("milestoneMore");
   if(fresh.length>1){
     more.hidden=false;
@@ -2340,7 +2340,7 @@ function buildShareCanvas(){
     var earned=[];
     if(collMode!=="na")AA_COINS.forEach(function(t){if(day>=t.days)earned.push({kind:"aa",t:t});});
     if(collMode!=="aa")NA_TAGS.forEach(function(t){if(day>=t.days)earned.push({kind:"na",t:t});});
-    var head=(o.showDay?("Day "+day+" — "):"")+earned.length+" token"+(earned.length===1?"":"s")+" earned";
+    var head=(o.showDay?("Sober Day "+day+" — "):"")+earned.length+" token"+(earned.length===1?"":"s")+" earned";
     ctx.fillText(head,540,172);
     var cols=4, cell=230, x0=540-((Math.min(cols,Math.max(earned.length,1))-1)*cell)/2, y=330;
     earned.slice(0,12).forEach(function(e,i){
@@ -2360,7 +2360,7 @@ function buildShareCanvas(){
     ctx.font="800 58px sans-serif";
     ctx.fillText(t.front,540,838);
     ctx.font="600 36px sans-serif"; ctx.fillStyle="#d9e6f2";
-    ctx.fillText(o.showDay?("Day "+day+" — My Recovery Journey"):("My Recovery Journey"),540,890);
+    ctx.fillText(o.showDay?("Sober Day "+day+" — My Recovery Journey"):("My Recovery Journey"),540,890);
     footer();
   }
   return cv;
@@ -2409,9 +2409,9 @@ function shareCaptionText(){
   var day=collDay();
   if(shareState.kind!=="collection"&&shareState.token){
     var t=shareState.token;
-    return "Day "+t.days+". "+t.colorName+" "+(shareState.kind2==="aa"?"coin":"key tag")+" earned, one day at a time. #MyRecoveryJourney #Recovery #SoberLife #OneDayAtATime #Sobriety";
+    return "Sober Day "+t.days+". "+t.colorName+" "+(shareState.kind2==="aa"?"coin":"key tag")+" earned, one day at a time. #MyRecoveryJourney #Recovery #SoberLife #OneDayAtATime #Sobriety";
   }
-  return "Day "+day+". My collection so far, earned one day at a time. #MyRecoveryJourney #Recovery #SoberLife #OneDayAtATime #Sobriety";
+  return "Sober Day "+day+". My collection so far, earned one day at a time. #MyRecoveryJourney #Recovery #SoberLife #OneDayAtATime #Sobriety";
 }
 function copyShareCaption(){
   var txt=shareCaptionText();
@@ -2535,10 +2535,10 @@ function mdShow(cfg){
   var moment=document.createElement("p"); moment.style.margin="6px 0 0";
   if(startISO){
     var dateISO=collAddDaysISO(startISO,cfg.days);
-    if(earned)moment.innerHTML="Day "+cfg.days+" — reached <strong>"+fmtLong(dateISO)+"</strong>. One day at a time got you here.";
-    else{ var n=cfg.days-day; moment.innerHTML="Day "+cfg.days+" — <strong>"+n+" "+(n===1?"day":"days")+" to go</strong> · "+fmtLong(dateISO)+". It is ahead of you on the road."; }
+    if(earned)moment.innerHTML="Sober Day "+cfg.days+" — reached <strong>"+fmtLong(dateISO)+"</strong>. One day at a time got you here.";
+    else{ var n=cfg.days-day; moment.innerHTML="Sober Day "+cfg.days+" — <strong>"+n+" "+(n===1?"day":"days")+" to go</strong> · "+fmtLong(dateISO)+". It is ahead of you on the road."; }
   }else{
-    moment.textContent="Day "+cfg.days+" of the journey.";
+    moment.textContent="Sober Day "+cfg.days+" of the journey.";
   }
   body.appendChild(moment);
   if(art){
@@ -2854,7 +2854,7 @@ applyPersonal();
   }
   function renderPinned(){
     var info=currentDay(), day=info.day;
-    var num=$("pinDayNum"); if(num)num.textContent=day>=0?("Day "+day):"Day 0 soon";
+    var num=$("pinDayNum"); if(num)num.textContent=day>=0?("Sober Day "+day):"Sober Day 0 soon";
     var note=$("pinDayNote");
     if(note)note.textContent=info.personal?("Your journey \u2014 counting from "+fmtLong(window.personalStart)+"."):("Steven\u2019s journey \u2014 set your start date below to make this counter yours.");
     var next=null, prev=0;
@@ -2873,7 +2873,7 @@ applyPersonal();
       spark.style.display=days.length>=3?"flex":"none";
     }
     if(st)st.textContent=days.length>=3?("Check-in cravings across your last "+days.length+" check-in days, oldest to newest."):("Your recent check-in pattern will appear here once you have a few check-ins saved.");
-    var ft=$("founderTeaserDay"); if(ft)ft.textContent=" He is on Day "+window.founderDay+" today.";
+    var ft=$("founderTeaserDay"); if(ft)ft.textContent=" He is on Sober Day "+window.founderDay+" today.";
   }
   var MONTHS={Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12};
   function journalKey(en){
