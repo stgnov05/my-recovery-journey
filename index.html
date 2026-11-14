@@ -375,6 +375,13 @@
 .scripture-index .book-head{ font-family:Lora, Georgia, serif; font-size:1.08rem; color:var(--navy-deep); margin:20px 0 4px; }
 .scripture-index .verse-entry{ margin:0 0 12px; }
 .scripture-index .v-ref{ font-weight:700; color:var(--steel); }
+.storm-btns{ display:flex; flex-wrap:wrap; gap:10px; margin:14px 0 6px; }
+.storm-btn{ font:inherit; font-weight:700; color:var(--steel); background:var(--field); border:1.5px solid var(--field-line); border-radius:999px; padding:10px 20px; cursor:pointer; }
+.storm-btn.on{ background:var(--steel); border-color:var(--steel); color:#fff; }
+.storm-result{ margin-top:10px; }
+.storm-verse{ font-family:Lora, Georgia, serif; font-size:1.12rem; line-height:1.5; margin:10px 0 4px; }
+.storm-ref{ font-weight:700; color:var(--steel); margin:0; }
+.storm-prompt{ margin:10px 0 0; }
 .update-list{ display:grid; gap:16px; max-width:760px; margin:22px auto 0; text-align:left; }
 .update-item{ background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px 22px; }
 .update-meta{ display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:8px; }
@@ -2366,6 +2373,29 @@ a[href^="tel:"]{ white-space:nowrap; }
 <p><a href="reflections/day-74-new-mercies-every-morning.html">Read this reflection</a></p>
 </article>
 </div>
+<article class="card storm-card" id="storm">
+    <div class="card-head">
+      <span class="tile" aria-hidden="true">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 1 9 9H3a9 9 0 0 1 9-9Z"/><path d="M12 12v6a3 3 0 0 0 6 0"/></svg>
+      </span>
+      <div>
+        <h3>Scripture for the Storm</h3>
+        <p class="sub">A verse for whatever you are carrying today.</p>
+      </div>
+    </div>
+    <p class="hint">Some days the storm has a name. Tap the one that feels heaviest right now, and sit with the verse for a moment.</p>
+    <div class="storm-btns">
+      <button type="button" class="storm-btn" data-storm="fear">Fear</button>
+      <button type="button" class="storm-btn" data-storm="loneliness">Loneliness</button>
+      <button type="button" class="storm-btn" data-storm="shame">Shame</button>
+      <button type="button" class="storm-btn" data-storm="anger">Anger</button>
+      <button type="button" class="storm-btn" data-storm="hopelessness">Hopelessness</button>
+      <button type="button" class="storm-btn" data-storm="grief">Grief</button>
+    </div>
+    <div class="storm-result" id="stormResult" aria-live="polite">
+      <p class="storm-prompt">Your verse will appear here.</p>
+    </div>
+</article>
 <article class="card scripture-index" id="scripture">
     <div class="card-head">
       <span class="tile" aria-hidden="true">
@@ -3298,6 +3328,31 @@ a[href^="tel:"]{ white-space:nowrap; }
       } catch (e) {}
     });
   });
+})();
+</script>
+<script>
+(function () {
+  var verses = {
+    fear: { text: "But when I am afraid, I will put my trust in you.", ref: "Psalm 56:3" },
+    loneliness: { text: "Do not be afraid or discouraged, for the LORD will personally go ahead of you. He will be with you; he will neither fail you nor abandon you.", ref: "Deuteronomy 31:8" },
+    shame: { text: "So now there is no condemnation for those who belong to Christ Jesus.", ref: "Romans 8:1" },
+    anger: { text: "Understand this, my dear brothers and sisters: You must all be quick to listen, slow to speak, and slow to get angry. Human anger does not produce the righteousness God desires.", ref: "James 1:19\u201320" },
+    hopelessness: { text: "\u201CFor I know the plans I have for you,\u201D says the LORD. \u201CThey are plans for good and not for disaster, to give you a future and a hope.\u201D", ref: "Jeremiah 29:11" },
+    grief: { text: "The LORD is close to the brokenhearted; he rescues those whose spirits are crushed.", ref: "Psalm 34:18" }
+  };
+  var result = document.getElementById('stormResult');
+  if (!result) return;
+  var btns = document.querySelectorAll('.storm-btn');
+  function pick(btn) {
+    var v = verses[btn.getAttribute('data-storm')];
+    if (!v) return;
+    for (var i = 0; i < btns.length; i++) btns[i].classList.remove('on');
+    btn.classList.add('on');
+    result.innerHTML = '<p class="storm-verse">' + v.text + '</p><p class="storm-ref">\u2014 ' + v.ref + ' (NLT)</p>';
+  }
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener('click', function () { pick(this); });
+  }
 })();
 </script>
 </body>
