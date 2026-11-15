@@ -77,6 +77,7 @@ section.card h3{font-size:var(--body);margin:18px 0 6px;font-weight:700}
 .btn-gold{background:#2c2f36;color:var(--accent)}
 .btn-help{background:var(--red);color:#fff}
 .btn-quiet{background:transparent;color:var(--dim);border:0;padding:10px 8px;text-decoration:underline}
+.save-confirm{margin:12px 0 0;padding:10px 14px;border-radius:12px;background:rgba(126,211,33,.10);border:1px solid rgba(126,211,33,.40);font-weight:600}
 .btn-stack{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;text-align:center}
 input[type="date"],input[type="text"],input[type="number"],textarea{width:100%;background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:14px;padding:12px;font:inherit}
 label.lbl{display:block;font-weight:600;font-size:.94rem;margin-bottom:6px}
@@ -298,7 +299,7 @@ section.card.article-card{padding:0;overflow:hidden}
     <p class="date" id="todayLabel">Today</p>
     <p class="day-big" id="heroDay">One day at a time</p>
     <p class="tagline">One Day at a Time. One Step Toward a New Life.</p>
-    <p id="heroSub">Steven Gregory's journey — and yours — counted one honest day at a time.</p>
+    <p id="heroSub">Your recovery — counted one honest day at a time.</p>
   </div>
 </header>
 
@@ -339,7 +340,7 @@ section.card.article-card{padding:0;overflow:hidden}
         <p class="muted" id="pinSparkText" style="margin:0"></p>
       </div>
       <div id="setupForm">
-        <p>Set the first day of <strong>your</strong> recovery. That day counts as <strong>Sober Day 0</strong> — the way Steven counts on My Recovery Journey — and every day after it adds one.</p>
+        <p>Set the first day of <strong>your</strong> recovery. That day counts as <strong>Sober Day 0</strong>, and every day after it adds one.</p>
         <form id="startForm">
           <div class="form-row">
             <div class="grow">
@@ -349,10 +350,13 @@ section.card.article-card{padding:0;overflow:hidden}
             <button class="btn" type="submit">Start counting</button>
           </div>
         </form>
-        <p style="margin:12px 0 0"><button type="button" class="btn btn-gold btn-stack" id="useFounderDate">Use Steven's date — August 20, 2026</button></p>
+        <p class="muted" style="margin:14px 0 0;font-size:.94rem">Just looking? You can preview the counter with an example date — the founder&#8217;s, August 20, 2026. Milestones and collection tokens unlock only from your own date.</p>
+        <p style="margin:6px 0 0"><button type="button" class="btn-quiet" id="useFounderDate" style="padding-left:0">Use the founder&#8217;s date as an example</button></p>
       </div>
       <div id="setupDone" hidden>
         <p style="margin:0">Counting from <strong id="startDateLabel"></strong> — that's <strong id="personalDayLabel"></strong> today.</p>
+        <p class="save-confirm" id="startSaved" role="status" hidden></p>
+        <p class="muted" id="exampleNote" style="margin:12px 0 0" hidden>You&#8217;re viewing the founder&#8217;s example date. Your counter, milestones, and collection become truly yours when you set your own start date below.</p>
         <p id="moneyLine" style="margin:12px 0 0" hidden></p>
         <details class="settings" style="margin-top:12px">
           <summary>Money saved &#8212; what a drinking day used to cost</summary>
@@ -495,13 +499,7 @@ section.card.article-card{padding:0;overflow:hidden}
       <p style="margin:0">This app is free, and always will be. If it helped you today, you can help keep it going.</p>
       <p style="margin:12px 0 0"><button class="btn btn-stack" type="button" data-goto="support">Support this work</button> <button class="btn-quiet" type="button" id="supportCardDismiss">Dismiss</button></p>
     </section>
-    <section class="card" id="founderTeaser">
-      <h2>The Founder&#8217;s Journey</h2>
-      <p style="margin:0">Steven Gregory started this journey on August 20, 2026, after 34 years of struggling with alcohol &#8212; rehabs, jail, and losing everything he owned more than once. He built My Recovery Journey for the person who feels alone in recovery tonight.<span id="founderTeaserDay"></span></p>
-      <p class="font-display" style="margin:12px 0 0;font-style:italic">&#8220;One Day at a Time. One Step Toward a New Life.&#8221;</p>
-      <p style="margin:12px 0 0"><button class="btn btn-stack" type="button" data-goto="founder">Read the Founder&#8217;s Journey</button></p>
-    </section>
-  </div>
+      </div>
 
 
   <!-- ============ COLLECTION ============ -->
@@ -510,7 +508,8 @@ section.card.article-card{padding:0;overflow:hidden}
       <h2>My Collection</h2>
       <p class="muted" style="margin:0">The tokens you would be handed at a meeting — earned by time, one day at a time. They unlock on their own from your day counter.</p>
       <div id="collNoStart" hidden>
-        <p style="margin:14px 0 0">Set your start date on the Today tab first, and your collection starts with the most important token of all — the one for wanting to stop.</p>
+        <p id="collNoStartText" style="margin:14px 0 0">Set your start date on the Today tab first, and your collection starts with the most important token of all — the one for wanting to stop.</p>
+        <p id="collExampleText" style="margin:14px 0 0" hidden>You&#8217;re viewing with the founder&#8217;s example date, so the collection stays locked — tokens unlock only from your own start date. Set yours on the Today tab and your collection begins with the most important token of all: the one for wanting to stop.</p>
         <p style="margin:12px 0 0"><button type="button" class="btn btn-stack" data-goto="today">Go to my day counter</button></p>
       </div>
       <div id="collMain" hidden>
@@ -540,7 +539,7 @@ section.card.article-card{padding:0;overflow:hidden}
           <div class="form-row">
             <div class="grow">
               <label class="lbl" for="shareNameInput">Name to show (only if the box above is on)</label>
-              <input type="text" id="shareNameInput" placeholder="e.g. Steven" autocomplete="off">
+              <input type="text" id="shareNameInput" placeholder="e.g. Alex" autocomplete="off">
             </div>
           </div>
           <p style="margin:12px 0 0;display:flex;gap:10px;flex-wrap:wrap">
@@ -1258,7 +1257,7 @@ section.card.article-card{padding:0;overflow:hidden}
 
     <section class="card">
       <h2>More resources</h2>
-      <p style="margin:0"><strong>Recovery Resources</strong> &#8212; the longer resource list Steven keeps on the My Recovery Journey website: books, tools, and more doors than fit inside one app.</p>
+      <p style="margin:0"><strong>Recovery Resources</strong> &#8212; the longer resource list on the My Recovery Journey website: books, tools, and more doors than fit inside one app.</p>
       <p style="margin:12px 0 0"><a class="btn btn-stack" href="https://stgnov05.github.io/my-recovery-journey/#/resources" target="_blank" rel="noopener">Recovery Resources &#8212; the website</a></p>
       <p class="muted" style="margin:16px 0 0;font-size:.94rem">My Recovery Journey is a personal recovery app. It is not affiliated with, endorsed by, or speaking for Alcoholics Anonymous, Narcotics Anonymous, or any other fellowship. Meeting links go to the fellowships' own directories, where times and details are kept current by the groups themselves.</p>
     </section>
@@ -1469,8 +1468,8 @@ if(supportCardDismiss)supportCardDismiss.addEventListener("click",function(){sto
 /* Hero + reflection */
 var founderDay=dayNumberFor(FOUNDER_START);
 document.getElementById("todayLabel").textContent=todayLabel();
-document.getElementById("heroDay").textContent="Sober Day "+founderDay;
-document.getElementById("heroSub").textContent="Steven Gregory — Sober Day "+founderDay+" since August 20, 2026. Your counter is below.";
+document.getElementById("heroDay").textContent="One day at a time";
+document.getElementById("heroSub").textContent="Your recovery — counted one honest day at a time. Set your start date below to begin.";
 document.getElementById("founderDay").textContent="Sober Day "+founderDay;
 var r=reflectionForToday();
 document.getElementById("reflTitle").textContent=r.title;
@@ -1489,29 +1488,37 @@ REFLECTIONS.forEach(function(x,i){
 
 /* Personal counter (saved on this device) */
 var personalStart=store.get("mrj.start",null);
+var startSource=store.get("mrj.startSource",null);
+function isExample(){return !!personalStart&&startSource==="founder";}
+function showStartSaved(msg){var el=document.getElementById("startSaved"); if(el){el.textContent=msg; el.hidden=false;}}
 function applyPersonal(){
   store.set("mrj.start",personalStart);
-  var has=!!personalStart;
+  store.set("mrj.startSource",startSource);
+  var has=!!personalStart, ex=isExample();
   document.getElementById("setupForm").hidden=has;
   document.getElementById("setupDone").hidden=!has;
-  document.getElementById("milesCard").hidden=!has;
+  document.getElementById("milesCard").hidden=!has||ex;
+  var en=document.getElementById("exampleNote"); if(en)en.hidden=!ex;
   if(has){
     var d=dayNumberFor(personalStart);
     document.getElementById("startDateLabel").textContent=fmtLong(personalStart)+" (Sober Day 0)";
     document.getElementById("personalDayLabel").textContent=d>=0?("Sober Day "+d):("starting "+fmtLong(personalStart));
-    document.getElementById("startDate2").value=personalStart;
-    if(d>=0)renderMiles("milesList","nextMile",d);
+    document.getElementById("startDate2").value="";
+    if(d>=0&&!ex)renderMiles("milesList","nextMile",d);
     document.getElementById("heroDay").textContent=d>=0?("Sober Day "+d):"Sober Day 0 soon";
-    document.getElementById("heroSub").textContent=d>=0?("Your recovery — Day "+d+" counting from "+fmtLong(personalStart)+". Steven is on Day "+founderDay+"."):"Your journey begins "+fmtLong(personalStart)+".";
+    if(ex)document.getElementById("heroSub").textContent=d>=0?("The founder\u2019s example — Sober Day "+d+" counting from August 20, 2026. Set your own date below to make it yours."):"The founder\u2019s example begins "+fmtLong(personalStart)+".";
+    else document.getElementById("heroSub").textContent=d>=0?("Your recovery — Sober Day "+d+" counting from "+fmtLong(personalStart)+"."):"Your journey begins "+fmtLong(personalStart)+".";
   }else{
-    document.getElementById("heroDay").textContent="Sober Day "+founderDay;
+    document.getElementById("heroDay").textContent="One day at a time";
+    document.getElementById("heroSub").textContent="Your recovery — counted one honest day at a time. Set your start date below to begin.";
+    var sv=document.getElementById("startSaved"); if(sv)sv.hidden=true;
   }
   renderMoney();
 }
-document.getElementById("startForm").addEventListener("submit",function(e){e.preventDefault();var v=document.getElementById("startDate").value;if(v){personalStart=v;applyPersonal();}});
-document.getElementById("startForm2").addEventListener("submit",function(e){e.preventDefault();var v=document.getElementById("startDate2").value;if(v){personalStart=v;applyPersonal();}});
-document.getElementById("clearDate").addEventListener("click",function(){personalStart=null;applyPersonal();});
-document.getElementById("useFounderDate").addEventListener("click",function(){personalStart=FOUNDER_START;applyPersonal();});
+document.getElementById("startForm").addEventListener("submit",function(e){e.preventDefault();var v=document.getElementById("startDate").value;if(v){personalStart=v;startSource="own";applyPersonal();showStartSaved("\u2713 Your start date is saved on this device — counting from "+fmtLong(personalStart)+".");}});
+document.getElementById("startForm2").addEventListener("submit",function(e){e.preventDefault();var v=document.getElementById("startDate2").value;if(v){personalStart=v;startSource="own";applyPersonal();showStartSaved("\u2713 Your start date was updated and saved on this device — counting from "+fmtLong(personalStart)+".");}});
+document.getElementById("clearDate").addEventListener("click",function(){personalStart=null;startSource=null;applyPersonal();});
+document.getElementById("useFounderDate").addEventListener("click",function(){personalStart=FOUNDER_START;startSource="founder";applyPersonal();var sv=document.getElementById("startSaved"); if(sv)sv.hidden=true;});
 
 /* Grounding */
 var GROUND=[
@@ -1851,7 +1858,7 @@ renderCheckins();
 var dailySpend=store.get("mrj.spend",null);
 function renderMoney(){
   var line=document.getElementById("moneyLine"); if(!line)return;
-  var d=personalStart?dayNumberFor(personalStart):-1;
+  var d=(personalStart&&startSource!=="founder")?dayNumberFor(personalStart):-1;
   if(dailySpend&&d>=0){
     line.hidden=false;
     line.innerHTML="Money not spent on alcohol so far: <strong>$"+Math.round(dailySpend*d).toLocaleString("en-US")+"</strong> <span class=\"muted\">(about $"+dailySpend+" a day \u00d7 "+d+" days)</span>";
@@ -1923,7 +1930,7 @@ function collAddDaysISO(iso,days){
   function pad(n){return (n<10?"0":"")+n;}
   return d.getUTCFullYear()+"-"+pad(d.getUTCMonth()+1)+"-"+pad(d.getUTCDate());
 }
-function collDay(){ return personalStart?dayNumberFor(personalStart):-1; }
+function collDay(){ return (personalStart&&startSource!=="founder")?dayNumberFor(personalStart):-1; }
 function collSetMode(m){
   collMode=m; store.set("mrj.collMode",m);
   ["AA","NA","Both"].forEach(function(x){
@@ -2072,8 +2079,11 @@ function renderCollection(){
   var main=document.getElementById("collMain"), none=document.getElementById("collNoStart");
   if(!main||!none)return;
   var day=collDay();
-  none.hidden=!!personalStart; main.hidden=!personalStart;
-  if(!personalStart)return;
+  var ex=(typeof isExample==="function")&&isExample();
+  none.hidden=!!personalStart&&!ex; main.hidden=!personalStart||ex;
+  var nt=document.getElementById("collNoStartText"); if(nt)nt.hidden=ex;
+  var et=document.getElementById("collExampleText"); if(et)et.hidden=!ex;
+  if(!personalStart||ex)return;
   ["AA","NA","Both"].forEach(function(x){
     var b=document.getElementById("collMode"+x); if(b)b.setAttribute("aria-pressed",String(collMode===x.toLowerCase()));
   });
@@ -2151,7 +2161,7 @@ function collSeenRec(){
   return rec;
 }
 function checkMilestones(){
-  if(!personalStart)return;
+  if(!personalStart||startSource==="founder")return;
   var day=collDay(); if(day<0)return;
   var rec=collSeenRec();
   var fresh=[];
@@ -2849,23 +2859,24 @@ applyPersonal();
     urgent.hidden=!hot; quiet.hidden=hot;
   }
   function currentDay(){
+    if(window.personalStart&&(window.startSource||"own")==="founder")return {day:dayNumberFor(window.personalStart),personal:false,example:true};
     if(window.personalStart)return {day:dayNumberFor(window.personalStart),personal:true};
-    return {day:window.founderDay,personal:false};
+    return {day:-1,personal:false,example:false};
   }
   function renderPinned(){
     var info=currentDay(), day=info.day;
-    var num=$("pinDayNum"); if(num)num.textContent=day>=0?("Sober Day "+day):"Sober Day 0 soon";
+    var num=$("pinDayNum"); if(num)num.textContent=(info.personal||info.example)?(day>=0?("Sober Day "+day):"Sober Day 0 soon"):"Your Day 0";
     var note=$("pinDayNote");
-    if(note)note.textContent=info.personal?("Your journey \u2014 counting from "+fmtLong(window.personalStart)+"."):("Steven\u2019s journey \u2014 set your start date below to make this counter yours.");
+    if(note)note.textContent=info.personal?("Your journey \u2014 counting from "+fmtLong(window.personalStart)+"."):(info.example?("The founder\u2019s example \u2014 counting from August 20, 2026. Set your own date below to make it yours."):("Set your start date below to make this counter yours."));
     var next=null, prev=0;
     window.MILESTONES.forEach(function(m){ if(day>=m.days)prev=m.days; if(!next&&m.days>day)next=m; });
-    var pct=next&&day>=0?Math.max(0,Math.min(100,Math.round((day-prev)/(next.days-prev)*100))):100;
+    var pct=(next&&day>=0)?Math.max(0,Math.min(100,Math.round((day-prev)/(next.days-prev)*100))):(day<0?0:100);
     ["pinProgressFill","pinNextFill"].forEach(function(id){var f=$(id); if(f)f.style.width=pct+"%";});
     var pt=$("pinProgressText");
-    if(pt)pt.textContent=next?("Progress to "+next.label+" \u2014 "+(next.days-day)+" "+((next.days-day)===1?"day":"days")+" to go."):"Every milestone on the list is behind you. Keep going \u2014 one day at a time.";
-    var nl=$("pinNextLabel"); if(nl)nl.textContent=next?next.label:"";
+    if(pt)pt.textContent=day<0?"Set your start date and your progress will count from your own Day 0.":(next?("Progress to "+next.label+" \u2014 "+(next.days-day)+" "+((next.days-day)===1?"day":"days")+" to go."):"Every milestone on the list is behind you. Keep going \u2014 one day at a time.");
+    var nl=$("pinNextLabel"); if(nl)nl.textContent=next?next.label:((info.personal||info.example)?"":"Your first milestone");
     var nt=$("pinNextText");
-    if(nt)nt.textContent=next?((info.personal?"You reach ":"Steven reaches ")+next.label+" at Day "+next.days+" \u2014 "+(next.days-day)+" "+((next.days-day)===1?"day":"days")+" from today."):"";
+    if(nt)nt.textContent=info.example?(next?("On the founder\u2019s example, the next milestone is "+next.label+" at Day "+next.days+" \u2014 "+(next.days-day)+" "+((next.days-day)===1?"day":"days")+" from today."):""):(!info.personal?"Set your start date below, and this card will count down to your own milestones.":(next?("You reach "+next.label+" at Day "+next.days+" \u2014 "+(next.days-day)+" "+((next.days-day)===1?"day":"days")+" from today."):""));
     var spark=$("pinSpark"), st=$("pinSparkText"), days=recentCheckinDays(7);
     if(spark){
       spark.innerHTML="";
