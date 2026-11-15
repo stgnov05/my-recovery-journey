@@ -10,6 +10,7 @@ There are no accounts on this site. The gratitude journal, check-ins, and other 
 
 - [Home](https://stgnov05.github.io/my-recovery-journey/): Start page with the day counter, the newest updates, and local weekend events.
 - [Start Here](https://stgnov05.github.io/my-recovery-journey/start-here.html): A welcome and a suggested path for first-time visitors.
+- [About This Site](https://stgnov05.github.io/my-recovery-journey/about.html): What this site is - and what it is not, in Steven's own words.
 - [My Story](https://stgnov05.github.io/my-recovery-journey/story.html): Steven's story, honestly told.
 - [Journey Updates](https://stgnov05.github.io/my-recovery-journey/updates.html): The day-by-day journal of this recovery, newest first.
 
