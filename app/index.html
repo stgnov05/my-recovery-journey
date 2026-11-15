@@ -78,6 +78,12 @@ section.card h3{font-size:var(--body);margin:18px 0 6px;font-weight:700}
 .save-confirm{margin:12px 0 0;padding:10px 14px;border-radius:12px;background:rgba(126,211,33,.10);border:1px solid rgba(126,211,33,.40);font-weight:600}
 .mile-card{position:relative}
 .mile-x{position:absolute;top:8px;right:10px;background:transparent;border:0;color:var(--dim);font-size:1.8rem;line-height:1;padding:8px;cursor:pointer}
+/* Masthead centering: hero, help strip, pinned counter + next milestone */
+.hero-copy{text-align:center}
+#pinnedH{text-align:center}
+#helpStrip{text-align:center}
+#setupCard,#nextMileCard{text-align:center}
+#setupCard .pin-bars{justify-content:center}
 .btn-stack{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;text-align:center}
 input[type="date"],input[type="text"],input[type="number"],textarea{width:100%;background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:14px;padding:12px;font:inherit}
 label.lbl{display:block;font-weight:600;font-size:.94rem;margin-bottom:6px}
@@ -322,7 +328,7 @@ section.card.article-card{padding:0;overflow:hidden}
         <p class="muted" style="margin:10px 0 0">Your check-in today showed a strong craving. One tap to help: 988, SAMHSA, your person, grounding, and a prayer. You don&#8217;t have to carry a hard moment alone.</p>
       </div>
       <div id="helpQuiet">
-        <p style="margin:0;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"><strong>Need help now?</strong><button type="button" class="btn btn-help" data-goto="help" style="width:auto;min-height:44px;padding:10px 18px">Get help</button></p>
+        <p style="margin:0;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap"><strong>Need help now?</strong><button type="button" class="btn btn-help" data-goto="help" style="width:auto;min-height:44px;padding:10px 18px">Get help</button></p>
         <p class="muted" style="margin:10px 0 0">One tap to 988, SAMHSA, your person, grounding, and a prayer &#8212; any time the day gets heavy.</p>
       </div>
     </section>
