@@ -911,7 +911,7 @@ a[href^="tel:"]{ white-space:nowrap; }
    page view stays hidden until the main script runs, and the content's late
    appearance shoves the page down - the site's main layout shift (CLS). */
 (function(){
-  var PAGES = {home:1,tools:1,gratitude:1,milestones:1,reflection:1,grounding:1,'next-step':1,story:1,updates:1,faith:1,resources:1,'start-here':1,paths:1,faq:1,articles:1,books:1,progress:1,support:1,'sober-living':1,directory:1,privacy:1,reflections:1};
+  var PAGES = {home:1,tools:1,gratitude:1,milestones:1,reflection:1,grounding:1,'next-step':1,story:1,updates:1,faith:1,resources:1,'start-here':1,paths:1,faq:1,articles:1,books:1,progress:1,support:1,'sober-living':1,directory:1,privacy:1,reflections:1,about:1};
   var ALIASES = {welcome:'home',index:'home',start:'home'};
   function name(){
     var raw = (location.hash || '').replace(/^#\/?/, '').split('?')[0];
@@ -1026,26 +1026,6 @@ a[href^="tel:"]{ white-space:nowrap; }
         <div class="d90-title" id="d90Title">Sober Day 90 is coming</div>
         <p class="d90-sub" id="d90Sub">Ninety days, built one day at a time.</p>
       </div>
-    </section>
-
-    <section id="about-site">
-      <article class="card about-card">
-        <div class="card-head">
-          <span class="tile" aria-hidden="true">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-          </span>
-          <div>
-            <h3>About this site</h3>
-            <p class="sub">What My Recovery Journey is &#8212; and what it isn&#8217;t.</p>
-          </div>
-        </div>
-        <p>My Recovery Journey is one man&#8217;s honest record of rebuilding a life. I&#8217;m Steven Gregory &#8212; after 34 years of struggling with alcohol, I got sober on August 20, 2026, and I&#8217;ve been taking it one day at a time ever since.</p>
-        <p>This site isn&#8217;t a treatment program, and it doesn&#8217;t replace one. It&#8217;s a daily companion &#8212; reflections, Scripture, and simple tools &#8212; for anyone who feels alone in recovery. You don&#8217;t have to have it figured out. Neither do I. We just take the next right step, together.</p>
-        <div class="about-actions">
-          <a class="btn" href="#/story">Read My Story</a>
-          <a class="btn ghost" href="#/start-here">Start Here</a>
-        </div>
-      </article>
     </section>
 
     <section id="explore">
@@ -2306,12 +2286,41 @@ a[href^="tel:"]{ white-space:nowrap; }
           <p><a href="#/sober-living"><b>Sober Living</b></a> &#8212; questions to ask before choosing a recovery home</p>
           <p><a href="#/support"><b>Support This Site</b></a> &#8212; ways to help Steven rebuild and keep this resource growing</p>
           <p><a href="#/privacy"><b>Privacy</b></a> &#8212; what this site does and doesn&#8217;t do with your information</p>
+      <p><a href="#/about"><b>About This Site</b></a> &#8212; what My Recovery Journey is &#8212; and what it isn&#8217;t</p>
         </article>
       </div>
     </section>
   </div>
 
-  <!-- ============ PAGE: PRIVACY ============ -->
+    <!-- ============ PAGE: ABOUT ============ -->
+  <div class="page-view" data-page="about">
+    <section id="about">
+      <div class="page-head">
+        <a class="back-link" href="#/home">Home</a>
+        <h1>About This Site</h1>
+        <p class="lede">What My Recovery Journey is &#8212; and what it isn&#8217;t.</p>
+      </div>
+      <div class="page-cards">
+        <article class="card">
+          <h3>One man&#8217;s honest record</h3>
+          <p>My Recovery Journey is one man&#8217;s honest record of rebuilding a life. I&#8217;m Steven Gregory &#8212; after 34 years of struggling with alcohol, I got sober on August 20, 2026, and I&#8217;ve been taking it one day at a time ever since.</p>
+          <p>This site isn&#8217;t a treatment program, and it doesn&#8217;t replace one. It&#8217;s a daily companion &#8212; reflections, Scripture, and simple tools &#8212; for anyone who feels alone in recovery. You don&#8217;t have to have it figured out. Neither do I. We just take the next right step, together.</p>
+          <div class="about-actions">
+            <a class="btn" href="#/story">Read My Story</a>
+            <a class="btn ghost" href="#/start-here">Start Here</a>
+          </div>
+        </article>
+      </div>
+      <nav class="page-foot-nav" aria-label="Keep exploring">
+        <span class="label">Keep exploring:</span>
+        <a href="#/faq">FAQ</a>
+        <a href="#/privacy">Privacy</a>
+        <a href="#/support">Support This Site</a>
+      </nav>
+    </section>
+  </div>
+
+<!-- ============ PAGE: PRIVACY ============ -->
   <div class="page-view" data-page="privacy"privacy>
     <section id="privacy">
       <div class="page-head">
@@ -2603,7 +2612,6 @@ a[href^="tel:"]{ white-space:nowrap; }
     <nav>
     <a class="nav-help" href="#/resources">Need Help Now <span aria-hidden="true">&#8250;</span></a>
     <a href="#/home" data-page-link="home">Home <span aria-hidden="true">&#8250;</span></a>
-    <a href="#/support" data-page-link="support">Support This Site <span aria-hidden="true">&#8250;</span></a>
     <a href="#/start-here" data-page-link="start-here">Start Here <span aria-hidden="true">&#8250;</span></a>
     <a href="#/story" data-page-link="story">My Story <span aria-hidden="true">&#8250;</span></a>
     <a href="#/updates" data-page-link="updates">Journey Updates <span aria-hidden="true">&#8250;</span></a>
@@ -2614,6 +2622,7 @@ a[href^="tel:"]{ white-space:nowrap; }
     <a href="#/resources" data-page-link="resources">Recovery Resources <span aria-hidden="true">&#8250;</span></a>
     <a href="#/tools" data-page-link="tools">Recovery Tools <span aria-hidden="true">&#8250;</span></a>
     <a href="https://stgnov05.github.io/my-recovery-journey/app/" target="_blank" rel="noopener">Recovery App <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/support" data-page-link="support">Support This Site <span aria-hidden="true">&#8250;</span></a>
     <button class="more-toggle" id="moreToggle" type="button" aria-expanded="false" aria-controls="drawerMore">More Pages <span class="more-chev" aria-hidden="true">&#8250;</span></button>
     <div class="drawer-more" id="drawerMore" hidden>
     <a href="#/articles" data-page-link="articles">Articles &amp; Inspiration <span aria-hidden="true">&#8250;</span></a>
@@ -2627,6 +2636,7 @@ a[href^="tel:"]{ white-space:nowrap; }
     <a href="#/directory" data-page-link="directory">Site Directory <span aria-hidden="true">&#8250;</span></a>
     <a href="#/sober-living" data-page-link="sober-living">Sober Living <span aria-hidden="true">&#8250;</span></a>
     <a href="#/grounding" data-page-link="grounding">When a Moment Feels Difficult <span aria-hidden="true">&#8250;</span></a>
+    <a href="#/about" data-page-link="about">About This Site <span aria-hidden="true">&#8250;</span></a>
     </div>
   </nav>
   <button class="theme-toggle" id="themeBtn" type="button" aria-pressed="false">Switch to dark mode</button>
@@ -2753,7 +2763,8 @@ a[href^="tel:"]{ white-space:nowrap; }
     'sober-living': { title:'Sober Living | My Recovery Journey', desc:'Questions to ask any sober living home, Oxford House and NARR standards, and how Steven is preparing for sober living in Washington or Oregon.' },
     'directory':   { title:'Site Directory | My Recovery Journey', desc:'Every page on My Recovery Journey in one place: start here, daily tools, articles, books, recovery paths, faith, resources, and support.' },
     'privacy':     { title:'Privacy | My Recovery Journey', desc:'How My Recovery Journey handles your information in plain language: no accounts, no tracking cookies, only anonymous visit counting, and tools that store data only on your own device.' },
-    'reflections': { title:'Reflections Archive | My Recovery Journey', desc:'Steven\u2019s daily reflections \u2014 one short reflection for each day, each on its own page to find, share, and read again on a hard day.' }
+    'reflections': { title:'Reflections Archive | My Recovery Journey', desc:'Steven\u2019s daily reflections \u2014 one short reflection for each day, each on its own page to find, share, and read again on a hard day.' },
+    'about':      { title:'About This Site | My Recovery Journey', desc:'What My Recovery Journey is \u2014 and what it isn\u2019t: one man\u2019s honest record of rebuilding a life in recovery, and a daily companion of reflections, Scripture, and simple tools.' }
   };
   var ALIASES = { 'welcome':'home', 'index':'home', 'start':'home' };
   var views = Array.prototype.slice.call(document.querySelectorAll('.page-view'));
@@ -2876,6 +2887,7 @@ a[href^="tel:"]{ white-space:nowrap; }
     { title:'Start Here', note:'First steps for someone new to recovery', page:'start-here', keys:'start here new beginner first steps beginning help how do i start' },
     { title:'Recovery Paths', note:'AA, NA, SMART Recovery, Celebrate Recovery, Al-Anon, treatment', page:'paths', keys:'paths programs aa na smart recovery celebrate recovery al-anon meetings fellowship twelve steps options' },
     { title:'FAQ', note:'Questions about this site and about recovery', page:'faq', keys:'faq questions answers contact private journal relapse setback christian' },
+    { title:'About This Site', note:'What My Recovery Journey is, and what it is not', page:'about', keys:'about this site what is this place who made this steven gregory purpose mission welcome' },
     { title:'Articles & Inspiration', note:'Encouragement for every stage of recovery', page:'articles', keys:'articles inspiration reading early recovery lonely routine rebuilding hope staying connected' },
     { title:'Books & Literature', note:'Recommended recovery reading, searchable', page:'books', keys:'books literature reading big book basic text daily reflections literature library step guides family' },
     { title:'My Progress', note:'What Steven is working toward, plus the day counter', page:'progress', keys:'progress goals working toward stability community faith day counter' },
