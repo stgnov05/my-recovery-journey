@@ -79,9 +79,7 @@ section.card h3{font-size:var(--body);margin:18px 0 6px;font-weight:700}
 .mile-card{position:relative}
 .mile-x{position:absolute;top:8px;right:10px;background:transparent;border:0;color:var(--dim);font-size:1.8rem;line-height:1;padding:8px;cursor:pointer}
 /* Uniform chips: every option chip the same size */
-#checkinCard .chips{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .chip{display:flex;align-items:center;justify-content:center;text-align:center}
-#checkinCard .chip{height:58px;box-sizing:border-box}
 #collMain .coll-toggle{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 /* Masthead centering: hero, help strip, pinned counter + next milestone */
 .hero-copy{text-align:center}
@@ -328,10 +326,6 @@ section.card.article-card{padding:0;overflow:hidden}
   <!-- ============ TODAY ============ -->
     <div class="view active" id="view-today">
         <section class="card" id="helpStrip">
-      <div id="helpUrgent" hidden>
-        <p style="margin:0"><button type="button" class="btn btn-help" data-goto="help" style="width:100%;font-size:1.08rem;padding:15px 18px">I&#8217;m struggling right now</button></p>
-        <p class="muted" style="margin:10px 0 0">Your check-in today showed a strong craving. One tap to help: 988, SAMHSA, your person, grounding, and a prayer. You don&#8217;t have to carry a hard moment alone.</p>
-      </div>
       <div id="helpQuiet">
         <p style="margin:0;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap"><strong>Need help now?</strong><button type="button" class="btn btn-help" data-goto="help" style="width:auto;min-height:44px;padding:10px 18px">Get help</button></p>
         <p class="muted" style="margin:10px 0 0">One tap to 988, SAMHSA, your person, grounding, and a prayer &#8212; any time the day gets heavy.</p>
@@ -345,8 +339,6 @@ section.card.article-card{padding:0;overflow:hidden}
         <p class="muted" id="pinDayNote" style="margin:2px 0 0"></p>
         <div class="pin-progress" aria-hidden="true"><span id="pinProgressFill"></span></div>
         <p class="muted" id="pinProgressText" style="margin:8px 0 0"></p>
-        <div class="bars pin-bars" id="pinSpark" aria-hidden="true"></div>
-        <p class="muted" id="pinSparkText" style="margin:0"></p>
       </div>
       <div id="setupForm">
         <p>Set the first day of <strong>your</strong> recovery. That day counts as <strong>Sober Day 0</strong>, and every day after it adds one.</p>
@@ -404,53 +396,14 @@ section.card.article-card{padding:0;overflow:hidden}
       <div class="pin-progress" aria-hidden="true"><span id="pinNextFill"></span></div>
       <p class="muted" style="margin:10px 0 0">Your full milestone list is further down this page.</p>
     </section>
-<section class="card" id="checkinCard">
-      <h2>Daily check-in</h2>
-      <p class="muted" style="margin:0">Thirty seconds, honestly. How are you right now? Check-ins stay on this device, same as your journal.</p>
-      <p style="margin:14px 0 0"><strong>I feel:</strong></p>
-      <div class="chips" id="moodChips" role="group" aria-label="How you feel">
-        <button type="button" class="chip" data-mood="Struggling" aria-pressed="false">Struggling</button>
-        <button type="button" class="chip" data-mood="Low" aria-pressed="false">Low</button>
-        <button type="button" class="chip" data-mood="Okay" aria-pressed="true">Okay</button>
-        <button type="button" class="chip" data-mood="Good" aria-pressed="false">Good</button>
-        <button type="button" class="chip" data-mood="Strong" aria-pressed="false">Strong</button>
-      </div>
-      <p style="margin:14px 0 0"><strong>Craving strength: <span id="cravingVal">0</span> / 10</strong></p>
-      <input type="range" id="cravingRange" min="0" max="10" step="1" value="0" aria-label="Craving strength, 0 to 10">
-      <p style="margin:10px 0 0"><strong>What&#8217;s around you?</strong> <span class="muted">(optional)</span></p>
-      <div class="chips" id="ctxChips" role="group" aria-label="What is around you">
-        <button type="button" class="chip" data-val="Just checking in" aria-pressed="false">Just checking in</button>
-        <button type="button" class="chip" data-val="Alone" aria-pressed="false">Alone</button>
-        <button type="button" class="chip" data-val="With people" aria-pressed="false">With people</button>
-        <button type="button" class="chip" data-val="A stressful moment" aria-pressed="false">A stressful moment</button>
-        <button type="button" class="chip" data-val="Hungry or tired" aria-pressed="false">Hungry or tired</button>
-        <button type="button" class="chip" data-val="Around temptation" aria-pressed="false">Around temptation</button>
-      </div>
-      <p style="margin:10px 0 0"><strong>What helps?</strong> <span class="muted">(optional)</span></p>
-      <div class="chips" id="helpChips" role="group" aria-label="What helps">
-        <button type="button" class="chip" data-val="Prayer" aria-pressed="false">Prayer</button>
-        <button type="button" class="chip" data-val="Calling someone" aria-pressed="false">Calling someone</button>
-        <button type="button" class="chip" data-val="A meeting" aria-pressed="false">A meeting</button>
-        <button type="button" class="chip" data-val="A walk" aria-pressed="false">A walk</button>
-        <button type="button" class="chip" data-val="Grounding or breathing" aria-pressed="false">Grounding or breathing</button>
-        <button type="button" class="chip" data-val="Music" aria-pressed="false">Music</button>
-        <button type="button" class="chip" data-val="Nothing yet" aria-pressed="false">Nothing yet</button>
-      </div>
-      <p style="margin:16px 0 0"><button class="btn" type="button" id="checkinSave">Save check-in</button> <span id="checkinThanks" class="muted" hidden>Saved. One day at a time.</span></p>
-      <div id="cravingNudge" hidden style="margin:14px 0 0;background:var(--gold-soft);border:1px solid var(--gold);border-radius:10px;padding:12px 14px">
-        <p style="margin:0"><strong>That&#8217;s a strong craving &#8212; and cravings pass.</strong> You don&#8217;t have to ride it out alone.</p>
-        <p style="margin:10px 0 0"><button class="btn btn-help btn-stack" type="button" data-goto="help">I&#8217;m struggling right now</button></p>
-      </div>
-      <div id="checkinHistory"></div>
-    </section>
 <section class="card" id="groundCard">
       <h2>5-4-3-2-1 Grounding</h2>
       <div id="groundRoot"></div>
     </section>
 <section class="card" id="remindCard">
       <h2>Daily reminders</h2>
-      <p class="muted" style="margin:0">A gentle nudge once a day, only if you want it. Turning one on asks your permission to send notifications &#8212; the same ask as the bell on the website. Your check-ins and journal entries themselves never leave this device; the notification service (OneSignal) only keeps these two on/off flags.</p>
-      <p style="margin:14px 0 0"><label><input type="checkbox" id="remindCheckin"> Morning check-in reminder</label></p>
+      <p class="muted" style="margin:0">A gentle nudge once a day, only if you want it. Turning one on asks your permission to send notifications &#8212; the same ask as the bell on the website. Your journal entries themselves never leave this device; the notification service (OneSignal) only keeps these two on/off flags.</p>
+      <p style="margin:14px 0 0"><label><input type="checkbox" id="remindCheckin"> Morning reminder</label></p>
       <p style="margin:10px 0 0"><label><input type="checkbox" id="remindGratitude"> Evening gratitude reminder</label></p>
       <p class="muted" id="remindStatus" aria-live="polite" style="margin:10px 0 0"></p>
     </section>
@@ -466,12 +419,6 @@ section.card.article-card{padding:0;overflow:hidden}
     </section>
     <h2 class="today-h" id="highlightsH">Highlights</h2>
     <section class="card" id="highlightsCard">
-      <div class="hl-block">
-        <h3 style="margin-top:0">Craving trend</h3>
-        <p id="hlCravingText" style="margin:0"></p>
-        <div class="bars" id="hlCravingBars" aria-hidden="true"></div>
-        <p class="muted" id="hlCravingCap" style="margin:0;font-size:.85rem" hidden>Average craving per check-in day, oldest to newest.</p>
-      </div>
       <div class="hl-block">
         <h3 style="margin-top:0">Money saved</h3>
         <p id="hlMoneyText" style="margin:0"></p>
@@ -715,8 +662,7 @@ section.card.article-card{padding:0;overflow:hidden}
 
     <h3 class="browse-h">Recovery Categories</h3>
     <div class="browse-grid">
-      <button type="button" class="tile" data-goto="today" data-scroll="checkinCard"><span style="color:#ff9f0a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4.5" width="14" height="16.5" rx="2"/><path d="M9 4.5V3h6v1.5"/><path d="M9 13.5l2.2 2.2 4.3-4.7"/></svg></span><span class="tile-label">Daily<br>Check-In</span></button>
-      <button type="button" class="tile" data-goto="learn"><span style="color:#64d2ff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6c-1.8-1.6-4-2-8-2v14c4 0 6.2.4 8 2 1.8-1.6 4-2 8-2V4c-4 0-6.2.4-8 2z"/><path d="M12 6v14"/></svg></span><span class="tile-label">Learn</span></button>
+            <button type="button" class="tile" data-goto="learn"><span style="color:#64d2ff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6c-1.8-1.6-4-2-8-2v14c4 0 6.2.4 8 2 1.8-1.6 4-2 8-2V4c-4 0-6.2.4-8 2z"/><path d="M12 6v14"/></svg></span><span class="tile-label">Learn</span></button>
       <button type="button" class="tile" data-goto="today" data-scroll="milesCard"><span style="color:#ffd60a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21.5v-17"/><path d="M5 5c4-2.2 7 2 12 .2V12c-5 1.8-8-2.4-12-.2"/></svg></span><span class="tile-label">Milestones</span></button>
       <button type="button" class="tile" data-goto="collection"><span style="color:#bf5af2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/></svg></span><span class="tile-label">My<br>Collection</span></button>
       <button type="button" class="tile" data-goto="journal"><span style="color:#30d158"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="3.5" width="13" height="17" rx="2"/><path d="M9.5 3.5v17"/><path d="M12.8 8.5h3.4M12.8 12h3.4"/></svg></span><span class="tile-label">Gratitude<br>Journal</span></button>
@@ -740,7 +686,7 @@ section.card.article-card{padding:0;overflow:hidden}
 
     <section class="card">
       <h2>About this app</h2>
-      <p>Private by design: your day counter, check-ins, gratitude journal, and next steps are stored only on this device. Nothing you write here is uploaded or shared &#8212; sharing happens only when you tap Share on a milestone card.</p>
+      <p>Private by design: your day counter, gratitude journal, and next steps are stored only on this device. Nothing you write here is uploaded or shared &#8212; sharing happens only when you tap Share on a milestone card.</p>
       <p style="margin:14px 0 0"><button class="btn btn-stack" type="button" data-goto="install">Install this app</button></p>
       <p class="muted" style="margin:12px 0 0">Made by Steven Gregory as part of My Recovery Journey &#8212; one day at a time.</p>
     </section>
@@ -776,7 +722,7 @@ section.card.article-card{padding:0;overflow:hidden}
       <div class="hero-medal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9" r="2.8"/><path d="M15.6 14.2c2.3.3 4.1 1.9 4.7 4.8"/></svg></div>
       <h2>Sharing Your Milestones</h2>
       <div class="hero-row"><span class="hic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8.5 12.5l2.5 2.5 4.5-5.5"/></svg></span><div><strong>You Decide What to Share</strong><p class="muted">Share a milestone only when you choose to. Nothing is ever posted for you.</p></div></div>
-      <div class="hero-row"><span class="hic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="10.5" width="13" height="9.5" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/><circle cx="12" cy="15.2" r="1.3" fill="currentColor" stroke="none"/></svg></span><div><strong>Private by Design</strong><p class="muted">Your journal and check-ins never leave this phone.</p></div></div>
+      <div class="hero-row"><span class="hic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="10.5" width="13" height="9.5" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/><circle cx="12" cy="15.2" r="1.3" fill="currentColor" stroke="none"/></svg></span><div><strong>Private by Design</strong><p class="muted">Your journal never leaves this phone.</p></div></div>
       <div class="hero-row"><span class="hic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.2s-6.8-4.4-6.8-9.1A3.9 3.9 0 0 1 12 8.4a3.9 3.9 0 0 1 6.8 2.7c0 4.7-6.8 9.1-6.8 9.1z"/></svg></span><div><strong>People, Not Data</strong><p class="muted">This tab is about your people, not your numbers.</p></div></div>
       <p style="margin:22px 0 0"><button type="button" class="btn btn-gold btn-stack" id="fellowShareBtn">Share a Milestone</button></p>
       <p class="muted" style="margin:10px 0 0">Opens your collection &#8212; tap any coin or key tag to share that milestone, or share the whole collection. Nothing is shared until you tap Share there.</p>
@@ -990,8 +936,7 @@ section.card.article-card{padding:0;overflow:hidden}
 
     <section class="card">
       <h2>Try this today</h2>
-      <p style="margin:0">Run the check right now, before the day gets any louder. Ask the four questions slowly &#8212; Hungry? Angry? Lonely? Tired? &#8212; and notice which one answers first. Then open today&#8217;s check-in and mark it honestly: how you feel, how strong the craving is, and what is around you. (The check-in even has a &#8220;Hungry or tired&#8221; chip.) After that, give the loudest letter its honest answer &#8212; a real meal, a hard conversation started kindly, one phone call, an early night. Five honest minutes now can spare you a much harder hour later.</p>
-      <p style="margin:12px 0 0"><button class="btn btn-stack" type="button" id="haltCheckBtn">Open today&#8217;s check-in</button></p>
+      <p style="margin:0">Run the check right now, before the day gets any louder. Ask the four questions slowly &#8212; Hungry? Angry? Lonely? Tired? &#8212; and notice which one answers first. Then sit with the answers honestly: how you feel, how strong the craving is, and what is around you right now. After that, give the loudest letter its honest answer &#8212; a real meal, a hard conversation started kindly, one phone call, an early night. Five honest minutes now can spare you a much harder hour later.</p>
     </section>
 
     <section class="card">
@@ -1210,7 +1155,7 @@ section.card.article-card{padding:0;overflow:hidden}
       <div class="lesson-body" id="odaatLesson">
         <p>Ask someone in their first weeks what frightens them most, and it is rarely today. It is forever. Never again &#8212; not at a wedding, not at a funeral, not on the best day or the worst one &#8212; stretches ahead like a wall too high to see over, and plenty of people turn back at the sight of it. But here is what the old-timers pass down like a tool: nobody in the rooms has stayed sober forever. They have stayed sober today, a great many times in a row. One day at a time is not a slogan for a gift-shop plaque. It is the method itself, and it works because it asks for the one amount of time a person can actually hold.</p>
         <p>Look at the other units and you will see why. Yesterday is finished. Its wins and its wrecks are equally out of reach now, and neither can be lived again or repaired from here. Tomorrow has not arrived, and no amount of worrying tonight will let you live it early. You will meet it when it is today, carrying today&#8217;s strength instead of tonight&#8217;s fears. Which leaves the day you are standing in &#8212; the only one with handles on it. Today you can eat and rest, pray and work, get to a meeting, make the call. Today is small enough to hold and large enough to matter. Recovery never asks you to carry your whole future. It only ever asks you to carry this.</p>
-        <p>So the practice is simple, and it is daily by design. In the morning comes one small decision, said once and plainly: today, I do not drink &#8212; and I will do what today needs to keep that true. Then live the day in its own size: the meeting on the calendar, the work in front of you, food and rest in their proper places. At night, close it out. A moment of gratitude, the day counted, then set down &#8212; not dragged behind you, and not owed to tomorrow. If the rhythm feels familiar, it should: the app in your hand is built on the same unit. The counter counts days. The check-in is daily. The reflection is for today. The saying even stands at the head of this whole app &#8212; the first half of My Recovery Journey&#8217;s tagline: &#8220;One Day at a Time. One Step Toward a New Life.&#8221; The day is the size of the promise because the day is the size of a life, taken one at a time.</p>
+        <p>So the practice is simple, and it is daily by design. In the morning comes one small decision, said once and plainly: today, I do not drink &#8212; and I will do what today needs to keep that true. Then live the day in its own size: the meeting on the calendar, the work in front of you, food and rest in their proper places. At night, close it out. A moment of gratitude, the day counted, then set down &#8212; not dragged behind you, and not owed to tomorrow. If the rhythm feels familiar, it should: the app in your hand is built on the same unit. The counter counts days. The reflection is for today. The saying even stands at the head of this whole app &#8212; the first half of My Recovery Journey&#8217;s tagline: &#8220;One Day at a Time. One Step Toward a New Life.&#8221; The day is the size of the promise because the day is the size of a life, taken one at a time.</p>
         <p>Some days, honestly, feel too big even for that. Grief days. Diagnosis days. Days when the cravings crowd in one after another and the hours crawl. On those days the same idea simply shrinks &#8212; and shrinking it is not cheating. One hour at a time: get to the next meal, the next meeting, the next phone call. One wave at a time: a craving rises, peaks, and passes, and you only have to ride the one in front of you &#8212; the Triggers lesson walks through exactly that. One prayer, one honest sentence, one small task at a time. The unit gets as small as it needs to get. It has never once needed to be bigger than now.</p>
         <p>Many people in the rooms have long paired this practice with the old prayer for daily bread &#8212; give us today what today requires &#8212; trusting that the One who provides for this day will still be there providing when the next one comes.</p>
         <p>And underneath it all sits a quiet arithmetic. Days handled one at a time do not stay small. They stack. A week is seven todays, faced one by one. A month is thirty. A year is a tall stack of single days, none of which had to carry the others, and each of which you only had to live once. Nobody has ever stayed sober a year. They have stayed sober today, faithfully, until the todays added up to something that looks &#8212; from the outside, and only from the outside &#8212; like forever.</p>
@@ -1219,7 +1164,7 @@ section.card.article-card{padding:0;overflow:hidden}
 
     <section class="card">
       <h2>Try this today</h2>
-      <p style="margin:0">Open today&#8217;s Daily Reflection. It was written for this exact day &#8212; not for someday, and not for the person you hope to be by spring, but for the one standing here now. Read it slowly. Then make the one-day decision in its smallest true form, out loud if you can: today, I do not drink. And if today already feels too big, shrink it without apology: this hour, I do not drink &#8212; and before the hour turns, I will get to a meeting, a meal, or a phone call. The daily check-in waits right below the reflection, ready to mark the day honestly when you are.</p>
+      <p style="margin:0">Open today&#8217;s Daily Reflection. It was written for this exact day &#8212; not for someday, and not for the person you hope to be by spring, but for the one standing here now. Read it slowly. Then make the one-day decision in its smallest true form, out loud if you can: today, I do not drink. And if today already feels too big, shrink it without apology: this hour, I do not drink &#8212; and before the hour turns, I will get to a meeting, a meal, or a phone call.</p>
       <p style="margin:12px 0 0"><button class="btn btn-stack" type="button" id="odaatReflBtn">Open today&#8217;s reflection</button></p>
     </section>
 
@@ -1313,7 +1258,7 @@ section.card.article-card{padding:0;overflow:hidden}
       <p class="muted" style="margin:12px 0 0;font-size:.94rem">&#8220;Closed&#8221; meetings are for people who identify as alcoholic or in recovery; &#8220;Open&#8221; meetings welcome anyone.</p>
     </section>
 
-    <p class="muted" style="margin:14px 2px 0;font-size:.85rem">About this page: the weather and the linked listings come from outside services that update themselves, and those services may use cookies. Your journal, check-ins, and day counter still stay on this device &#8212; they are never sent anywhere.</p>
+    <p class="muted" style="margin:14px 2px 0;font-size:.85rem">About this page: the weather and the linked listings come from outside services that update themselves, and those services may use cookies. Your journal and day counter still stay on this device &#8212; they are never sent anywhere.</p>
     <p style="margin:14px 0 0"><button class="btn-quiet" type="button" data-goto="today">&#8592; Back to Today</button></p>
   </div>
 
@@ -1680,12 +1625,6 @@ if(lessonGroundBtn)lessonGroundBtn.addEventListener("click",function(){
   setTimeout(function(){var c=document.getElementById("groundCard"); if(c)c.scrollIntoView({behavior:"smooth",block:"start"});},150);
 });
 
-var haltCheckBtn=document.getElementById("haltCheckBtn");
-if(haltCheckBtn)haltCheckBtn.addEventListener("click",function(){
-  goTo("today");
-  setTimeout(function(){var c=document.getElementById("checkinCard"); if(c)c.scrollIntoView({behavior:"smooth",block:"start"});},150);
-});
-
 var odaatReflBtn=document.getElementById("odaatReflBtn");
 if(odaatReflBtn)odaatReflBtn.addEventListener("click",function(){
   goTo("today");
@@ -1794,78 +1733,7 @@ function tryInstall(){
 if(installNowBtn)installNowBtn.addEventListener("click",tryInstall);
 var bannerInstallBtn=document.getElementById("bannerInstallBtn");
 if(bannerInstallBtn)bannerInstallBtn.addEventListener("click",tryInstall);
-/* Check-ins & money saved (saved on this device) */
-var checkins=store.get("mrj.checkins",[]);
-var selMood="Okay", selCtx="", selHelped="";
-function wireChips(id,attr,allowClear,initial,set){
-  var box=document.getElementById(id); if(!box)return;
-  box.querySelectorAll(".chip").forEach(function(ch){
-    ch.addEventListener("click",function(){
-      var was=ch.getAttribute("aria-pressed")==="true";
-      box.querySelectorAll(".chip").forEach(function(c){c.setAttribute("aria-pressed","false");});
-      if(was&&allowClear){set("");}
-      else{ch.setAttribute("aria-pressed","true");set(ch.getAttribute(attr));}
-    });
-  });
-}
-wireChips("moodChips","data-mood",false,"Okay",function(v){selMood=v;});
-wireChips("ctxChips","data-val",true,"",function(v){selCtx=v;});
-wireChips("helpChips","data-val",true,"",function(v){selHelped=v;});
-var cravingRange=document.getElementById("cravingRange"), cravingVal=document.getElementById("cravingVal");
-if(cravingRange)cravingRange.addEventListener("input",function(){cravingVal.textContent=cravingRange.value;});
-function fmtWhen(t){
-  var d=new Date(t), ct=chicagoToday();
-  var dayMs=86400000;
-  var diff=Math.round((Date.UTC(ct.y,ct.m-1,ct.d)-Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()))/dayMs);
-  var time=d.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"});
-  if(diff===0)return "Today, "+time;
-  if(diff===1)return "Yesterday, "+time;
-  return d.toLocaleDateString("en-US",{month:"short",day:"numeric"})+", "+time;
-}
-function renderCheckins(){
-  store.set("mrj.checkins",checkins);
-  var wrap=document.getElementById("checkinHistory"); if(!wrap)return;
-  wrap.innerHTML="";
-  if(!checkins.length){
-    var p=document.createElement("p"); p.className="muted"; p.style.margin="14px 0 0";
-    p.textContent="No check-ins yet. Your first one takes thirty seconds.";
-    wrap.appendChild(p); return;
-  }
-  var n=Math.min(checkins.length,7), sum=0, i;
-  for(i=0;i<n;i++)sum+=checkins[i].craving;
-  var counts={}, topCtx="", topN=0;
-  checkins.forEach(function(c){ if(c.ctx){ counts[c.ctx]=(counts[c.ctx]||0)+1; if(counts[c.ctx]>topN){topN=counts[c.ctx]; topCtx=c.ctx;} } });
-  var head=document.createElement("h3"); head.textContent="Your recent check-ins"; wrap.appendChild(head);
-  var note=document.createElement("p"); note.className="muted"; note.style.margin="0";
-  note.textContent="Average craving across your last "+n+" check-in"+(n>1?"s":"")+": "+(Math.round((sum/n)*10)/10)+" / 10."+(topCtx?(" Most often around you: "+topCtx.toLowerCase()+"."):"");
-  wrap.appendChild(note);
-  if(checkins.length>=2){
-    var bars=document.createElement("div"); bars.className="bars"; bars.setAttribute("aria-hidden","true");
-    checkins.slice(0,7).reverse().forEach(function(c){ var b=document.createElement("span"); b.style.height=Math.max(8,c.craving*10)+"%"; bars.appendChild(b); });
-    wrap.appendChild(bars);
-    var cap=document.createElement("p"); cap.className="muted"; cap.style.margin="0"; cap.style.fontSize=".85rem";
-    cap.textContent="Craving strength, oldest to newest (last 7)."; wrap.appendChild(cap);
-  }
-  checkins.slice(0,5).forEach(function(c){
-    var d=document.createElement("div"); d.className="entry";
-    var when=document.createElement("div"); when.className="when"; when.textContent=fmtWhen(c.t); d.appendChild(when);
-    var line=document.createElement("p"); line.style.margin="4px 0 0";
-    var txt="Feeling "+c.mood.toLowerCase()+" \u00b7 Craving "+c.craving+" / 10";
-    if(c.ctx)txt+=" \u00b7 Around you: "+c.ctx.toLowerCase();
-    if(c.helped)txt+=" \u00b7 What helped: "+c.helped.toLowerCase();
-    line.textContent=txt; d.appendChild(line); wrap.appendChild(d);
-  });
-}
-var checkinSave=document.getElementById("checkinSave");
-if(checkinSave)checkinSave.addEventListener("click",function(){
-  var entry={t:Date.now(),mood:selMood,craving:Number(cravingRange.value),ctx:selCtx,helped:selHelped};
-  checkins.unshift(entry); if(checkins.length>90)checkins=checkins.slice(0,90);
-  renderCheckins();
-  var th=document.getElementById("checkinThanks"); if(th){th.hidden=false; setTimeout(function(){th.hidden=true;},4000);}
-  var nu=document.getElementById("cravingNudge"); if(nu)nu.hidden=entry.craving<7;
-});
-renderCheckins();
-
+/* Money saved (saved on this device) */
 var dailySpend=store.get("mrj.spend",null);
 function renderMoney(){
   var line=document.getElementById("moneyLine"); if(!line)return;
@@ -2773,7 +2641,6 @@ applyPersonal();
   /* ---- search index ---- */
   var INDEX=[];
   var KEYWORDS={
-    "today|checkinCard":"check in mood craving how i feel daily",
     "learn|":"learn lessons understanding study",
     "today|milesCard":"milestones days sober clean counter progress",
     "collection|":"collection coins key tags aa na chips celebrate",
@@ -2848,7 +2715,7 @@ applyPersonal();
 <script>
 /* PR C — Today: help-strip state, pinned summary, highlights.
    Reads only the data the app already stores on this device
-   (mrj.checkins, mrj.journal, mrj.spend, mrj.start) — no new storage
+   (mrj.journal, mrj.spend, mrj.start) — no new storage
    keys, and nothing is sent anywhere. */
 (function(){
   "use strict";
@@ -2862,21 +2729,6 @@ applyPersonal();
   function todayKey(){var t=chicagoToday();return t.y+"-"+pad(t.m)+"-"+pad(t.d);}
   function keyMs(k){var p=k.split("-");return Date.UTC(+p[0],+p[1]-1,+p[2]);}
   function r1(x){return Math.round(x*10)/10;}
-  /* Distinct check-in days (Chicago), oldest to newest, average craving. */
-  function recentCheckinDays(limit){
-    var sums={},counts={};
-    (window.checkins||[]).forEach(function(c){
-      var k=chicagoKey(c.t); sums[k]=(sums[k]||0)+Number(c.craving||0); counts[k]=(counts[k]||0)+1;
-    });
-    var ks=Object.keys(sums).sort().slice(-limit);
-    return ks.map(function(k){return {key:k,avg:sums[k]/counts[k]};});
-  }
-  function renderHelpStrip(){
-    var urgent=$("helpUrgent"), quiet=$("helpQuiet"); if(!urgent||!quiet)return;
-    var tk=todayKey(), hot=false;
-    (window.checkins||[]).forEach(function(c){ if(chicagoKey(c.t)===tk&&Number(c.craving)>=7)hot=true; });
-    urgent.hidden=!hot; quiet.hidden=hot;
-  }
   function currentDay(){
     if(window.personalStart&&(window.startSource||"own")==="founder")return {day:dayNumberFor(window.personalStart),personal:false,example:true};
     if(window.personalStart)return {day:dayNumberFor(window.personalStart),personal:true};
@@ -2896,13 +2748,6 @@ applyPersonal();
     var nl=$("pinNextLabel"); if(nl)nl.textContent=next?next.label:((info.personal||info.example)?"":"Your first milestone");
     var nt=$("pinNextText");
     if(nt)nt.textContent=info.example?(next?("On the founder\u2019s example, the next milestone is "+next.label+" at Day "+next.days+" \u2014 "+(next.days-day)+" "+((next.days-day)===1?"day":"days")+" from today."):""):(!info.personal?"Set your start date below, and this card will count down to your own milestones.":(next?("You reach "+next.label+" at Day "+next.days+" \u2014 "+(next.days-day)+" "+((next.days-day)===1?"day":"days")+" from today."):""));
-    var spark=$("pinSpark"), st=$("pinSparkText"), days=recentCheckinDays(7);
-    if(spark){
-      spark.innerHTML="";
-      days.forEach(function(d){var b=document.createElement("span"); b.style.height=Math.max(8,d.avg*10)+"%"; spark.appendChild(b);});
-      spark.style.display=days.length>=3?"flex":"none";
-    }
-    if(st)st.textContent=days.length>=3?("Check-in cravings across your last "+days.length+" check-in days, oldest to newest."):("Your recent check-in pattern will appear here once you have a few check-ins saved.");
     var ft=$("founderTeaserDay"); if(ft)ft.textContent=" He is on Sober Day "+window.founderDay+" today.";
   }
   var MONTHS={Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12};
@@ -2911,21 +2756,6 @@ applyPersonal();
     return m[3]+"-"+pad(MONTHS[m[1]])+"-"+pad(+m[2]);
   }
   function renderHighlights(){
-    var ct=$("hlCravingText"), cb=$("hlCravingBars"), cc=$("hlCravingCap"), days=recentCheckinDays(7);
-    if(ct&&cb){
-      if(days.length>=7){
-        var avg=days.reduce(function(a,d){return a+d.avg;},0)/days.length;
-        var older=(days[0].avg+days[1].avg+days[2].avg)/3, newer=(days[4].avg+days[5].avg+days[6].avg)/3;
-        var move=newer<older-0.24?(", down from "+r1(older)+" at the start of that stretch"):newer>older+0.24?(", up from "+r1(older)+" at the start of that stretch"):(" \u2014 about the same as the "+r1(older)+" they started that stretch at");
-        ct.textContent="Your cravings averaged "+r1(avg)+" out of 10 across your last 7 check-in days"+move+".";
-        cb.innerHTML="";
-        days.forEach(function(d){var b=document.createElement("span"); b.style.height=Math.max(8,d.avg*10)+"%"; cb.appendChild(b);});
-        cb.style.display="flex"; if(cc)cc.hidden=false;
-      }else{
-        ct.textContent="This card needs about a week of check-ins before it can show an honest trend. You have "+days.length+" check-in "+(days.length===1?"day":"days")+" saved so far \u2014 keep checking in, and the pattern will appear here.";
-        cb.innerHTML=""; cb.style.display="none"; if(cc)cc.hidden=true;
-      }
-    }
     var mt=$("hlMoneyText");
     if(mt){
       var d=window.personalStart?dayNumberFor(window.personalStart):-1;
@@ -2954,8 +2784,7 @@ applyPersonal();
       }
     }
   }
-  function renderPRC(){ renderHelpStrip(); renderPinned(); renderHighlights(); }
-  var _rc=window.renderCheckins; if(_rc)window.renderCheckins=function(){_rc();renderPRC();};
+  function renderPRC(){ renderPinned(); renderHighlights(); }
   var _rj=window.renderJournal; if(_rj)window.renderJournal=function(){_rj();renderPRC();};
   var _rm=window.renderMoney; if(_rm)window.renderMoney=function(){_rm();renderPRC();};
   var _ap=window.applyPersonal; if(_ap)window.applyPersonal=function(){_ap();renderPRC();};
@@ -3130,7 +2959,7 @@ applyPersonal();
         if (!OneSignal.User.PushSubscription.optedIn) { box.checked = false; say('That didn\u2019t finish signing you up \u2014 please try tapping again.'); return; }
         await OneSignal.User.addTag(key, '1');
         box.checked = true;
-        say(which === 'checkin' ? 'Morning check-in reminder is on.' : 'Evening gratitude reminder is on.');
+        say(which === 'checkin' ? 'Morning reminder is on.' : 'Evening gratitude reminder is on.');
       } else {
         await OneSignal.User.removeTag(key);
         box.checked = false;
