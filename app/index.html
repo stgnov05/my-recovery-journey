@@ -78,6 +78,8 @@ section.card h3{font-size:var(--body);margin:18px 0 6px;font-weight:700}
 .btn-help{background:var(--red);color:#fff}
 .btn-quiet{background:transparent;color:var(--dim);border:0;padding:10px 8px;text-decoration:underline}
 .save-confirm{margin:12px 0 0;padding:10px 14px;border-radius:12px;background:rgba(126,211,33,.10);border:1px solid rgba(126,211,33,.40);font-weight:600}
+.mile-card{position:relative}
+.mile-x{position:absolute;top:8px;right:10px;background:transparent;border:0;color:var(--dim);font-size:1.8rem;line-height:1;padding:8px;cursor:pointer}
 .btn-stack{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;text-align:center}
 input[type="date"],input[type="text"],input[type="number"],textarea{width:100%;background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:14px;padding:12px;font:inherit}
 label.lbl{display:block;font-weight:600;font-size:.94rem;margin-bottom:6px}
@@ -434,6 +436,10 @@ section.card.article-card{padding:0;overflow:hidden}
       </div>
       <div id="checkinHistory"></div>
     </section>
+<section class="card" id="groundCard">
+      <h2>5-4-3-2-1 Grounding</h2>
+      <div id="groundRoot"></div>
+    </section>
 <section class="card" id="remindCard">
       <h2>Daily reminders</h2>
       <p class="muted" style="margin:0">A gentle nudge once a day, only if you want it. Turning one on asks your permission to send notifications &#8212; the same ask as the bell on the website. Your check-ins and journal entries themselves never leave this device; the notification service (OneSignal) only keeps these two on/off flags.</p>
@@ -445,10 +451,6 @@ section.card.article-card{padding:0;overflow:hidden}
       <h2>Milestones</h2>
       <ul class="miles" id="milesList"></ul>
       <p class="muted" id="nextMile" style="margin:12px 0 0"></p>
-    </section>
-<section class="card" id="groundCard">
-      <h2>5-4-3-2-1 Grounding</h2>
-      <div id="groundRoot"></div>
     </section>
 <section class="card">
       <h2>My Next Right Step</h2>
@@ -556,6 +558,7 @@ section.card.article-card{padding:0;overflow:hidden}
 
   <div id="milestoneOverlay" hidden role="dialog" aria-modal="true" aria-labelledby="milestoneHead">
     <div class="mile-card">
+      <button type="button" class="mile-x" id="milestoneCloseX" aria-label="Close">&#215;</button>
       <h2 class="font-display" id="milestoneHead" style="margin:0 0 6px;font-size:1.6rem">A new token is yours</h2>
       <p style="margin:0">One day at a time got you here.</p>
       <div class="mile-latest mile-coin" id="milestoneLatest"></div>
@@ -567,6 +570,7 @@ section.card.article-card{padding:0;overflow:hidden}
       <p style="margin:16px 0 0;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
         <button type="button" class="btn" id="milestoneAdd">Add to My Collection</button>
         <button type="button" class="btn btn-gold" id="milestoneShare">Share</button>
+        <button type="button" class="btn-quiet" id="milestoneClose">Close</button>
       </p>
     </div>
   </div>
@@ -2205,6 +2209,14 @@ function checkMilestones(){
     store.set("mrj.collSeen",rec); ov.hidden=true; goTo("collection"); renderCollection();
     openShare("milestone",{kind:f.kind,token:f.t});
   };
+  function dismissMilestone(){
+    fresh.forEach(function(x){ if(rec.keys.indexOf(x.k)<0)rec.keys.push(x.k); });
+    store.set("mrj.collSeen",rec); ov.hidden=true;
+  }
+  document.getElementById("milestoneClose").onclick=dismissMilestone;
+  document.getElementById("milestoneCloseX").onclick=dismissMilestone;
+  ov.onclick=function(e){ if(e.target===ov)dismissMilestone(); };
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&!ov.hidden)dismissMilestone(); });
 }
 /* Sharing: on-device Canvas PNG cards (1080x1080), Web Share with
    files where supported, Save-image fallback, Copy caption. The app
