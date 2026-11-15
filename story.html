@@ -455,6 +455,7 @@
   }
   .form-actions .spacer{ flex:1; }
   .save-note{ font-size:.92rem; color:var(--muted); }
+.save-confirm{ margin:10px 0 0; font-size:.95rem; font-weight:700; color:var(--steel); }
   .entries{ margin-top:20px; display:grid; gap:10px; }
   .entries:empty{ display:none; }
   .entry{
@@ -1284,6 +1285,7 @@ a[href^="tel:"]{ white-space:nowrap; }
           Clear
         </button>
       </div>
+      <p class="save-confirm" id="gratitudeSaved" role="status" hidden>Saved on this device only &#8212; your journal stays in this browser and is never sent anywhere.</p>
       <div class="entries" id="entries" aria-live="polite"></div>
       <p id="gratitudeStorageNote" class="note" hidden>This browser isn&#8217;t letting the site save on this device, so your journal entries won&#8217;t be kept after you close this page.</p>
       <div class="entries-actions" id="entriesActions">
@@ -2997,6 +2999,13 @@ a[href^="tel:"]{ white-space:nowrap; }
     persistEntries();
     gInput.value = '';
     renderEntries();
+    var savedNote = document.getElementById('gratitudeSaved');
+    var storageNote = document.getElementById('gratitudeStorageNote');
+    if (savedNote) savedNote.hidden = !(storageNote && storageNote.hidden);
+  });
+  gInput.addEventListener('input', function(){
+    var savedNote = document.getElementById('gratitudeSaved');
+    if (savedNote) savedNote.hidden = true;
   });
   document.getElementById('clearEntry').addEventListener('click', function(){
     gInput.value = '';
