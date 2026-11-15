@@ -78,6 +78,11 @@ section.card h3{font-size:var(--body);margin:18px 0 6px;font-weight:700}
 .save-confirm{margin:12px 0 0;padding:10px 14px;border-radius:12px;background:rgba(126,211,33,.10);border:1px solid rgba(126,211,33,.40);font-weight:600}
 .mile-card{position:relative}
 .mile-x{position:absolute;top:8px;right:10px;background:transparent;border:0;color:var(--dim);font-size:1.8rem;line-height:1;padding:8px;cursor:pointer}
+/* Uniform chips: every option chip the same size */
+#checkinCard .chips{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.chip{display:flex;align-items:center;justify-content:center;text-align:center}
+#checkinCard .chip{height:58px;box-sizing:border-box}
+#collMain .coll-toggle{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 /* Masthead centering: hero, help strip, pinned counter + next milestone */
 .hero-copy{text-align:center}
 #pinnedH{text-align:center}
