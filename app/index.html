@@ -3100,33 +3100,6 @@ applyPersonal();
   var status = document.getElementById('remindStatus');
   if (!c || !g || !window.OneSignalDeferred) return;
   function say(msg) { if (status) status.textContent = msg; }
-  var diag = document.createElement('p');
-  diag.id = 'remindDiag';
-  diag.setAttribute('style', 'font-size:.8rem;opacity:.72;margin:8px 0 0;overflow-wrap:anywhere;');
-  if (status && status.parentNode) status.parentNode.appendChild(diag);
-  function paintDiag() {
-    try {
-      var parts = [];
-      var OS = window.OneSignal;
-      if (!OS || !OS.User) { parts.push('Alerts service: still loading'); }
-      else {
-        parts.push('Alerts service: connected');
-        var perm = null;
-        try { perm = OS.Notifications.permission; } catch (e) {}
-        if (perm === null && typeof Notification !== 'undefined') perm = Notification.permission === 'granted';
-        parts.push('Permission: ' + (perm ? 'allowed' : 'not allowed'));
-        var sub = OS.User.PushSubscription || {};
-        parts.push('Subscription: ' + (sub.optedIn ? 'active' : 'not created'));
-        if (sub.id) parts.push('Sub ID: ' + String(sub.id).slice(0, 8));
-        if (OS.User.onesignalId) parts.push('User ID: ' + String(OS.User.onesignalId).slice(0, 8));
-        else parts.push('User ID: none yet');
-      }
-      diag.textContent = parts.join(' \u00b7 ');
-    } catch (e) {}
-  }
-  paintDiag();
-  var diagTries = 0;
-  var diagTimer = setInterval(function () { paintDiag(); if (++diagTries >= 8) clearInterval(diagTimer); }, 2500);
   function sync(OneSignal) {
     try {
       var tags = OneSignal.User.getTags ? OneSignal.User.getTags() : null;
@@ -3136,7 +3109,7 @@ applyPersonal();
       }
     } catch (e) {}
   }
-  OneSignalDeferred.push(async function (OneSignal) { sync(OneSignal); paintDiag(); });
+  OneSignalDeferred.push(async function (OneSignal) { sync(OneSignal); });
   var applyCount = 0;
   async function apply(OneSignal, which, wantOn) {
     applyCount++;
@@ -3157,7 +3130,6 @@ applyPersonal();
         say('Reminder off.');
       }
     } catch (e) { say('That didn\u2019t work just now \u2014 please try again.'); }
-    paintDiag();
   }
   function wire(box, which) {
     box.addEventListener('change', function () {
@@ -3165,7 +3137,6 @@ applyPersonal();
       var appliesBefore = applyCount;
       setTimeout(function () {
         if (applyCount === appliesBefore) say('The alerts service didn\u2019t respond \u2014 please check your connection, close and reopen the app, then try again.');
-        paintDiag();
       }, 8000);
       OneSignalDeferred.push(function (OneSignal) { return apply(OneSignal, which, wantOn); });
     });
