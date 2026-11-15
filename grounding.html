@@ -769,9 +769,12 @@ html[data-theme="dark"] .card{ border-color:rgba(60,100,132,.55); }
 .card .sub{ font-size:1.05rem; margin-top:4px; }
 
 /* Buttons */
-.btn{ padding:13px 26px; background:linear-gradient(180deg,#3b78a6 0%,#1d4e76 100%); box-shadow:0 7px 16px rgba(23,64,98,.30), inset 0 1px 0 rgba(255,255,255,.30); }
-.btn.ghost{ background:linear-gradient(180deg,#fff,#eef4f9); color:var(--ink); border:1.5px solid #bfd2e1; box-shadow:0 2px 6px rgba(24,68,108,.08); }
-html[data-theme="dark"] .btn.ghost{ background:linear-gradient(180deg,#17324a,#10283c); border-color:#2c4c64; }
+.btn{ padding:13px 26px; background:linear-gradient(180deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.16) 42%, rgba(255,255,255,0) 54%), linear-gradient(180deg,#6fb1e8 0%,#3b78a6 46%,#1d4e76 100%); box-shadow:0 7px 16px rgba(23,64,98,.30), inset 0 1px 0 rgba(255,255,255,.7), inset 0 -12px 18px rgba(9,32,52,.28); text-shadow:0 1px 2px rgba(9,32,52,.4); }
+.btn.ghost{ background:linear-gradient(180deg, rgba(255,255,255,.9) 0%, rgba(255,255,255,.25) 42%, rgba(255,255,255,0) 54%), linear-gradient(180deg,#fff,#eef4f9); color:var(--ink); border:1.5px solid #bfd2e1; box-shadow:0 2px 6px rgba(24,68,108,.08), inset 0 1px 0 rgba(255,255,255,.9), inset 0 -8px 12px rgba(24,68,108,.10); text-shadow:none; }
+html[data-theme="dark"] .btn.ghost{ background:linear-gradient(180deg, rgba(255,255,255,.28) 0%, rgba(255,255,255,.07) 42%, rgba(255,255,255,0) 54%), linear-gradient(180deg,#1d3d59,#10283c); border-color:#2c4c64; box-shadow:0 2px 6px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.35), inset 0 -8px 12px rgba(0,0,0,.25); }
+.path-btn,.storm-btn{ background-image:linear-gradient(180deg, rgba(255,255,255,.32) 0%, rgba(255,255,255,.07) 45%, rgba(255,255,255,0) 55%); box-shadow:inset 0 1px 0 rgba(255,255,255,.35), inset 0 -8px 12px rgba(23,57,79,.10); }
+.path-btn.on,.storm-btn.on{ background:linear-gradient(180deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.16) 42%, rgba(255,255,255,0) 54%), linear-gradient(180deg,#6fb1e8 0%,#3b78a6 46%,#1d4e76 100%); border-color:#1d4e76; box-shadow:0 4px 10px rgba(23,64,98,.3), inset 0 1px 0 rgba(255,255,255,.7), inset 0 -10px 14px rgba(9,32,52,.28); text-shadow:0 1px 2px rgba(9,32,52,.4); }
+.help-fab{ background:linear-gradient(180deg, rgba(255,255,255,.5) 0%, rgba(255,255,255,.14) 42%, rgba(255,255,255,0) 54%), linear-gradient(180deg,#ecc26a 0%,#d9a441 55%,#b9822e 100%); box-shadow:0 8px 22px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.75), inset 0 -10px 14px rgba(120,72,10,.35); }
 .card-actions{ display:flex; justify-content:center; margin-top:18px; }
 .tool-card .card-actions .btn{ margin-top:0; }
 
